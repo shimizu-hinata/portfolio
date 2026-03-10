@@ -3023,12 +3023,6 @@ input, select, textarea {
 					padding-left: 0;
 				}
 
-				.post > header .meta h3 {
-					margin: 0 0 0.5em 0;
-					text-align: center;
-					width: 100%;
-				}
-
 				.post > header .meta .author .name {
 					display: none;
 				}
