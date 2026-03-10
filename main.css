@@ -3055,6 +3055,20 @@ input, select, textarea {
 		text-transform: uppercase;
 	}
 
+	.post > header .title .project-genres {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55em;
+		justify-content: flex-start;
+		margin: 0 0 1.25em 0;
+	}
+
+	@media screen and (max-width: 980px) {
+		.post > header .title .project-genres {
+			justify-content: center;
+		}
+	}
+
 	.post > header .title .project-genre {
 		background: rgba(46, 186, 174, 0.08);
 		border: solid 1px rgba(46, 186, 174, 0.35);
@@ -3065,9 +3079,16 @@ input, select, textarea {
 		font-weight: 800;
 		letter-spacing: 0.2em;
 		line-height: 1.8;
-		margin: 0 0 1.25em 0;
+		margin: 0;
 		padding: 0.3em 1.1em;
 		text-transform: uppercase;
+	}
+
+	.post > header .meta h3 {
+		font-size: 0.62em;
+		letter-spacing: 0.2em;
+		line-height: 1.8;
+		margin: 0 0 1.2em 0;
 	}
 
 /* Table */
