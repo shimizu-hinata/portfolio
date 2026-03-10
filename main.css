@@ -3003,16 +3003,30 @@ input, select, textarea {
 				-webkit-align-items: center;
 				-ms-align-items: center;
 				align-items: center;
-				-moz-flex-direction: column;
-				-webkit-flex-direction: column;
-				-ms-flex-direction: column;
-				flex-direction: column;
+				-moz-flex-direction: row;
+				-webkit-flex-direction: row;
+				-ms-flex-direction: row;
+				flex-direction: row;
+				-moz-flex-wrap: wrap;
+				-webkit-flex-wrap: wrap;
+				-ms-flex-wrap: wrap;
+				flex-wrap: wrap;
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
 			}
 
 				.post > header .meta > * {
 					border-left: 0;
-					margin: 1em 0 0 0;
+					margin: 0.75em 0.5em 0 0.5em;
 					padding-left: 0;
+				}
+
+				.post > header .meta h3 {
+					margin: 0 0 0.5em 0;
+					text-align: center;
+					width: 100%;
 				}
 
 				.post > header .meta .author .name {
