@@ -2366,9 +2366,11 @@ input, select, textarea {
 		}
 
 		.image .js-video-player video {
+			aspect-ratio: 16 / 9;
 			display: block;
 			height: auto;
 			max-width: 100%;
+			object-fit: cover;
 			width: 100%;
 		}
 

@@ -193,20 +193,39 @@
 	<script src="assets/js/main.js"></script>
 	<script>
 		(function () {
-			function toDrivePreviewUrl(rawUrl) {
+			function extractDriveFileId(rawUrl) {
 				if (!rawUrl) return "";
-				if (rawUrl.indexOf("drive.google.com") === -1) return "";
+				var idMatch = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+				return idMatch && idMatch[1] ? idMatch[1] : "";
+			}
+
+			function toDrivePreviewUrl(rawUrl) {
+				if (!rawUrl || rawUrl.indexOf("drive.google.com") === -1) return "";
 
 				if (rawUrl.indexOf("/preview") !== -1) {
 					return rawUrl;
 				}
 
-				var idMatch = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-				if (idMatch && idMatch[1]) {
-					return "https://drive.google.com/file/d/" + idMatch[1] + "/preview";
+				var fileId = extractDriveFileId(rawUrl);
+				if (fileId) {
+					return "https://drive.google.com/file/d/" + fileId + "/preview";
 				}
 
 				return "";
+			}
+
+			function appendIframe(container, previewUrl) {
+				var frame = document.createElement("iframe");
+				frame.src = previewUrl;
+				frame.style.display = "block";
+				frame.style.width = "100%";
+				frame.style.aspectRatio = "16 / 9";
+				frame.style.height = "auto";
+				frame.style.border = "0";
+				frame.allow = "autoplay; fullscreen";
+				frame.allowFullscreen = true;
+				frame.loading = "lazy";
+				container.appendChild(frame);
 			}
 
 			var players = document.querySelectorAll(".js-video-player[data-video-url]");
@@ -217,16 +236,7 @@
 
 				var drivePreviewUrl = toDrivePreviewUrl(rawUrl);
 				if (drivePreviewUrl) {
-					var frame = document.createElement("iframe");
-					frame.src = drivePreviewUrl;
-					frame.style.display = "block";
-					frame.style.width = "100%";
-					frame.style.aspectRatio = "16 / 9";
-					frame.style.height = "auto";
-					frame.style.border = "0";
-					frame.allow = "autoplay; fullscreen";
-					frame.allowFullscreen = true;
-					container.appendChild(frame);
+					appendIframe(container, drivePreviewUrl);
 					continue;
 				}
 
