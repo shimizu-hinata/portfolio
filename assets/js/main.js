@@ -13,13 +13,24 @@
 		$main = $('#main');
 
 	// Always start from the top when opening this site.
+		function forceScrollTop() {
+			window.scrollTo(0, 0);
+			document.documentElement.scrollTop = 0;
+			document.body.scrollTop = 0;
+		}
+
 		if ('scrollRestoration' in window.history) {
 			window.history.scrollRestoration = 'manual';
 		}
 
+		document.addEventListener('DOMContentLoaded', forceScrollTop);
+
 		$window.on('pageshow', function() {
-			window.scrollTo(0, 0);
+			forceScrollTop();
+			window.requestAnimationFrame(forceScrollTop);
 		});
+
+		$window.on('beforeunload', forceScrollTop);
 
 	// Breakpoints.
 		breakpoints({
@@ -32,7 +43,9 @@
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
-			window.scrollTo(0, 0);
+			forceScrollTop();
+			window.requestAnimationFrame(forceScrollTop);
+			window.setTimeout(forceScrollTop, 0);
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
