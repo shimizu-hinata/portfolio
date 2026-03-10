@@ -12,6 +12,15 @@
 		$sidebar = $('#sidebar'),
 		$main = $('#main');
 
+	// Always start from the top when opening this site.
+		if ('scrollRestoration' in window.history) {
+			window.history.scrollRestoration = 'manual';
+		}
+
+		$window.on('pageshow', function() {
+			window.scrollTo(0, 0);
+		});
+
 	// Breakpoints.
 		breakpoints({
 			xlarge:   [ '1281px',  '1680px' ],
@@ -23,6 +32,7 @@
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
+			window.scrollTo(0, 0);
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
