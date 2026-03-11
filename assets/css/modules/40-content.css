@@ -222,9 +222,9 @@
 			.post > header .meta {
 				padding: 3.75em 3em 1.75em 3em ;
 				border-left: solid 1px rgba(160, 160, 160, 0.3);
-				min-width: 17em;
+				min-width: 18.5em;
 				text-align: right;
-				width: 17em;
+				width: 18.5em;
 			}
 
 				.post > header .meta > * {
@@ -533,7 +533,64 @@
 		margin: 0 0 1.2em 0;
 	}
 
+	.post > header .meta .author {
+		display: grid;
+		grid-template-areas:
+			"name name"
+			"tags icon";
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: flex-end;
+		justify-content: flex-start;
+		text-align: right;
+		white-space: normal;
+		width: 100%;
+		column-gap: 0.6em;
+		row-gap: 0.35em;
+	}
+
+	.post > header .meta .author .name {
+		grid-area: name;
+		display: block;
+		line-height: 1.6;
+		margin: 0;
+		overflow-wrap: normal;
+		white-space: nowrap;
+		word-break: keep-all;
+	}
+
+	.post > header .meta .author .role-tags {
+		grid-area: tags;
+		display: inline-flex;
+		flex-wrap: nowrap;
+		gap: 0.45em;
+		white-space: nowrap;
+		justify-self: end;
+		align-self: center;
+	}
+
+	.post > header .meta .author .role-tag {
+		background: rgba(46, 186, 174, 0.08);
+		border: solid 1px rgba(46, 186, 174, 0.35);
+		border-radius: 999px;
+		display: inline-block;
+		font-size: 0.82em;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		line-height: 1.5;
+		padding: 0.12em 0.7em;
+		text-transform: none;
+		white-space: nowrap;
+	}
+
+	.post > header .meta .author img {
+		grid-area: icon;
+	}
+
 	@media screen and (max-width: 980px) {
+		.post > header .meta .author .name {
+			white-space: normal;
+		}
+
 		.post .image.featured > h3 {
 			text-align: center;
 		}
