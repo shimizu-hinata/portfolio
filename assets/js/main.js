@@ -115,4 +115,67 @@
 				$intro.prependTo($sidebar);
 			});
 
+	// Video embeds.
+		function extractDriveFileId(rawUrl) {
+			var match = rawUrl.match(/\/file\/d\/([^/]+)/i);
+			return match ? match[1] : '';
+		}
+
+		function toDrivePreviewUrl(rawUrl) {
+			if (!rawUrl || rawUrl.indexOf('drive.google.com') === -1)
+				return '';
+
+			if (rawUrl.indexOf('/preview') !== -1)
+				return rawUrl;
+
+			var fileId = extractDriveFileId(rawUrl);
+			return fileId ? 'https://drive.google.com/file/d/' + fileId + '/preview' : '';
+		}
+
+		function appendIframe(container, previewUrl) {
+			var frame = document.createElement('iframe');
+			frame.src = previewUrl;
+			frame.style.display = 'block';
+			frame.style.width = '100%';
+			frame.style.aspectRatio = '16 / 9';
+			frame.style.height = 'auto';
+			frame.style.border = '0';
+			frame.allow = 'autoplay; fullscreen';
+			frame.allowFullscreen = true;
+			frame.loading = 'lazy';
+			container.innerHTML = '';
+			container.appendChild(frame);
+		}
+
+		(function hydrateVideoPlayers() {
+			var players = document.querySelectorAll('.js-video-player[data-video-url]');
+
+			for (var i = 0; i < players.length; i++) {
+				var container = players[i];
+				var rawUrl = (container.getAttribute('data-video-url') || '').trim();
+				if (!rawUrl)
+					continue;
+
+				var drivePreviewUrl = toDrivePreviewUrl(rawUrl);
+				if (drivePreviewUrl) {
+					appendIframe(container, drivePreviewUrl);
+					continue;
+				}
+
+				if (/\.(mp4|webm|ogg)(\?|#|$)/i.test(rawUrl)) {
+					var video = document.createElement('video');
+					var source = document.createElement('source');
+					video.controls = true;
+					video.preload = 'metadata';
+					video.style.width = '100%';
+					video.style.height = 'auto';
+					video.style.display = 'block';
+					source.src = rawUrl;
+					video.appendChild(source);
+					container.innerHTML = '';
+					container.appendChild(video);
+				}
+			}
+		})();
+
 })(jQuery);

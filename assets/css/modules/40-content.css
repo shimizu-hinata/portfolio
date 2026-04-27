@@ -195,6 +195,45 @@
 		position: relative;
 	}
 
+	.unityroom-post .meta p {
+		margin: 0 0 0.85em 0;
+	}
+
+	.unityroom-post .meta .published {
+		display: block;
+		font-size: 0.72em;
+		letter-spacing: 0.18em;
+	}
+
+	.unityroom-video-frame {
+		margin-bottom: 2.5em;
+	}
+
+	.unityroom-video-placeholder {
+		align-items: center;
+		background:
+			linear-gradient(135deg, rgba(95, 165, 218, 0.14) 0%, rgba(46, 186, 174, 0.12) 100%),
+			repeating-linear-gradient(-45deg, rgba(60, 59, 59, 0.04) 0 10px, rgba(255, 255, 255, 0.65) 10px 20px);
+		border: solid 1px rgba(129, 147, 163, 0.34);
+		display: flex;
+		justify-content: center;
+		min-height: 22rem;
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.unityroom-video-placeholder p {
+		margin: 0;
+	}
+
+	.unityroom-video-placeholder .unityroom-video-example {
+		color: #7f888f;
+		font-size: 0.85em;
+		letter-spacing: 0.08em;
+		margin-top: 0.75rem;
+		text-transform: uppercase;
+	}
+
 		.post:before {
 			content: '';
 			position: absolute;
