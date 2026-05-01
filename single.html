@@ -224,7 +224,6 @@
 						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
 								rel="noopener noreferrer">GitHub</a></li>
 						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.exe）</a></li>
-						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.apk）</a></li>
 					</ul>
 				</section>
 				<footer>
@@ -420,69 +419,6 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script>
-		(function () {
-			function extractDriveFileId(rawUrl) {
-				if (!rawUrl) return "";
-				var idMatch = rawUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-				return idMatch && idMatch[1] ? idMatch[1] : "";
-			}
-
-			function toDrivePreviewUrl(rawUrl) {
-				if (!rawUrl || rawUrl.indexOf("drive.google.com") === -1) return "";
-
-				if (rawUrl.indexOf("/preview") !== -1) {
-					return rawUrl;
-				}
-
-				var fileId = extractDriveFileId(rawUrl);
-				if (fileId) {
-					return "https://drive.google.com/file/d/" + fileId + "/preview";
-				}
-
-				return "";
-			}
-
-			function appendIframe(container, previewUrl) {
-				var frame = document.createElement("iframe");
-				frame.src = previewUrl;
-				frame.style.display = "block";
-				frame.style.width = "100%";
-				frame.style.aspectRatio = "16 / 9";
-				frame.style.height = "auto";
-				frame.style.border = "0";
-				frame.allow = "autoplay; fullscreen";
-				frame.allowFullscreen = true;
-				frame.loading = "lazy";
-				container.appendChild(frame);
-			}
-
-			var players = document.querySelectorAll(".js-video-player[data-video-url]");
-			for (var i = 0; i < players.length; i++) {
-				var container = players[i];
-				var rawUrl = (container.getAttribute("data-video-url") || "").trim();
-				if (!rawUrl) continue;
-
-				var drivePreviewUrl = toDrivePreviewUrl(rawUrl);
-				if (drivePreviewUrl) {
-					appendIframe(container, drivePreviewUrl);
-					continue;
-				}
-
-				if (/\.(mp4|webm|ogg)(\?|#|$)/i.test(rawUrl)) {
-					var video = document.createElement("video");
-					video.controls = true;
-					video.preload = "metadata";
-					video.style.width = "100%";
-					video.style.height = "auto";
-					video.style.display = "block";
-					var source = document.createElement("source");
-					source.src = rawUrl;
-					video.appendChild(source);
-					container.appendChild(video);
-				}
-			}
-		})();
-
 		(function () {
 			var toggleButtons = document.querySelectorAll(".js-story-toggle");
 
