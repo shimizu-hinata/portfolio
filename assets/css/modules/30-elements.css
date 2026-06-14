@@ -599,8 +599,17 @@
 			display: block;
 			height: auto;
 			max-width: 100%;
-			object-fit: cover;
+			object-fit: contain;
 			width: 100%;
+		}
+
+		@media screen and (orientation: portrait) and (max-aspect-ratio: 3/4) {
+
+			.image .js-video-player iframe,
+			.image .js-video-player video {
+				aspect-ratio: 4 / 3;
+			}
+
 		}
 
 /* List */

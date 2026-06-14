@@ -137,8 +137,6 @@
 			frame.src = previewUrl;
 			frame.style.display = 'block';
 			frame.style.width = '100%';
-			frame.style.aspectRatio = '16 / 9';
-			frame.style.height = 'auto';
 			frame.style.border = '0';
 			frame.allow = 'autoplay; fullscreen';
 			frame.allowFullscreen = true;
