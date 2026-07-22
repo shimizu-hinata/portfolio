@@ -505,10 +505,14 @@
 
 		@media screen and (max-width: 980px) {
 			.mini-work-overview {
-				margin: 0 calc(50% - 50vw) 1.5em;
+				border-left: 0;
+				border-right: 0;
+				left: -3em;
+				margin: 0 0 2em 0;
 				max-width: none;
+				position: relative;
 				padding: 2em 1.5em 1.25em;
-				width: 100vw;
+				width: calc(100% + (3em * 2));
 			}
 		}
 
@@ -525,7 +529,11 @@
 
 		@media screen and (max-width: 736px) {
 			.mini-work-overview {
+				left: -1.5em;
+				margin: 0 0 1.5em 0;
+				position: relative;
 				padding: 1.25em 0.75em 0.5em;
+				width: calc(100% + 3em);
 			}
 
 			.mini-work-overview__header {
@@ -568,9 +576,7 @@
 
 		@media screen and (max-width: 480px) {
 			.mini-work-overview {
-				border-left: 0;
-				border-right: 0;
-				margin: 0 calc(50% - 50vw) 1.2em;
+				margin: 0 0 1.2em 0;
 				padding: 1em 0.5em 0.25em;
 			}
 
