@@ -525,15 +525,6 @@
 			.mini-work-card {
 				padding: 1.25em;
 			}
-
-			.mini-work-card .mini-work-video-frame {
-				aspect-ratio: 16 / 9;
-			}
-
-			.mini-work-card .mini-work-video-frame > .js-video-player iframe,
-			.mini-work-card .mini-work-video-frame > .js-video-player video {
-				aspect-ratio: 16 / 9;
-			}
 		}
 		@media screen and (max-width: 980px) {
 
