@@ -21,10 +21,26 @@
 		window.addEventListener('beforeunload', scrollToTop);
 	}
 
-	function getDrivePreviewUrl(url) {
+	function getDriveFileId(url) {
 		var match = url.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
-		if (!match) return '';
-		return 'https://drive.google.com/file/d/' + match[1] + '/preview';
+		return match ? match[1] : '';
+	}
+
+	function getDrivePreviewUrl(url) {
+		var fileId = getDriveFileId(url);
+		if (!fileId) return '';
+		return 'https://drive.google.com/file/d/' + fileId + '/preview';
+	}
+
+	function getDriveDirectVideoUrl(url) {
+		var fileId = getDriveFileId(url);
+		if (!fileId) return '';
+		return 'https://drive.google.com/uc?export=download&id=' + fileId;
+	}
+
+	function shouldPreferNativeVideo(player) {
+		if (player.getAttribute('data-video-mode') === 'native') return true;
+		return !!player.closest('.mini-work-card');
 	}
 
 	function createIframe(url) {
@@ -77,6 +93,17 @@
 		container.classList.add('is-custom-video');
 		container.appendChild(video);
 		container.appendChild(toggle);
+		return video;
+	}
+
+	function createDriveVideoWithIframeFallback(container, directUrl, previewUrl) {
+		var video = createVideoPlayer(container, directUrl);
+
+		video.addEventListener('error', function () {
+			container.classList.remove('is-custom-video', 'is-playing', 'is-portrait-video');
+			container.textContent = '';
+			container.appendChild(createIframe(previewUrl));
+		}, { once: true });
 	}
 
 	function hydrateVideoPlayers() {
@@ -85,6 +112,14 @@
 			var player = players[index];
 			var url = (player.getAttribute('data-video-url') || '').trim();
 			var previewUrl = getDrivePreviewUrl(url);
+			var directDriveUrl = getDriveDirectVideoUrl(url);
+
+			if (previewUrl && shouldPreferNativeVideo(player) && directDriveUrl) {
+				player.textContent = '';
+				createDriveVideoWithIframeFallback(player, directDriveUrl, previewUrl);
+				continue;
+			}
+
 			if (previewUrl) {
 				player.textContent = '';
 				player.appendChild(createIframe(previewUrl));
