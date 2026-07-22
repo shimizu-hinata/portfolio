@@ -4,11 +4,12 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="ja">
 
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<title>作品詳細 | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
@@ -411,48 +412,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-	<script>
-		(function () {
-			var toggleButtons = document.querySelectorAll(".js-story-toggle");
-
-			for (var i = 0; i < toggleButtons.length; i++) {
-				toggleButtons[i].addEventListener("click", function () {
-					var section = this.closest("section");
-					if (!section) return;
-
-					var content = section.querySelector(".js-story-content");
-					if (!content) return;
-
-					var isExpanded = this.getAttribute("aria-expanded") === "true";
-					var nextState = !isExpanded;
-
-					content.hidden = !nextState;
-					this.setAttribute("aria-expanded", nextState ? "true" : "false");
-					this.textContent = nextState ? "ストーリーを閉じる" : "ストーリーを表示";
-				});
-			}
-		})();
-
-		(function () {
-			var params = new URLSearchParams(window.location.search);
-			var selectedPost = params.get("post");
-			if (!selectedPost) return;
-
-			var posts = document.querySelectorAll("#main .post[data-post]");
-			var found = false;
-
-			for (var i = 0; i < posts.length; i++) {
-				var post = posts[i];
-				var isMatch = post.getAttribute("data-post") === selectedPost;
-				post.style.display = isMatch ? "block" : "none";
-				if (isMatch) found = true;
-			}
-
-			if (!found && posts.length > 0) {
-				posts[0].style.display = "block";
-			}
-		})();
-	</script>
+	<script src="assets/js/site.js"></script>
 
 </body>
 

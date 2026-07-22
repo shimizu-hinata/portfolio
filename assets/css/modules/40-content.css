@@ -525,15 +525,6 @@
 				aspect-ratio: 16 / 9;
 			}
 		}
-					.post > footer .stats li .icon {
-						border-bottom: 0;
-					}
-
-						.post > footer .stats li .icon:before {
-							color: rgba(160, 160, 160, 0.3);
-							margin-right: 0.75em;
-						}
-
 		@media screen and (max-width: 980px) {
 
 			.post {

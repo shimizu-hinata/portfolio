@@ -12,26 +12,6 @@
 		$sidebar = $('#sidebar'),
 		$main = $('#main');
 
-	// Always start from the top when opening this site.
-		function forceScrollTop() {
-			window.scrollTo(0, 0);
-			document.documentElement.scrollTop = 0;
-			document.body.scrollTop = 0;
-		}
-
-		if ('scrollRestoration' in window.history) {
-			window.history.scrollRestoration = 'manual';
-		}
-
-		document.addEventListener('DOMContentLoaded', forceScrollTop);
-
-		$window.on('pageshow', function() {
-			forceScrollTop();
-			window.requestAnimationFrame(forceScrollTop);
-		});
-
-		$window.on('beforeunload', forceScrollTop);
-
 	// Breakpoints.
 		breakpoints({
 			xlarge:   [ '1281px',  '1680px' ],
@@ -43,9 +23,6 @@
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
-			forceScrollTop();
-			window.requestAnimationFrame(forceScrollTop);
-			window.setTimeout(forceScrollTop, 0);
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
@@ -114,149 +91,5 @@
 			breakpoints.on('>large', function() {
 				$intro.prependTo($sidebar);
 			});
-
-	// Video embeds.
-		function extractDriveFileId(rawUrl) {
-			var match = rawUrl.match(/\/file\/d\/([^/]+)/i);
-			return match ? match[1] : '';
-		}
-
-		function toDrivePreviewUrl(rawUrl) {
-			if (!rawUrl || rawUrl.indexOf('drive.google.com') === -1)
-				return '';
-
-			if (rawUrl.indexOf('/preview') !== -1)
-				return rawUrl;
-
-			var fileId = extractDriveFileId(rawUrl);
-			return fileId ? 'https://drive.google.com/file/d/' + fileId + '/preview' : '';
-		}
-
-		function setVideoOrientation(container, video) {
-			if (!video.videoWidth || !video.videoHeight)
-				return;
-
-			container.classList.toggle('is-portrait-video', video.videoHeight > video.videoWidth);
-		}
-
-		function applyDeclaredOrientation(container) {
-			var orientation = (container.getAttribute('data-video-orientation') || '').toLowerCase();
-			if (!orientation)
-				return;
-
-			container.classList.toggle('is-portrait-video', orientation === 'portrait');
-		}
-
-		function syncPlaybackUi(container, video) {
-			container.classList.toggle('is-playing', !video.paused && !video.ended);
-		}
-
-		function appendVideo(container, videoUrl, fallbackPreviewUrl) {
-			var video = document.createElement('video');
-			var source = document.createElement('source');
-			var overlay = document.createElement('button');
-
-			overlay.type = 'button';
-			overlay.className = 'video-play-toggle';
-			overlay.setAttribute('aria-label', 'Play video');
-			overlay.innerHTML = '<span aria-hidden="true"></span>';
-
-			video.controls = false;
-			video.playsInline = true;
-			video.preload = 'metadata';
-			video.setAttribute('playsinline', '');
-			video.style.width = '100%';
-			video.style.height = '100%';
-			video.style.display = 'block';
-
-			source.src = videoUrl;
-			video.appendChild(source);
-
-			container.innerHTML = '';
-			container.classList.add('is-custom-video');
-			container.appendChild(video);
-			container.appendChild(overlay);
-
-			video.addEventListener('loadedmetadata', function() {
-				setVideoOrientation(container, video);
-			});
-
-			video.addEventListener('play', function() {
-				syncPlaybackUi(container, video);
-				overlay.setAttribute('aria-label', 'Pause video');
-			});
-
-			video.addEventListener('pause', function() {
-				syncPlaybackUi(container, video);
-				overlay.setAttribute('aria-label', 'Play video');
-			});
-
-			video.addEventListener('ended', function() {
-				syncPlaybackUi(container, video);
-				overlay.setAttribute('aria-label', 'Play video');
-			});
-
-			video.addEventListener('error', function() {
-				if (fallbackPreviewUrl)
-					appendIframe(container, fallbackPreviewUrl);
-			});
-
-			overlay.addEventListener('click', function() {
-				if (video.paused || video.ended) {
-					video.play();
-					return;
-				}
-
-				video.pause();
-			});
-
-			video.addEventListener('click', function() {
-				if (video.paused || video.ended) {
-					video.play();
-					return;
-				}
-
-				video.pause();
-			});
-
-			return video;
-		}
-
-		function appendIframe(container, previewUrl) {
-			var frame = document.createElement('iframe');
-			frame.src = previewUrl;
-			frame.style.display = 'block';
-			frame.style.width = '100%';
-			frame.style.height = '100%';
-			frame.style.border = '0';
-			frame.allow = 'autoplay; fullscreen';
-			frame.allowFullscreen = true;
-			frame.loading = 'lazy';
-			container.innerHTML = '';
-			container.appendChild(frame);
-		}
-
-		(function hydrateVideoPlayers() {
-			var players = document.querySelectorAll('.js-video-player[data-video-url]');
-
-			for (var i = 0; i < players.length; i++) {
-				var container = players[i];
-				var rawUrl = (container.getAttribute('data-video-url') || '').trim();
-				if (!rawUrl)
-					continue;
-
-				applyDeclaredOrientation(container);
-
-				var drivePreviewUrl = toDrivePreviewUrl(rawUrl);
-				if (drivePreviewUrl) {
-					appendIframe(container, drivePreviewUrl);
-					continue;
-				}
-
-				if (/\.(mp4|webm|ogg)(\?|#|$)/i.test(rawUrl)) {
-					appendVideo(container, rawUrl, '');
-				}
-			}
-		})();
 
 })(jQuery);
