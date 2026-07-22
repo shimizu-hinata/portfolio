@@ -132,11 +132,102 @@
 			return fileId ? 'https://drive.google.com/file/d/' + fileId + '/preview' : '';
 		}
 
+		function setVideoOrientation(container, video) {
+			if (!video.videoWidth || !video.videoHeight)
+				return;
+
+			container.classList.toggle('is-portrait-video', video.videoHeight > video.videoWidth);
+		}
+
+		function applyDeclaredOrientation(container) {
+			var orientation = (container.getAttribute('data-video-orientation') || '').toLowerCase();
+			if (!orientation)
+				return;
+
+			container.classList.toggle('is-portrait-video', orientation === 'portrait');
+		}
+
+		function syncPlaybackUi(container, video) {
+			container.classList.toggle('is-playing', !video.paused && !video.ended);
+		}
+
+		function appendVideo(container, videoUrl, fallbackPreviewUrl) {
+			var video = document.createElement('video');
+			var source = document.createElement('source');
+			var overlay = document.createElement('button');
+
+			overlay.type = 'button';
+			overlay.className = 'video-play-toggle';
+			overlay.setAttribute('aria-label', 'Play video');
+			overlay.innerHTML = '<span aria-hidden="true"></span>';
+
+			video.controls = false;
+			video.playsInline = true;
+			video.preload = 'metadata';
+			video.setAttribute('playsinline', '');
+			video.style.width = '100%';
+			video.style.height = '100%';
+			video.style.display = 'block';
+
+			source.src = videoUrl;
+			video.appendChild(source);
+
+			container.innerHTML = '';
+			container.classList.add('is-custom-video');
+			container.appendChild(video);
+			container.appendChild(overlay);
+
+			video.addEventListener('loadedmetadata', function() {
+				setVideoOrientation(container, video);
+			});
+
+			video.addEventListener('play', function() {
+				syncPlaybackUi(container, video);
+				overlay.setAttribute('aria-label', 'Pause video');
+			});
+
+			video.addEventListener('pause', function() {
+				syncPlaybackUi(container, video);
+				overlay.setAttribute('aria-label', 'Play video');
+			});
+
+			video.addEventListener('ended', function() {
+				syncPlaybackUi(container, video);
+				overlay.setAttribute('aria-label', 'Play video');
+			});
+
+			video.addEventListener('error', function() {
+				if (fallbackPreviewUrl)
+					appendIframe(container, fallbackPreviewUrl);
+			});
+
+			overlay.addEventListener('click', function() {
+				if (video.paused || video.ended) {
+					video.play();
+					return;
+				}
+
+				video.pause();
+			});
+
+			video.addEventListener('click', function() {
+				if (video.paused || video.ended) {
+					video.play();
+					return;
+				}
+
+				video.pause();
+			});
+
+			return video;
+		}
+
 		function appendIframe(container, previewUrl) {
 			var frame = document.createElement('iframe');
 			frame.src = previewUrl;
 			frame.style.display = 'block';
 			frame.style.width = '100%';
+			frame.style.height = '100%';
 			frame.style.border = '0';
 			frame.allow = 'autoplay; fullscreen';
 			frame.allowFullscreen = true;
@@ -154,6 +245,8 @@
 				if (!rawUrl)
 					continue;
 
+				applyDeclaredOrientation(container);
+
 				var drivePreviewUrl = toDrivePreviewUrl(rawUrl);
 				if (drivePreviewUrl) {
 					appendIframe(container, drivePreviewUrl);
@@ -161,17 +254,7 @@
 				}
 
 				if (/\.(mp4|webm|ogg)(\?|#|$)/i.test(rawUrl)) {
-					var video = document.createElement('video');
-					var source = document.createElement('source');
-					video.controls = true;
-					video.preload = 'metadata';
-					video.style.width = '100%';
-					video.style.height = 'auto';
-					video.style.display = 'block';
-					source.src = rawUrl;
-					video.appendChild(source);
-					container.innerHTML = '';
-					container.appendChild(video);
+					appendVideo(container, rawUrl, '');
 				}
 			}
 		})();

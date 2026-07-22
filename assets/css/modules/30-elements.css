@@ -583,7 +583,16 @@
 			}
 
 		.image .js-video-player {
+			background: #111111;
+			overflow: hidden;
+			position: relative;
 			width: 100%;
+		}
+
+		.image .js-video-player.is-custom-video.is-portrait-video {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 28rem;
 		}
 
 		.image .js-video-player iframe {
@@ -596,6 +605,7 @@
 
 		.image .js-video-player video {
 			aspect-ratio: 16 / 9;
+			background: #111111;
 			display: block;
 			height: auto;
 			max-width: 100%;
@@ -603,11 +613,73 @@
 			width: 100%;
 		}
 
+		.image .js-video-player.is-portrait-video iframe,
+		.image .js-video-player.is-portrait-video video {
+			aspect-ratio: 9 / 16;
+		}
+
+		.image .js-video-player .video-play-toggle {
+			align-items: center;
+			background: linear-gradient(180deg, rgba(17, 17, 17, 0.08) 0%, rgba(17, 17, 17, 0.42) 100%);
+			border: 0;
+			cursor: pointer;
+			display: flex;
+			inset: 0;
+			justify-content: center;
+			padding: 0;
+			position: absolute;
+			transition: opacity 0.18s ease, visibility 0.18s ease;
+			width: 100%;
+		}
+
+		.image .js-video-player .video-play-toggle span {
+			background: rgba(17, 17, 17, 0.72);
+			border-radius: 999px;
+			display: block;
+			height: 4.5rem;
+			position: relative;
+			width: 4.5rem;
+		}
+
+		.image .js-video-player .video-play-toggle span:before {
+			border-bottom: 0.75rem solid transparent;
+			border-left: 1.2rem solid #ffffff;
+			border-top: 0.75rem solid transparent;
+			content: '';
+			left: 1.78rem;
+			position: absolute;
+			top: 1.48rem;
+		}
+
+		.image .js-video-player.is-playing .video-play-toggle {
+			opacity: 0;
+			pointer-events: none;
+			visibility: hidden;
+		}
+
 		@media screen and (orientation: portrait) and (max-aspect-ratio: 3/4) {
 
 			.image .js-video-player iframe,
 			.image .js-video-player video {
 				aspect-ratio: 4 / 3;
+			}
+
+			.image .js-video-player.is-portrait-video iframe,
+			.image .js-video-player.is-portrait-video video {
+				aspect-ratio: 9 / 16;
+			}
+
+			.image .js-video-player .video-play-toggle span {
+				height: 3.75rem;
+				width: 3.75rem;
+			}
+
+			.image .js-video-player .video-play-toggle span:before {
+				border-bottom-width: 0.62rem;
+				border-left-width: 1rem;
+				border-top-width: 0.62rem;
+				left: 1.5rem;
+				top: 1.25rem;
 			}
 
 		}
