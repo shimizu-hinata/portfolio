@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<title>Kaomoji Clash | Game Portfolio</title>
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Post -->
+			<article class="post">
+				<ul class="actions">
+					<li><a href="index.html" class="button small">ホームに戻る</a></li>
+				</ul>
+				<header>
+					<div class="title">
+						<div class="project-genres">
+							<p class="project-genre">顔文字</p>
+							<p class="project-genre">ビルド</p>
+							<p class="project-genre">衝突アクション</p>
+						</div>
+						<h2><a href="#">Kaomoji Clash</a></h2>
+						<p>このゲームでは自分で顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
+							<br>自分だけの顔文字、戦略、そして衝突の爽快感を楽しむゲームとなります。
+							<br>顔文字だけでなくアリーナに設置するアイテムを追加することにより単なる衝突だけでは済まさず、戦略性を上げるようにしています。</p>
+					</div>
+					<div class="meta">
+						<h3>開発メンバー</h3>
+						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img src="images/Hiyoko_icon.png"alt="" /></a>
+					</div>
+				</header>
+				<div class="image featured">
+					<h3>紹介動画</h3>
+					<div class="js-video-player"
+						data-video-url="https://drive.google.com/file/d/1axGpShR2qQ63-HHGVL82WkBYhlDcp-MC/view?usp=drive_link">
+					</div>
+				</div>
+				<section>
+					<h3>プロジェクト情報</h3>
+					<ul class="alt">
+						<li><strong>プラットフォーム:</strong> Android or PC</li>
+						<li><strong>ジャンル:</strong> 顔文字 / ビルド / アクション</li>
+						<li><strong>開発期間:</strong> 2026/01 - 2026/02 (上旬)</li>
+						<li><strong>開発体制:</strong> 個人開発</li>
+						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub</li>
+					</ul>
+				</section>
+				<section>
+					<h3>ゲーム概要</h3>
+					<p>KaomojiClash は、プレイヤーが独自の顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
+						<br>強さはキャラクターレベルではなく、記号パーツの構成（ビルド） によって決まります。
+						<br>プレイヤーは顔文字を引っ張って発射し、敵に衝突させることでダメージを与えます。
+						<br>収集した記号パーツを組み替えることで戦略的な深みが生まれ、「記号収集 → ビルド再構成 → 再挑戦」のループがゲームの核心を形成します。</p>
+				</section>
+				<section>
+					<h3>技術的な工夫・実装内容</h3>
+					<p>このゲームでは記号を無数に実装しなければいけないので将来を見越して
+						テンプレート性と拡張性を重視して開発しました。
+						<br>例えば、記号や敵を作成するカスタムエディタやデータ管理を容易にするために
+						ScriptableObjectでデータ作成などを行いました。
+						<br>例えばカメラ振動などに含ませたいUIはWorldSpaceのCanvasに...
+						それ以外の静的なUIはUIToolkitを使って作成しました。
+						<br>これによりUIのテンプレート性をかなり保持できました。</p>
+				</section>
+				<section>
+					<ul class="actions">
+						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
+					</ul>
+					<div class="js-story-content" hidden>
+						<h3>Story</h3>
+						<h4>Story Overview</h4>
+						<p>KaomojiClashの世界では、顔文字が一つの生命体として存在しています。
+							<br><br>もともと顔文字は、人間が感情を表現するために生み出した記号でした。
+							しかし長い時間の中で、無数の感情が込められたことで、
+							その記号たちは次第に「意味」だけでなく「意識」を持つ存在へと変化していきました。
+							<br><br>こうして、顔文字たちは独自の文明を築き始めます。</p>
+						<hr />
+						<h4>Kaomoji Civilization</h4>
+						<p>顔文字は「目」「口」「装飾」などの記号によって構成されています。
+							<br><br>その構成は単なる見た目ではなく、
+							そのまま顔文字の能力や個性として現れます。
+							<br><br>構成が複雑で完成度の高い顔文字ほど、
+							強く、美しく、完成された存在とされます。
+							<br><br>やがて顔文字たちは、異なる文化圏を形成していきました。</p>
+						<p>文化圏ごとに</p>
+						<ul>
+							<li>顔文字の構造</li>
+							<li>戦い方</li>
+							<li>強さの基準</li>
+						</ul>
+						<p>が異なり、文明が発展するほど
+							より高度な顔文字が生まれていきます。</p>
+						<hr />
+						<h4>The Player</h4>
+						<p>プレイヤーは、まだ未完成の顔文字です。
+							<br><br>しかしプレイヤーには特別な能力があります。
+							<br><br>それは、戦いの中で他の顔文字の記号を取り込み、
+							自分の構造を再構成できる能力です。
+							<br><br>この力によってプレイヤーは、
+							戦うたびに自分の顔文字を変化させ、
+							より強い存在へと進化していきます。</p>
+						<hr />
+						<h4>Purpose</h4>
+						<p>顔文字文明では、
+							強い構成を持つことが「完成された存在」である証とされています。</p>
+						<p>プレイヤーは様々な文化圏へ挑戦しながら、</p>
+						<ul>
+							<li>新しい記号を集め</li>
+							<li>自分の顔文字を再構成し</li>
+							<li>より高度な文明へと進んでいきます。</li>
+						</ul>
+						<p>そして最終的には、
+							最も完成された顔文字へと到達することを目指します。</p>
+						<hr />
+						<h4>Theme</h4>
+						<p>KaomojiClashは、
+							<br><br>「人間が作った記号が、自ら進化していく世界」
+							<br><br>をテーマにしたゲームです。
+							<br><br>プレイヤーは戦いを通して構造を変化させ、
+							唯一無二の顔文字を完成させていきます。</p>
+					</div>
+				</section>
+				<section>
+					<h3>関連リンク</h3>
+					<ul class="actions">
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
+								rel="noopener noreferrer">GitHub</a></li>
+						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.exe）</a></li>
+						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.apk）</a></li>
+					</ul>
+				</section>
+				<footer>
+					<ul class="stats">
+						<li>Unity</li>
+						<li>Personal Development</li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+
+		<!-- Sidebar -->
+		<section id="sidebar">
+
+			<!-- Intro -->
+			<section id="intro">
+				<a href="#" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<header>
+					<h2>Game Portfolio</h2>
+					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+				</header>
+			</section>
+
+			<!-- Mini Posts -->
+			<section>
+				<div class="mini-posts">
+
+					<!-- Mini Post -->
+					<article class="mini-post">
+						<header>
+							<h3><a href="algomate.html">Algomate Colony</a></h3>
+							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
+							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+						</header>
+						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"
+								alt="" /></a>
+					</article>
+
+					<article class="mini-post">
+						<header>
+							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
+							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
+							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+						</header>
+						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png"
+								alt="" /></a>
+					</article>
+
+					<article class="mini-post">
+						<header>
+							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
+							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
+							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+						</header>
+						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png"
+								alt="" /></a>
+					</article>
+				</div>
+			</section>
+		</section>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/site.js"></script>
+
+</body>
+
+</html>

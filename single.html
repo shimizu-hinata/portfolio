@@ -19,339 +19,25 @@
 	<div id="wrapper">
 		<!-- Main -->
 		<div id="main">
-
-			<!-- Post -->
-			<article class="post" data-post="algomate">
-				<ul class="actions">
-					<li><a href="index.html" class="button small">ホームに戻る</a></li>
-				</ul>
+			<article class="post">
 				<header>
 					<div class="title">
-						<div class="project-genres">
-							<p class="project-genre">コマンド入力</p>
-							<p class="project-genre">拠点運営シミュレーション</p>
-						</div>
-						<h2><a href="#">Algomate Colony</a></h2>
-						<p>プレイヤーが神の視点からロボットたちに命令（プログラミング）を与え、自動化されたコロニーを運営・発展させていくシミュレーションゲームです。
-							<br>ロボットに資源の収集、運搬、加工などを指示し、あなたの手でコロニーを豊かにしていきましょう。
-							<br>ゲームを進めることで、より複雑で高度な命令をプログラムできるようになり、ロボットたちの作業効率を最適化していく楽しみが味わえます。</p>
+						<h2><a href="#">作品詳細ページは post ごとに分割されました</a></h2>
+						<p>旧 URL からアクセスした場合は、自動的に対応する詳細ページへ移動します。</p>
 					</div>
 					<div class="meta">
-						<h3>開発メンバー</h3>
-						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img
-								src="images/Hiyoko_icon.png" alt="" /></a>
-						<a href="#" class="author"><span class="name">田島侑來</span><span class="role-tags"><span class="role-tag">デザイナー</span></span><img
-								src="images/TajimaYura_Icon.jpg" alt="" /></a>
+						<h3>移動先</h3>
+						<p>Algomate Colony / Kaomoji Clash / Bomb Crash</p>
 					</div>
 				</header>
-				<div class="image featured">
-					<h3>紹介動画</h3>
-					<div class="js-video-player"
-						data-video-url="https://drive.google.com/file/d/16tkBSSP6DT93uMh1SscQ86Nltv69H7tA/view?usp=drivesdk">
-					</div>
-				</div>
 				<section>
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> PC </li>
-						<li><strong>ジャンル:</strong> コマンド入力 / 拠点運営シミュレーション</li>
-						<li><strong>開発期間:</strong> 2024/12 - 2025/02 (上旬)</li>
-						<li><strong>開発体制:</strong> チーム開発 (担当: プログラミング・プランニング)</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.23f1) / C# / Git Bash / GitHub</li>
+					<ul class="actions fit">
+						<li><a href="algomate.html" class="button">Algomate Colony</a></li>
+						<li><a href="kaomoji.html" class="button">Kaomoji Clash</a></li>
+						<li><a href="bombcrash.html" class="button">Bomb Crash</a></li>
+						<li><a href="index.html" class="button">ホームに戻る</a></li>
 					</ul>
 				</section>
-				<section>
-					<h3>ゲーム概要</h3>
-					<p>このゲームでは、プレイヤーがキャラクターを直接操作することはありません。
-						<br><br><strong>ロボットの選択:</strong>マップ上のロボットを選択します。
-						<br><strong>コマンドの入力:</strong>選択したロボットに対して、画面に表示されるコマンドリストから命令を与えます。
-						最初は「移動（Move）」や「収集（Gather）」,「格納（Deposit）」といった基本的なコマンドから始まります。
-						<br><strong>ヒント:</strong> コマンドの概要は右上の設定ボタンから確認できます。
-						<br><strong>施設の利用:</strong>
-						拠点をクリックすることで、施設のアップグレードや新しいコマンドの研究が可能です。
-						<br><br>ゲームの目的は、これらのコマンドを組み合わせてロボットの行動を自動化し、効率的な生産ラインを構築することです。</p>
-				</section>
-				<section>
-					<h3>技術的な工夫・実装内容</h3>
-					<p>NavMeshでの経路探索実装が難航したため、代替としてWaypointとRaycastを組み合わせ、疑似的なゲームAI挙動を実現しました。</p>
-				</section>
-				<section>
-					<h3>ストーリー</h3>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<div class="js-story-content" hidden>
-						<p>荒廃した惑星に降り立ったあなたは、稼働限界が近いロボットたちを再起動し、失われた文明の技術を集めながら新たな拠点を築きます。
-							<br>しかし、惑星の環境は過酷で、資源もエネルギーも不足気味です。限られた命令をどう組み合わせるかで、コロニーの未来は大きく変わります。
-							<br>研究を進めるごとにロボットは賢くなり、単純作業だった運営はやがて巨大な自動化システムへと進化していきます。</p>
-					</div>
-				</section>
-				<section>
-					<h3>関連リンク</h3>
-					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
-						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
-					</ul>
-				</section>
-				<footer>
-					<ul class="stats">
-						<li>Unity</li>
-						<li>Team Development</li>
-					</ul>
-				</footer>
-			</article>
-
-			<article class="post" data-post="kaomoji">
-				<ul class="actions">
-					<li><a href="index.html" class="button small">ホームに戻る</a></li>
-				</ul>
-				<header>
-					<div class="title">
-						<div class="project-genres">
-							<p class="project-genre">顔文字</p>
-							<p class="project-genre">ビルド</p>
-							<p class="project-genre">衝突アクション</p>
-						</div>
-						<h2><a href="#">Kaomoji Clash</a></h2>
-						<p>このゲームでは自分で顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
-							<br>自分だけの顔文字、戦略、そして衝突の爽快感を楽しむゲームとなります。
-							<br>顔文字だけでなくアリーナに設置するアイテムを追加することにより単なる衝突だけでは済まさず、戦略性を上げるようにしています。</p>
-					</div>
-					<div class="meta">
-						<h3>開発メンバー</h3>
-						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img src="images/Hiyoko_icon.png"alt="" /></a>
-					</div>
-				</header>
-				<div class="image featured">
-					<h3>紹介動画</h3>
-					<div class="js-video-player"
-						data-video-url="https://drive.google.com/file/d/1axGpShR2qQ63-HHGVL82WkBYhlDcp-MC/view?usp=drive_link">
-					</div>
-				</div>
-				<section>
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> Android or PC</li>
-						<li><strong>ジャンル:</strong> 顔文字 / ビルド / アクション</li>
-						<li><strong>開発期間:</strong> 2026/01 - 2026/02 (上旬)</li>
-						<li><strong>開発体制:</strong> 個人開発</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub</li>
-					</ul>
-				</section>
-				<section>
-					<h3>ゲーム概要</h3>
-					<p>KaomojiClash は、プレイヤーが独自の顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
-						<br>強さはキャラクターレベルではなく、記号パーツの構成（ビルド） によって決まります。
-						<br>プレイヤーは顔文字を引っ張って発射し、敵に衝突させることでダメージを与えます。
-						<br>収集した記号パーツを組み替えることで戦略的な深みが生まれ、「記号収集 → ビルド再構成 → 再挑戦」のループがゲームの核心を形成します。</p>
-				</section>
-				<section>
-					<h3>技術的な工夫・実装内容</h3>
-					<p>このゲームでは記号を無数に実装しなければいけないので将来を見越して
-						テンプレート性と拡張性を重視して開発しました。
-						<br>例えば、記号や敵を作成するカスタムエディタやデータ管理を容易にするために
-						ScriptableObjectでデータ作成などを行いました。
-						<br>例えばカメラ振動などに含ませたいUIはWorldSpaceのCanvasに...
-						それ以外の静的なUIはUIToolkitを使って作成しました。
-						<br>これによりUIのテンプレート性をかなり保持できました。</p>
-				</section>
-				<section>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<!-- ストーリー -->
-					<div class="js-story-content" hidden>
-						<h3>Story</h3>
-						<h4>Story Overview</h4>
-						<p>KaomojiClashの世界では、顔文字が一つの生命体として存在しています。
-							<br><br>もともと顔文字は、人間が感情を表現するために生み出した記号でした。
-							しかし長い時間の中で、無数の感情が込められたことで、
-							その記号たちは次第に「意味」だけでなく「意識」を持つ存在へと変化していきました。
-							<br><br>こうして、顔文字たちは独自の文明を築き始めます。</p>
-						<hr />
-						<h4>Kaomoji Civilization</h4>
-						<p>顔文字は「目」「口」「装飾」などの記号によって構成されています。
-							<br><br>その構成は単なる見た目ではなく、
-							そのまま顔文字の能力や個性として現れます。
-							<br><br>構成が複雑で完成度の高い顔文字ほど、
-							強く、美しく、完成された存在とされます。
-							<br><br>やがて顔文字たちは、異なる文化圏を形成していきました。</p>
-						<p>文化圏ごとに</p>
-						<ul>
-							<li>顔文字の構造</li>
-							<li>戦い方</li>
-							<li>強さの基準</li>
-						</ul>
-						<p>が異なり、文明が発展するほど
-							より高度な顔文字が生まれていきます。</p>
-						<hr />
-						<h4>The Player</h4>
-						<p>プレイヤーは、まだ未完成の顔文字です。
-							<br><br>しかしプレイヤーには特別な能力があります。
-							<br><br>それは、戦いの中で他の顔文字の記号を取り込み、
-							自分の構造を再構成できる能力です。
-							<br><br>この力によってプレイヤーは、
-							戦うたびに自分の顔文字を変化させ、
-							より強い存在へと進化していきます。</p>
-						<hr />
-						<h4>Purpose</h4>
-						<p>顔文字文明では、
-							強い構成を持つことが「完成された存在」である証とされています。</p>
-						<p>プレイヤーは様々な文化圏へ挑戦しながら、</p>
-						<ul>
-							<li>新しい記号を集め</li>
-							<li>自分の顔文字を再構成し</li>
-							<li>より高度な文明へと進んでいきます。</li>
-						</ul>
-						<p>そして最終的には、
-							最も完成された顔文字へと到達することを目指します。</p>
-						<hr />
-						<h4>Theme</h4>
-						<p>KaomojiClashは、
-							<br><br>「人間が作った記号が、自ら進化していく世界」
-							<br><br>をテーマにしたゲームです。
-							<br><br>プレイヤーは戦いを通して構造を変化させ、
-							唯一無二の顔文字を完成させていきます。</p>
-					</div>
-				</section>
-				<section>
-					<h3>関連リンク</h3>
-					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
-						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.exe）</a></li>
-						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.apk）</a></li>
-					</ul>
-				</section>
-				<footer>
-					<ul class="stats">
-						<li>Unity</li>
-						<li>Personal Development</li>
-					</ul>
-				</footer>
-			</article>
-
-			<article class="post" data-post="bombcrash">
-				<ul class="actions">
-					<li><a href="index.html" class="button small">ホームに戻る</a></li>
-				</ul>
-				<header>
-					<div class="title">
-						<div class="project-genres">
-							<p class="project-genre">ローグライト</p>
-							<p class="project-genre">爆弾迎撃アクション</p>
-						</div>
-						<h2><a href="#">Bomb Crash</a></h2>
-						<p>BombCrash は Unity で制作した、2D アクションゲームです。
-							<br>プレイヤーは強力な冷凍ボムを武器に、カウントダウン式の敵ボムが爆発する前に次々と撃破していきます。
-							<br>敵を倒してスクラップとインサイトポイントを集め、スキルや装備をアップグレードしながら、どこまでウェーブを生き延びられるか挑戦するゲームとなります。</p>
-					</div>
-					<div class="meta">
-						<h3>開発メンバー</h3>
-						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img
-								src="images/Hiyoko_icon.png" alt="" /></a>
-						<a href="#" class="author"><span class="name">小西睦月</span><span class="role-tags"><span class="role-tag">エフェクトデザイナー</span></span><img
-								src="images/character_oji_02_blue_brown.png" alt="" /></a>
-						<a href="#" class="author"><span class="name">岩見穂乃香</span><span class="role-tags"><span class="role-tag">デザイナー</span></span><img
-								src="images/character_tenshi_gold.png" alt="" /></a>
-					</div>
-				</header>
-				<div class="image featured">
-					<h3>紹介動画</h3>
-					<div class="js-video-player"
-						data-video-url="https://drive.google.com/file/d/1RMhaNP2h8D5IbEeFLTXy_bCQ31rHKP17/view?usp=drive_link">
-					</div>
-				</div>
-				<section>
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> PC </li>
-						<li><strong>ジャンル:</strong> 爆弾ビルド / ローグライト / アクション</li>
-						<li><strong>開発期間:</strong> 2025/02 - 2025/06 (上旬)</li>
-						<li><strong>開発体制:</strong> チーム開発（担当: プログラミング・プランニング）</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.29f1) / C# / Git Bash / GitHub</li>
-					</ul>
-				</section>
-				<section>
-					<h3>ゲーム概要</h3>
-					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾(敵)を、強力な凍結爆弾で破壊する爽快アクションゲームです。
-						<br>プレイヤーはキャラクターを操作し、敵を倒してスクラップを入手します。
-						<br>このスクラップでスキルや装備を強化できます。
-						<br>このゲームでは、Wave(波)の概念を採用しており、Wave数が上がるにつれ敵が強くなっていくようになっています。</p>
-				</section>
-				<section>
-					<h3>技術的な工夫・実装内容</h3>
-					<p>このゲームでは、スキルや爆弾、プレイヤーの能力といったデータをScriptableObjectで管理しました。
-						<br>ScriptableObjectを活用することで、後のパラメータ変更や新しいスキルの追加が容易になり、ゲームの拡張性を高めることができました。
-						<br>敵の出現パターンやWaveの管理もScriptableObjectで行い、ゲームバランスの調整を効率的に行えるようにしました。
-						<br>UIのAnimationはAnimatorやTimelineを活用し、UIの遷移をスムーズにすることで、プレイヤーの没入感を高める工夫をしました。
-				</section>
-				<section>
-					<h3>ストーリー</h3>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<!--- ストーリー --->
-					<div class="js-story-content" hidden>
-						<h3>BombCrash - 物語のあらすじ</h3>
-						<h4>プロローグ</h4>
-						<p>かつて、私の母は父が作った爆弾の誤作動によって命を落とした。
-							<br><br>その日以来、父は生きる気力を失ったかのように、自身の研究にさらに深くのめり込んでいった。
-							<br><br>まだ幼かった私は、父が作ってくれたウサギ型のロボット人形を抱きしめ、寂しそうに父の研究室を覗き込むことしかできなかった。
-							そして、静かにその扉を閉じる。</p>
-						<h4>数年後、日常の断絶</h4>
-						<p>私は高校生になった。
-							<br><br>学校からの帰り道、いつも通り父の研究室を覗くと、そこには研究に没頭する父の姿があった。私は静かに通り過ぎる。
-							学生カバンに着けた、昔のロボット人形とお揃いのキーホルダーが、扉の隙間から父の姿をのぞかせていた。
-							<br><br>自室に戻ると、そこは私の研究室でもあった。
-							爆弾の設計に必要な道具が散らばるデスク。
-							壁には、精密に描かれた凍結爆弾の設計図が貼られている。
-							デスクの傍らには、幼い頃に抱いていたウサギの人形と、母の顔がかすれてしまった家族写真が置かれていた。
-							<br><br>私は学生カバンを置き、再び爆弾の設計に取り掛かる。</p>
-						<h4>回想 - 父との亀裂</h4>
-						<p>数年前、私は初めて自力で開発した爆弾の設計図を父に見せた。
-							<br><br>「見て見て！これ私が作ったんだ！」
-							<br><br>喜んでもらえると、そう信じていた。 しかし、父からの返答は淡々としたものだった。
-							<br><br>「あぁ。すごいじゃないか…。」
-							<br><br>期待していた反応は得られず、私は握りしめてくしゃくしゃになった設計図を父に投げつけ、研究室を飛び出した。 自室のベッドにうずくまり、掛け布団を深く覆いかぶせて泣いた。
-							<br><br>一方、父は床に落ちた設計図を拾い上げる。
-							<br><br>「凍結爆弾か…、よくできている…。」
-							<br><br>その呟きは、誰に聞かれることもなく研究室に消えた。</p>
-						<h4>事件の勃発</h4>
-						<p>数週間後、学校から帰宅すると、いつもいるはずの父の姿が研究室から消えていた。
-							<br><br>急いで扉を開けて中へ入るが、誰もいない。ただ、父が研究していた爆弾の資料が床に散乱していた。
-							その設計資料に描かれていたのは、見たこともない爆弾だった。
-							<br><br>その時、外から大きな爆発音が響き渡る。
-							<br><br>窓の外を見ると、先ほどの資料とそっくりな爆弾が次々と爆発していた。
-							そして、私のすぐそばに、どこからともなくカウントダウンを始める爆弾が出現する。
-							<br><br>このままではやられる――！
-							<br><br>私は一か八か、学生カバンから試作品の凍結爆弾を取り出し、敵の爆弾に投げつけた。
-							爆弾は見る見るうちに凍りつき、完全に凍結されると粉々に砕け散った。
-							<br><br>そう、私が開発したこの凍結爆弾だけが、敵を破壊できる唯一の手段だったのだ。
-							<br><br>安堵もつかの間、新たな敵性爆弾が次々と現れる。
-							急いで家に戻ろうとしたが、自宅はすでに跡形もなく爆破されていた。
-							<br><br>しかし、地下の研究室へ続くハッチだけは、奇跡的に無事だった。
-							爆弾研究のために、地下室はほとんどの爆発を無効化できるように設計されている。私の部屋も、研究を始めてから地下に移していた。
-							<br><br>地下の自室へ駆け込み、デスクの上に置かれた設計図と完成品の爆弾を見つめる。
-							私は慣れた手つきで作業着に着替えると、それらを手に地上へと向かった。
-							<br><br>父の行方を追い、謎の爆弾を破壊するため、私の戦いが今、始まる。</p>
-					</div>
-				</section>
-				<section>
-					<h3>関連リンク</h3>
-					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/BombCrash" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
-						<li><a href="https://drive.google.com/file/d/1i8zCdus-vOQ-KaE83p5uE_9-xqK1dx_b/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
-					</ul>
-				</section>
-				<footer>
-					<ul class="stats">
-						<li>Unity</li>
-						<li>Personal Development</li>
-					</ul>
-				</footer>
 			</article>
 		</div>
 
@@ -374,31 +60,31 @@
 					<!-- Mini Post -->
 					<article class="mini-post">
 						<header>
-							<h3><a href="single.html?post=algomate">Algomate Colony</a></h3>
+							<h3><a href="algomate.html">Algomate Colony</a></h3>
 							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
 							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
 						</header>
-						<a href="single.html?post=algomate" class="image"><img src="images/AlgomateColony_Thumbnail.png"
+						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"
 								alt="" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
-							<h3><a href="single.html?post=kaomoji">Kaomoji Clash</a></h3>
+							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
 							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
 							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
 						</header>
-						<a href="single.html?post=kaomoji" class="image"><img src="images/KaomojiClash_Thumbnail.png"
+						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png"
 								alt="" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
-							<h3><a href="single.html?post=bombcrash">Bomb Crash</a></h3>
+							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
 							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
 							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
 						</header>
-						<a href="single.html?post=bombcrash" class="image"><img src="images/BombCrash_Thumbnail.png"
+						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png"
 								alt="" /></a>
 					</article>
 				</div>
@@ -412,6 +98,20 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		(function () {
+			var routes = {
+				algomate: 'algomate.html',
+				kaomoji: 'kaomoji.html',
+				bombcrash: 'bombcrash.html'
+			};
+
+			var post = new URLSearchParams(window.location.search).get('post');
+			if (post && routes[post]) {
+				window.location.replace(routes[post]);
+			}
+		})();
+	</script>
 	<script src="assets/js/site.js"></script>
 
 </body>
