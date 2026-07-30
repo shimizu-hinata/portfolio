@@ -81,7 +81,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -248,7 +248,7 @@
     scroll-snap-align: center;
     background: #fff;
     border: solid 1px rgba(160, 160, 160, 0.3);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     display: block;
     text-decoration: none;
@@ -302,15 +302,9 @@
 /* Portfolio Section */
 .portfolio-section {
     display: flex;
+    flex-direction: column;
     gap: 4em;
     margin-bottom: 4em;
-}
-
-@media screen and (max-width: 1280px) {
-    .portfolio-section {
-        flex-direction: column;
-        gap: 2em;
-    }
 }
 
 .filter-sidebar {
@@ -321,81 +315,51 @@
 .filter-inline {
     display: block;
     margin-top: 0;
-    margin-bottom: 2em;
+    margin-bottom: 0em;
 }
 
 .filter-button-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    border-top: solid 1px rgba(160, 160, 160, 0.3);
-}
-
-@media screen and (min-width: 1281px) {
-    .filter-sidebar {
-        display: block;
-    }
-
-    .filter-inline {
-        display: block;
-    }
-
-    .filter-button-list {
-        display: block;
-        border-top: solid 1px rgba(160, 160, 160, 0.3);
-    }
-}
-
-@media screen and (max-width: 1280px) {
-    .filter-button-list {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        border-top: 0;
-        gap: 0.5em;
-        padding-bottom: 0.25em;
-    }
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    border-top: 0;
+    gap: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 .filter-button-list li {
     border-bottom: none;
 }
 
-@media screen and (max-width: 1280px) {
-    .filter-button-list li {
-        flex: 0 0 auto;
-        border-bottom: 0;
-    }
-}
-
 .filter-btn {
     display: block;
     width: 100%;
-    padding: 1.5em 0; /* 左右のパディングを0にしてアンダーラインを強調 */
+    padding: 0em 1.5em;
     background: none;
-    border: none;
-    text-align: left;
+    border: solid 1px rgba(160, 160, 160, 0.3);
+    border-radius: 0.5em;
+    text-align: center;
     cursor: pointer;
     font-family: "Raleway", Helvetica, sans-serif;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    font-size: 0.7em;
-    color: #999; /* 未選択時は少し薄く */
+    font-size: 1.2em;
+    color: #999;
     transition: all 0.3s ease;
-    position: relative; /* アニメーションのために追加 */
+    position: relative;
+    line-height: 1;
+    white-space: nowrap;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 736px) {
     .filter-btn {
-        padding: 0.8em 1.5em;
-        border: solid 1px rgba(160, 160, 160, 0.3);
-        border-radius: 4px;
-        text-align: center;
-        white-space: nowrap;
+        font-size: 0.75em;
+        padding: 0.5em 1em;
     }
 }
 
@@ -425,18 +389,6 @@
     width: 100%;
 }
 
-@media screen and (min-width: 1281px) {
-    .filter-btn.active:after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 4px;
-        background: #2ebaae;
-    }
-}
-
 .portfolio-list-wrapper {
     flex-grow: 1;
 }
@@ -459,7 +411,7 @@
 
 .minimal-card:hover {
     border-color: #2ebaae;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .minimal-card .thumb {
@@ -518,8 +470,15 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 [hidden] {
