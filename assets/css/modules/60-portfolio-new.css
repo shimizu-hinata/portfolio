@@ -98,7 +98,9 @@
     left: 0;
     z-index: 2;
     display: flex;
+    justify-content: center;
     align-items: center;
+    align-self: center;
     background: rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -107,17 +109,32 @@
     color: #fff;
 }
 
+.hero-profile .profile-side {
+    display: flex;
+    direction: ltr;
+    align-items: center;
+    gap: 0.5em;
+}
+
 .hero-profile .logo {
+    align-self: center;
     flex-shrink: 0;
-    margin-right: 0.75em;
+    margin-right: 0;
 }
 
 .hero-profile .logo img {
     display: block;
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
-    object-fit: cover;
+    padding: 0.2em;
+    background-color: #ffffff2c;
+    border-radius: 30%;
+}
+
+.hero-profile .profile-side {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
 }
 
 .hero-profile header {
@@ -130,12 +147,14 @@
 .hero-profile h2,
 .hero-profile p {
     margin: 0;
+    align-self: center;
+    text-align: center;
     color: #fff;
 }
 
 .hero-profile h2 {
-    font-size: 1rem;
-    letter-spacing: 0.2em;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
 }
 
