@@ -189,7 +189,6 @@
 
 .carousel-controls {
     position: relative;
-    padding: 0 3.5rem;
 }
 
 .carousel-nav {
@@ -256,14 +255,13 @@
 
     .carousel-container {
         gap: 0.2rem;
-        padding-bottom: 1rem;
         scroll-padding-inline: 1rem;
     }
 }
 
 .carousel-item {
-    flex: 0 0 min(100%, 450px);
-    max-width: 450px;
+    max-width: 16 / 9;
+    flex: 0 0 calc(33.333% - 1.5em);
     scroll-snap-align: center;
     background: #fff;
     border: solid 1px rgba(160, 160, 160, 0.3);
@@ -274,14 +272,12 @@
     color: inherit;
 }
 
+
+/* 画面が小さくなってもサムネイルは16/9の比率を維持し、これを基準にカルーセルの幅を決定する */
 @media screen and (max-width: 736px) {
     .carousel-item {
         flex: 0 0 calc(100vw - 5.5rem);
         max-width: calc(100vw - 5.5rem);
-    }
-
-    .carousel-item .image-wrapper {
-        height: calc((100vw - 5.5rem) * 9 / 16);
     }
 }
 
@@ -293,7 +289,8 @@
 
 .carousel-item .image-wrapper {
     width: 100%;
-    height: 250px;
+    aspect-ratio: 16 / 9;
+    height: auto;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -316,8 +313,11 @@
     border: none;
 }
 
-.carousel-item .content {
-    padding: 2em;
+
+.carousel-item .info {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 1.5em 0;
 }
 
 .carousel-item h3 {
