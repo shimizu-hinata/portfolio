@@ -310,6 +310,12 @@
     max-width: 100%;
 }
 
+.carousel-item .image-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
 .carousel-item .content {
     padding: 2em;
 }
