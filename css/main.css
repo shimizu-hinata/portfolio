@@ -3592,7 +3592,7 @@ body.single #wrapper {
 }
 
 #intro .profile-side {
-	margin: auto;
+	margin: auto 0;
 }
 
 @media screen and (max-width: 1280px) {
