@@ -426,6 +426,8 @@
     text-decoration: none;
     color: inherit;
     transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
 }
 
 .minimal-card:hover {
@@ -457,6 +459,9 @@
 }
 
 .minimal-card .info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     padding: 1.25em;
 }
 
@@ -481,6 +486,21 @@
     line-height: 1.6;
     margin: 0;
     color: #646464;
+}
+
+.minimal-card .card-link-note {
+    margin-top: auto;
+    margin-bottom: 0;
+    padding-top: 1.2em;
+    font-size: 0.68em;
+    color: #2ebaae;
+    letter-spacing: 0.08em;
+}
+
+.minimal-card .card-overlay-link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
 }
 
 /* Filtering animation */
