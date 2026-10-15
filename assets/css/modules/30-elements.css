@@ -630,6 +630,9 @@
 			position: absolute;
 			transition: opacity 0.18s ease, visibility 0.18s ease;
 			width: 100%;
+			height: auto;
+			line-height: normal;
+			box-shadow: none;
 		}
 
 		.image .js-video-player .video-play-toggle span {

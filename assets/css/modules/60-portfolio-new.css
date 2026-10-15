@@ -528,6 +528,33 @@
     z-index: 2;
 }
 
+.custom-editor-demos {
+    margin-top: 2em;
+}
+
+.custom-editor-demo {
+    margin: 0 auto 2em;
+    max-width: 48rem;
+}
+
+.custom-editor-demo .js-video-player {
+    aspect-ratio: 4 / 3;
+}
+
+.custom-editor-demo .js-video-player.is-custom-video.is-portrait-video {
+    max-width: 100%;
+}
+
+.custom-editor-demo .js-video-player video {
+    aspect-ratio: auto;
+    height: 100%;
+    object-fit: contain;
+}
+
+.custom-editor-demo h4 {
+    margin-bottom: 0.75em;
+}
+
 [hidden] {
     display: none !important;
 }
