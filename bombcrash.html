@@ -46,6 +46,36 @@
 								src="images/character_tenshi_gold.png" alt="" /></a>
 					</div>
 				</header>
+				<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#design-flow">ゲーム進行</a>
+					<a href="#implementation">実装内容</a>
+					<a href="#project-links">ソース・実行ファイル</a>
+				</nav>
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>作品の要点</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>担当</h3>
+							<p>チーム開発でプログラミング・プランニングを担当。爆弾アクション、ウェーブ進行、スキル・装備などのゲーム要素を制作しました。</p>
+						</article>
+						<article>
+							<h3>設計上の課題</h3>
+							<p>ウェーブや敵、スキルの調整を行いやすくしながら、敵の出現から戦闘・リザルトまでの進行を一貫させること。</p>
+						</article>
+						<article>
+							<h3>実装した工夫</h3>
+							<p>ScriptableObjectの設定からWaveGeneratorが出現条件を生成し、WaveManagerとEnemySpawnControllerがウェーブを進行。ゲームデータと処理を分離しました。</p>
+						</article>
+					</div>
+					<ul class="actions project-quick-links">
+						<li><a href="https://github.com/HinataPiyo/BombCrash" class="button small" target="_blank"
+								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
+						<li><a href="https://drive.google.com/file/d/1i8zCdus-vOQ-KaE83p5uE_9-xqK1dx_b/view?usp=drive_link"
+								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
+					</ul>
+				</section>
 				<div class="image featured">
 					<h3>紹介動画</h3>
 					<div class="js-video-player"
@@ -62,19 +92,59 @@
 						<li><strong>使用技術:</strong> Unity (6000.0.29f1) / C# / Git Bash / GitHub</li>
 					</ul>
 				</section>
-				<section>
+				<section id="game-overview">
 					<h3>ゲーム概要</h3>
 					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾(敵)を、強力な凍結爆弾で破壊する爽快アクションゲームです。
 						<br>プレイヤーはキャラクターを操作し、敵を倒してスクラップを入手します。
 						<br>このスクラップでスキルや装備を強化できます。
 						<br>このゲームでは、Wave(波)の概念を採用しており、Wave数が上がるにつれ敵が強くなっていくようになっています。</p>
+					<ul>
+						<li>敵はHPと爆発までのカウントダウンを持ち、時間切れになる前に撃破する必要があります。</li>
+						<li>プレイヤーは爆弾の着弾位置を調整して投げ、敵を倒すとスクラップを獲得します。</li>
+						<li>爆弾の所持数は時間経過で補充され、装備スキルや必殺技にはクールタイム・使用可能状態があります。</li>
+						<li>ウェーブの敵出現が終わり、フィールド上の敵がいなくなると次のウェーブへ進みます。一定間隔でスタンピードやボスも登場します。</li>
+						<li>ゲームオーバー後のリザルトで到達ウェーブと獲得資源を確認できます。</li>
+					</ul>
+					<h4>操作</h4>
+					<ul>
+						<li>左右移動: ← / →、爆弾の着弾位置調整: ↑ / ↓、爆弾を投げる: Space</li>
+						<li>装備スキル: Z / X / C、必殺技（使用可能時）: V</li>
+						<li>ホーム画面などのUI操作: マウスクリック、ゲームオーバー演出後にホームへ戻る: Space</li>
+					</ul>
 				</section>
-				<section>
+				<section class="design-flow-section" id="design-flow">
+					<h3>ゲーム進行・処理フロー</h3>
+					<p>出撃からウェーブ戦闘、リザルトまでのゲーム進行と、ウェーブ設定から敵を出現させる処理の流れです。</p>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h4>プレイの基本ループ</h4>
+							<ol class="design-flow-steps">
+								<li><strong>出撃</strong><span>ホームからゲームを開始し、ローディングを経て戦闘へ</span></li>
+								<li><strong>敵が出現</strong><span>ウェーブ設定に従って敵がフィールドに登場</span></li>
+								<li><strong>爆弾で迎撃</strong><span>着弾位置を調整して凍結爆弾を投げ、敵を撃破</span></li>
+								<li><strong>継続・リザルト</strong><span>出現終了後に敵が残っていなければ次へ進行。敵のカウントダウンが尽きるとゲームオーバーとなり、リザルトを表示</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>ウェーブ・リザルト処理</h4>
+							<ol class="design-flow-steps design-flow-steps-three">
+								<li><strong>ルールから生成</strong><span>EndlessWaveRuleと敵データから時間・出現間隔・候補を構成</span></li>
+								<li><strong>敵を出現・進行</strong><span>WaveManagerが進行とUIを管理し、EnemySpawnControllerが敵を配置</span></li>
+								<li><strong>結果を反映</strong><span>討伐数・スクラップを更新し、到達ウェーブと獲得資源を表示</span></li>
+							</ol>
+						</div>
+					</div>
+				</section>
+				<section id="implementation">
 					<h3>技術的な工夫・実装内容</h3>
-					<p>このゲームでは、スキルや爆弾、プレイヤーの能力といったデータをScriptableObjectで管理しました。
-						<br>ScriptableObjectを活用することで、後のパラメータ変更や新しいスキルの追加が容易になり、ゲームの拡張性を高めることができました。
-						<br>敵の出現パターンやWaveの管理もScriptableObjectで行い、ゲームバランスの調整を効率的に行えるようにしました。
-						<br>UIのAnimationはAnimatorやTimelineを活用し、UIの遷移をスムーズにすることで、プレイヤーの没入感を高める工夫をしました。
+					<ul>
+						<li><strong>データと処理の分離:</strong> プレイヤー・敵・ボス・爆弾・スキル・装備・ウェーブルールをScriptableObjectで管理し、パラメーターをUnity Editorから調整。</li>
+						<li><strong>ルールベースのウェーブ生成:</strong> WaveGeneratorがEndlessWaveRuleと敵ごとの設定からウェーブ時間、出現間隔、スタンピード、出現候補を構成。</li>
+						<li><strong>役割ごとのスクリプト:</strong> Scripts/Systemにゲーム処理、Scripts/UIに画面表示・UI操作、Scripts/SOにデータ型を配置。IEnemyなどのインターフェースで敵の共通処理を扱います。</li>
+						<li><strong>画面遷移と演出:</strong> ローディングシーンを介した非同期シーン読み込みに加え、フェード・カットイン・サウンド・カメラ振動を使用。</li>
+					</ul>
+					<h4>現在の実装範囲</h4>
+					<p>ガチャ関連の処理には未実装部分があるため、ホーム画面のガチャボタンは無効化されています。スキルガチャは利用可能な機能として案内していません。リポジトリにはUnityプロジェクトが含まれますが、READMEには配布用ビルドの公開先は記載されていません。</p>
 				</section>
 				<section>
 					<h3>ストーリー</h3>
@@ -126,11 +196,11 @@
 							<br><br>父の行方を追い、謎の爆弾を破壊するため、私の戦いが今、始まる。</p>
 					</div>
 				</section>
-				<section>
+				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
 						<li><a href="https://github.com/HinataPiyo/BombCrash" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
+								rel="noopener noreferrer">GitHub（README・技術資料）</a></li>
 						<li><a href="https://drive.google.com/file/d/1i8zCdus-vOQ-KaE83p5uE_9-xqK1dx_b/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
 					</ul>
 				</section>

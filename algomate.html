@@ -32,9 +32,8 @@
 							<p class="project-genre">拠点運営シミュレーション</p>
 						</div>
 						<h2><a href="#">Algomate Colony</a></h2>
-						<p>プレイヤーが神の視点からロボットたちに命令（プログラミング）を与え、自動化されたコロニーを運営・発展させていくシミュレーションゲームです。
-							<br>ロボットに資源の収集、運搬、加工などを指示し、あなたの手でコロニーを豊かにしていきましょう。
-							<br>ゲームを進めることで、より複雑で高度な命令をプログラムできるようになり、ロボットたちの作業効率を最適化していく楽しみが味わえます。</p>
+						<p>プレイヤーが神の視点からロボットたちに命令（プログラミング）を与え、コロニーの運営・発展を目指すシミュレーションゲームです。
+							<br>現在のプロトタイプでは、Move・Gather・Depositを組み合わせ、資源の収集や格納など基本的な作業を自動化します。</p>
 					</div>
 					<div class="meta">
 						<h3>開発メンバー</h3>
@@ -44,6 +43,36 @@
 								src="images/TajimaYura_Icon.jpg" alt="" /></a>
 					</div>
 				</header>
+				<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#design-flow">設計・処理フロー</a>
+					<a href="#implementation">実装内容</a>
+					<a href="#project-links">ソース・実行ファイル</a>
+				</nav>
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>作品の要点</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>担当</h3>
+							<p>チーム開発で企画・プログラミングを担当。コマンド入力を起点にロボットが行動するゲームの実装に取り組みました。</p>
+						</article>
+						<article>
+							<h3>設計上の課題</h3>
+							<p>NavMeshによる経路探索が難航。ロボットが指定された資源や施設へ移動して作業できるよう、移動処理を見直しました。</p>
+						</article>
+						<article>
+							<h3>実装した工夫</h3>
+							<p>WaypointとRaycastを組み合わせた移動処理を実装。コマンドの検証・実行とロボットの状態遷移を分け、Move・Gather・Depositを順番に処理します。</p>
+						</article>
+					</div>
+					<ul class="actions project-quick-links">
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony" class="button small" target="_blank"
+								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
+						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link"
+								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
+					</ul>
+				</section>
 				<div class="image featured">
 					<h3>紹介動画</h3>
 					<div class="js-video-player"
@@ -60,7 +89,7 @@
 						<li><strong>使用技術:</strong> Unity (6000.0.23f1) / C# / Git Bash / GitHub</li>
 					</ul>
 				</section>
-				<section>
+				<section id="game-overview">
 					<h3>ゲーム概要</h3>
 					<p>このゲームでは、プレイヤーがキャラクターを直接操作することはありません。
 						<br><br><strong>ロボットの選択:</strong>マップ上のロボットを選択します。
@@ -68,12 +97,51 @@
 						最初は「移動（Move）」や「収集（Gather）」,「格納（Deposit）」といった基本的なコマンドから始まります。
 						<br><strong>ヒント:</strong> コマンドの概要は右上の設定ボタンから確認できます。
 						<br><strong>施設の利用:</strong>
-						拠点をクリックすることで、施設のアップグレードや新しいコマンドの研究が可能です。
+						拠点をクリックして施設パネルを開き、レベルアップ関連のUIを操作します。
 						<br><br>ゲームの目的は、これらのコマンドを組み合わせてロボットの行動を自動化し、効率的な生産ラインを構築することです。</p>
+					<h4>現在プレイできる範囲</h4>
+					<ul>
+						<li>ロボットを選択し、指定した場所への移動を指示。</li>
+						<li>資源を収集して拠点へ運搬し、格納。</li>
+						<li>資源量や拠点レベルなどの基本情報を確認し、拠点のレベルアップを実行。</li>
+					</ul>
+					<p>ゲームは開発中のプロトタイプです。if文・for文などの高度な構文や、加工施設を含む拡張された生産チェーンは、README上で今後の予定として記載されています。</p>
 				</section>
-				<section>
+				<section class="design-flow-section" id="design-flow">
+					<h3>ゲーム設計・処理フロー</h3>
+					<p>ロボットに命令を入力し、資源を収集・格納して拠点を発展させるまでの流れです。</p>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h4>プレイの基本ループ</h4>
+							<ol class="design-flow-steps">
+								<li><strong>ロボットを選択</strong><span>マップ上のロボットを選び、状態と命令対象を決める</span></li>
+								<li><strong>コマンドを入力</strong><span>Move・Gather・Depositなどの命令を組み立てる</span></li>
+								<li><strong>資源を収集・格納</strong><span>ロボットが対象へ移動し、資源を運搬する</span></li>
+								<li><strong>拠点を発展</strong><span>資源を使って拠点レベルを上げ、進行する</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>コマンド実行の処理</h4>
+							<ol class="design-flow-steps">
+								<li><strong>定義を読み込む</strong><span>CommandLoaderがResources内のJSONからコマンド定義を取得</span></li>
+								<li><strong>入力を検証</strong><span>CommandHandlerがコマンド名と引数を確認</span></li>
+								<li><strong>順番に実行</strong><span>RobotCommandExecuteがMove・Gather・Depositの状態遷移を処理</span></li>
+								<li><strong>ロボットが行動</strong><span>移動・収集・格納を行い、Loop()による循環動作にも対応</span></li>
+							</ol>
+						</div>
+					</div>
+				</section>
+				<section id="implementation">
 					<h3>技術的な工夫・実装内容</h3>
-					<p>NavMeshでの経路探索実装が難航したため、代替としてWaypointとRaycastを組み合わせ、疑似的なゲームAI挙動を実現しました。</p>
+					<ul>
+						<li><strong>WaypointとRaycastを用いた移動:</strong> NavMeshでの経路探索が難航したため別方式を検討し、2つを組み合わせてロボットの移動挙動を実装。</li>
+						<li><strong>コマンド定義のデータ化:</strong> JSONからコマンド定義を読み込み、Move・Gather・Depositの入力検証に利用。</li>
+						<li><strong>検証と実行の分離:</strong> CommandHandlerによる入力検証、RobotCommandExecuteによる逐次実行、ロボット側の行動処理を役割ごとに構成。</li>
+						<li><strong>拠点レベルの解放情報:</strong> ScriptableObjectでレベルごとの必要素材と解放情報を管理。</li>
+						<li><strong>施設UI:</strong> FacilityManagerで各施設パネルの表示切替やEscapeキーによる閉じる動作を管理。</li>
+					</ul>
+					<h4>現在の実装範囲</h4>
+					<p>現行のコマンド実行はMove・Gather・Depositが中心です。if・for・whileなどの高度な構文や、より広い生産チェーン・進行システムは、開発ドキュメントで予定または部分実装として整理されています。</p>
 				</section>
 				<section>
 					<h3>ストーリー</h3>
@@ -86,11 +154,11 @@
 							<br>研究を進めるごとにロボットは賢くなり、単純作業だった運営はやがて巨大な自動化システムへと進化していきます。</p>
 					</div>
 				</section>
-				<section>
+				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
+								rel="noopener noreferrer">GitHub（README・技術資料）</a></li>
 						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
 					</ul>
 				</section>
