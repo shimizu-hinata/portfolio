@@ -10,8 +10,12 @@
                 var filter = btn.getAttribute('data-filter');
 
                 // Update active button
-                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                filterBtns.forEach(function(button) {
+                    button.classList.remove('active');
+                    button.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
 
                 // --- 追加: ボタンを中央にスクロール ---
                 btn.scrollIntoView({

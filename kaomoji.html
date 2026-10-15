@@ -39,20 +39,53 @@
 						</p>
 					</div>
 					<div class="meta">
-						<h3>開発メンバー</h3>
+						<h2>開発メンバー</h2>
 						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span
 									class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img
 								src="images/Hiyoko_icon.png" alt="" /></a>
 					</div>
 				</header>
+				<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#design-flow">設計・処理フロー</a>
+					<a href="#implementation">実装例</a>
+					<a href="#project-links">ソース・実行ファイル</a>
+				</nav>
+				<!-- 担当範囲・課題・設計判断を更新するときは、下の各カードの文章を編集してください。 -->
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>作品の要点</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>担当</h3>
+							<p>個人開発として企画・プログラミングを担当。</p>
+						</article>
+						<article>
+							<h3>設計上の課題</h3>
+							<p>記号や敵の種類が増えても、データを作成・調整しやすい構成にすること。</p>
+						</article>
+						<article>
+							<h3>実装した工夫</h3>
+							<p>ScriptableObjectとカスタムエディタでデータ作成を補助し、ビルド構成と成長値から実ステータスを算出。</p>
+						</article>
+					</div>
+					<ul class="actions project-quick-links">
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
+								rel="noopener noreferrer">ソースコードを見る</a></li>
+						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link"
+								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
+						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link"
+								class="button small" target="_blank" rel="noopener noreferrer">Android版を見る</a></li>
+					</ul>
+				</section>
 				<div class="image featured">
-					<h3>紹介動画</h3>
+					<h2>紹介動画</h2>
 					<div class="js-video-player"
 						data-video-url="https://drive.google.com/file/d/1axGpShR2qQ63-HHGVL82WkBYhlDcp-MC/view?usp=drive_link">
 					</div>
 				</div>
 				<section>
-					<h3>プロジェクト情報</h3>
+					<h2>プロジェクト情報</h2>
 					<ul class="alt">
 						<li><strong>プラットフォーム:</strong> Android or PC</li>
 						<li><strong>ジャンル:</strong> 顔文字 / ビルド / アクション</li>
@@ -61,8 +94,8 @@
 						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub / Github Copilot</li>
 					</ul>
 				</section>
-				<section>
-					<h3>ゲーム概要</h3>
+				<section id="game-overview">
+					<h2>ゲーム概要</h2>
 					<p>KaomojiClash は、<strong>プレイヤーが独自の顔文字をビルドし、アリーナで敵と激突させるトップダウン型アクションゲーム。</strong></p>
 					<ul>
 						<li>強さはキャラクターレベルではなく、記号パーツの構成（ビルド） によって決まる。</li>
@@ -72,15 +105,38 @@
 						<li>戦闘終了後、記号を収集することができ、収集した記号パーツを組み替えることで戦略的な深みが生まれる。</li>
 					</ul>
 				</section>
-				<section>
-					<h3>技術的な工夫・実装内容</h3>
-					<p>このゲームでは記号を無数に実装しなければいけないので将来を見越して
-						テンプレート性と拡張性を重視して開発しました。
-						<ul>
-							<li><strong>記号や敵のデータ作成を補助するカスタムエディタ</strong>を用意し、ScriptableObjectでデータ作成などを行いました。</li>
-							<li>カスタムエディタはAIを活用して、データ作成の効率化を図りました。</li>
-						</ul>
-					</p>
+				<section class="design-flow-section" id="design-flow">
+					<h2>ゲーム設計・処理フロー</h2>
+					<p>記号を集めてビルドを組み替え、次のアリーナに挑むゲームループと、ゲームデータを作成して利用するまでの流れです。</p>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h4>ゲームプレイの基本ループ</h4>
+							<ol class="design-flow-steps">
+								<li><strong>アリーナに挑戦</strong><span>構成した顔文字で戦闘を開始</span></li>
+								<li><strong>敵と戦う</strong><span>顔文字を発射し、敵にぶつけて攻撃</span></li>
+								<li><strong>記号を集める</strong><span>戦闘後に新しいパーツを獲得</span></li>
+								<li><strong>ビルドを再構成</strong><span>記号を組み替えて次の戦闘に備える</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>ゲームデータの作成・利用</h4>
+							<ol class="design-flow-steps design-flow-steps-three">
+								<li><strong>エディタで作成</strong><span>カスタムエディタで記号や敵などのデータを編集</span></li>
+								<li><strong>データとして管理</strong><span>ScriptableObjectに設定を保存</span></li>
+								<li><strong>ゲーム内で利用</strong><span>ビルド構成と成長値を合成して実ステータスを算出</span></li>
+							</ol>
+						</div>
+					</div>
+				</section>
+				<section id="implementation">
+					<h2>技術的な工夫・実装内容</h2>
+					<p>記号や敵の種類が増えることを見越し、データ作成のしやすさと拡張性を重視しました。</p>
+					<ul>
+						<li><strong>カスタムエディタ:</strong> 記号や敵のデータ作成を補助。</li>
+						<li><strong>ScriptableObject:</strong> ゲームデータを編集・管理。</li>
+						<li><strong>AIの活用:</strong> カスタムエディタの作成・データ制作を補助し、開発を効率化。</li>
+					</ul>
+					<p>以下の動画で、エリア・記号・敵のデータ作成を確認できます。</p>
 					<div class="image featured custom-editor-demos">
 						<div class="custom-editor-demo">
 							<h4>エリアデータの作成</h4>
@@ -108,7 +164,7 @@
 								aria-expanded="false">ストーリーを表示</button></li>
 					</ul>
 					<div class="js-story-content" hidden>
-						<h3>Story</h3>
+						<h2>Story</h2>
 						<h4>Story Overview</h4>
 						<p>KaomojiClashの世界では、顔文字が一つの生命体として存在しています。
 							<br><br>もともと顔文字は、人間が感情を表現するために生み出した記号でした。
@@ -178,7 +234,7 @@
 						</p>
 					</div>
 				</section>
-				<section>
+				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
 						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
