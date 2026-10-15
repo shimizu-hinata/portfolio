@@ -36,24 +36,6 @@
 		background-attachment: scroll;
 		background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, no-repeat;
 		background-size: auto, auto, auto, auto, 20px 20px, 100% 100%;
-		animation: playfulBackgroundShift 26s ease-in-out infinite alternate;
-	}
-
-	@keyframes playfulBackgroundShift {
-		0% {
-			background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%, 0 0, 0 0;
-		}
-		100% {
-			background-position: 6% 4%, 94% 5%, 4% 95%, 95% 94%, 10px 6px, 0 0;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-
-		body {
-			animation: none;
-		}
-
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -254,4 +236,3 @@
 	.align-right {
 		text-align: right;
 	}
-
