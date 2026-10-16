@@ -59,11 +59,11 @@
 						</article>
 						<article>
 							<h3>設計上の課題</h3>
-							<p>NavMeshによる経路探索が難航。ロボットが指定された資源や施設へ移動して作業できるよう、移動処理を見直しました。</p>
+							<p>ロボットが指定対象まで移動し、途中で障害物にぶつかった場合にも進行できる移動処理を構成すること。</p>
 						</article>
 						<article>
 							<h3>実装した工夫</h3>
-							<p>WaypointとRaycastを組み合わせた移動処理を実装。コマンドの検証・実行とロボットの状態遷移を分け、Move・Gather・Depositを順番に処理します。</p>
+							<p>開始位置から目的地までを10分割したWaypointを生成し、Raycastで障害物を検出した際は空いている方向へ回避。コマンドの検証・実行とロボットの状態遷移も分けています。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
@@ -96,16 +96,16 @@
 						<br><strong>コマンドの入力:</strong>選択したロボットに対して、画面に表示されるコマンドリストから命令を与えます。
 						最初は「移動（Move）」や「収集（Gather）」,「格納（Deposit）」といった基本的なコマンドから始まります。
 						<br><strong>ヒント:</strong> コマンドの概要は右上の設定ボタンから確認できます。
-						<br><strong>施設の利用:</strong>
-						拠点をクリックして施設パネルを開き、レベルアップ関連のUIを操作します。
+						<br><strong>施設・補助入力の利用:</strong>
+						ワールド上の施設をクリックして施設パネルを開き、拠点では必要素材を確認してレベルアップを行います。左下の補助入力では cmd:setting で設定、cmd:location でロケーション画面を開けます。
 						<br><br>ゲームの目的は、これらのコマンドを組み合わせてロボットの行動を自動化し、効率的な生産ラインを構築することです。</p>
 					<h4>現在プレイできる範囲</h4>
 					<ul>
-						<li>ロボットを選択し、指定した場所への移動を指示。</li>
-						<li>資源を収集して拠点へ運搬し、格納。</li>
-						<li>資源量や拠点レベルなどの基本情報を確認し、拠点のレベルアップを実行。</li>
+						<li>ロボットを選択し、Move・Gather・Depositで移動、資源収集、格納を指示。</li>
+						<li>資源量や拠点レベルなどの基本情報を確認し、必要素材を使った拠点レベルアップを実行。</li>
+						<li>左下の補助入力で cmd:setting / cmd:location を使用。Tabキーによる入力補完にも対応。</li>
 					</ul>
-					<p>ゲームは開発中のプロトタイプです。if文・for文などの高度な構文や、加工施設を含む拡張された生産チェーンは、README上で今後の予定として記載されています。</p>
+					<p>ゲームは開発中のプロトタイプです。READMEではMove・Gather・Depositによる基本的な運搬・格納をプレイ可能とし、チュートリアルにもwarehouseへの移動と格納が記載されています。一方、多様な施設や高度な構文、エネルギー管理などは今後の予定です。ここでは拡張された倉庫・生産施設の機能までは実装済みとして扱っていません。</p>
 				</section>
 				<section class="design-flow-section" id="design-flow">
 					<h3>ゲーム設計・処理フロー</h3>
@@ -115,9 +115,9 @@
 							<h4>プレイの基本ループ</h4>
 							<ol class="design-flow-steps">
 								<li><strong>ロボットを選択</strong><span>マップ上のロボットを選び、状態と命令対象を決める</span></li>
-								<li><strong>コマンドを入力</strong><span>Move・Gather・Depositなどの命令を組み立てる</span></li>
-								<li><strong>資源を収集・格納</strong><span>ロボットが対象へ移動し、資源を運搬する</span></li>
-								<li><strong>拠点を発展</strong><span>資源を使って拠点レベルを上げ、進行する</span></li>
+								<li><strong>命令を入力・実行</strong><span>Move・Gather・Depositでロボットの行動を指示する</span></li>
+								<li><strong>資源を収集・格納</strong><span>ロボットが対象へ移動し、資源を拠点へ運ぶ</span></li>
+								<li><strong>拠点レベルを上げる</strong><span>必要素材を集めて拠点をレベルアップする</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
@@ -129,19 +129,47 @@
 								<li><strong>ロボットが行動</strong><span>移動・収集・格納を行い、Loop()による循環動作にも対応</span></li>
 							</ol>
 						</div>
+						<div class="design-flow-card">
+							<h4>チュートリアルの実際の手順</h4>
+							<p>未完了またはリセット設定時に開始し、各サブタスクの完了を待って次へ進みます。</p>
+							<ol class="design-flow-steps">
+								<li><strong>ロボットを拠点へ移動</strong><span>ロボットを選択し、Cボタンで入力欄を開いて<code>Move(location);</code>を入力・確認して実行</span></li>
+								<li><strong>資源を採集・格納</strong><span><code>Move(rock);</code>・<code>Gather(rock);</code>の後、<code>Move(warehouse);</code>・<code>Deposit(rock, 30);</code>を実行</span></li>
+								<li><strong>拠点レベルを上げる</strong><span>locationパネルを開き、必要素材を集めてlevelUpボタンを実行</span></li>
+								<li><strong>タスクを完了</strong><span>各操作に対応したタスクを完了し、最後の「チュートリアルをクリアする」へ進む</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>ロボットの移動・障害物回避</h4>
+							<ol class="design-flow-steps">
+								<li><strong>目的地を設定</strong><span>Moveコマンドに応じて移動先を決める</span></li>
+								<li><strong>Waypointを生成</strong><span>現在地から目的地までを直線補間し、10個の経由点を作る</span></li>
+								<li><strong>障害物を検出</strong><span>移動方向へRaycastを行い、通行を妨げる障害物を確認</span></li>
+								<li><strong>回避して到達</strong><span>周囲のRaycast結果から進める方向を選び、目的地への経路を再生成</span></li>
+							</ol>
+						</div>
 					</div>
 				</section>
 				<section id="implementation">
 					<h3>技術的な工夫・実装内容</h3>
 					<ul>
-						<li><strong>WaypointとRaycastを用いた移動:</strong> NavMeshでの経路探索が難航したため別方式を検討し、2つを組み合わせてロボットの移動挙動を実装。</li>
-						<li><strong>コマンド定義のデータ化:</strong> JSONからコマンド定義を読み込み、Move・Gather・Depositの入力検証に利用。</li>
+						<li><strong>WaypointとRaycastを用いた移動:</strong> PathfindingSystemが開始位置から目的地までを10分割して経由点を生成。RobotMovementが進行方向をRaycastで確認し、ObstacleAvoidanceHelperが候補方向の障害物状況から回避方向を選択。</li>
+						<li><strong>コマンド定義のデータ化:</strong> Resources内のJSONからコマンド定義を読み込み、Move・Gather・Depositの引数検証に利用。</li>
 						<li><strong>検証と実行の分離:</strong> CommandHandlerによる入力検証、RobotCommandExecuteによる逐次実行、ロボット側の行動処理を役割ごとに構成。</li>
 						<li><strong>拠点レベルの解放情報:</strong> ScriptableObjectでレベルごとの必要素材と解放情報を管理。</li>
-						<li><strong>施設UI:</strong> FacilityManagerで各施設パネルの表示切替やEscapeキーによる閉じる動作を管理。</li>
+						<li><strong>施設UI:</strong> FacilityManagerで施設パネルの表示切替やEscapeキーによる閉じる動作を管理。</li>
 					</ul>
-					<h4>現在の実装範囲</h4>
-					<p>現行のコマンド実行はMove・Gather・Depositが中心です。if・for・whileなどの高度な構文や、より広い生産チェーン・進行システムは、開発ドキュメントで予定または部分実装として整理されています。</p>
+					<h4>現行仕様と今後の予定</h4>
+					<p>実行できる主な命令はMove・Gather・Depositです。Loop()による循環動作と、cmd:setting / cmd:locationなどの補助入力があります。一方、if・for・whileなどの高度な構文や、より広い生産チェーン・エネルギー管理は今後の予定としてREADMEに記載されています。</p>
+					<p>以下の動画で、実装例を確認できます。</p>
+					<div class="image featured custom-editor-demos">
+						<div class="custom-editor-demo">
+							<h4>WaypointとRaycastによる移動・障害物回避</h4>
+							<div class="js-video-player"
+								data-video-url="movies/AlgomateColony_工夫した部分.mp4">
+							</div>
+						</div>
+					</div>
 				</section>
 				<section>
 					<h3>ストーリー</h3>

@@ -33,8 +33,8 @@
 						</div>
 						<h2><a href="#">Bomb Crash</a></h2>
 						<p>BombCrash は Unity で制作した、2D アクションゲームです。
-							<br>プレイヤーは強力な冷凍ボムを武器に、カウントダウン式の敵ボムが爆発する前に次々と撃破していきます。
-							<br>敵を倒してスクラップとインサイトポイントを集め、スキルや装備をアップグレードしながら、どこまでウェーブを生き延びられるか挑戦するゲームとなります。</p>
+							<br>プレイヤーは強力な凍結爆弾を武器に、カウントダウン式の敵ボムが爆発する前に次々と撃破していきます。
+							<br>敵を倒してスクラップを集め、装備を購入・強化しながら、どこまでウェーブを生き延びられるか挑戦します。知見ポイント（IP）は到達状況などに応じてリザルトで獲得します。</p>
 					</div>
 					<div class="meta">
 						<h3>開発メンバー</h3>
@@ -58,11 +58,11 @@
 					<div class="project-highlight-grid">
 						<article>
 							<h3>担当</h3>
-							<p>チーム開発でプログラミング・プランニングを担当。爆弾アクション、ウェーブ進行、スキル・装備などのゲーム要素を制作しました。</p>
+							<p>チーム開発でプログラミング・プランニングを担当。システムの基本設計・実装を行いました。</p>
 						</article>
 						<article>
 							<h3>設計上の課題</h3>
-							<p>ウェーブや敵、スキルの調整を行いやすくしながら、敵の出現から戦闘・リザルトまでの進行を一貫させること。</p>
+							<p>敵・爆弾・スキル・ウェーブのパラメーターを調整しやすくし、出現・戦闘・次ウェーブ判定・リザルトの進行をつなぐこと。</p>
 						</article>
 						<article>
 							<h3>実装した工夫</h3>
@@ -94,16 +94,17 @@
 				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
-					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾(敵)を、強力な凍結爆弾で破壊する爽快アクションゲームです。
+					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾（敵）を、強力な凍結爆弾で破壊する爽快アクションゲームです。
 						<br>プレイヤーはキャラクターを操作し、敵を倒してスクラップを入手します。
-						<br>このスクラップでスキルや装備を強化できます。
+						<br>スクラップは装備の購入・強化に使用します。知見ポイント（IP）はウェーブ到達状況などに応じてリザルトで獲得します。
 						<br>このゲームでは、Wave(波)の概念を採用しており、Wave数が上がるにつれ敵が強くなっていくようになっています。</p>
 					<ul>
 						<li>敵はHPと爆発までのカウントダウンを持ち、時間切れになる前に撃破する必要があります。</li>
-						<li>プレイヤーは爆弾の着弾位置を調整して投げ、敵を倒すとスクラップを獲得します。</li>
-						<li>爆弾の所持数は時間経過で補充され、装備スキルや必殺技にはクールタイム・使用可能状態があります。</li>
-						<li>ウェーブの敵出現が終わり、フィールド上の敵がいなくなると次のウェーブへ進みます。一定間隔でスタンピードやボスも登場します。</li>
-						<li>ゲームオーバー後のリザルトで到達ウェーブと獲得資源を確認できます。</li>
+						<li>プレイヤーは爆弾の着弾位置を調整して投げ、敵を倒すとスクラップを獲得します。爆弾は所持数に上限があり、時間経過で補充されます。</li>
+						<li>スクラップは装備の購入・強化に使用します。知見ポイント（IP）はウェーブ到達状況などに応じてリザルトで獲得します。</li>
+						<li>オトモに装備したスキルはZ / X / Cで使用でき、スキルの設定によっては自動発動します。必殺技は使用可能な状態でVキーから発動します。</li>
+						<li>ウェーブの敵出現が終了し、フィールド上の敵もいなくなると次のウェーブへ進みます。一定間隔のスタンピードやボス出現も設定されています。</li>
+						<li>敵のカウントダウンが尽きると爆発してゲームオーバーとなり、リザルトで到達ウェーブや獲得資源を確認できます。</li>
 					</ul>
 					<h4>操作</h4>
 					<ul>
@@ -117,12 +118,12 @@
 					<p>出撃からウェーブ戦闘、リザルトまでのゲーム進行と、ウェーブ設定から敵を出現させる処理の流れです。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
-							<h4>プレイの基本ループ</h4>
+							<h4>プレイの基本ループと終了条件</h4>
 							<ol class="design-flow-steps">
 								<li><strong>出撃</strong><span>ホームからゲームを開始し、ローディングを経て戦闘へ</span></li>
 								<li><strong>敵が出現</strong><span>ウェーブ設定に従って敵がフィールドに登場</span></li>
 								<li><strong>爆弾で迎撃</strong><span>着弾位置を調整して凍結爆弾を投げ、敵を撃破</span></li>
-								<li><strong>継続・リザルト</strong><span>出現終了後に敵が残っていなければ次へ進行。敵のカウントダウンが尽きるとゲームオーバーとなり、リザルトを表示</span></li>
+								<li><strong>次のWave / ゲームオーバー</strong><span>出現終了かつ敵がいなければ次のWaveへ。敵のカウントダウンが尽きた場合はゲームオーバーとなり、リザルトへ</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
@@ -131,6 +132,30 @@
 								<li><strong>ルールから生成</strong><span>EndlessWaveRuleと敵データから時間・出現間隔・候補を構成</span></li>
 								<li><strong>敵を出現・進行</strong><span>WaveManagerが進行とUIを管理し、EnemySpawnControllerが敵を配置</span></li>
 								<li><strong>結果を反映</strong><span>討伐数・スクラップを更新し、到達ウェーブと獲得資源を表示</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>オトモスキルの装備・発動</h4>
+							<ol class="design-flow-steps design-flow-steps-three">
+								<li><strong>装備を反映</strong><span>出撃時にOtomoSkillManagerが装備スロットのスキルを読み込む</span></li>
+								<li><strong>発動方式を判定</strong><span>OtomoSkillRunnerがZ / X / C入力を確認。自動設定スキルは敵がいる場合に発動を試みる</span></li>
+								<li><strong>発動・再使用待ち</strong><span>SkillSO.Execute()を実行し、設定されたクールタイム中は再発動しない</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>装備処理フロー</h4>
+							<ol class="design-flow-steps design-flow-steps-three">
+								<li><strong>スクラップを獲得</strong><span>敵を撃破してゲーム内資源を入手</span></li>
+								<li><strong>装備を購入・強化</strong><span>スクラップを使って装備を整え、プレイヤー能力を補助</span></li>
+								<li><strong>次の出撃に備える</strong><span>装備内容を確認して、より先のウェーブに挑戦</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>オトモ処理フロー</h4>
+							<ol class="design-flow-steps design-flow-steps-three">
+								<li><strong>オトモを解放</strong><span>一定の到達ウェーブを条件に解放される</span></li>
+								<li><strong>スキルを装備</strong><span>オトモにスキルを設定し、手動または設定に応じて自動で使用</span></li>
+								<li><strong>戦闘を支援</strong><span>クールタイムや使用可能状態に従ってスキルを発動</span></li>
 							</ol>
 						</div>
 					</div>
@@ -144,7 +169,17 @@
 						<li><strong>画面遷移と演出:</strong> ローディングシーンを介した非同期シーン読み込みに加え、フェード・カットイン・サウンド・カメラ振動を使用。</li>
 					</ul>
 					<h4>現在の実装範囲</h4>
-					<p>ガチャ関連の処理には未実装部分があるため、ホーム画面のガチャボタンは無効化されています。スキルガチャは利用可能な機能として案内していません。リポジトリにはUnityプロジェクトが含まれますが、READMEには配布用ビルドの公開先は記載されていません。</p>
+					<p>ガチャ関連の処理には未実装部分があるため、ホーム画面のガチャボタンは無効化されています。現時点でスキルガチャは利用できません。GitHub READMEには配布用実行ファイルの公開先は記載されていません。ページ上のGoogle DriveリンクはREADMEとは別に掲載しているファイルです。</p>
+					<div class="image featured custom-editor-demos">
+						<div class="custom-editor-demo">
+							<h4>Endless Waveの生成</h4>
+							<img src="images/BombCrash_EndlessWaveGeneration.png" alt="Endless Waveの生成例" />
+						</div>
+						<div class="custom-editor-demo">
+							<h4>スキルのデータ</h4>
+							<img src="images/BombCrash_Skill_Data.png" alt="スキルのデータ例" />
+						</div>
+					</div>
 				</section>
 				<section>
 					<h3>ストーリー</h3>
