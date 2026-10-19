@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<title>Algomate Colony | Game Portfolio</title>
+	<title>AlgomateColony（アルゴメイトコロニー） | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
@@ -31,39 +31,32 @@
 							<p class="project-genre">コマンド入力</p>
 							<p class="project-genre">拠点運営シミュレーション</p>
 						</div>
-						<h2><a href="#">Algomate Colony</a></h2>
-						<p>プレイヤーが神の視点からロボットたちに命令（プログラミング）を与え、コロニーの運営・発展を目指すシミュレーションゲームです。
-							<br>現在のプロトタイプでは、Move・Gather・Depositを組み合わせ、資源の収集や格納など基本的な作業を自動化します。</p>
-					</div>
-					<div class="meta">
-						<h3>開発メンバー</h3>
-						<a href="#" class="author"><span class="name">清水日向多</span><span class="role-tags"><span class="role-tag">プログラマー</span><span class="role-tag">プランナー</span></span><img
-								src="images/Hiyoko_icon.png" alt="" /></a>
-						<a href="#" class="author"><span class="name">田島侑來</span><span class="role-tags"><span class="role-tag">デザイナー</span></span><img
-								src="images/TajimaYura_Icon.jpg" alt="" /></a>
+						<h2><a href="#">AlgomateColony</a></h2>
+						<p>プレイヤーがロボット「アルゴメイト」にコマンドを与え、資源を集めて拠点を発展させるシミュレーションゲームです。Move・Gather・Depositを組み合わせ、直接操作ではなく作業手順を組み立てます。</p>
 					</div>
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
 					<a href="#project-summary">作品の要点</a>
 					<a href="#game-overview">ゲーム概要</a>
+					<a href="#screenshots">ゲーム画面</a>
 					<a href="#design-flow">設計・処理フロー</a>
-					<a href="#implementation">実装内容</a>
-					<a href="#project-links">ソース・実行ファイル</a>
+					<a href="#implementation">技術・開発状況</a>
+					<a href="#project-links">関連資料</a>
 				</nav>
 				<section class="project-at-a-glance" id="project-summary">
 					<h2>作品の要点</h2>
 					<div class="project-highlight-grid">
 						<article>
-							<h3>担当</h3>
-							<p>チーム開発で企画・プログラミングを担当。コマンド入力を起点にロボットが行動するゲームの実装に取り組みました。</p>
+							<h3>ゲームの軸</h3>
+							<p>資源の採集・運搬をコマンドでつなぎ、ロボットの作業手順を考えて拠点を成長させます。</p>
 						</article>
 						<article>
-							<h3>設計上の課題</h3>
-							<p>ロボットが指定対象まで移動し、途中で障害物にぶつかった場合にも進行できる移動処理を構成すること。</p>
+							<h3>チームでの担当</h3>
+							<p>清水日向多が企画・プログラミング、田島侑來がデザインを担当しました。</p>
 						</article>
 						<article>
-							<h3>実装した工夫</h3>
-							<p>開始位置から目的地までを10分割したWaypointを生成し、Raycastで障害物を検出した際は空いている方向へ回避。コマンドの検証・実行とロボットの状態遷移も分けています。</p>
+							<h3>技術上の見どころ</h3>
+							<p>コマンド入力の検証・逐次実行を、探索・移動・採集・格納を担うロボット処理につなぐ構成です。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
@@ -75,9 +68,7 @@
 				</section>
 				<div class="image featured">
 					<h3>紹介動画</h3>
-					<div class="js-video-player"
-						data-video-url="https://drive.google.com/file/d/16tkBSSP6DT93uMh1SscQ86Nltv69H7tA/view?usp=drivesdk">
-					</div>
+					<div class="js-video-player" data-video-url="https://www.youtube.com/embed/RtqT31HnvDc"></div>
 				</div>
 				<section>
 					<h3>プロジェクト情報</h3>
@@ -85,94 +76,175 @@
 						<li><strong>プラットフォーム:</strong> PC </li>
 						<li><strong>ジャンル:</strong> コマンド入力 / 拠点運営シミュレーション</li>
 						<li><strong>開発期間:</strong> 2024/12 - 2025/02 (上旬)</li>
-						<li><strong>開発体制:</strong> チーム開発 (担当: プログラミング・プランニング)</li>
+						<li><strong>開発体制・担当:</strong> チーム開発。清水日向多: 企画・プログラミング / 田島侑來: デザイン</li>
 						<li><strong>使用技術:</strong> Unity (6000.0.23f1) / C# / Git Bash / GitHub</li>
 					</ul>
 				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
-					<p>このゲームでは、プレイヤーがキャラクターを直接操作することはありません。
-						<br><br><strong>ロボットの選択:</strong>マップ上のロボットを選択します。
-						<br><strong>コマンドの入力:</strong>選択したロボットに対して、画面に表示されるコマンドリストから命令を与えます。
-						最初は「移動（Move）」や「収集（Gather）」,「格納（Deposit）」といった基本的なコマンドから始まります。
-						<br><strong>ヒント:</strong> コマンドの概要は右上の設定ボタンから確認できます。
-						<br><strong>施設・補助入力の利用:</strong>
-						ワールド上の施設をクリックして施設パネルを開き、拠点では必要素材を確認してレベルアップを行います。左下の補助入力では cmd:setting で設定、cmd:location でロケーション画面を開けます。
-						<br><br>ゲームの目的は、これらのコマンドを組み合わせてロボットの行動を自動化し、効率的な生産ラインを構築することです。</p>
-					<h4>現在プレイできる範囲</h4>
-					<ul>
-						<li>ロボットを選択し、Move・Gather・Depositで移動、資源収集、格納を指示。</li>
-						<li>資源量や拠点レベルなどの基本情報を確認し、必要素材を使った拠点レベルアップを実行。</li>
-						<li>左下の補助入力で cmd:setting / cmd:location を使用。Tabキーによる入力補完にも対応。</li>
-					</ul>
-					<p>ゲームは開発中のプロトタイプです。READMEではMove・Gather・Depositによる基本的な運搬・格納をプレイ可能とし、チュートリアルにもwarehouseへの移動と格納が記載されています。一方、多様な施設や高度な構文、エネルギー管理などは今後の予定です。ここでは拡張された倉庫・生産施設の機能までは実装済みとして扱っていません。</p>
+					<p>アルゴメイトを選び、複数行の命令を入力して資源の採集・運搬を指示します。プレイヤーがキャラクターを直接動かすのではなく、作業の順序を考え、実行される様子を見守るゲームです。</p>
+					<div class="algomate-overview-grid">
+						<article>
+							<h4>01 — ロボットに指示</h4>
+							<p>アルゴメイトを選び、Move・Gather・Depositを組み合わせて入力します。</p>
+						</article>
+						<article>
+							<h4>02 — 資源を運ぶ</h4>
+							<p>資源の場所へ移動して採集し、倉庫の近くで指定した素材と数量を格納します。</p>
+						</article>
+						<article>
+							<h4>03 — 拠点を発展</h4>
+							<p>拠点パネルで必要素材を確認し、条件を満たしてレベルアップを目指します。</p>
+						</article>
+					</div>
 				</section>
-				<section class="design-flow-section" id="design-flow">
-					<h3>ゲーム設計・処理フロー</h3>
-					<p>ロボットに命令を入力し、資源を収集・格納して拠点を発展させるまでの流れです。</p>
-					<div class="design-flow-grid">
-						<div class="design-flow-card">
-							<h4>プレイの基本ループ</h4>
-							<ol class="design-flow-steps">
-								<li><strong>ロボットを選択</strong><span>マップ上のロボットを選び、状態と命令対象を決める</span></li>
-								<li><strong>命令を入力・実行</strong><span>Move・Gather・Depositでロボットの行動を指示する</span></li>
-								<li><strong>資源を収集・格納</strong><span>ロボットが対象へ移動し、資源を拠点へ運ぶ</span></li>
-								<li><strong>拠点レベルを上げる</strong><span>必要素材を集めて拠点をレベルアップする</span></li>
-							</ol>
+				<section id="screenshots">
+					<h3>ゲーム画面・コマンド</h3>
+					<p>入力欄に作業の順序を書き、実行結果や拠点の状態を確認する画面です。</p>
+					<div class="algomate-screenshot-feature">
+						<figure class="algomate-screenshot-card algomate-screenshot-main">
+							<img src="images/AlgomateColony/AlgomateColony_CommandEditor.png"
+								alt="ロボットのステータスとMove、Gather、Depositを入力したコマンドエディタ">
+							<figcaption><strong>コマンドエディタ</strong> ロボットの状態を見ながら、移動・採集・格納の手順をまとめて入力します。</figcaption>
+						</figure>
+						<div class="algomate-screenshot-intro">
+							<span class="algomate-eyebrow">PLAN → EXECUTE → GROW</span>
+							<h4>命令を組み立て、作業の流れをつくる</h4>
+							<p>基本コマンドを順番に記述し、資源の移動から拠点の成長までをつなぎます。現行仕様資料では、コマンド行を検証してから順番に実行する構成が確認されています。</p>
+							<code>Move(rock);<br>Gather(rock);<br>Move(warehouse);<br>Deposit(rock, 30);</code>
 						</div>
-						<div class="design-flow-card">
-							<h4>コマンド実行の処理</h4>
-							<ol class="design-flow-steps">
-								<li><strong>定義を読み込む</strong><span>CommandLoaderがResources内のJSONからコマンド定義を取得</span></li>
-								<li><strong>入力を検証</strong><span>CommandHandlerがコマンド名と引数を確認</span></li>
-								<li><strong>順番に実行</strong><span>RobotCommandExecuteがMove・Gather・Depositの状態遷移を処理</span></li>
-								<li><strong>ロボットが行動</strong><span>移動・収集・格納を行い、Loop()による循環動作にも対応</span></li>
-							</ol>
-						</div>
-						<div class="design-flow-card">
-							<h4>チュートリアルの実際の手順</h4>
-							<p>未完了またはリセット設定時に開始し、各サブタスクの完了を待って次へ進みます。</p>
-							<ol class="design-flow-steps">
-								<li><strong>ロボットを拠点へ移動</strong><span>ロボットを選択し、Cボタンで入力欄を開いて<code>Move(location);</code>を入力・確認して実行</span></li>
-								<li><strong>資源を採集・格納</strong><span><code>Move(rock);</code>・<code>Gather(rock);</code>の後、<code>Move(warehouse);</code>・<code>Deposit(rock, 30);</code>を実行</span></li>
-								<li><strong>拠点レベルを上げる</strong><span>locationパネルを開き、必要素材を集めてlevelUpボタンを実行</span></li>
-								<li><strong>タスクを完了</strong><span>各操作に対応したタスクを完了し、最後の「チュートリアルをクリアする」へ進む</span></li>
-							</ol>
-						</div>
-						<div class="design-flow-card">
-							<h4>ロボットの移動・障害物回避</h4>
-							<ol class="design-flow-steps">
-								<li><strong>目的地を設定</strong><span>Moveコマンドに応じて移動先を決める</span></li>
-								<li><strong>Waypointを生成</strong><span>現在地から目的地までを直線補間し、10個の経由点を作る</span></li>
-								<li><strong>障害物を検出</strong><span>移動方向へRaycastを行い、通行を妨げる障害物を確認</span></li>
-								<li><strong>回避して到達</strong><span>周囲のRaycast結果から進める方向を選び、目的地への経路を再生成</span></li>
-							</ol>
+					</div>
+					<h4 class="algomate-subheading">3つの基本コマンド</h4>
+					<div class="algomate-command-grid">
+						<figure class="algomate-screenshot-card">
+							<img src="images/AlgomateColony/AlgomateColony_Command_Move.png"
+								alt="Moveコマンドの説明と使用できるオブジェクト一覧">
+							<figcaption><strong>Move — 移動</strong> location、warehouse、rock、tree、ironOreなどを移動先に指定します。</figcaption>
+						</figure>
+						<figure class="algomate-screenshot-card">
+							<img src="images/AlgomateColony/AlgomateColony_Command_Gather.png"
+								alt="Gatherコマンドの説明と採集できるオブジェクト一覧">
+							<figcaption><strong>Gather — 採集</strong> 対象へ移動したあと、rock、tree、ironOreなどを採集します。</figcaption>
+						</figure>
+						<figure class="algomate-screenshot-card">
+							<img src="images/AlgomateColony/AlgomateColony_Command_Deposit.png"
+								alt="Depositコマンドの説明と資源を倉庫へ預ける操作">
+							<figcaption><strong>Deposit — 格納</strong> 素材名と数量を指定します。倉庫名を引数にするのではなく、近くの倉庫を検索します。</figcaption>
+						</figure>
+					</div>
+					<h4 class="algomate-subheading">入力の結果と拠点画面</h4>
+					<div class="algomate-outcome-grid">
+						<figure class="algomate-screenshot-card">
+							<img src="images/AlgomateColony/AlgomateColony_Command_Success.png"
+								alt="Move、Gather、Depositのコマンド入力が成功した表示">
+							<figcaption><strong>成功表示の例</strong> 画面上にコマンドの成功表示が出ているケースです。</figcaption>
+						</figure>
+						<figure class="algomate-screenshot-card">
+							<img src="images/AlgomateColony/AlgomateColony_Command_Error.png"
+								alt="無効な資源名を使ったDepositコマンドが失敗した表示">
+							<figcaption><strong>失敗表示の例</strong> 無効な資源名を指定した入力が失敗として表示されています。</figcaption>
+						</figure>
+						<figure class="algomate-screenshot-card algomate-screenshot-location">
+							<img src="images/AlgomateColony/AlgomateColony_Open_Location Panel.png"
+								alt="拠点パネルにレベルアップに必要な石、木材、鉄鉱石の数が表示された画面">
+							<figcaption><strong>拠点パネル</strong> レベルアップに必要な素材と在庫数を確認する画面です。</figcaption>
+						</figure>
+					</div>
+					<h4 class="algomate-subheading">チュートリアル</h4>
+					<p>Unity上のタスク設定と、プレイヤーに表示される案内画面を紹介します。</p>
+					<div class="algomate-screenshot-feature algomate-tutorial-feature">
+						<div class="algomate-tutorial-grid">
+							<figure class="algomate-tutorial-visual">
+								<img src="images/AlgomateColony/AlgomateColony_Tutorial_CustomPicture.png"
+									alt="Unity InspectorでTutorialSOの終了・初期化フラグと、チュートリアルタスクおよびサブタスクを設定している画面">
+								<figcaption>
+									<strong>UNITY EDITOR / TUTORIALSO</strong>
+									案内の内容をタスクデータで構成。TutorialSOで進行フラグと大・小タスクの説明文を設定します。
+								</figcaption>
+							</figure>
+							<figure class="algomate-tutorial-visual">
+								<img src="images/AlgomateColony/AlgomateColony_Tutorial01.png"
+									alt="アルゴメイトを拠点へ移動させる目標と、アルゴメイトをクリックする案内が表示されたチュートリアル画面">
+								<figcaption>
+									<strong>IN GAME / TUTORIAL</strong>
+									目標と次の操作を画面で案内。「アルゴメイトを拠点に移動させる」という目標と、クリック操作を表示します。
+								</figcaption>
+							</figure>
 						</div>
 					</div>
 				</section>
-				<section id="implementation">
-					<h3>技術的な工夫・実装内容</h3>
-					<ul>
-						<li><strong>WaypointとRaycastを用いた移動:</strong> PathfindingSystemが開始位置から目的地までを10分割して経由点を生成。RobotMovementが進行方向をRaycastで確認し、ObstacleAvoidanceHelperが候補方向の障害物状況から回避方向を選択。</li>
-						<li><strong>コマンド定義のデータ化:</strong> Resources内のJSONからコマンド定義を読み込み、Move・Gather・Depositの引数検証に利用。</li>
-						<li><strong>検証と実行の分離:</strong> CommandHandlerによる入力検証、RobotCommandExecuteによる逐次実行、ロボット側の行動処理を役割ごとに構成。</li>
-						<li><strong>拠点レベルの解放情報:</strong> ScriptableObjectでレベルごとの必要素材と解放情報を管理。</li>
-						<li><strong>施設UI:</strong> FacilityManagerで施設パネルの表示切替やEscapeキーによる閉じる動作を管理。</li>
-					</ul>
-					<h4>現行仕様と今後の予定</h4>
-					<p>実行できる主な命令はMove・Gather・Depositです。Loop()による循環動作と、cmd:setting / cmd:locationなどの補助入力があります。一方、if・for・whileなどの高度な構文や、より広い生産チェーン・エネルギー管理は今後の予定としてREADMEに記載されています。</p>
-					<p>以下の動画で、実装例を確認できます。</p>
-					<div class="image featured custom-editor-demos">
-						<div class="custom-editor-demo">
-							<h4>WaypointとRaycastによる移動・障害物回避</h4>
-							<div class="js-video-player"
-								data-video-url="movies/AlgomateColony_工夫した部分.mp4">
+				<section class="design-flow-section" id="design-flow">
+					<h3>ゲーム設計・処理フロー</h3>
+					<p>企画上のプレイループと、GitHubの現行仕様資料から確認できる処理の流れを分けて紹介します。</p>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h4>プレイの基本ループ（企画・チュートリアル）</h4>
+							<ol class="design-flow-steps">
+								<li><strong>ロボットを選ぶ</strong><span>アルゴメイトを選択し、命令対象を決める</span></li>
+								<li><strong>手順を入力する</strong><span>Move・Gather・Depositを順に記述する</span></li>
+								<li><strong>資源を運ぶ</strong><span>採集した素材を倉庫へ格納する</span></li>
+								<li><strong>拠点を成長させる</strong><span>必要素材をそろえてレベルアップを目指す</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>コマンドがロボットの行動になるまで（コード上の構成）</h4>
+							<ol class="design-flow-steps">
+								<li><strong>定義を読み込む</strong><span>CommandLoaderがResourcesのJSONから候補を取得</span></li>
+								<li><strong>入力を検証する</strong><span>CommandHandlerが各行と引数を確認</span></li>
+								<li><strong>行ごとに実行する</strong><span>RobotCommandExecuteが入力行を順番に処理</span></li>
+								<li><strong>行動へつなぐ</strong><span>RobotControllerが探索・移動・採集・格納の処理を呼び分ける</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>チュートリアルデータに記録された手順</h4>
+							<ol class="design-flow-steps">
+								<li><strong>拠点へ移動</strong><span>ロボットをlocationへ移動させる</span></li>
+								<li><strong>石を採集する</strong><span>rockへ移動してGatherで採集する</span></li>
+								<li><strong>倉庫へ格納する</strong><span>warehouseへ移動し、Depositで石を預ける</span></li>
+								<li><strong>拠点をレベルアップ</strong><span>必要素材をそろえてチュートリアル完了を目指す</span></li>
+							</ol>
+						</div>
+						<div class="design-flow-card">
+							<h4>経路生成と局所的な障害物回避（部分実装）</h4>
+							<ol class="design-flow-steps">
+								<li><strong>目的地を設定</strong><span>Moveコマンドに応じて移動先を決める</span></li>
+								<li><strong>経由点を生成</strong><span>直線を10分割したWaypointを作る</span></li>
+								<li><strong>周囲を検知</strong><span>移動方向へRaycastを行う</span></li>
+								<li><strong>局所的に回避</strong><span>ObstacleAvoidanceHelperで候補方向を選ぶ</span></li>
+							</ol>
+							<div class="image featured custom-editor-demos">
+								<div class="custom-editor-demo">
+									<h4>WaypointとRaycastを用いた移動処理</h4>
+									<div class="js-video-player"
+										data-video-url="movies/AlgomateColony_工夫した部分.mp4">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</section>
+				<section id="implementation">
+					<h3>技術・開発状況</h3>
+					<div class="algomate-tech-grid">
+						<article><h4>コマンド定義と入力検証</h4><p>Resources内のJSONからコマンド候補を読み込み、CommandHandlerが入力行を検証します。</p></article>
+						<article><h4>逐次実行と状態管理</h4><p>RobotCommandExecuteが命令を順番に進め、RobotControllerがロボットの行動状態を管理します。</p></article>
+						<article><h4>探索・移動・採集・格納</h4><p>RobotSearch、RobotMovement、RobotGather、RobotDepositが対象検索から資源処理までを分担します。</p></article>
+						<article><h4>拠点レベルとデータ</h4><p>ScriptableObjectでレベルごとの必要素材・解放情報を定義し、LocationControllerが在庫表示とレベルアップUIを扱います。</p></article>
+						<article><h4>施設パネル</h4><p>FacilityManagerが設定・ロボット・拠点・倉庫などの各Canvas表示を切り替えます。</p></article>
+					</div>
+					<h4>プロトタイプの範囲</h4>
+					<p>現行の基本コマンドはMove・Gather・Depositです。READMEではif・forなどの高度な構文、加工施設での生産、エネルギー管理、クエストや交易、新しいコマンドの研究を今後の要素として挙げています。画面やデータの一部が存在する機能も、実行処理が完成しているとは限りません。</p>
+					<p>移動処理の実装例は、以下の動画で紹介しています。</p>
+					<h4>GitHubの技術資料</h4>
+					<ul class="algomate-doc-links">
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">現行ゲーム仕様（コード照合版）</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/ImplementationStatus.md" target="_blank" rel="noopener noreferrer">機能別の実装状況</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/FutureRoadmap.md" target="_blank" rel="noopener noreferrer">将来構想とロードマップ案</a></li>
+					</ul>
+				</section>
 				<section>
-					<h3>ストーリー</h3>
+					<h3>ストーリー設定</h3>
 					<ul class="actions">
 						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
 					</ul>
@@ -218,7 +290,7 @@
 					<!-- Mini Post -->
 					<article class="mini-post">
 						<header>
-							<h3><a href="algomate.html">Algomate Colony</a></h3>
+							<h3><a href="algomate.html">AlgomateColony</a></h3>
 							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
 							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
 						</header>
@@ -244,6 +316,15 @@
 						</header>
 						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png"
 								alt="" /></a>
+					</article>
+
+					<article class="mini-post">
+						<header>
+							<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
+							<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
+							<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+						</header>
+						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
 					</article>
 				</div>
 			</section>

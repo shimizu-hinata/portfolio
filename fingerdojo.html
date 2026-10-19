@@ -33,6 +33,7 @@
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
 					<a href="#project-summary">作品の要点</a>
+					<a href="#intro-video">紹介動画</a>
 					<a href="#game-overview">ゲーム概要</a>
 					<a href="#commands">コマンドと戦闘</a>
 					<a href="#implementation">技術構成</a>
@@ -41,7 +42,7 @@
 
 				<section class="project-at-a-glance" id="project-summary">
 					<h2>作品の要点</h2>
-					<div class="project-highlight-grid">
+					<div class="project-highlight-grid fingerdojo-highlights">
 						<article>
 							<h3>担当</h3>
 							<p>チーム開発で、清水日向多がゲーム企画・実装を担当。岩見ほのかさんが全てのデザインを担当しました。</p>
@@ -54,78 +55,56 @@
 							<h3>実装した工夫</h3>
 							<p>プレイヤーと敵の状態・HPを分け、Command、StateController、CombatCalculatorを通じて入力から戦闘結果を処理します。</p>
 						</article>
+						<article>
+							<h3>モバイル操作を想定</h3>
+							<p>指道場はタッチ操作を前提として設計されており、画面上のボタンで指撃、カウンター、休息を操作します。</p>
+						</article>
 					</div>
 					<ul class="actions project-quick-links">
 						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/README.md" class="button small"
 								target="_blank" rel="noopener noreferrer">GitHub READMEを見る</a></li>
-						<li><a href="https://drive.google.com/file/d/1LMfXinCZ1BvhaGgafi9iV30i4J2_bIfd/view?usp=sharing"
-								class="button small" target="_blank" rel="noopener noreferrer">プレイ動画を見る（Google Drive）</a></li>
 					</ul>
 				</section>
 
+				<section class="image featured fingerdojo-video" id="intro-video">
+					<h3>紹介動画</h3>
+					<div class="js-video-player"
+						data-video-url="https://drive.google.com/file/d/1LMfXinCZ1BvhaGgafi9iV30i4J2_bIfd/view?usp=sharing">
+					</div>
+				</section>
+				<section id="project-info">
+					<h2>プロジェクト情報</h2>
+					<ul class="alt">
+						<li><strong>ジャンル:</strong> タイミング入力型・1対1バトル</li>
+						<li><strong>開発体制:</strong> チーム開発</li>
+						<li><strong>担当:</strong> ゲーム企画・実装: 清水日向多 / 全てのデザイン: 岩見穂乃香</li>
+						<li><strong>使用技術:</strong> Unity 6000.0.51f1 / Universal Render Pipeline 17.0.4 / Input System 1.14.0 / Cinemachine 3.1.4 / C#</li>
+					</ul>
+				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
 					<p>道場を舞台に、手のキャラクター同士が戦うタイミング入力型の1対1バトルです。敵の攻撃をカウンターし、指撃QTEで反撃しながらHPを削り、勝利を目指します。</p>
-					<h4>プレイの基本ループ</h4>
-					<ul>
-						<li>タイトル画面で敵の難易度を選び、BattleSceneへ進む。</li>
-						<li>指撃・カウンター・休息を使い分け、敵の攻撃や回復に対応する。</li>
-						<li>どちらかのHPが0になると、勝敗画面を表示する。</li>
-					</ul>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h4>プレイの基本ループ</h4>
+							<ol class="design-flow-steps">
+								<li><strong>難易度選択</strong><span>タイトル画面で敵の難易度を選び、BattleSceneへ進む。</span></li>
+								<li><strong>戦闘</strong><span>指撃・カウンター・休息を使い分け、敵の攻撃や回復に対応する。</span></li>
+								<li><strong>勝敗判定</strong><span>どちらかのHPが0になると、勝敗画面を表示する。</span></li>
+							</ol>
+						</div>
+					</div>
 				</section>
 
 				<section id="commands">
 					<h3>コマンドと戦闘システム</h3>
-					<p>以下はGitHubの現状資料と、ページに掲載しているスクリーンショットで確認できる内容です。実行時の操作感や演出の再生はUnity Editorで未検証です。</p>
 					<div class="image featured fingerdojo-cover">
 						<figure>
 							<img src="images/FingerDojo/FingerDojo_Home.png" alt="指道場のタイトル画面。難易度とスキルカスタムの項目が表示されている">
-							<figcaption>タイトル画面 — 難易度選択とスキルカスタムのメニュー。</figcaption>
+							<figcaption>タイトル画面 — 難易度選択とスキル(技)カスタムのメニュー。</figcaption>
 						</figure>
 					</div>
 					<div class="fingerdojo-command-list">
-						<article class="fingerdojo-command-card">
-							<figure>
-								<img src="images/FingerDojo/FingerDojo_standby.png" alt="指撃ボタン、プレイヤーと敵のHP、コマンドが表示された戦闘画面">
-								<figcaption>戦闘画面 — 中央の赤い「指撃」ボタンとHP表示。</figcaption>
-							</figure>
-							<div>
-								<h4>指撃</h4>
-								<ul>
-									<li>指撃ボタンで攻撃を開始し、QTE中に画面を押してタイミングを入力。</li>
-									<li>バー位置を x として、ダメージは「PlayerStrength × (0.5 + 2x)」。</li>
-									<li>Bad / Good / Great / Perfectを表示。ダメージ倍率は判定名ではなくバー位置で計算。</li>
-								</ul>
-							</div>
-						</article>
-						<article class="fingerdojo-command-card">
-							<figure>
-								<img src="images/FingerDojo/FingerDojo_playerCounter.png" alt="カウンター成功時、COUNTERと反撃ダメージ25が表示された戦闘画面">
-								<figcaption>カウンター成功 — COUNTER表示と反撃ダメージ「25」。</figcaption>
-							</figure>
-							<div>
-								<h4>カウンター</h4>
-								<ul>
-									<li>入力後0.5秒間、カウンター状態になる。</li>
-									<li>受付中に敵の攻撃を受けると、被ダメージを無効化して反撃。</li>
-									<li>反撃ダメージはPlayerStrengthの25%。</li>
-								</ul>
-							</div>
-						</article>
-						<article class="fingerdojo-command-card">
-							<figure>
-								<img src="images/FingerDojo/FingerDojo_playerBreaked.png" alt="COUNTERの演出、判定ゲージ、カウント表示がある戦闘画面">
-								<figcaption>戦闘中のCOUNTER表示とゲージ。画像にBreak専用表示はありません。</figcaption>
-							</figure>
-							<div>
-								<h4>Break（自動発生）</h4>
-								<ul>
-									<li>プレイヤーが選択するコマンドではなく、被弾条件で発生する状態。</li>
-									<li>敵がCounter状態のときに2回被弾するとBreakへ移行。</li>
-									<li>Break中は3秒間コマンドが無効。</li>
-								</ul>
-							</div>
-						</article>
 						<article class="fingerdojo-command-card">
 							<figure>
 								<img src="images/FingerDojo/FingerDojo_standby.png" alt="休むボタンを含む戦闘コマンドが表示された基本画面">
@@ -137,6 +116,52 @@
 									<li>2秒かけて最大100HPを回復。</li>
 									<li>回復中は無防備で、敵の攻撃を受けると中断。</li>
 									<li>実装上、Playerのコマンドボタンは休息中に無効化される。</li>
+								</ul>
+							</div>
+						</article>
+						<article class="fingerdojo-command-card">
+							<figure>
+								<img src="images/FingerDojo/FingerDojo_standby.png"
+									alt="指撃ボタン、プレイヤーと敵のHP、コマンドが表示された戦闘画面">
+								<figcaption>戦闘画面 — 中央より下に赤い「指撃」ボタンとその他のコマンドを表示。</figcaption>
+							</figure>
+							<div>
+								<h4>指撃</h4>
+								<ul>
+									<li>指撃ボタンで攻撃を開始し、QTE中に画面を押してタイミングを入力。</li>
+									<li>バー位置を x として、ダメージは「PlayerStrength x (0.5 + 2x)」。</li>
+									<li>Bad / Good / Great / Perfectを表示。ダメージ倍率は判定名ではなくバー位置で計算。</li>
+								</ul>
+							</div>
+						</article>
+						<article class="fingerdojo-command-card">
+							<figure>
+								<img src="images/FingerDojo/FingerDojo_playerCounter.png"
+									alt="カウンター成功時、COUNTERと反撃ダメージ25が表示された戦闘画面">
+								<figcaption>カウンター成功 — COUNTER表示と反撃ダメージ「25」。</figcaption>
+							</figure>
+							<div>
+								<h4>カウンター</h4>
+								<ul>
+									<li>入力後0.5秒間、カウンター状態になる。</li>
+									<li>受付中に敵の攻撃を受けると、被ダメージを無効化して反撃。</li>
+									<li>反撃ダメージはPlayerStrengthの25%。</li>
+									<li>反撃に成功したら敵のBreakカウントが減少。これはPlayerも同様。</li>
+								</ul>
+							</div>
+						</article>
+						<article class="fingerdojo-command-card">
+							<figure>
+								<img src="images/FingerDojo/FingerDojo_playerBreaked.png"
+									alt="COUNTERの演出、判定ゲージ、カウント表示がある戦闘画面">
+								<figcaption>BreakeカウントはPlayerはHPバーの上に、敵はHPバーの横に表示。</figcaption>
+							</figure>
+							<div>
+								<h4>Break（自動発生）</h4>
+								<ul>
+									<li>プレイヤーが選択するコマンドではなく、被弾条件で発生する状態。</li>
+									<li>Breakカウントが0になるとBreak状態に移行。</li>
+									<li>Break中は3秒間コマンドが無効。</li>
 								</ul>
 							</div>
 						</article>
@@ -156,7 +181,7 @@
 						</article>
 					</div>
 					<h4>未実装のコマンド</h4>
-					<p>タイトル画面・戦闘画面に「技」「煽る」のUIはありますが、GitHubの実装状況資料ではプレイヤー側コマンド処理は未実装です。</p>
+					<p>タイトル画面・戦闘画面に「技」「煽る」のUIはありますが、コマンド処理は未実装です。</p>
 				</section>
 
 				<section id="implementation">
@@ -174,52 +199,64 @@
 						</div>
 						<div class="design-flow-card">
 							<h4>主なクラスとデータ</h4>
-							<ul>
-								<li><strong>PlayerStateController / EnemyStateController:</strong> プレイヤー・敵それぞれの戦闘状態を管理。</li>
-								<li><strong>EnemyDecisionController:</strong> 敵AIの行動と戦闘中の履歴を管理。</li>
-								<li><strong>PlayerDataSO / EnemyProfileSO:</strong> ScriptableObjectでプレイヤー値と難易度別の敵パラメータを保持。</li>
-								<li><strong>TimingBarController / CommandTimingQTE:</strong> バー表示、ポインター入力、タイミング倍率・判定表示を担当。</li>
+							<ul class="fingerdojo-tech-list">
+								<li><strong>プレイヤーと敵の戦闘状態を個別に管理</strong><span><code>PlayerStateController</code> / <code>EnemyStateController</code></span></li>
+								<li><strong>敵AIの行動と戦闘中の履歴を管理</strong><span><code>EnemyDecisionController</code></span></li>
+								<li><strong>プレイヤー値と難易度別の敵パラメータを保持</strong><span><code>PlayerDataSO</code> / <code>EnemyProfileSO</code>（ScriptableObject）</span></li>
+								<li><strong>QTEバー、ポインター入力、倍率・判定表示を処理</strong><span><code>TimingBarController</code> / <code>CommandTimingQTE</code></span></li>
 							</ul>
 						</div>
 					</div>
-					<p>ゲーム内には技・煽りのボタン名や状態名が残っていますが、該当するプレイヤーコマンド処理は未実装です。Unity EditorでのPlay Mode、シーン参照、AnimationEvent、実際の操作感・バランスもドキュメント上は未検証とされています。</p>
-					<p>技術基盤はUnity 6000.0.51f1、URP 17.0.4、Input System 1.14.0、Cinemachine 3.1.4です。戦闘入力の説明はUIボタンを中心としており、Input Actions資産があることだけからキーボード操作を断定していません。</p>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/CurrentProjectSpecification.md" class="button small"
-								target="_blank" rel="noopener noreferrer">現状総合仕様書</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/Architecture.md" class="button small"
-								target="_blank" rel="noopener noreferrer">アーキテクチャ概要</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/GameplaySpec.md" class="button small"
-								target="_blank" rel="noopener noreferrer">ゲームプレイ仕様（現状）</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStructure.md" class="button small"
-								target="_blank" rel="noopener noreferrer">実装構造・コード解説</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStatus.md" class="button small"
-								target="_blank" rel="noopener noreferrer">機能・実装状況</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/CurrentProjectSpecification.md"
+								class="button small" target="_blank" rel="noopener noreferrer">現状総合仕様書</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/Architecture.md"
+								class="button small" target="_blank" rel="noopener noreferrer">アーキテクチャ概要</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/GameplaySpec.md"
+								class="button small" target="_blank" rel="noopener noreferrer">ゲームプレイ仕様（現状）</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStructure.md"
+								class="button small" target="_blank" rel="noopener noreferrer">実装構造・コード解説</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStatus.md"
+								class="button small" target="_blank" rel="noopener noreferrer">機能・実装状況</a></li>
 					</ul>
 				</section>
+			</article>
 
-				<div class="image featured">
-					<h2>紹介動画</h2>
-					<div class="js-video-player"
-						data-video-url="https://drive.google.com/file/d/1LMfXinCZ1BvhaGgafi9iV30i4J2_bIfd/view?usp=sharing">
-					</div>
-				</div>
+				<article class="mini-post">
+					<header>
+						<h3><a href="algomate.html">Algomate Colony</a></h3>
+						<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
+						<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+					</header>
+						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"alt="" /></a>
+				</article>
 
-				<section id="project-info">
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>ジャンル:</strong> タイミング入力型・1対1バトル</li>
-						<li><strong>開発体制:</strong> チーム開発</li>
-						<li><strong>担当:</strong> ゲーム企画・実装: 清水日向多 / 全てのデザイン: 岩見ほのか</li>
-						<li><strong>使用技術:</strong> Unity 6000.0.51f1 / Universal Render Pipeline 17.0.4 / Input System 1.14.0 / Cinemachine 3.1.4 / C#</li>
-					</ul>
-					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/README.md" class="button small"
-								target="_blank" rel="noopener noreferrer">GitHub READMEを見る</a></li>
-						<li><a href="https://drive.google.com/file/d/1LMfXinCZ1BvhaGgafi9iV30i4J2_bIfd/view?usp=sharing"
-								class="button small" target="_blank" rel="noopener noreferrer">プレイ動画を見る（Google Drive）</a></li>
-					</ul>
-				</section>
+				<article class="mini-post">
+					<header>
+						<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
+						<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
+						<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+					</header>
+					<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png" alt="" /></a>
+				</article>
+
+				<article class="mini-post">
+					<header>
+						<h3><a href="bombcrash.html">Bomb Crash</a></h3>
+						<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
+						<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+					</header>
+					<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png" alt="" /></a>
+				</article>
+
+				<article class="mini-post">
+					<header>
+						<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
+						<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
+						<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+					</header>
+					<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+				</article>
 			</article>
 		</div>
 	</div>

@@ -593,6 +593,7 @@
 }
 
 .custom-editor-demo h4 {
+    margin-top: 0.75em;
     margin-bottom: 0.75em;
 }
 
@@ -932,9 +933,295 @@
     margin: 0;
 }
 
+.fingerdojo-highlights {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .project-quick-links {
     margin-top: 1em;
     margin-bottom: 1em;
+}
+
+.fingerdojo-video .js-video-player {
+    border-radius: var(--portfolio-radius);
+}
+
+.algomate-overview-grid {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.5em 0;
+}
+
+.algomate-overview-grid article,
+.algomate-tech-grid article {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-shadow: var(--portfolio-shadow);
+    margin: 0;
+    padding: 1em;
+}
+
+.algomate-overview-grid h4,
+.algomate-tech-grid h4 {
+    color: var(--portfolio-accent-strong);
+    font-size: 0.8em;
+    margin-bottom: 0.55em;
+}
+
+.algomate-overview-grid p,
+.algomate-tech-grid p {
+    color: var(--portfolio-muted);
+    font-size: 0.72em;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.algomate-screenshot-feature {
+    align-items: center;
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-shadow: var(--portfolio-shadow);
+    display: grid;
+    gap: 1.5em;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    margin: 1.5em 0;
+    padding: 1em;
+}
+
+.algomate-screenshot-card {
+    align-items: center;
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-shadow: var(--portfolio-shadow);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-width: 0;
+    padding: 1em;
+}
+
+.algomate-screenshot-card img {
+    background: #080808;
+    border-radius: var(--portfolio-radius);
+    display: block;
+    height: auto;
+    max-height: 25em;
+    max-width: min(100%, 38em);
+    object-fit: contain;
+}
+
+.algomate-screenshot-card figcaption {
+    align-self: stretch;
+    color: var(--portfolio-muted);
+    font-size: 0.75em;
+    line-height: 1.7;
+    padding-top: 1em;
+}
+
+.algomate-screenshot-card figcaption strong {
+    color: var(--portfolio-accent-strong);
+    display: block;
+    margin-bottom: 0.3em;
+}
+
+.algomate-screenshot-main img {
+    max-width: 100%;
+}
+
+.algomate-screenshot-intro {
+    padding: 0.75em;
+}
+
+.algomate-eyebrow {
+    color: var(--portfolio-accent-strong);
+    display: block;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 0.62em;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    margin-bottom: 0.8em;
+}
+
+.algomate-screenshot-intro h4 {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.algomate-screenshot-intro p {
+    color: var(--portfolio-muted);
+    font-size: 0.75em;
+    line-height: 1.8;
+}
+
+.algomate-screenshot-intro code {
+    background: #111;
+    border-radius: var(--portfolio-radius);
+    color: #f7f7f7;
+    display: block;
+    font-size: 0.72em;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+    padding: 0.9em 1em;
+}
+
+.algomate-subheading {
+    margin: 1.75em 0 0.8em;
+}
+
+.algomate-command-grid,
+.algomate-outcome-grid,
+.algomate-tech-grid {
+    display: grid;
+    gap: 1.1em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 1em 0 1.5em;
+}
+
+.algomate-tutorial-feature {
+    display: block;
+    margin: 1em 0 1.5em;
+}
+
+.algomate-tutorial-grid {
+    align-items: start;
+    display: grid;
+    gap: 1.5em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.algomate-tutorial-visual {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-width: 0;
+}
+
+.algomate-tutorial-visual img {
+    background: transparent;
+    border-radius: var(--portfolio-radius);
+    height: 20rem;
+    max-height: 55vh;
+    max-width: 100%;
+    object-fit: contain;
+    width: auto;
+}
+
+.algomate-tutorial-visual figcaption {
+    align-self: stretch;
+    color: var(--portfolio-muted);
+    font-size: 0.72em;
+    line-height: 1.7;
+    padding-top: 1em;
+}
+
+.algomate-tutorial-visual figcaption strong {
+    color: var(--portfolio-accent-strong);
+    display: block;
+    font-family: "Raleway", Helvetica, sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.45em;
+}
+
+.algomate-command-grid > .algomate-screenshot-card:last-child {
+    display: grid;
+    gap: 1.25em;
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.algomate-command-grid > .algomate-screenshot-card:last-child img {
+    align-self: center;
+}
+
+.algomate-command-grid > .algomate-screenshot-card:last-child figcaption {
+    align-self: center;
+}
+
+.algomate-screenshot-location {
+    align-items: center;
+    display: grid;
+    grid-column: 1 / -1;
+    gap: 1.25em;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.algomate-screenshot-location img {
+    max-width: 100%;
+}
+
+.algomate-tech-grid article {
+    padding: 1.2em;
+}
+
+.algomate-doc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    list-style: none;
+    margin-bottom: 1em ;
+    padding: 0;
+}
+
+.algomate-doc-links a {
+    background: var(--portfolio-surface-tint);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    color: var(--portfolio-accent-strong);
+    display: inline-flex;
+    font-size: 0.72em;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 0.65em 0.9em;
+}
+
+.algomate-doc-links a:hover {
+    background: var(--portfolio-accent-strong);
+    color: #fff !important;
+}
+
+.algomate-doc-links a:focus-visible {
+    outline: 2px solid var(--portfolio-accent-strong);
+    outline-offset: 3px;
+}
+
+@media screen and (max-width: 736px) {
+    .algomate-overview-grid,
+    .algomate-command-grid,
+    .algomate-outcome-grid,
+    .algomate-tech-grid,
+    .algomate-tutorial-grid,
+    .algomate-screenshot-feature,
+    .algomate-screenshot-location {
+        grid-template-columns: 1fr;
+    }
+
+    .algomate-screenshot-location {
+        grid-column: auto;
+    }
+
+    .algomate-command-grid > .algomate-screenshot-card:last-child {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .algomate-screenshot-feature {
+        gap: 0.75em;
+        padding: 0.75em;
+    }
+
+    .algomate-screenshot-intro {
+        padding: 0.5em;
+    }
+
+    .algomate-tutorial-visual img {
+        height: 16rem;
+    }
 }
 
 .fingerdojo-cover figure {
@@ -1011,6 +1298,39 @@
     text-align: left;
 }
 
+.fingerdojo-tech-list {
+    display: grid;
+    gap: 0.75em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fingerdojo-tech-list li {
+    background: var(--portfolio-surface-tint);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    font-size: 0.72em;
+    line-height: 1.65;
+    min-width: 0;
+    padding: 1em;
+}
+
+.fingerdojo-tech-list strong,
+.fingerdojo-tech-list span {
+    display: block;
+}
+
+.fingerdojo-tech-list strong {
+    color: var(--portfolio-accent-strong);
+    margin-bottom: 0.45em;
+}
+
+.fingerdojo-tech-list code {
+    overflow-wrap: anywhere;
+}
+
 @media screen and (max-width: 736px) {
     .fingerdojo-command-card {
         gap: 1em;
@@ -1025,6 +1345,10 @@
         max-height: 26em;
         width: auto;
     }
+
+    .fingerdojo-tech-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 980px) {
@@ -1038,6 +1362,10 @@
 
     .project-highlight-grid {
         grid-template-columns: 1fr;
+    }
+
+    .fingerdojo-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 }
@@ -1068,6 +1396,10 @@
 
     .project-at-a-glance {
         padding: 1em;
+    }
+
+    .fingerdojo-highlights {
+        grid-template-columns: 1fr;
     }
 
     .project-toc {

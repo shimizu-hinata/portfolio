@@ -38,6 +38,11 @@
 		return 'https://drive.google.com/uc?export=download&id=' + fileId;
 	}
 
+	function getYouTubeEmbedUrl(url) {
+		var match = url.match(/(?:youtube\.com\/(?:embed\/|watch\?(?:.*&)?v=)|youtu\.be\/)([\w-]{11})/i);
+		return match ? 'https://www.youtube.com/embed/' + match[1] : '';
+	}
+
 	function shouldPreferNativeVideo(player) {
 		if (player.getAttribute('data-video-mode') === 'native') return true;
 		return !!player.closest('.mini-work-card');
@@ -113,6 +118,13 @@
 			var url = (player.getAttribute('data-video-url') || '').trim();
 			var previewUrl = getDrivePreviewUrl(url);
 			var directDriveUrl = getDriveDirectVideoUrl(url);
+			var youTubeUrl = getYouTubeEmbedUrl(url);
+
+			if (youTubeUrl) {
+				player.textContent = '';
+				player.appendChild(createIframe(youTubeUrl));
+				continue;
+			}
 
 			if (previewUrl && shouldPreferNativeVideo(player) && directDriveUrl) {
 				player.textContent = '';
