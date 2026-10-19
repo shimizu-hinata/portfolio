@@ -933,7 +933,98 @@
 }
 
 .project-quick-links {
-    margin: 1em 0 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.fingerdojo-cover figure {
+    margin: 0;
+    text-align: center;
+}
+
+.fingerdojo-cover img {
+    display: block;
+    margin: 0 auto;
+    max-height: 34em;
+    object-fit: contain;
+    width: auto;
+}
+
+.fingerdojo-cover figcaption {
+    color: var(--portfolio-muted);
+    font-size: 0.72em;
+    line-height: 1.6;
+    padding-top: 0.75em;
+    text-align: left;
+}
+
+.fingerdojo-command-list {
+    display: grid;
+    gap: 1.25em;
+    margin-bottom: 1.5em;
+}
+
+.fingerdojo-command-card {
+    align-items: center;
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-shadow: var(--portfolio-shadow);
+    display: grid;
+    gap: 1.5em;
+    grid-template-columns: minmax(180px, 0.7fr) minmax(0, 1.3fr);
+    padding: 1em;
+}
+
+.fingerdojo-command-card:nth-child(even) figure {
+    order: 2;
+}
+
+.fingerdojo-command-card figure {
+    margin: 0;
+}
+
+.fingerdojo-command-card img {
+    display: block;
+    margin: 0 auto;
+    max-height: 30em;
+    object-fit: contain;
+    width: 100%;
+}
+
+.fingerdojo-command-card h4 {
+    color: var(--portfolio-accent-strong);
+    margin-bottom: 0.75em;
+}
+
+.fingerdojo-command-card p {
+    font-size: 0.85em;
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+.fingerdojo-command-card figcaption {
+    color: var(--portfolio-muted);
+    font-size: 0.72em;
+    line-height: 1.6;
+    padding-top: 0.75em;
+    text-align: left;
+}
+
+@media screen and (max-width: 736px) {
+    .fingerdojo-command-card {
+        gap: 1em;
+        grid-template-columns: 1fr;
+    }
+
+    .fingerdojo-command-card:nth-child(even) figure {
+        order: 0;
+    }
+
+    .fingerdojo-command-card img {
+        max-height: 26em;
+        width: auto;
+    }
 }
 
 @media screen and (max-width: 980px) {
@@ -948,6 +1039,7 @@
     .project-highlight-grid {
         grid-template-columns: 1fr;
     }
+
 }
 
 @media screen and (max-width: 736px) {
