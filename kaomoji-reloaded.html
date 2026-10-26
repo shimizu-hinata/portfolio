@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Kaomoji Clash / Reloadedのゲーム内容、初版との比較、実装上の改善点を紹介します。" />
+	<title>Kaomoji Clash / Reloaded | Game Portfolio</title>
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+
+	<div id="wrapper">
+		<div id="main">
+			<article class="post">
+				<ul class="actions">
+					<li><a href="index.html" class="button small">ホームに戻る</a></li>
+					<li><a href="kaomoji.html" class="button small">初版 Kaomoji Clash</a></li>
+				</ul>
+				<header>
+					<div class="title">
+						<div class="project-genres">
+							<p class="project-genre">顔文字</p>
+							<p class="project-genre">物理アクション</p>
+							<p class="project-genre">ウェーブ制</p>
+						</div>
+						<h2><a href="#">Kaomoji Clash / Reloaded</a></h2>
+						<p>顔文字をドラッグして発射し、敵との衝突でウェーブを突破する2D物理アクションゲームです。
+							<br>初版のビルド・衝突アクションを土台に、戦闘進行と成長システム、ゲーム内部の役割分担を見直しています。
+							<br><strong>現在制作中です。以下は公開リポジトリのソース・設定から確認できる内容です。</strong>
+						</p>
+					</div>
+				</header>
+
+				<nav class="project-toc" aria-label="Reloaded紹介ページの目次">
+					<a href="#reloaded-overview">ゲーム概要</a>
+					<a href="#reloaded-comparison">初版との比較</a>
+					<a href="#reloaded-improvements">改善・設計</a>
+					<a href="#reloaded-status">開発状況</a>
+					<a href="#reloaded-links">関連リンク</a>
+				</nav>
+
+				<section class="project-at-a-glance" id="reloaded-overview">
+					<h2>Reloaded の概要</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>操作と戦闘</h3>
+							<p>マウスで引っ張った方向と反対へ顔文字を発射。敵との衝突速度をもとにダメージを判定します。</p>
+						</article>
+						<article>
+							<h3>ウェーブと成長</h3>
+							<p>敵を倒して経験値を獲得。レベルアップ時にアリーナオブジェクトを選択・強化します。</p>
+						</article>
+						<article>
+							<h3>制作環境</h3>
+							<p>Unity 6000.3.20f1 / C#。ScriptableObjectでゲームデータを管理しています。</p>
+						</article>
+					</div>
+					<ul class="actions project-quick-links">
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded" class="button small" target="_blank" rel="noopener noreferrer">Reloaded のソースコード</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>ゲームの流れ</h2>
+					<ol>
+						<li>顔文字をドラッグして発射し、敵にぶつけて攻撃する。</li>
+						<li>敵を倒して経験値を獲得し、ウェーブを進める。</li>
+						<li>レベルアップ時にアリーナオブジェクトを選択して強化する。</li>
+						<li>敵を全滅させるか制限時間を迎えるとウェーブが切り替わる。プレイヤーの体力が尽きると失敗となる。</li>
+					</ol>
+					<p>アリーナオブジェクトとして現在データを確認できるのは、衝突時に反発力を与える Bumper です。</p>
+				</section>
+
+				<section>
+					<h2>ブラッシュアップ映像</h2>
+					<div class="image featured">
+						<iframe src="https://www.youtube.com/embed/D5MxKl4xR1o" title="Kaomoji Clash のブラッシュアップ紹介動画"
+							style="width: 100%; aspect-ratio: 16 / 9;" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen></iframe>
+					</div>
+					<p>初版からリプレイ性を高めるブラッシュアップとして、記号のステータス表示を見やすく整理し、プレイヤーのレベルアップ時にアリーナオブジェクトを選択できるようにしました。アリーナオブジェクトは各戦闘後に配置を変更できます。</p>
+				</section>
+
+				<section id="reloaded-comparison">
+					<h2>初版との比較</h2>
+					<p>初版ですでに取り組んでいた顔文字の構成、衝突戦闘、ウェーブ、レベルアップ時のアリーナオブジェクト選択を引き継ぎ、Reloaded では戦闘中の成長と進行管理を一体化しています。</p>
+					<div class="table-wrapper">
+						<table>
+							<thead>
+								<tr>
+									<th scope="col">比較軸</th>
+									<th scope="col">Kaomoji Clash</th>
+									<th scope="col">Kaomoji Clash / Reloaded</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">ゲームの軸</th>
+									<td>記号パーツを組み合わせたビルドと、アリーナでの衝突アクション。</td>
+									<td>引っ張って発射する物理戦闘を軸に、ウェーブを連続して攻略。</td>
+								</tr>
+								<tr>
+									<th scope="row">成長の流れ</th>
+									<td>記号の収集・組み替えでビルドを構成。ブラッシュアップではレベルアップ時のArenaObject選択も導入。</td>
+									<td>撃破経験値によるレベルアップをウェーブ中のオブジェクト選択・強化につなぐ。</td>
+								</tr>
+								<tr>
+									<th scope="row">戦闘進行</th>
+									<td>アリーナと敵のウェーブを攻略し、戦闘後の構成変更や次の戦闘位置でリプレイ性を高める。</td>
+									<td>敵の全滅・制限時間・プレイヤーの体力切れを状態管理し、ウェーブ進行や結果へ反映。</td>
+								</tr>
+								<tr>
+									<th scope="row">内部設計</th>
+									<td>ScriptableObjectを使った顔文字・記号データとビルドのステータス計算。</td>
+									<td>データ駆動の構成を継承し、共通StatsCalculator、IAttackable / IWave、WaveControllerの状態管理で処理の役割を整理。</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</section>
+
+				<section id="reloaded-improvements">
+					<h2>Reloaded の改善・実装上の工夫</h2>
+					<ul>
+						<li><strong>入力から衝突までの一貫性:</strong> ドラッグ距離から発射力を算出し、物理衝突の速度条件をダメージ判定に使います。</li>
+						<li><strong>戦闘と成長を接続:</strong> ウェーブ、制限時間、撃破経験値、レベルアップ時の選択を、ひと続きのゲーム進行として管理します。</li>
+						<li><strong>処理の役割を分離:</strong> 共通のステータス計算窓口や攻撃・ウェーブのインターフェースを用意し、WaveControllerがバトル状態の遷移を管理します。</li>
+						<li><strong>データから拡張:</strong> 顔文字パーツ、敵、ウェーブ、スキル、アリーナオブジェクトなどを用途別のScriptableObjectとして扱います。</li>
+					</ul>
+					<p>コード例: <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/main/Assets/Scripts/Player/Movement.cs" target="_blank" rel="noopener noreferrer">ドラッグ操作と発射（Movement.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/main/Assets/Scripts/Wave/WaveController.cs" target="_blank" rel="noopener noreferrer">ウェーブ進行（WaveController.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/main/Assets/Scripts/Kaomoji/StatCalculator/PlayerStatsCalculator.cs" target="_blank" rel="noopener noreferrer">ステータス計算（PlayerStatsCalculator.cs）</a></p>
+				</section>
+
+				<section id="reloaded-status">
+					<h2>開発状況・今後の課題</h2>
+					<p>Reloaded は制作途中です。公開リポジトリの README はソース・設定をもとにした説明で、Unity Editor上でのプレイ確認やビルド確認は行われていません。</p>
+					<ul>
+						<li>スキル装備UIと戦闘時のスキル参照が一貫しておらず、重複装備制限も未確認。</li>
+						<li>Guardとクリティカル値はデータや表示がありますが、確認された衝突ダメージ処理では効果が適用されていません。</li>
+						<li>顔文字パーツなど一部データの不足があり、全ステータスの実戦投入は確認できていません。</li>
+					</ul>
+				</section>
+
+				<section id="reloaded-links">
+					<h2>関連リンク</h2>
+					<ul class="actions">
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded" class="button small" target="_blank" rel="noopener noreferrer">Reloaded GitHub</a></li>
+						<li><a href="kaomoji.html" class="button small">初版 Kaomoji Clash の紹介</a></li>
+					</ul>
+				</section>
+
+				<footer>
+					<ul class="stats">
+						<li>Unity</li>
+						<li>Personal Development</li>
+						<li>In Development</li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+
+		<section id="sidebar">
+			<section id="intro">
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<header>
+					<h2>Game Portfolio</h2>
+					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+				</header>
+			</section>
+		</section>
+	</div>
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/site.js"></script>
+
+</body>
+
+</html>

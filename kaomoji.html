@@ -33,9 +33,8 @@
 							<p class="project-genre">衝突アクション</p>
 						</div>
 						<h2><a href="#">Kaomoji Clash</a></h2>
-						<p>このゲームでは自分で顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
-							<br>自分だけの顔文字、戦略、そして衝突の爽快感を楽しむゲームとなります。
-							<br>顔文字だけでなくアリーナに設置するアイテムを追加することにより単なる衝突だけでは済まさず、戦略性を上げるようにしています。
+						<p>自分で顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
+							<br>記号の組み合わせによるビルドと、アリーナオブジェクトを使った戦略を楽しめます。
 						</p>
 					</div>
 				</header>
@@ -44,9 +43,9 @@
 					<a href="#game-overview">ゲーム概要</a>
 					<a href="#design-flow">設計・処理フロー</a>
 					<a href="#implementation">実装例</a>
+					<a href="#tech-deep-dive">技術解説</a>
 					<a href="#project-links">ソース・実行ファイル</a>
 				</nav>
-				<!-- 担当範囲・課題・設計判断を更新するときは、下の各カードの文章を編集してください。 -->
 				<section class="project-at-a-glance" id="project-summary">
 					<h2>作品の要点</h2>
 					<div class="project-highlight-grid">
@@ -55,21 +54,21 @@
 							<p>個人開発として企画・プログラミングを担当。</p>
 						</article>
 						<article>
-							<h3>設計上の課題</h3>
-							<p>記号や敵の種類が増えても、データを作成・調整しやすい構成にすること。</p>
+							<h3>ビルドとステータス</h3>
+							<p>記号パーツのスキルタグを集計し、スタック数に応じた補正をステータスに反映。</p>
 						</article>
 						<article>
-							<h3>実装した工夫</h3>
-							<p>ScriptableObjectとカスタムエディタでデータ作成を補助し、ビルド構成と成長値から実ステータスを算出。</p>
+							<h3>データ作成</h3>
+							<p>ScriptableObjectとカスタムエディタを使った、エリア・記号・敵データの作成手順を掲載。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
 						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコードを見る</a></li>
 						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
+								class="button small" target="_blank" rel="noopener noreferrer">Windows版</a></li>
 						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">Android版を見る</a></li>
+								class="button small" target="_blank" rel="noopener noreferrer">Android版</a></li>
 					</ul>
 				</section>
 				<div class="image featured">
@@ -79,11 +78,11 @@
 				<section>
 					<h2>プロジェクト情報</h2>
 					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> Android or PC</li>
+						<li><strong>プラットフォーム:</strong> Android / PC</li>
 						<li><strong>ジャンル:</strong> 顔文字 / ビルド / アクション</li>
 						<li><strong>開発期間:</strong> 2026/01 - 2026/02 (上旬)</li>
 						<li><strong>開発体制:</strong> 個人開発</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub / Github Copilot</li>
+						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub / GitHub Copilot</li>
 					</ul>
 				</section>
 				<section id="game-overview">
@@ -121,14 +120,8 @@
 					</div>
 				</section>
 				<section id="implementation">
-					<h2>技術的な工夫・実装内容</h2>
-					<p>記号や敵の種類が増えることを見越し、データ作成のしやすさと拡張性を重視しました。</p>
-					<ul>
-						<li><strong>カスタムエディタ:</strong> 記号や敵のデータ作成を補助。</li>
-						<li><strong>ScriptableObject:</strong> ゲームデータを編集・管理。</li>
-						<li><strong>AIの活用:</strong> カスタムエディタの作成・データ制作を補助し、開発を効率化。</li>
-					</ul>
-					<p>以下の動画で、エリア・記号・敵のデータ作成を確認できます。</p>
+					<h2>Unity Editorでのデータ作成</h2>
+					<p>カスタムエディタを使ったエリア・記号・敵データの作成手順を動画で紹介します。ゲーム内でのビルド構成とステータス計算は、<a href="#tech-deep-dive">実装のポイント</a>をご覧ください。</p>
 					<div class="image featured custom-editor-demos">
 						<div class="custom-editor-demo">
 							<h4>エリアデータの作成</h4>
@@ -149,6 +142,33 @@
 							</div>
 						</div>
 					</div>
+				</section>
+				<section class="tech-deep-dive" id="tech-deep-dive">
+					<h2>実装のポイント：顔文字ビルドとステータス計算</h2>
+					<p class="tech-lead">個人制作として企画・プログラミングを担当。顔文字を構成する記号パーツのスキルタグを集計し、ビルド内容からプレイヤーのステータスを計算します。</p>
+					<div class="implementation-grid">
+						<article>
+							<h4>パーツのタグを集計する</h4>
+							<p><strong>各パーツのタグを集計し、同じタグをスタックとして記録</strong>します。PlayerUpgradeServiceは条件付きタグを通常のステータス補正とは分けて管理します。</p>
+							<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/Player/PlayerUpgradeService.cs" target="_blank" rel="noopener noreferrer">PlayerUpgradeService.csを見る</a></p>
+						</article>
+						<article>
+							<h4>タグとパーツの効果を反映する</h4>
+							<p>タグの補正を<strong>乗算してから加算</strong>し、その後にパーツ固有の補正を反映します。顔文字の表示、コライダー幅の設定、アップグレード処理の初期化はPlayerApplyKaomojiがつなぎます。</p>
+							<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/ScriptableObject/KaomojiSkill/UpgradeDefinition.cs" target="_blank" rel="noopener noreferrer">SkillTagの補正定義</a> · <a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/Player/PlayerApplyKaomoji.cs" target="_blank" rel="noopener noreferrer">プレイヤー初期化</a></p>
+						</article>
+					</div>
+					<figure class="tech-code">
+						<figcaption>タグのステータス補正を適用する順序（SkillTag.StatusModifier）</figcaption>
+						<pre><code>public float ApplyModifier(float baseValue)
+{
+    float modifiedValue = ApplyMultiplication(baseValue);
+    modifiedValue = ApplyAddition(modifiedValue);
+    return modifiedValue;
+}</code></pre>
+					</figure>
+					<p class="tech-next-step"><strong>今後の改善候補:</strong> タグの集計処理を共通化し、最大スタック数の設定を一元管理すること。スタック数と補正データの対応を検証する自動テストも追加できます。</p>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/KaomojiClash" target="_blank" rel="noopener noreferrer">Kaomoji Clash のソースコードとREADMEを見る</a></p>
 				</section>
 				<section>
 					<ul class="actions">
@@ -210,19 +230,6 @@
 							<br><br>をテーマにしたゲームです。
 							<br><br>プレイヤーは戦いを通して構造を変化させ、
 							唯一無二の顔文字を完成させていきます。
-						</p>
-					</div>
-				</section>
-				<section>
-					<div class="image featured">
-						<h3>ブラッシュアップ（制作途中）</h3>
-						<iframe src="https://www.youtube.com/embed/D5MxKl4xR1o" title="YouTube video player"
-							style="width: 100%; aspect-ratio: 16 / 9;" frameborder="0"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							allowfullscreen></iframe>
-						<h4>KaomojiClashをさらにリプレイ性を持たせるようにしました。</h4>
-						<p>記号のステータスをよりビジュアライズ化し見やすくしました。
-							また、ArenaObjectはゲーム中Playerがレベルアップした際に選択できるようにし、毎戦闘後位置を変更できるようにしました。
 						</p>
 					</div>
 				</section>

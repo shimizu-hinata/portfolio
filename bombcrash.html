@@ -42,6 +42,7 @@
 					<a href="#game-overview">ゲーム概要</a>
 					<a href="#design-flow">ゲーム進行</a>
 					<a href="#implementation">実装内容</a>
+					<a href="#tech-deep-dive">技術解説</a>
 					<a href="#project-links">ソース・実行ファイル</a>
 				</nav>
 				<section class="project-at-a-glance" id="project-summary">
@@ -52,12 +53,12 @@
 							<p>チーム開発でプログラミング・プランニングを担当。システムの基本設計・実装を行いました。</p>
 						</article>
 						<article>
-							<h3>設計上の課題</h3>
-							<p>敵・爆弾・スキル・ウェーブのパラメーターを調整しやすくし、出現・戦闘・次ウェーブ判定・リザルトの進行をつなぐこと。</p>
+							<h3>実装したシステム</h3>
+							<p>Waveの出現ルール、敵のスポーン、ボス進行、スキル発動とクールタイムを実装。</p>
 						</article>
 						<article>
-							<h3>実装した工夫</h3>
-							<p>ScriptableObjectの設定からWaveGeneratorが出現条件を生成し、WaveManagerとEnemySpawnControllerがウェーブを進行。ゲームデータと処理を分離しました。</p>
+							<h3>データと処理</h3>
+							<p>ScriptableObjectのWave設定をWaveGeneratorが実行時データに変換し、WaveManagerとEnemySpawnControllerが進行・出現を担います。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
@@ -150,15 +151,9 @@
 					</div>
 				</section>
 				<section id="implementation">
-					<h3>技術的な工夫・実装内容</h3>
-					<ul>
-						<li><strong>データと処理の分離:</strong> プレイヤー・敵・ボス・爆弾・スキル・装備・ウェーブルールをScriptableObjectで管理し、パラメーターをUnity Editorから調整。</li>
-						<li><strong>ルールベースのウェーブ生成:</strong> WaveGeneratorがEndlessWaveRuleと敵ごとの設定からウェーブ時間、出現間隔、スタンピード、出現候補を構成。</li>
-						<li><strong>役割ごとのスクリプト:</strong> Scripts/Systemにゲーム処理、Scripts/UIに画面表示・UI操作、Scripts/SOにデータ型を配置。IEnemyなどのインターフェースで敵の共通処理を扱います。</li>
-						<li><strong>画面遷移と演出:</strong> ローディングシーンを介した非同期シーン読み込みに加え、フェード・カットイン・サウンド・カメラ振動を使用。</li>
-					</ul>
+					<h3>ゲーム設定画面</h3>
 					<h4>現在の実装範囲</h4>
-					<p>ガチャ関連の処理には未実装部分があるため、ホーム画面のガチャボタンは無効化されています。現時点でスキルガチャは利用できません。GitHub READMEには配布用実行ファイルの公開先は記載されていません。ページ上のGoogle DriveリンクはREADMEとは別に掲載しているファイルです。</p>
+					<p>スキルガチャは未実装のため、ホーム画面のガチャボタンは無効です。</p>
 					<div class="image featured custom-editor-demos">
 						<div class="custom-editor-demo">
 							<h4>Endless Waveの生成</h4>
@@ -169,6 +164,36 @@
 							<img src="images/BombCrash_Skill_Data.png" alt="スキルのデータ例" />
 						</div>
 					</div>
+				</section>
+				<section class="tech-deep-dive" id="tech-deep-dive">
+					<h3>実装のポイント：ウェーブ生成とスキル発動</h3>
+					<p class="tech-lead">Bomb Crashでは、敵の登場タイミングと種類をWaveごとに変化させ、装備スキルを入力または条件に応じて発動します。チーム開発で、本人は企画・プログラミングを担当しました。</p>
+					<div class="implementation-grid">
+						<article>
+							<h4>Waveごとの出現条件を組み立てる</h4>
+							<p><strong>Waveごとの出現条件を設定</strong>するEndlessWaveRuleをもとに、WaveGeneratorが回ごとの出現設定を作成。EnemySpawnControllerが敵の比重から出現対象を選び、WaveManagerがボスやスタンピードを含む進行を扱います。</p>
+							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
+						</article>
+						<article>
+							<h4>スキルの発動方法をそろえる</h4>
+							<p><strong>手動・自動の発動とクールタイムを管理</strong>するOtomoSkillRunnerが、装備スロットとZ / X / C入力を扱います。スキル共通の情報と実行口はSkillSOに定義しています。Wave設定とスキル設定の画面は上のスクリーンショットで紹介しています。</p>
+							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">スキル定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動処理</a></p>
+						</article>
+					</div>
+					<figure class="tech-code">
+						<figcaption>敵ごとの出現比重をWaveの進行に合わせて計算する処理（WaveGenerator）</figcaption>
+						<pre><code>float t = Mathf.InverseLerp(pattern.startWave, pattern.peakWave, waveNumber);
+float weight = Mathf.Lerp(0f, pattern.peakWeight, Mathf.Clamp01(t));
+
+if (weight &gt; 0f)
+    options.Add(new IntervalWaveData.EnemySpawnOption
+    {
+        enemySO = pattern.enemySO,
+        weight = weight
+    });</code></pre>
+					</figure>
+					<p class="tech-next-step"><strong>今後の改善候補:</strong> 敵の出現候補が空の場合を設定時に検出すること、自動スキルの待機処理が重複して起動しないよう状態を管理すること。</p>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/BombCrash" target="_blank" rel="noopener noreferrer">Bomb Crash のソースコードとREADMEを見る</a></p>
 				</section>
 				<section>
 					<h3>ストーリー</h3>
@@ -231,7 +256,7 @@
 				<footer>
 					<ul class="stats">
 						<li>Unity</li>
-						<li>Personal Development</li>
+						<li>Team Development</li>
 					</ul>
 				</footer>
 			</article>

@@ -35,27 +35,26 @@
 							target="_blank" rel="noopener noreferrer">制作資料（Google Drive）</a>
 					</div>
 				</div>
-				<img class="portfolio-hero-image" src="images/KaomojiClash_Thumbnail.png" alt="Kaomoji Clashのゲーム画面" />
+				<img class="portfolio-hero-image" src="images/KaomojiClash_Thumbnail.png" alt="Kaomoji Clash 初版のゲーム画面" />
 			</section>
 
-			<!-- 実績や学習内容に合わせて、得意領域の見出しと説明を更新してください。 -->
 			<section class="strengths-section" aria-labelledby="strengths-heading">
 				<header class="section-heading">
-					<p class="portfolio-eyebrow">WHAT I WORK ON</p>
-					<h2 id="strengths-heading">得意領域</h2>
+					<p class="portfolio-eyebrow">SELECTED IMPLEMENTATION</p>
+					<h2 id="strengths-heading">制作で取り組んだこと</h2>
 				</header>
 				<div class="strengths-grid">
 					<article class="strength-card">
-						<h3>ゲームシステムの設計・実装</h3>
-						<p>戦闘、成長、Wave進行など、繰り返し遊びたくなるゲームループを形にします。</p>
+						<h3>ゲーム進行・ルール</h3>
+						<p>Wave進行や装備スキル、ロボットへのコマンド実行など、作品ごとのゲームシステムを実装。</p>
 					</article>
 					<article class="strength-card">
-						<h3>拡張しやすいデータ設計</h3>
-						<p>ScriptableObjectやカスタムエディタを使い、ゲームデータの作成・調整をしやすくします。</p>
+						<h3>ゲームデータとツール</h3>
+						<p>ScriptableObjectによるデータ管理や、Unity Editor上でデータを作成するカスタムエディタを制作。</p>
 					</article>
 					<article class="strength-card">
-						<h3>課題に合わせた実装の工夫</h3>
-						<p>経路探索やUI、パフォーマンスなど、作品ごとの課題に合わせて方法を選びます。</p>
+						<h3>移動・ユーザーインターフェース</h3>
+						<p>WaypointとRaycastを使ったロボット移動や、UIToolkitを使ったUIなどの制作経験を掲載。</p>
 					</article>
 				</div>
 			</section>
@@ -66,20 +65,20 @@
 					<header class="section-heading projects-heading">
 						<p class="portfolio-eyebrow">SELECTED WORKS</p>
 						<h2>主要作品</h2>
-						<p>まずは個人制作・チーム制作のゲームからご覧ください。各作品ページで担当範囲、設計、実装内容を紹介しています。</p>
+						<p>代表作品3作の実装内容を詳しく紹介しています。技術検証・小作品、その他のゲームもカテゴリからご覧いただけます。</p>
 					</header>
 					<div class="filter-sidebar filter-inline">
 						<ul class="filter-button-list">
 							<li><button class="filter-btn" data-filter="all" aria-pressed="false">すべて</button></li>
-							<li><button class="filter-btn active" data-filter="game" aria-pressed="true">主要作品</button></li>
-							<li><button class="filter-btn" data-filter="unityroom" aria-pressed="false">Unityroom</button></li>
-							<li><button class="filter-btn" data-filter="mini" aria-pressed="false">ミニ作品</button></li>
+							<li><button class="filter-btn active" data-filter="representative" aria-pressed="true">代表作品</button></li>
+							<li><button class="filter-btn" data-filter="tech" aria-pressed="false">技術検証・小作品</button></li>
+							<li><button class="filter-btn" data-filter="other" aria-pressed="false">その他の作品</button></li>
 							<!-- <li><button class="filter-btn" data-filter="video">Video Production</button></li> -->
 						</ul>
 					</div>
 					<div class="portfolio-grid">
 						<!-- Major Games -->
-						<a href="algomate.html" class="minimal-card" data-category="game">
+						<a href="algomate.html" class="minimal-card" data-category="representative">
 							<div class="thumb"><img src="images/AlgomateColony_Thumbnail.png" alt=""></div>
 							<div class="info">
 							<div class="period-row">
@@ -88,10 +87,11 @@
 							</div>
 								<h3>Algomate Colony</h3>
 								<p class="catchphrase">担当: 企画・プログラミング。WaypointとRaycastでロボットの経路挙動を実装。</p>
+								<span class="tech-status">技術解説あり</span>
 							</div>
 						</a>
 
-						<a href="kaomoji.html" class="minimal-card" data-category="game">
+						<a href="kaomoji.html" class="minimal-card" data-category="representative">
 							<div class="thumb"><img src="images/KaomojiClash_Thumbnail.png" alt=""></div>
 							<div class="info">
 								<div class="period-row">
@@ -99,11 +99,25 @@
 									<p class="team-label">個人開発</p>
 								</div>
 								<h3>Kaomoji Clash</h3>
-								<p class="catchphrase">担当: 企画・プログラミング。ScriptableObjectとカスタムエディタを活用。</p>
+								<p class="catchphrase">担当: 企画・プログラミング。記号パーツを組み合わせた顔文字ビルドで戦うアクションゲーム。</p>
+								<span class="tech-status">初版の紹介</span>
 							</div>
 						</a>
 
-						<a href="bombcrash.html" class="minimal-card" data-category="game">
+						<a href="kaomoji-reloaded.html" class="minimal-card" data-category="representative">
+							<div class="thumb"><img src="images/KaomojiClash_Logo.png" alt=""></div>
+							<div class="info">
+								<div class="period-row">
+									<span class="period">制作中</span>
+									<p class="team-label">個人開発</p>
+								</div>
+								<h3>Kaomoji Clash / Reloaded</h3>
+								<p class="catchphrase">ドラッグ射出とウェーブ制の戦闘を開発中。初版との比較・改善点はこちら。</p>
+								<span class="tech-status">Reloaded の紹介</span>
+							</div>
+						</a>
+
+						<a href="bombcrash.html" class="minimal-card" data-category="representative">
 							<div class="thumb"><img src="images/BombCrash_Thumbnail.png" alt=""></div>
 							<div class="info">
 								<div class="period-row">
@@ -112,10 +126,11 @@
 								</div>
 								<h3>Bomb Crash</h3>
 								<p class="catchphrase">担当: 企画・プログラミング。スキルやWave設定をScriptableObjectで管理。</p>
+								<span class="tech-status">技術解説あり</span>
 							</div>
 						</a>
 
-						<a href="fingerdojo.html" class="minimal-card" data-category="game">
+						<a href="fingerdojo.html" class="minimal-card" data-category="other">
 							<div class="thumb"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のタイトル画面"></div>
 							<div class="info">
 								<div class="period-row">
@@ -127,9 +142,9 @@
 							</div>
 						</a>
 
-						<!-- Unityroom -->
+						<!-- Other games -->
 						<a href="https://unityroom.com/games/absolutecolor01" target="_blank" rel="noopener noreferrer" class="minimal-card"
-							data-category="unityroom" hidden>
+							data-category="other" hidden>
 							<div class="thumb">
 								<iframe src="https://www.youtube.com/embed/62C6vth-yDw" title="YouTube video player" loading="lazy"
 									frameborder="0"
@@ -146,7 +161,7 @@
 						</a>
 
 						<a href="https://unityroom.com/games/sword-slicer" target="_blank" rel="noopener noreferrer" class="minimal-card"
-							data-category="unityroom" hidden>
+							data-category="other" hidden>
 							<div class="thumb">
 								<iframe src="https://www.youtube.com/embed/XoulBDcGWyg" title="YouTube video player" loading="lazy"
 									frameborder="0"
@@ -162,8 +177,8 @@
 							</div>
 						</a>
 
-						<!-- Mini Works -->
-						<div class="minimal-card" data-category="mini" hidden>
+						<!-- Technical experiments and small works -->
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/wzwYaukL7t0" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -175,7 +190,7 @@
 							</div>
 						</div>
 
-						<div class="minimal-card" data-category="mini" hidden>
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/hbKHc-xk9mo" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -187,7 +202,7 @@
 							</div>
 						</div>
 
-						<div class="minimal-card" data-category="mini" hidden>
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/AvFe8xZq5Lo" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -199,7 +214,7 @@
 							</div>
 						</div>
 
-						<div class="minimal-card" data-category="mini" hidden>
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/X6vnGXn5MxM" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -211,7 +226,7 @@
 							</div>
 						</div>
 
-						<div class="minimal-card" data-category="mini" hidden>
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/O_EVzG_THUU" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -225,7 +240,7 @@
 							<a class="card-overlay-link" href="https://note.com/hiyokopiyo15/m/m5422dfc375b8" target="_blank" rel="noopener noreferrer" aria-label="noteページへ移動"></a>
 						</div>
 
-						<div class="minimal-card" data-category="mini" hidden>
+						<div class="minimal-card" data-category="tech" hidden>
 							<iframe src="https://www.youtube.com/embed/sPvNX9SME2Q" title="YouTube video player" loading="lazy"
 								frameborder="0"
 								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

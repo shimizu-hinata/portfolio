@@ -1410,3 +1410,111 @@
 [hidden] {
     display: none !important;
 }
+
+/* 技術解説セクション（代表作品ページ共通） */
+.tech-deep-dive > h3 {
+    margin-bottom: 0.4em;
+}
+
+.tech-deep-dive h4 {
+    border-left: 3px solid var(--portfolio-accent-strong);
+    font-size: 0.9em;
+    margin: 1.8em 0 0.6em;
+    padding-left: 0.6em;
+}
+
+.tech-lead {
+    font-size: 0.85em;
+    line-height: 1.8;
+}
+
+.implementation-grid {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 1.2em 0;
+}
+
+.implementation-grid article {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    padding: 1em;
+}
+
+.implementation-grid h4 {
+    margin-top: 0;
+}
+
+.implementation-grid p,
+.tech-next-step,
+.tech-source-link {
+    font-size: 0.78em;
+    line-height: 1.75;
+}
+
+.implementation-grid p:last-child,
+.tech-source-link {
+    margin-bottom: 0;
+}
+
+.tech-next-step {
+    background: var(--portfolio-surface-tint);
+    border-left: 3px solid var(--portfolio-accent-strong);
+    margin: 1.2em 0;
+    padding: 0.8em 1em;
+}
+
+.tech-source-link {
+    text-align: right;
+}
+
+.tech-status {
+    border-radius: 999px;
+    border: 1px solid var(--portfolio-border);
+    display: inline-block;
+    font-size: 0.9em;
+    font-weight: 700;
+    padding: 0 0.6em;
+    white-space: nowrap;
+}
+
+.tech-code {
+    margin: 1.2em 0;
+}
+
+.tech-code figcaption {
+    font-size: 0.72em;
+    line-height: 1.6;
+    margin-bottom: 0.4em;
+}
+
+.tech-code pre {
+    background: var(--portfolio-surface-tint);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    font-size: 0.72em;
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: auto;
+    padding: 1em;
+    tab-size: 4;
+}
+
+.tech-code code {
+    font-family: Consolas, "Courier New", monospace;
+}
+
+.tech-code pre code {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-size: 1em;
+    padding: 0;
+}
+
+@media screen and (max-width: 736px) {
+    .implementation-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -41,6 +41,7 @@
 					<a href="#screenshots">ゲーム画面</a>
 					<a href="#design-flow">設計・処理フロー</a>
 					<a href="#implementation">技術・開発状況</a>
+					<a href="#tech-deep-dive">技術解説</a>
 					<a href="#project-links">関連資料</a>
 				</nav>
 				<section class="project-at-a-glance" id="project-summary">
@@ -175,10 +176,10 @@
 				</section>
 				<section class="design-flow-section" id="design-flow">
 					<h3>ゲーム設計・処理フロー</h3>
-					<p>企画上のプレイループと、GitHubの現行仕様資料から確認できる処理の流れを分けて紹介します。</p>
+					<p>ロボットに作業手順を入力し、資源を運んで拠点を成長させるゲームの流れと、命令が行動になるまでを紹介します。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
-							<h4>プレイの基本ループ（企画・チュートリアル）</h4>
+							<h4>プレイの基本ループ</h4>
 							<ol class="design-flow-steps">
 								<li><strong>ロボットを選ぶ</strong><span>アルゴメイトを選択し、命令対象を決める</span></li>
 								<li><strong>手順を入力する</strong><span>Move・Gather・Depositを順に記述する</span></li>
@@ -187,7 +188,7 @@
 							</ol>
 						</div>
 						<div class="design-flow-card">
-							<h4>コマンドがロボットの行動になるまで（コード上の構成）</h4>
+							<h4>命令入力からロボットの行動へ</h4>
 							<ol class="design-flow-steps">
 								<li><strong>定義を読み込む</strong><span>CommandLoaderがResourcesのJSONから候補を取得</span></li>
 								<li><strong>入力を検証する</strong><span>CommandHandlerが各行と引数を確認</span></li>
@@ -224,17 +225,9 @@
 					</div>
 				</section>
 				<section id="implementation">
-					<h3>技術・開発状況</h3>
-					<div class="algomate-tech-grid">
-						<article><h4>コマンド定義と入力検証</h4><p>Resources内のJSONからコマンド候補を読み込み、CommandHandlerが入力行を検証します。</p></article>
-						<article><h4>逐次実行と状態管理</h4><p>RobotCommandExecuteが命令を順番に進め、RobotControllerがロボットの行動状態を管理します。</p></article>
-						<article><h4>探索・移動・採集・格納</h4><p>RobotSearch、RobotMovement、RobotGather、RobotDepositが対象検索から資源処理までを分担します。</p></article>
-						<article><h4>拠点レベルとデータ</h4><p>ScriptableObjectでレベルごとの必要素材・解放情報を定義し、LocationControllerが在庫表示とレベルアップUIを扱います。</p></article>
-						<article><h4>施設パネル</h4><p>FacilityManagerが設定・ロボット・拠点・倉庫などの各Canvas表示を切り替えます。</p></article>
-					</div>
+					<h3>開発状況・関連資料</h3>
 					<h4>プロトタイプの範囲</h4>
-					<p>現行の基本コマンドはMove・Gather・Depositです。READMEではif・forなどの高度な構文、加工施設での生産、エネルギー管理、クエストや交易、新しいコマンドの研究を今後の要素として挙げています。画面やデータの一部が存在する機能も、実行処理が完成しているとは限りません。</p>
-					<p>移動処理の実装例は、以下の動画で紹介しています。</p>
+					<p>利用できる基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエストや交易、新しいコマンドの研究は今後の要素として資料に記載されています。</p>
 					<h4>GitHubの技術資料</h4>
 					<ul class="algomate-doc-links">
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>
@@ -242,6 +235,32 @@
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/ImplementationStatus.md" target="_blank" rel="noopener noreferrer">機能別の実装状況</a></li>
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/FutureRoadmap.md" target="_blank" rel="noopener noreferrer">将来構想とロードマップ案</a></li>
 					</ul>
+				</section>
+				<section class="tech-deep-dive" id="tech-deep-dive">
+					<h3>実装のポイント：コマンド実行とロボット移動</h3>
+					<p class="tech-lead">チーム開発で、本人はゲーム企画・プログラミングを担当。ロボットへの命令入力、逐次実行、移動処理を以下の構成で実装しています。</p>
+					<div class="implementation-grid">
+						<article>
+							<h4>入力した命令を検証して実行する</h4>
+							<p><strong>Move・Gather・Depositの入力と対象を検証</strong>するCommandHandlerは、Resources内のJSONから指定できる対象一覧を読み込みます。RobotCommandExecuteは各命令の終了を待ってから次の行へ進め、移動・採集・格納をロボットの状態遷移につなぎます。</p>
+							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Command/CommandHandler.cs" target="_blank" rel="noopener noreferrer">命令の検証</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotCommandExecute.cs" target="_blank" rel="noopener noreferrer">命令の実行</a></p>
+						</article>
+						<article>
+							<h4>WaypointとRaycastで移動する</h4>
+							<p><strong>始点と目的地の間にWaypointを生成</strong>するPathfindingSystemと、経路点をたどるRobotMovementで移動します。障害物はRaycastで検知し、回避方向を選びます。</p>
+							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/PathfindingSystem.cs" target="_blank" rel="noopener noreferrer">Waypoint生成</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotMovement.cs" target="_blank" rel="noopener noreferrer">ロボット移動</a></p>
+						</article>
+					</div>
+					<figure class="tech-code">
+						<figcaption>始点から終点までを分割してWaypointを作成（PathfindingSystem）</figcaption>
+						<pre><code>for (int i = 1; i &lt;= stepCount; i++)
+{
+    Vector2 point = Vector2.Lerp(start, end, i / (float)stepCount);
+    waypoints.Enqueue(point);
+}</code></pre>
+					</figure>
+					<p class="tech-next-step"><strong>今後の改善候補:</strong> 命令文字列を検証・実行間で共通の形式にし、入力エラーを扱いやすくすること。現在の経路は直線補間と局所回避の組み合わせのため、複雑な障害物配置に対応する経路探索も検討できます。</p>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/AlgomateColony" target="_blank" rel="noopener noreferrer">AlgomateColony のソースコードとREADMEを見る</a></p>
 				</section>
 				<section>
 					<h3>ストーリー設定</h3>
