@@ -12,7 +12,28 @@
 	<meta name="description" content="Kaomoji Clash / Reloadedのゲーム内容、初版との比較、実装上の改善点を紹介します。" />
 	<title>Kaomoji Clash / Reloaded | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
-</head>
+	<style>
+		.compare-visual{display:flex;flex-direction:column;gap:1rem;margin:1.5rem 0}
+		.compare-head,.compare-row{display:grid;grid-template-columns:9rem 1fr 2rem 1fr;gap:.75rem;align-items:stretch}
+		.compare-head{font-weight:700;text-align:center}
+		.compare-head span{padding:.4rem;border-radius:.4rem}
+		.compare-head .v1{background:#e8eef5;color:#3b4a5c}
+		.compare-head .v2{background:#fde8e4;color:#b23a2b}
+		.compare-axis{display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;background:#f5f5f5;border-radius:.5rem;padding:.75rem;text-align:center}
+		.compare-row{padding:.75rem;border:2px solid #d5d9de;border-radius:.75rem;background:#fff}
+		.compare-head{padding:0 calc(.75rem + 2px)}
+		.compare-card{padding:.9rem 1rem;border-radius:.5rem;font-size:.9rem;line-height:1.6;border-left:4px solid}
+		.compare-card.v1{background:#f3f6fa;border-color:#8aa0b8}
+		.compare-card.v2{background:#fff4f2;border-color:#e0584a}
+		.compare-label{display:none;font-size:.75rem;font-weight:700;margin-bottom:.3rem}
+		.compare-arrow{display:flex;align-items:center;justify-content:center;color:#e0584a;font-size:1.3rem}
+		@media(max-width:736px){
+			.compare-head{display:none}
+			.compare-row{grid-template-columns:1fr;gap:.4rem}
+			.compare-arrow{transform:rotate(90deg);height:1.5rem}
+			.compare-label{display:block}
+		}
+	</style></head>
 
 <body class="is-preload">
 
@@ -92,39 +113,13 @@
 				<section id="reloaded-comparison">
 					<h2>初版との比較</h2>
 					<p>初版ですでに取り組んでいた顔文字の構成、衝突戦闘、ウェーブ、レベルアップ時のアリーナオブジェクト選択を引き継ぎ、Reloaded では戦闘中の成長と進行管理を一体化しています。</p>
-					<div class="table-wrapper">
-						<table>
-							<thead>
-								<tr>
-									<th scope="col">比較軸</th>
-									<th scope="col">Kaomoji Clash</th>
-									<th scope="col">Kaomoji Clash / Reloaded</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">ゲームの軸</th>
-									<td>記号パーツを組み合わせたビルドと、アリーナでの衝突アクション。</td>
-									<td>引っ張って発射する物理戦闘を軸に、ウェーブを連続して攻略。</td>
-								</tr>
-								<tr>
-									<th scope="row">成長の流れ</th>
-									<td>記号の収集・組み替えでビルドを構成。ブラッシュアップではレベルアップ時のArenaObject選択も導入。</td>
-									<td>撃破経験値によるレベルアップをウェーブ中のオブジェクト選択・強化につなぐ。</td>
-								</tr>
-								<tr>
-									<th scope="row">戦闘進行</th>
-									<td>アリーナと敵のウェーブを攻略し、戦闘後の構成変更や次の戦闘位置でリプレイ性を高める。</td>
-									<td>敵の全滅・制限時間・プレイヤーの体力切れを状態管理し、ウェーブ進行や結果へ反映。</td>
-								</tr>
-								<tr>
-									<th scope="row">内部設計</th>
-									<td>ScriptableObjectを使った顔文字・記号データとビルドのステータス計算。</td>
-									<td>データ駆動の構成を継承し、共通StatsCalculator、IAttackable / IWave、WaveControllerの状態管理で処理の役割を整理。</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					<div class="compare-visual">
+<div class="compare-head"><span></span><span class="v1">Kaomoji Clash</span><span></span><span class="v2">Kaomoji Clash / Reloaded</span></div>
+<div class="compare-row"><div class="compare-axis">ゲームの軸</div><div class="compare-card v1"><span class="compare-label">初版</span>記号パーツを組み合わせたビルドと、アリーナでの衝突アクション。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>引っ張って発射する物理戦闘を軸に、ウェーブを連続して攻略。</div></div>
+<div class="compare-row"><div class="compare-axis">成長の流れ</div><div class="compare-card v1"><span class="compare-label">初版</span>記号の収集・組み替えでビルドを構成。ブラッシュアップではレベルアップ時のArenaObject選択も導入。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>撃破経験値によるレベルアップをウェーブ中のオブジェクト選択・強化につなぐ。</div></div>
+<div class="compare-row"><div class="compare-axis">戦闘進行</div><div class="compare-card v1"><span class="compare-label">初版</span>アリーナと敵のウェーブを攻略し、戦闘後の構成変更や次の戦闘位置でリプレイ性を高める。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>敵の全滅・制限時間・プレイヤーの体力切れを状態管理し、ウェーブ進行や結果へ反映。</div></div>
+<div class="compare-row"><div class="compare-axis">内部設計</div><div class="compare-card v1"><span class="compare-label">初版</span>ScriptableObjectを使った顔文字・記号データとビルドのステータス計算。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>データ駆動の構成を継承し、共通StatsCalculator、IAttackable / IWave、WaveControllerの状態管理で処理の役割を整理。</div></div>
+</div>
 				</section>
 
 				<section id="reloaded-improvements">

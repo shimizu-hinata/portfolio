@@ -1467,7 +1467,8 @@
         padding: 1em;
     }
 
-    .fingerdojo-highlights {
+    .fingerdojo-highlights,
+    .highlights-four {
         grid-template-columns: 1fr;
     }
 
@@ -1481,7 +1482,7 @@
 }
 
 /* 技術解説セクション（代表作品ページ共通） */
-.tech-deep-dive > h3 {
+.tech-deep-dive > h2 {
     margin-bottom: 0.4em;
 }
 
