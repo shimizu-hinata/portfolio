@@ -133,7 +133,7 @@
 							<figcaption><strong>Deposit — 格納</strong> 素材名と数量を指定します。倉庫名を引数にするのではなく、近くの倉庫を検索します。</figcaption>
 						</figure>
 					</div>
-					<h4 class="algomate-subheading">入力の結果と拠点画面</h4>
+					<h4 class="algomate-subheading" id="command-feedback">入力の結果と拠点画面</h4>
 					<div class="algomate-outcome-grid">
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Success.png"
@@ -240,12 +240,12 @@
 					<h3>実装のポイント：コマンド実行とロボット移動</h3>
 					<p class="tech-lead">チーム開発で、本人はゲーム企画・プログラミングを担当。ロボットへの命令入力、逐次実行、移動処理を以下の構成で実装しています。</p>
 					<div class="implementation-grid">
-						<article>
+						<article id="command-execution">
 							<h4>入力した命令を検証して実行する</h4>
 							<p><strong>Move・Gather・Depositの入力と対象を検証</strong>するCommandHandlerは、Resources内のJSONから指定できる対象一覧を読み込みます。RobotCommandExecuteは各命令の終了を待ってから次の行へ進め、移動・採集・格納をロボットの状態遷移につなぎます。</p>
 							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Command/CommandHandler.cs" target="_blank" rel="noopener noreferrer">命令の検証</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotCommandExecute.cs" target="_blank" rel="noopener noreferrer">命令の実行</a></p>
 						</article>
-						<article>
+						<article id="robot-navigation">
 							<h4>WaypointとRaycastで移動する</h4>
 							<p><strong>始点と目的地の間にWaypointを生成</strong>するPathfindingSystemと、経路点をたどるRobotMovementで移動します。障害物はRaycastで検知し、回避方向を選びます。</p>
 							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/PathfindingSystem.cs" target="_blank" rel="noopener noreferrer">Waypoint生成</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotMovement.cs" target="_blank" rel="noopener noreferrer">ロボット移動</a></p>

@@ -116,7 +116,7 @@
 								<li><strong>次のWave / ゲームオーバー</strong><span>出現終了かつ敵がいなければ次のWaveへ。敵のカウントダウンが尽きた場合はゲームオーバーとなり、リザルトへ</span></li>
 							</ol>
 						</div>
-						<div class="design-flow-card">
+						<div class="design-flow-card" id="wave-result-flow">
 							<h4>ウェーブ・リザルト処理</h4>
 							<ol class="design-flow-steps design-flow-steps-three">
 								<li><strong>ルールから生成</strong><span>EndlessWaveRuleと敵データから時間・出現間隔・候補を構成</span></li>
@@ -169,12 +169,12 @@
 					<h3>実装のポイント：ウェーブ生成とスキル発動</h3>
 					<p class="tech-lead">Bomb Crashでは、敵の登場タイミングと種類をWaveごとに変化させ、装備スキルを入力または条件に応じて発動します。チーム開発で、本人は企画・プログラミングを担当しました。</p>
 					<div class="implementation-grid">
-						<article>
+						<article id="wave-generation">
 							<h4>Waveごとの出現条件を組み立てる</h4>
 							<p><strong>Waveごとの出現条件を設定</strong>するEndlessWaveRuleをもとに、WaveGeneratorが回ごとの出現設定を作成。EnemySpawnControllerが敵の比重から出現対象を選び、WaveManagerがボスやスタンピードを含む進行を扱います。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
 						</article>
-						<article>
+						<article id="skill-activation">
 							<h4>スキルの発動方法をそろえる</h4>
 							<p><strong>手動・自動の発動とクールタイムを管理</strong>するOtomoSkillRunnerが、装備スロットとZ / X / C入力を扱います。スキル共通の情報と実行口はSkillSOに定義しています。Wave設定とスキル設定の画面は上のスクリーンショットで紹介しています。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">スキル定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動処理</a></p>

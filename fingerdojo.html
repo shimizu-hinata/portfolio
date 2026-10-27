@@ -188,7 +188,7 @@
 					<h3>技術構成・実装</h3>
 					<p>UnityのScene上のGameObjectとMonoBehaviourを中心に構成。タイトルで選んだ敵ProfileをBattleSceneへ渡し、コマンド入力から状態遷移、QTE・ダメージ処理、HP/UI更新、勝敗表示へつなぐ設計です。</p>
 					<div class="design-flow-grid">
-						<div class="design-flow-card">
+						<div class="design-flow-card" id="fingerdojo-combat-flow">
 							<h4>戦闘の処理経路</h4>
 							<ol class="design-flow-steps">
 								<li><strong>難易度を選ぶ</strong><span>DifficultyButtonが選択Profileを確認し、BattleSceneへ進む</span></li>
@@ -197,7 +197,7 @@
 								<li><strong>結果を反映</strong><span>HealthがHPを更新し、GameManagerとGameUIManagerが勝敗を表示</span></li>
 							</ol>
 						</div>
-						<div class="design-flow-card">
+						<div class="design-flow-card" id="fingerdojo-combat-architecture">
 							<h4>主なクラスとデータ</h4>
 							<ul class="fingerdojo-tech-list">
 								<li><strong>プレイヤーと敵の戦闘状態を個別に管理</strong><span><code>PlayerStateController</code> / <code>EnemyStateController</code></span></li>
