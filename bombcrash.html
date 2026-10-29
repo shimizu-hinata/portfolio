@@ -8,7 +8,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Bomb Crash | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -31,10 +31,8 @@
 							<p class="project-genre">ローグライト</p>
 							<p class="project-genre">爆弾迎撃アクション</p>
 						</div>
-						<h2><a href="#">Bomb Crash</a></h2>
-						<p>BombCrash は Unity で制作した、2D アクションゲームです。
-							<br>プレイヤーは強力な凍結爆弾を武器に、カウントダウン式の敵ボムが爆発する前に次々と撃破していきます。
-							<br>敵を倒してスクラップを集め、装備を購入・強化しながら、どこまでウェーブを生き延びられるか挑戦します。知見ポイント（IP）は到達状況などに応じてリザルトで獲得します。</p>
+						<h1>Bomb Crash</h1>
+						<p>凍結爆弾でカウントダウン式の敵を迎撃し、スクラップを集めながらWaveの攻略に挑む2Dアクションゲームです。</p>
 					</div>
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
@@ -49,39 +47,23 @@
 					<h2>作品の要点</h2>
 					<div class="project-highlight-grid">
 						<article>
-							<h3>担当</h3>
-							<p>チーム開発でプログラミング・プランニングを担当。システムの基本設計・実装を行いました。</p>
+							<h3>制作体制</h3>
+							<p>チーム制作です。本人の担当範囲は確認中のため、機能の実装者を断定していません。</p>
 						</article>
 						<article>
-							<h3>実装したシステム</h3>
-							<p>Waveの出現ルール、敵のスポーン、ボス進行、スキル発動とクールタイムを実装。</p>
-						</article>
-						<article>
-							<h3>データと処理</h3>
+							<h3>コードで確認できる仕組み</h3>
 							<p>ScriptableObjectのWave設定をWaveGeneratorが実行時データに変換し、WaveManagerとEnemySpawnControllerが進行・出現を担います。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/BombCrash" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
-						<li><a href="https://drive.google.com/file/d/1i8zCdus-vOQ-KaE83p5uE_9-xqK1dx_b/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
 					</ul>
 				</section>
 				<div class="image featured">
 					<h3>紹介動画</h3>
 					<div class="js-video-player"data-video-url="https://www.youtube.com/embed/pQ53e4TLCJE"></div>
 				</div>
-				<section>
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> PC </li>
-						<li><strong>ジャンル:</strong> 爆弾ビルド / ローグライト / アクション</li>
-						<li><strong>開発期間:</strong> 2025/02 - 2025/06 (上旬)</li>
-						<li><strong>開発体制:</strong> チーム開発（担当: プログラミング・プランニング）</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.29f1) / C# / Git Bash / GitHub</li>
-					</ul>
-				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
 					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾（敵）を、強力な凍結爆弾で破壊する爽快アクションゲームです。
@@ -157,27 +139,27 @@
 					<div class="image featured custom-editor-demos">
 						<div class="custom-editor-demo">
 							<h4>Endless Waveの生成</h4>
-							<img src="images/BombCrash_EndlessWaveGeneration.png" alt="Endless Waveの生成例" />
+							<img src="images/BombCrash_EndlessWaveGeneration.png" alt="Endless Waveの生成例" loading="lazy" decoding="async" />
 						</div>
 						<div class="custom-editor-demo">
 							<h4>スキルのデータ</h4>
-							<img src="images/BombCrash_Skill_Data.png" alt="スキルのデータ例" />
+							<img src="images/BombCrash_Skill_Data.png" alt="スキルのデータ例" loading="lazy" decoding="async" />
 						</div>
 					</div>
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
 					<h3>実装のポイント：ウェーブ生成とスキル発動</h3>
-					<p class="tech-lead">Bomb Crashでは、敵の登場タイミングと種類をWaveごとに変化させ、装備スキルを入力または条件に応じて発動します。チーム開発で、本人は企画・プログラミングを担当しました。</p>
+					<p class="tech-lead">公開リポジトリのコードでは、Waveルールから出現候補を作り、進行と敵の配置を別の処理へ渡す構成を確認できます。チーム内での本人担当範囲は確認中です。</p>
 					<div class="implementation-grid">
 						<article id="wave-generation">
 							<h4>Waveごとの出現条件を組み立てる</h4>
 							<p><strong>Waveごとの出現条件を設定</strong>するEndlessWaveRuleをもとに、WaveGeneratorが回ごとの出現設定を作成。EnemySpawnControllerが敵の比重から出現対象を選び、WaveManagerがボスやスタンピードを含む進行を扱います。</p>
-							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
+							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
 						</article>
 						<article id="skill-activation">
 							<h4>スキルの発動方法をそろえる</h4>
 							<p><strong>手動・自動の発動とクールタイムを管理</strong>するOtomoSkillRunnerが、装備スロットとZ / X / C入力を扱います。スキル共通の情報と実行口はSkillSOに定義しています。Wave設定とスキル設定の画面は上のスクリーンショットで紹介しています。</p>
-							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">スキル定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/main/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動処理</a></p>
+							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">スキル定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動処理</a></p>
 						</article>
 					</div>
 					<figure class="tech-code">
@@ -193,64 +175,13 @@ if (weight &gt; 0f)
     });</code></pre>
 					</figure>
 					<p class="tech-next-step"><strong>今後の改善候補:</strong> 敵の出現候補が空の場合を設定時に検出すること、自動スキルの待機処理が重複して起動しないよう状態を管理すること。</p>
-					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/BombCrash" target="_blank" rel="noopener noreferrer">Bomb Crash のソースコードとREADMEを見る</a></p>
-				</section>
-				<section>
-					<h3>ストーリー</h3>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<div class="js-story-content" hidden>
-						<h3>BombCrash - 物語のあらすじ</h3>
-						<h4>プロローグ</h4>
-						<p>かつて、私の母は父が作った爆弾の誤作動によって命を落とした。
-							<br><br>その日以来、父は生きる気力を失ったかのように、自身の研究にさらに深くのめり込んでいった。
-							<br><br>まだ幼かった私は、父が作ってくれたウサギ型のロボット人形を抱きしめ、寂しそうに父の研究室を覗き込むことしかできなかった。
-							そして、静かにその扉を閉じる。</p>
-						<h4>数年後、日常の断絶</h4>
-						<p>私は高校生になった。
-							<br><br>学校からの帰り道、いつも通り父の研究室を覗くと、そこには研究に没頭する父の姿があった。私は静かに通り過ぎる。
-							学生カバンに着けた、昔のロボット人形とお揃いのキーホルダーが、扉の隙間から父の姿をのぞかせていた。
-							<br><br>自室に戻ると、そこは私の研究室でもあった。
-							爆弾の設計に必要な道具が散らばるデスク。
-							壁には、精密に描かれた凍結爆弾の設計図が貼られている。
-							デスクの傍らには、幼い頃に抱いていたウサギの人形と、母の顔がかすれてしまった家族写真が置かれていた。
-							<br><br>私は学生カバンを置き、再び爆弾の設計に取り掛かる。</p>
-						<h4>回想 - 父との亀裂</h4>
-						<p>数年前、私は初めて自力で開発した爆弾の設計図を父に見せた。
-							<br><br>「見て見て！これ私が作ったんだ！」
-							<br><br>喜んでもらえると、そう信じていた。 しかし、父からの返答は淡々としたものだった。
-							<br><br>「あぁ。すごいじゃないか…。」
-							<br><br>期待していた反応は得られず、私は握りしめてくしゃくしゃになった設計図を父に投げつけ、研究室を飛び出した。 自室のベッドにうずくまり、掛け布団を深く覆いかぶせて泣いた。
-							<br><br>一方、父は床に落ちた設計図を拾い上げる。
-							<br><br>「凍結爆弾か…、よくできている…。」
-							<br><br>その呟きは、誰に聞かれることもなく研究室に消えた。</p>
-						<h4>事件の勃発</h4>
-						<p>数週間後、学校から帰宅すると、いつもいるはずの父の姿が研究室から消えていた。
-							<br><br>急いで扉を開けて中へ入るが、誰もいない。ただ、父が研究していた爆弾の資料が床に散乱していた。
-							その設計資料に描かれていたのは、見たこともない爆弾だった。
-							<br><br>その時、外から大きな爆発音が響き渡る。
-							<br><br>窓の外を見ると、先ほどの資料とそっくりな爆弾が次々と爆発していた。
-							そして、私のすぐそばに、どこからともなくカウントダウンを始める爆弾が出現する。
-							<br><br>このままではやられる――！
-							<br><br>私は一か八か、学生カバンから試作品の凍結爆弾を取り出し、敵の爆弾に投げつけた。
-							爆弾は見る見るうちに凍りつき、完全に凍結されると粉々に砕け散った。
-							<br><br>そう、私が開発したこの凍結爆弾だけが、敵を破壊できる唯一の手段だったのだ。
-							<br><br>安堵もつかの間、新たな敵性爆弾が次々と現れる。
-							急いで家に戻ろうとしたが、自宅はすでに跡形もなく爆破されていた。
-							<br><br>しかし、地下の研究室へ続くハッチだけは、奇跡的に無事だった。
-							爆弾研究のために、地下室はほとんどの爆発を無効化できるように設計されている。私の部屋も、研究を始めてから地下に移していた。
-							<br><br>地下の自室へ駆け込み、デスクの上に置かれた設計図と完成品の爆弾を見つめる。
-							私は慣れた手つきで作業着に着替えると、それらを手に地上へと向かった。
-							<br><br>父の行方を追い、謎の爆弾を破壊するため、私の戦いが今、始まる。</p>
-					</div>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" target="_blank" rel="noopener noreferrer">調査時点のソースとREADMEを見る</a></p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/BombCrash" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" class="button small" target="_blank"
 								rel="noopener noreferrer">GitHub（README・技術資料）</a></li>
-						<li><a href="https://drive.google.com/file/d/1i8zCdus-vOQ-KaE83p5uE_9-xqK1dx_b/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
 					</ul>
 				</section>
 				<footer>
@@ -267,10 +198,10 @@ if (weight &gt; 0f)
 
 			<!-- Intro -->
 			<section id="intro">
-				<a href="#" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="ポートフォリオのトップページ" /></a>
 				<header>
 					<h2>Game Portfolio</h2>
-					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+					<p>Unity / C#の制作作品と実装例を紹介しています。</p>
 				</header>
 			</section>
 
@@ -282,40 +213,36 @@ if (weight &gt; 0f)
 					<article class="mini-post">
 						<header>
 							<h3><a href="algomate.html">Algomate Colony</a></h3>
-							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
-							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+							<a href="algomate.html" class="author"><img src="images/AlgomateColony_Logo.png" alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"
-								alt="" /></a>
+								alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
-							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+							<a href="kaomoji.html" class="author"><img src="images/KaomojiClash_Logo.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png"
-								alt="" /></a>
+								alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
-							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+							<a href="bombcrash.html" class="author"><img src="images/BombCrash_Logo.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png"
-								alt="" /></a>
+								alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
-							<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
-							<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+							<a href="fingerdojo.html" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 					</article>
 				</div>
 			</section>

@@ -1235,9 +1235,11 @@
     border-radius: var(--portfolio-radius);
     color: var(--portfolio-accent-strong);
     display: inline-flex;
-    font-size: 0.72em;
+    align-items: center;
+    font-size: 0.875rem;
     font-weight: 700;
     line-height: 1.5;
+    min-height: 44px;
     padding: 0.65em 0.9em;
 }
 
@@ -1587,4 +1589,271 @@
     .implementation-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Highlight the section reached via an in-page link */
+@keyframes target-spotlight {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(46, 186, 174, 0);
+        outline-color: rgba(46, 186, 174, 0);
+    }
+    25%, 75% {
+        box-shadow: 0 0 0 0.5em rgba(46, 186, 174, 0.22), 0 0 1.5em rgba(46, 186, 174, 0.45);
+        outline-color: var(--portfolio-accent);
+    }
+    50% {
+        box-shadow: 0 0 0 0 rgba(46, 186, 174, 0);
+        outline-color: rgba(46, 186, 174, 0.2);
+    }
+}
+
+#main :target {
+    animation: target-spotlight 1.8s ease-in-out 2;
+    border-radius: 0.5em;
+    outline: 3px solid transparent;
+    outline-offset: 0.4em;
+    scroll-margin-top: 1.5em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #main :target {
+        animation: none;
+        outline-color: var(--portfolio-accent);
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    body.kaomoji-detail #intro {
+        margin-bottom: 1.5em;
+    }
+
+    body.kaomoji-detail #intro .logo {
+        height: 4em;
+        width: 4em;
+    }
+
+    body.kaomoji-detail #intro .logo img {
+        width: 4em;
+    }
+}
+
+@media screen and (max-width: 736px) {
+    body.kaomoji-detail #intro {
+        margin-bottom: 0.75em;
+        padding: 0.75em 0;
+    }
+
+    body.kaomoji-detail #intro .logo {
+        margin-bottom: 0.25em;
+    }
+}
+
+.compare-visual {
+    display: grid;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.compare-head,
+.compare-row {
+    align-items: stretch;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(7rem, 0.7fr) minmax(0, 1fr) 2rem minmax(0, 1fr);
+}
+
+.compare-head {
+    font-weight: 700;
+    text-align: center;
+}
+
+.compare-head span {
+    border-radius: var(--portfolio-radius);
+    padding: 0.4rem;
+}
+
+.compare-head .v1,
+.compare-card.v1 {
+    background: #f0f3f6;
+}
+
+.compare-head .v2,
+.compare-card.v2 {
+    background: var(--portfolio-surface-tint);
+}
+
+.compare-axis {
+    align-items: center;
+    background: var(--portfolio-surface-tint);
+    border-radius: var(--portfolio-radius);
+    display: flex;
+    font-weight: 700;
+    justify-content: center;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.compare-row {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    padding: 0.75rem;
+}
+
+.compare-card {
+    border-left: 4px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 0.9rem 1rem;
+}
+
+.compare-card.v1 {
+    border-color: #8aa0b8;
+}
+
+.compare-card.v2 {
+    border-color: var(--portfolio-accent-strong);
+}
+
+.compare-label {
+    display: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.compare-arrow {
+    align-items: center;
+    color: var(--portfolio-accent-strong);
+    display: flex;
+    font-size: 1.3rem;
+    justify-content: center;
+}
+
+@media screen and (max-width: 736px) {
+    .compare-head {
+        display: none;
+    }
+
+    .compare-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .compare-arrow {
+        height: 1.5rem;
+        transform: rotate(90deg);
+    }
+
+    .compare-label {
+        display: block;
+    }
+}
+
+a:hover,
+a:hover::before {
+    color: var(--portfolio-accent-hover) !important;
+}
+
+.post > header .title > p {
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.post .button,
+.portfolio-hero-actions .button {
+    font-size: 0.875rem;
+    height: auto;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    min-height: 44px;
+    padding: 0.7rem 1rem;
+}
+
+.project-toc a {
+    align-items: center;
+    font-size: 0.875rem;
+    min-height: 44px;
+    padding: 0.5rem 0.4rem;
+}
+
+.filter-btn {
+    min-height: 44px;
+    font-size: 0.875rem;
+}
+
+.post a:not(.button):not(.image):not(.author) {
+    line-height: 1.5;
+    padding-bottom: 0.15rem;
+    padding-top: 0.15rem;
+}
+
+.post > footer .stats li {
+    font-size: 0.75rem;
+}
+
+.post > header .title .project-genre {
+    color: var(--portfolio-accent-hover);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+}
+
+.mini-post header h3 {
+    font-size: 0.875rem;
+}
+
+#intro header p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.mini-post .author {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+.post > header .title h1,
+.post > header .title h2 {
+    letter-spacing: 0.12em;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--portfolio-accent-strong);
+    outline-offset: 3px;
+}
+
+.minimal-card .period,
+.minimal-card .team-label,
+.minimal-card .card-link-note {
+    font-size: 0.75rem;
+}
+
+.minimal-card .catchphrase,
+.strength-card p {
+    font-size: 0.875rem;
+}
+
+.post section p,
+.post section li {
+    font-size: 0.9rem;
+}
+
+.post section h4 {
+    font-size: 1rem;
+}
+
+.post section figcaption {
+    font-size: 0.875rem;
+}
+
+.design-flow-steps strong,
+.design-flow-steps span {
+    font-size: 0.875rem;
+}
+
+.tech-code pre {
+    font-size: 0.8rem;
 }

@@ -2,7 +2,17 @@
 (function () {
 	'use strict';
 
+	function getHashTarget() {
+		var id = decodeURIComponent(window.location.hash.slice(1));
+		return id ? document.getElementById(id) : null;
+	}
+
 	function scrollToTop() {
+		var target = getHashTarget();
+		if (target) {
+			target.scrollIntoView();
+			return;
+		}
 		window.scrollTo(0, 0);
 		document.documentElement.scrollTop = 0;
 		document.body.scrollTop = 0;
@@ -14,6 +24,7 @@
 		}
 
 		document.addEventListener('DOMContentLoaded', scrollToTop);
+		window.addEventListener('load', scrollToTop);
 		window.addEventListener('pageshow', function () {
 			scrollToTop();
 			window.requestAnimationFrame(scrollToTop);

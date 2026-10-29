@@ -8,7 +8,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>指道場（FingerDojo） | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -27,7 +27,7 @@
 							<p class="project-genre">タイミング入力型</p>
 							<p class="project-genre">1対1バトル</p>
 						</div>
-						<h2>指道場（FingerDojo）</h2>
+						<h1>指道場（FingerDojo）</h1>
 						<p>Unity製の1対1タイミングバトル。敵の攻撃に合わせるカウンター、タイミングQTEによる指撃、HPを回復する休息を使い分けます。現在は試作段階です。</p>
 					</div>
 				</header>
@@ -37,32 +37,30 @@
 					<a href="#game-overview">ゲーム概要</a>
 					<a href="#commands">コマンドと戦闘</a>
 					<a href="#implementation">技術構成</a>
-					<a href="#project-info">プロジェクト情報</a>
 				</nav>
 
 				<section class="project-at-a-glance" id="project-summary">
 					<h2>作品の要点</h2>
 					<div class="project-highlight-grid fingerdojo-highlights">
 						<article>
-							<h3>担当</h3>
-							<p>チーム開発で、清水日向多がゲーム企画・実装を担当。岩見ほのかさんが全てのデザインを担当しました。</p>
+							<h3>制作体制</h3>
+							<p>チーム制作です。本人の担当範囲と共同制作者の表記は確認中のため、ここでは記載していません。</p>
 						</article>
 						<article>
-							<h3>設計上の課題</h3>
+							<h3>ゲームの特徴</h3>
 							<p>指撃QTE、カウンター、休息を個別の戦闘状態として扱い、敵の行動やダメージ処理と連携させること。</p>
 						</article>
 						<article>
-							<h3>実装した工夫</h3>
+							<h3>コードで確認できる構成</h3>
 							<p>プレイヤーと敵の状態・HPを分け、Command、StateController、CombatCalculatorを通じて入力から戦闘結果を処理します。</p>
 						</article>
-						<article>
-							<h3>モバイル操作を想定</h3>
-							<p>指道場はタッチ操作を前提として設計されており、画面上のボタンで指撃、カウンター、休息を操作します。</p>
-						</article>
 					</div>
+					<p class="tech-next-step"><strong>開発状況:</strong> プロジェクト資料では試作段階とされています。「技」「煽る」のUIはありますが、コマンド処理は未実装です。</p>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/README.md" class="button small"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/README.md" class="button small"
 								target="_blank" rel="noopener noreferrer">GitHub READMEを見る</a></li>
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/tree/d67c1013a0b5d9d0be5c930bf85de006bd72d627" class="button small"
+								target="_blank" rel="noopener noreferrer">調査時点のソースコードを見る</a></li>
 					</ul>
 				</section>
 
@@ -71,15 +69,6 @@
 					<div class="js-video-player"
 						data-video-url="https://drive.google.com/file/d/1LMfXinCZ1BvhaGgafi9iV30i4J2_bIfd/view?usp=sharing">
 					</div>
-				</section>
-				<section id="project-info">
-					<h2>プロジェクト情報</h2>
-					<ul class="alt">
-						<li><strong>ジャンル:</strong> タイミング入力型・1対1バトル</li>
-						<li><strong>開発体制:</strong> チーム開発</li>
-						<li><strong>担当:</strong> ゲーム企画・実装: 清水日向多 / 全てのデザイン: 岩見穂乃香</li>
-						<li><strong>使用技術:</strong> Unity 6000.0.51f1 / Universal Render Pipeline 17.0.4 / Input System 1.14.0 / Cinemachine 3.1.4 / C#</li>
-					</ul>
 				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
@@ -100,14 +89,14 @@
 					<h3>コマンドと戦闘システム</h3>
 					<div class="image featured fingerdojo-cover">
 						<figure>
-							<img src="images/FingerDojo/FingerDojo_Home.png" alt="指道場のタイトル画面。難易度とスキルカスタムの項目が表示されている">
+							<img src="images/FingerDojo/FingerDojo_Home.png" alt="指道場のタイトル画面。難易度とスキルカスタムの項目が表示されている" loading="lazy" decoding="async">
 							<figcaption>タイトル画面 — 難易度選択とスキル(技)カスタムのメニュー。</figcaption>
 						</figure>
 					</div>
 					<div class="fingerdojo-command-list">
 						<article class="fingerdojo-command-card">
 							<figure>
-								<img src="images/FingerDojo/FingerDojo_standby.png" alt="休むボタンを含む戦闘コマンドが表示された基本画面">
+								<img src="images/FingerDojo/FingerDojo_standby.png" alt="休むボタンを含む戦闘コマンドが表示された基本画面" loading="lazy" decoding="async">
 								<figcaption>基本画面 — 右側の緑色の「休む」ボタン。</figcaption>
 							</figure>
 							<div>
@@ -120,11 +109,6 @@
 							</div>
 						</article>
 						<article class="fingerdojo-command-card">
-							<figure>
-								<img src="images/FingerDojo/FingerDojo_standby.png"
-									alt="指撃ボタン、プレイヤーと敵のHP、コマンドが表示された戦闘画面">
-								<figcaption>戦闘画面 — 中央より下に赤い「指撃」ボタンとその他のコマンドを表示。</figcaption>
-							</figure>
 							<div>
 								<h4>指撃</h4>
 								<ul>
@@ -137,7 +121,7 @@
 						<article class="fingerdojo-command-card">
 							<figure>
 								<img src="images/FingerDojo/FingerDojo_playerCounter.png"
-									alt="カウンター成功時、COUNTERと反撃ダメージ25が表示された戦闘画面">
+									alt="カウンター成功時、COUNTERと反撃ダメージ25が表示された戦闘画面" loading="lazy" decoding="async">
 								<figcaption>カウンター成功 — COUNTER表示と反撃ダメージ「25」。</figcaption>
 							</figure>
 							<div>
@@ -153,7 +137,7 @@
 						<article class="fingerdojo-command-card">
 							<figure>
 								<img src="images/FingerDojo/FingerDojo_playerBreaked.png"
-									alt="COUNTERの演出、判定ゲージ、カウント表示がある戦闘画面">
+									alt="COUNTERの演出、判定ゲージ、カウント表示がある戦闘画面" loading="lazy" decoding="async">
 								<figcaption>BreakeカウントはPlayerはHPバーの上に、敵はHPバーの横に表示。</figcaption>
 							</figure>
 							<div>
@@ -167,7 +151,7 @@
 						</article>
 						<article class="fingerdojo-command-card">
 							<figure>
-								<img src="images/FingerDojo/FingerDojo_enemyHealing.png" alt="敵側に緑色の回復エフェクトが表示された戦闘画面">
+								<img src="images/FingerDojo/FingerDojo_enemyHealing.png" alt="敵側に緑色の回復エフェクトが表示された戦闘画面" loading="lazy" decoding="async">
 								<figcaption>敵の回復行動 — 緑色の回復エフェクト。</figcaption>
 							</figure>
 							<div>
@@ -208,15 +192,15 @@
 						</div>
 					</div>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/CurrentProjectSpecification.md"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/Docs/CurrentProjectSpecification.md"
 								class="button small" target="_blank" rel="noopener noreferrer">現状総合仕様書</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/Architecture.md"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/Docs/Architecture.md"
 								class="button small" target="_blank" rel="noopener noreferrer">アーキテクチャ概要</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/GameplaySpec.md"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/Docs/GameplaySpec.md"
 								class="button small" target="_blank" rel="noopener noreferrer">ゲームプレイ仕様（現状）</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStructure.md"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/Docs/ImplementationStructure.md"
 								class="button small" target="_blank" rel="noopener noreferrer">実装構造・コード解説</a></li>
-						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/main/Docs/ImplementationStatus.md"
+						<li><a href="https://github.com/HinataPiyo/FingerDojo/blob/d67c1013a0b5d9d0be5c930bf85de006bd72d627/Docs/ImplementationStatus.md"
 								class="button small" target="_blank" rel="noopener noreferrer">機能・実装状況</a></li>
 					</ul>
 				</section>
@@ -228,10 +212,10 @@
 
 			<!-- Intro -->
 			<section id="intro">
-				<a href="#" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="ポートフォリオのトップページ" /></a>
 				<header>
 					<h2>Game Portfolio</h2>
-					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+					<p>Unity / C#の制作作品と実装例を紹介しています。</p>
 				</header>
 			</section>
 
@@ -241,37 +225,33 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="algomate.html">Algomate Colony</a></h3>
-							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
-							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+							<a href="algomate.html" class="author"><img src="images/AlgomateColony_Logo.png" alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 						</header>
-							<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"alt="" /></a>
+							<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png" alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
-							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+							<a href="kaomoji.html" class="author"><img src="images/KaomojiClash_Logo.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png" alt="" /></a>
+						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
-							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+							<a href="bombcrash.html" class="author"><img src="images/BombCrash_Logo.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png" alt="" /></a>
+						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
-							<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
-							<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+							<a href="fingerdojo.html" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 					</article>
 				</div>
 			</section>

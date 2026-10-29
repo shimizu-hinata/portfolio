@@ -8,7 +8,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>AlgomateColony（アルゴメイトコロニー） | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -31,7 +31,7 @@
 							<p class="project-genre">コマンド入力</p>
 							<p class="project-genre">拠点運営シミュレーション</p>
 						</div>
-						<h2><a href="#">AlgomateColony</a></h2>
+						<h1>AlgomateColony</h1>
 						<p>プレイヤーがロボット「アルゴメイト」にコマンドを与え、資源を集めて拠点を発展させるシミュレーションゲームです。Move・Gather・Depositを組み合わせ、直接操作ではなく作業手順を組み立てます。</p>
 					</div>
 				</header>
@@ -52,8 +52,8 @@
 							<p>資源の採集・運搬をコマンドでつなぎ、ロボットの作業手順を考えて拠点を成長させます。</p>
 						</article>
 						<article>
-							<h3>チームでの担当</h3>
-							<p>清水日向多が企画・プログラミング、田島侑來がデザインを担当しました。</p>
+							<h3>制作体制</h3>
+							<p>チーム制作です。本人の担当範囲は確認中のため、機能の実装者を断定していません。</p>
 						</article>
 						<article>
 							<h3>技術上の見どころ</h3>
@@ -61,26 +61,14 @@
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
-						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">実行ファイルを見る</a></li>
 					</ul>
 				</section>
 				<div class="image featured">
 					<h3>紹介動画</h3>
 					<div class="js-video-player" data-video-url="https://www.youtube.com/embed/RtqT31HnvDc"></div>
 				</div>
-				<section>
-					<h3>プロジェクト情報</h3>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> PC </li>
-						<li><strong>ジャンル:</strong> コマンド入力 / 拠点運営シミュレーション</li>
-						<li><strong>開発期間:</strong> 2024/12 - 2025/02 (上旬)</li>
-						<li><strong>開発体制・担当:</strong> チーム開発。清水日向多: 企画・プログラミング / 田島侑來: デザイン</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.23f1) / C# / Git Bash / GitHub</li>
-					</ul>
-				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
 					<p>アルゴメイトを選び、複数行の命令を入力して資源の採集・運搬を指示します。プレイヤーがキャラクターを直接動かすのではなく、作業の順序を考え、実行される様子を見守るゲームです。</p>
@@ -105,7 +93,7 @@
 					<div class="algomate-screenshot-feature">
 						<figure class="algomate-screenshot-card algomate-screenshot-main">
 							<img src="images/AlgomateColony/AlgomateColony_CommandEditor.png"
-								alt="ロボットのステータスとMove、Gather、Depositを入力したコマンドエディタ">
+								alt="ロボットのステータスとMove、Gather、Depositを入力したコマンドエディタ" loading="lazy" decoding="async">
 							<figcaption><strong>コマンドエディタ</strong> ロボットの状態を見ながら、移動・採集・格納の手順をまとめて入力します。</figcaption>
 						</figure>
 						<div class="algomate-screenshot-intro">
@@ -119,17 +107,17 @@
 					<div class="algomate-command-grid">
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Move.png"
-								alt="Moveコマンドの説明と使用できるオブジェクト一覧">
+								alt="Moveコマンドの説明と使用できるオブジェクト一覧" loading="lazy" decoding="async">
 							<figcaption><strong>Move — 移動</strong> location、warehouse、rock、tree、ironOreなどを移動先に指定します。</figcaption>
 						</figure>
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Gather.png"
-								alt="Gatherコマンドの説明と採集できるオブジェクト一覧">
+								alt="Gatherコマンドの説明と採集できるオブジェクト一覧" loading="lazy" decoding="async">
 							<figcaption><strong>Gather — 採集</strong> 対象へ移動したあと、rock、tree、ironOreなどを採集します。</figcaption>
 						</figure>
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Deposit.png"
-								alt="Depositコマンドの説明と資源を倉庫へ預ける操作">
+								alt="Depositコマンドの説明と資源を倉庫へ預ける操作" loading="lazy" decoding="async">
 							<figcaption><strong>Deposit — 格納</strong> 素材名と数量を指定します。倉庫名を引数にするのではなく、近くの倉庫を検索します。</figcaption>
 						</figure>
 					</div>
@@ -137,17 +125,17 @@
 					<div class="algomate-outcome-grid">
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Success.png"
-								alt="Move、Gather、Depositのコマンド入力が成功した表示">
+								alt="Move、Gather、Depositのコマンド入力が成功した表示" loading="lazy" decoding="async">
 							<figcaption><strong>成功表示の例</strong> 画面上にコマンドの成功表示が出ているケースです。</figcaption>
 						</figure>
 						<figure class="algomate-screenshot-card">
 							<img src="images/AlgomateColony/AlgomateColony_Command_Error.png"
-								alt="無効な資源名を使ったDepositコマンドが失敗した表示">
+								alt="無効な資源名を使ったDepositコマンドが失敗した表示" loading="lazy" decoding="async">
 							<figcaption><strong>失敗表示の例</strong> 無効な資源名を指定した入力が失敗として表示されています。</figcaption>
 						</figure>
 						<figure class="algomate-screenshot-card algomate-screenshot-location">
 							<img src="images/AlgomateColony/AlgomateColony_Open_Location Panel.png"
-								alt="拠点パネルにレベルアップに必要な石、木材、鉄鉱石の数が表示された画面">
+								alt="拠点パネルにレベルアップに必要な石、木材、鉄鉱石の数が表示された画面" loading="lazy" decoding="async">
 							<figcaption><strong>拠点パネル</strong> レベルアップに必要な素材と在庫数を確認する画面です。</figcaption>
 						</figure>
 					</div>
@@ -157,7 +145,7 @@
 						<div class="algomate-tutorial-grid">
 							<figure class="algomate-tutorial-visual">
 								<img src="images/AlgomateColony/AlgomateColony_Tutorial_CustomPicture.png"
-									alt="Unity InspectorでTutorialSOの終了・初期化フラグと、チュートリアルタスクおよびサブタスクを設定している画面">
+									alt="Unity InspectorでTutorialSOの終了・初期化フラグと、チュートリアルタスクおよびサブタスクを設定している画面" loading="lazy" decoding="async">
 								<figcaption>
 									<strong>UNITY EDITOR / TUTORIALSO</strong>
 									案内の内容をタスクデータで構成。TutorialSOで進行フラグと大・小タスクの説明文を設定します。
@@ -165,7 +153,7 @@
 							</figure>
 							<figure class="algomate-tutorial-visual">
 								<img src="images/AlgomateColony/AlgomateColony_Tutorial01.png"
-									alt="アルゴメイトを拠点へ移動させる目標と、アルゴメイトをクリックする案内が表示されたチュートリアル画面">
+									alt="アルゴメイトを拠点へ移動させる目標と、アルゴメイトをクリックする案内が表示されたチュートリアル画面" loading="lazy" decoding="async">
 								<figcaption>
 									<strong>IN GAME / TUTORIAL</strong>
 									目標と次の操作を画面で案内。「アルゴメイトを拠点に移動させる」という目標と、クリック操作を表示します。
@@ -230,25 +218,25 @@
 					<p>利用できる基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエストや交易、新しいコマンドの研究は今後の要素として資料に記載されています。</p>
 					<h4>GitHubの技術資料</h4>
 					<ul class="algomate-doc-links">
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">現行ゲーム仕様（コード照合版）</a></li>
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/ImplementationStatus.md" target="_blank" rel="noopener noreferrer">機能別の実装状況</a></li>
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Documentation/FutureRoadmap.md" target="_blank" rel="noopener noreferrer">将来構想とロードマップ案</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">現行ゲーム仕様（コード照合版）</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/ImplementationStatus.md" target="_blank" rel="noopener noreferrer">機能別の実装状況</a></li>
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/FutureRoadmap.md" target="_blank" rel="noopener noreferrer">将来構想とロードマップ案</a></li>
 					</ul>
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
 					<h3>実装のポイント：コマンド実行とロボット移動</h3>
-					<p class="tech-lead">チーム開発で、本人はゲーム企画・プログラミングを担当。ロボットへの命令入力、逐次実行、移動処理を以下の構成で実装しています。</p>
+					<p class="tech-lead">公開リポジトリのコードでは、ロボットへの命令入力を検証し、順番に実行して移動・採集・格納へつなぐ処理を確認できます。チーム内での本人担当範囲は確認中です。</p>
 					<div class="implementation-grid">
 						<article id="command-execution">
 							<h4>入力した命令を検証して実行する</h4>
 							<p><strong>Move・Gather・Depositの入力と対象を検証</strong>するCommandHandlerは、Resources内のJSONから指定できる対象一覧を読み込みます。RobotCommandExecuteは各命令の終了を待ってから次の行へ進め、移動・採集・格納をロボットの状態遷移につなぎます。</p>
-							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Command/CommandHandler.cs" target="_blank" rel="noopener noreferrer">命令の検証</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotCommandExecute.cs" target="_blank" rel="noopener noreferrer">命令の実行</a></p>
+							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Command/CommandHandler.cs" target="_blank" rel="noopener noreferrer">命令の検証</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/RobotCommandExecute.cs" target="_blank" rel="noopener noreferrer">命令の実行</a></p>
 						</article>
 						<article id="robot-navigation">
 							<h4>WaypointとRaycastで移動する</h4>
-							<p><strong>始点と目的地の間にWaypointを生成</strong>するPathfindingSystemと、経路点をたどるRobotMovementで移動します。障害物はRaycastで検知し、回避方向を選びます。</p>
-							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/PathfindingSystem.cs" target="_blank" rel="noopener noreferrer">Waypoint生成</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/main/Assets/Scripts/Robot/RobotMovement.cs" target="_blank" rel="noopener noreferrer">ロボット移動</a></p>
+							<p><strong>始点と目的地を直線補間したWaypointを生成</strong>し、RobotMovementが経由点へ移動します。障害物はRaycastで検知し、局所的な回避方向を選びます。A*などの経路探索としては説明していません。</p>
+							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/PathfindingSystem.cs" target="_blank" rel="noopener noreferrer">Waypoint生成</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/RobotMovement.cs" target="_blank" rel="noopener noreferrer">ロボット移動</a></p>
 						</article>
 					</div>
 					<figure class="tech-code">
@@ -260,25 +248,13 @@
 }</code></pre>
 					</figure>
 					<p class="tech-next-step"><strong>今後の改善候補:</strong> 命令文字列を検証・実行間で共通の形式にし、入力エラーを扱いやすくすること。現在の経路は直線補間と局所回避の組み合わせのため、複雑な障害物配置に対応する経路探索も検討できます。</p>
-					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/AlgomateColony" target="_blank" rel="noopener noreferrer">AlgomateColony のソースコードとREADMEを見る</a></p>
-				</section>
-				<section>
-					<h3>ストーリー設定</h3>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle" aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<div class="js-story-content" hidden>
-						<p>荒廃した惑星に降り立ったあなたは、稼働限界が近いロボットたちを再起動し、失われた文明の技術を集めながら新たな拠点を築きます。
-							<br>しかし、惑星の環境は過酷で、資源もエネルギーも不足気味です。限られた命令をどう組み合わせるかで、コロニーの未来は大きく変わります。
-							<br>研究を進めるごとにロボットは賢くなり、単純作業だった運営はやがて巨大な自動化システムへと進化していきます。</p>
-					</div>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" target="_blank" rel="noopener noreferrer">調査時点のソースとREADMEを見る</a></p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/AlgomateColony" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" class="button small" target="_blank"
 								rel="noopener noreferrer">GitHub（README・技術資料）</a></li>
-						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link" class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（Google Drive）</a></li>
 					</ul>
 				</section>
 				<footer>
@@ -295,10 +271,10 @@
 
 			<!-- Intro -->
 			<section id="intro">
-				<a href="#" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="ポートフォリオのトップページ" /></a>
 				<header>
 					<h2>Game Portfolio</h2>
-					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+					<p>Unity / C#の制作作品と実装例を紹介しています。</p>
 				</header>
 			</section>
 
@@ -310,40 +286,36 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="algomate.html">AlgomateColony</a></h3>
-							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
-							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+							<a href="algomate.html" class="author"><img src="images/AlgomateColony_Logo.png" alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"
-								alt="" /></a>
+								alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
-							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+							<a href="kaomoji.html" class="author"><img src="images/KaomojiClash_Logo.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png"
-								alt="" /></a>
+								alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
-							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+							<a href="bombcrash.html" class="author"><img src="images/BombCrash_Logo.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png"
-								alt="" /></a>
+								alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
-							<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
-							<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+							<a href="fingerdojo.html" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 					</article>
 				</div>
 			</section>

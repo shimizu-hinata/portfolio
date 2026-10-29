@@ -8,12 +8,12 @@
 
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Kaomoji Clash | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
-<body class="is-preload">
+<body class="is-preload kaomoji-detail">
 
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -32,134 +32,74 @@
 							<p class="project-genre">ビルド</p>
 							<p class="project-genre">衝突アクション</p>
 						</div>
-						<h2><a href="#">Kaomoji Clash</a></h2>
-						<p>自分で顔文字を組み立て、アリーナで敵と激突させるトップダウン型アクションゲームです。
-							<br>記号の組み合わせによるビルドと、アリーナオブジェクトを使った戦略を楽しめます。
-						</p>
+						<h1>Kaomoji Clash</h1>
+						<p>顔文字の記号パーツを組み合わせてビルドを作り、アリーナで敵と戦うトップダウン型アクションゲームです。</p>
 					</div>
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
-					<a href="#project-summary">作品の要点</a>
+					<a href="#gameplay">紹介動画</a>
 					<a href="#game-overview">ゲーム概要</a>
-					<a href="#design-flow">設計・処理フロー</a>
-					<a href="#implementation">実装例</a>
-					<a href="#tech-deep-dive">技術解説</a>
-					<a href="#project-links">ソース・実行ファイル</a>
+					<a href="#build-flow">ビルドの処理</a>
+					<a href="#implementation">コード解説</a>
+					<a href="#project-links">ソースコード</a>
 				</nav>
 				<section class="project-at-a-glance" id="project-summary">
-					<h2>作品の要点</h2>
+					<h2>作品と担当</h2>
 					<div class="project-highlight-grid">
 						<article>
 							<h3>担当</h3>
-							<p>個人開発として企画・プログラミングを担当。</p>
+							<p>個人制作。企画・プログラミングを担当。</p>
 						</article>
 						<article>
-							<h3>ビルドとステータス</h3>
-							<p>記号パーツのスキルタグを集計し、スタック数に応じた補正をステータスに反映。</p>
+							<h3>ゲームの特徴</h3>
+							<p>顔文字の記号パーツを組み替えてビルドを作り、アリーナで敵と戦うアクションゲーム。</p>
 						</article>
 						<article>
-							<h3>データ作成</h3>
-							<p>ScriptableObjectとカスタムエディタを使った、エリア・記号・敵データの作成手順を掲載。</p>
+							<h3>技術紹介</h3>
+							<p>パーツのタグを集計し、スタック数に応じたステータス補正を適用する処理。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash/tree/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコードを見る</a></li>
-						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">Windows版</a></li>
-						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">Android版</a></li>
 					</ul>
 				</section>
-				<div class="image featured">
-					<h2>紹介動画</h2>
-					<div class="js-video-player"data-video-url="https://www.youtube.com/embed/3Ye79Ocqmjk"></div>
-				</div>
-				<section>
-					<h2>プロジェクト情報</h2>
-					<ul class="alt">
-						<li><strong>プラットフォーム:</strong> Android / PC</li>
-						<li><strong>ジャンル:</strong> 顔文字 / ビルド / アクション</li>
-						<li><strong>開発期間:</strong> 2026/01 - 2026/02 (上旬)</li>
-						<li><strong>開発体制:</strong> 個人開発</li>
-						<li><strong>使用技術:</strong> Unity (6000.0.51f1) / C# / Git Bash / GitHub / GitHub Copilot</li>
-					</ul>
+				<section id="gameplay">
+					<h2>ゲーム紹介</h2>
+					<div class="image featured">
+						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/3Ye79Ocqmjk"></div>
+					</div>
+					<p><a href="https://www.youtube.com/watch?v=3Ye79Ocqmjk" target="_blank"
+							rel="noopener noreferrer">動画が表示されない場合はYouTubeで見る</a></p>
 				</section>
 				<section id="game-overview">
 					<h2>ゲーム概要</h2>
-					<p>KaomojiClash は、<strong>プレイヤーが独自の顔文字をビルドし、アリーナで敵と激突させるトップダウン型アクションゲーム。</strong></p>
+					<p><strong>Kaomoji Clash</strong> は、顔文字の記号パーツを組み合わせてビルドを作り、アリーナで敵と戦うトップダウン型アクションゲームです。</p>
 					<ul>
-						<li>強さはキャラクターレベルではなく、記号パーツの構成（ビルド） によって決まる。</li>
-						<li>プレイヤーは顔文字を引っ張って発射し、敵に衝突させることでダメージを与えられる。</li>
-						<li>記号ごとに異なるステータスやスキルが設定されており、戦略的な組み合わせが求められる。</li>
-						<li>戦闘は隔てられたアリーナ内で行い、Waveごとに敵の出現が行われる。</li>
-						<li>戦闘終了後、記号を収集することができ、収集した記号パーツを組み替えることで戦略的な深みが生まれる。</li>
+						<li>記号パーツの構成がキャラクターのステータスに反映されます。</li>
+						<li>顔文字を引っ張って発射し、敵にぶつけて攻撃します。</li>
+						<li>戦闘で集めた記号パーツを組み替え、次の挑戦に向けてビルドを再構成します。</li>
 					</ul>
 				</section>
-				<section class="design-flow-section" id="design-flow">
-					<h2>ゲーム設計・処理フロー</h2>
-					<p>記号を集めてビルドを組み替え、次のアリーナに挑むゲームループと、ゲームデータを作成して利用するまでの流れです。</p>
+				<section class="design-flow-section" id="build-flow">
+					<h2>パーツからステータスまで</h2>
+					<p>公開ソースの関連クラスをたどると、顔文字データからタグを集計し、タグとパーツの補正を反映する流れになっています。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
-							<h4>ゲームプレイの基本ループ</h4>
-							<ol class="design-flow-steps">
-								<li><strong>アリーナに挑戦</strong><span>構成した顔文字で戦闘を開始</span></li>
-								<li><strong>敵と戦う</strong><span>顔文字を発射し、敵にぶつけて攻撃</span></li>
-								<li><strong>記号を集める</strong><span>戦闘後に新しいパーツを獲得</span></li>
-								<li><strong>ビルドを再構成</strong><span>記号を組み替えて次の戦闘に備える</span></li>
-							</ol>
-						</div>
-						<div class="design-flow-card">
-							<h4>ゲームデータの作成・利用</h4>
+							<h3>顔文字ビルドの処理</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>エディタで作成</strong><span>カスタムエディタで記号や敵などのデータを編集</span></li>
-								<li><strong>データとして管理</strong><span>ScriptableObjectに設定を保存</span></li>
-								<li><strong>ゲーム内で利用</strong><span>ビルド構成と成長値を合成して実ステータスを算出</span></li>
+								<li><strong>顔文字を初期化</strong><span>PlayerApplyKaomojiが表示と関連処理を初期化</span></li>
+								<li><strong>タグを集計</strong><span>PlayerUpgradeServiceがタグを集計し、条件タグを分けて最大5スタックで記録</span></li>
+								<li><strong>補正を適用</strong><span>タグの補正を反映した後、パーツ由来の補正を適用</span></li>
 							</ol>
 						</div>
 					</div>
 				</section>
-				<section id="implementation">
-					<h2>Unity Editorでのデータ作成</h2>
-					<p>カスタムエディタを使ったエリア・記号・敵データの作成手順を動画で紹介します。ゲーム内でのビルド構成とステータス計算は、<a href="#tech-deep-dive">実装のポイント</a>をご覧ください。</p>
-					<div class="image featured custom-editor-demos">
-						<div class="custom-editor-demo">
-							<h4>エリアデータの作成</h4>
-							<div class="js-video-player"
-								data-video-url="movies/エリアデータ作成.mp4">
-							</div>
-						</div>
-						<div class="custom-editor-demo">
-							<h4>記号データの作成</h4>
-							<div class="js-video-player"
-								data-video-url="movies/記号データ作成.mp4">
-							</div>
-						</div>
-						<div class="custom-editor-demo">
-							<h4>敵データの作成</h4>
-							<div class="js-video-player"
-								data-video-url="movies/敵データ作成.mp4">
-							</div>
-						</div>
-					</div>
-				</section>
-				<section class="tech-deep-dive" id="tech-deep-dive">
-					<h2>実装のポイント：顔文字ビルドとステータス計算</h2>
-					<p class="tech-lead">個人制作として企画・プログラミングを担当。顔文字を構成する記号パーツのスキルタグを集計し、ビルド内容からプレイヤーのステータスを計算します。</p>
-					<div class="implementation-grid">
-						<article>
-							<h4>パーツのタグを集計する</h4>
-							<p><strong>各パーツのタグを集計し、同じタグをスタックとして記録</strong>します。PlayerUpgradeServiceは条件付きタグを通常のステータス補正とは分けて管理します。</p>
-							<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/Player/PlayerUpgradeService.cs" target="_blank" rel="noopener noreferrer">PlayerUpgradeService.csを見る</a></p>
-						</article>
-						<article>
-							<h4>タグとパーツの効果を反映する</h4>
-							<p>タグの補正を<strong>乗算してから加算</strong>し、その後にパーツ固有の補正を反映します。顔文字の表示、コライダー幅の設定、アップグレード処理の初期化はPlayerApplyKaomojiがつなぎます。</p>
-							<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/ScriptableObject/KaomojiSkill/UpgradeDefinition.cs" target="_blank" rel="noopener noreferrer">SkillTagの補正定義</a> · <a href="https://github.com/HinataPiyo/KaomojiClash/blob/main/Assets/Scripts/Player/PlayerApplyKaomoji.cs" target="_blank" rel="noopener noreferrer">プレイヤー初期化</a></p>
-						</article>
-					</div>
+				<section class="tech-deep-dive" id="implementation">
+					<h2>タグ補正を適用するコード</h2>
+					<p class="tech-lead">SkillTag.StatusModifier.ApplyModifierでは、基礎値に乗算補正を適用してから加算補正を加えます。ソース上では、その後にPlayerUpgradeServiceがパーツ由来の補正を反映します。</p>
 					<figure class="tech-code">
-						<figcaption>タグのステータス補正を適用する順序（SkillTag.StatusModifier）</figcaption>
+						<figcaption>SkillTag.StatusModifier.ApplyModifier（Kaomoji Clashのソースコードより）</figcaption>
 						<pre><code>public float ApplyModifier(float baseValue)
 {
     float modifiedValue = ApplyMultiplication(baseValue);
@@ -167,87 +107,26 @@
     return modifiedValue;
 }</code></pre>
 					</figure>
-					<p class="tech-next-step"><strong>今後の改善候補:</strong> タグの集計処理を共通化し、最大スタック数の設定を一元管理すること。スタック数と補正データの対応を検証する自動テストも追加できます。</p>
-					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/KaomojiClash" target="_blank" rel="noopener noreferrer">Kaomoji Clash のソースコードとREADMEを見る</a></p>
-				</section>
-				<section>
-					<ul class="actions">
-						<li><button type="button" class="button small js-story-toggle"
-								aria-expanded="false">ストーリーを表示</button></li>
-					</ul>
-					<div class="js-story-content" hidden>
-						<h2>Story</h2>
-						<h4>Story Overview</h4>
-						<p>KaomojiClashの世界では、顔文字が一つの生命体として存在しています。
-							<br><br>もともと顔文字は、人間が感情を表現するために生み出した記号でした。
-							しかし長い時間の中で、無数の感情が込められたことで、
-							その記号たちは次第に「意味」だけでなく「意識」を持つ存在へと変化していきました。
-							<br><br>こうして、顔文字たちは独自の文明を築き始めます。
-						</p>
-						<hr />
-						<h4>Kaomoji Civilization</h4>
-						<p>顔文字は「目」「口」「装飾」などの記号によって構成されています。
-							<br><br>その構成は単なる見た目ではなく、
-							そのまま顔文字の能力や個性として現れます。
-							<br><br>構成が複雑で完成度の高い顔文字ほど、
-							強く、美しく、完成された存在とされます。
-							<br><br>やがて顔文字たちは、異なる文化圏を形成していきました。
-						</p>
-						<p>文化圏ごとに</p>
-						<ul>
-							<li>顔文字の構造</li>
-							<li>戦い方</li>
-							<li>強さの基準</li>
-						</ul>
-						<p>が異なり、文明が発展するほど
-							より高度な顔文字が生まれていきます。</p>
-						<hr />
-						<h4>The Player</h4>
-						<p>プレイヤーは、まだ未完成の顔文字です。
-							<br><br>しかしプレイヤーには特別な能力があります。
-							<br><br>それは、戦いの中で他の顔文字の記号を取り込み、
-							自分の構造を再構成できる能力です。
-							<br><br>この力によってプレイヤーは、
-							戦うたびに自分の顔文字を変化させ、
-							より強い存在へと進化していきます。
-						</p>
-						<hr />
-						<h4>Purpose</h4>
-						<p>顔文字文明では、
-							強い構成を持つことが「完成された存在」である証とされています。</p>
-						<p>プレイヤーは様々な文化圏へ挑戦しながら、</p>
-						<ul>
-							<li>新しい記号を集め</li>
-							<li>自分の顔文字を再構成し</li>
-							<li>より高度な文明へと進んでいきます。</li>
-						</ul>
-						<p>そして最終的には、
-							最も完成された顔文字へと到達することを目指します。</p>
-						<hr />
-						<h4>Theme</h4>
-						<p>KaomojiClashは、
-							<br><br>「人間が作った記号が、自ら進化していく世界」
-							<br><br>をテーマにしたゲームです。
-							<br><br>プレイヤーは戦いを通して構造を変化させ、
-							唯一無二の顔文字を完成させていきます。
-						</p>
-					</div>
+					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerUpgradeService.cs#L47-L197"
+							target="_blank" rel="noopener noreferrer">タグの集計と補正を行う PlayerUpgradeService.cs を見る</a></p>
+					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/ScriptableObject/KaomojiSkill/UpgradeDefinition.cs#L37-L79"
+							target="_blank" rel="noopener noreferrer">補正値を定義する UpgradeDefinition.cs を見る</a></p>
+					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerApplyKaomoji.cs#L15-L33"
+							target="_blank" rel="noopener noreferrer">顔文字と関連処理を初期化する PlayerApplyKaomoji.cs を見る</a></p>
+					<p class="tech-next-step"><strong>次に検討できること:</strong> タグの最大スタック数と補正データの対応を自動テストで確認する。</p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>
 					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/KaomojiClash" class="button small" target="_blank"
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash/tree/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868" class="button small" target="_blank"
 								rel="noopener noreferrer">GitHub</a></li>
-						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.exe）</a></li>
-						<li><a href="https://drive.google.com/file/d/1-VPgL-ipMn2hWEqfSBidXNOh1_pamVB_/view?usp=drive_link"
-								class="button small" target="_blank" rel="noopener noreferrer">実行ファイル（.apk）</a></li>
 					</ul>
 				</section>
 				<footer>
 					<ul class="stats">
 						<li>Unity</li>
-						<li>Personal Development</li>
+						<li>C#</li>
+						<li>個人制作</li>
 					</ul>
 				</footer>
 			</article>
@@ -258,10 +137,10 @@
 
 			<!-- Intro -->
 			<section id="intro">
-				<a href="#" class="logo"><img src="images/Hiyoko_icon.png" alt="" /></a>
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="ポートフォリオのトップページ" /></a>
 				<header>
 					<h2>Game Portfolio</h2>
-					<p>今までに制作したゲームをまとめる自身のサイトです。</p>
+					<p>Unity / C#の制作作品と実装例を紹介しています。</p>
 				</header>
 			</section>
 
@@ -273,38 +152,34 @@
 					<article class="mini-post">
 						<header>
 							<h3><a href="algomate.html">Algomate Colony</a></h3>
-							<time class="published" datetime="2024-12-1">開発期間:24/12~25/02</time>
-							<a href="#" class="author"><img src="images/AlgomateColony_Logo.png" alt="" /></a>
+							<a href="algomate.html" class="author"><img src="images/AlgomateColony_Logo.png" alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 						</header>
 						<a href="algomate.html" class="image"><img src="images/AlgomateColony_Thumbnail.png"
-								alt="" /></a>
+								alt="Algomate Colonyのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="kaomoji.html">Kaomoji Clash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:26/01~26/02</time>
-							<a href="#" class="author"><img src="images/KaomojiClash_Logo.png" alt="" /></a>
+							<a href="kaomoji.html" class="author"><img src="images/KaomojiClash_Logo.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png" alt="" /></a>
+						<a href="kaomoji.html" class="image"><img src="images/KaomojiClash_Thumbnail.png" alt="Kaomoji Clashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="bombcrash.html">Bomb Crash</a></h3>
-							<time class="published" datetime="2026-02-1">開発期間:25/02~25/06</time>
-							<a href="#" class="author"><img src="images/BombCrash_Logo.png" alt="" /></a>
+							<a href="bombcrash.html" class="author"><img src="images/BombCrash_Logo.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png" alt="" /></a>
+						<a href="bombcrash.html" class="image"><img src="images/BombCrash_Thumbnail.png" alt="Bomb Crashのページ" loading="lazy" decoding="async" /></a>
 					</article>
 
 					<article class="mini-post">
 						<header>
 							<h3><a href="fingerdojo.html">Finger Dojo</a></h3>
-							<time class="published" datetime="25/06~25/07">開発期間:25/06~25/07</time>
-							<a href="#" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+							<a href="fingerdojo.html" class="author"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 						</header>
-						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="" /></a>
+						<a href="fingerdojo.html" class="image"><img src="images/FingerDojo/FingerDojo_Thumbnail.png" alt="指道場のページ" loading="lazy" decoding="async" /></a>
 					</article>
 				</div>
 			</section>
