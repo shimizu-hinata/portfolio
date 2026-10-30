@@ -83,21 +83,21 @@
 				</section>
 				<section class="design-flow-section" id="build-flow">
 					<h2>パーツからステータスまで</h2>
-					<p>公開ソースの関連クラスをたどると、顔文字データからタグを集計し、タグとパーツの補正を反映する流れになっています。</p>
+					<p>顔文字パーツのタグを集計し、タグごとの補正を適用した後、パーツ固有の補正を加えます。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
 							<h3>顔文字ビルドの処理</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
 								<li><strong>顔文字を初期化</strong><span>PlayerApplyKaomojiが表示と関連処理を初期化</span></li>
 								<li><strong>タグを集計</strong><span>PlayerUpgradeServiceがタグを集計し、条件タグを分けて最大5スタックで記録</span></li>
-								<li><strong>補正を適用</strong><span>タグの補正を反映した後、パーツ由来の補正を適用</span></li>
+								<li><strong>補正を適用</strong><span>タグの補正後にパーツ由来の補正を加え、PlayerUpgradeService.UpgradedStatusに計算結果を保存</span></li>
 							</ol>
 						</div>
 					</div>
 				</section>
 				<section class="tech-deep-dive" id="implementation">
 					<h2>タグ補正を適用するコード</h2>
-					<p class="tech-lead">SkillTag.StatusModifier.ApplyModifierでは、基礎値に乗算補正を適用してから加算補正を加えます。ソース上では、その後にPlayerUpgradeServiceがパーツ由来の補正を反映します。</p>
+					<p class="tech-lead">タグごとの補正は、基礎ステータスに乗算補正を適用してから加算補正を加えます。その後、PlayerUpgradeServiceが顔文字パーツ由来の補正を反映します。</p>
 					<figure class="tech-code">
 						<figcaption>SkillTag.StatusModifier.ApplyModifier（Kaomoji Clashのソースコードより）</figcaption>
 						<pre><code>public float ApplyModifier(float baseValue)
@@ -113,7 +113,6 @@
 							target="_blank" rel="noopener noreferrer">補正値を定義する UpgradeDefinition.cs を見る</a></p>
 					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerApplyKaomoji.cs#L15-L33"
 							target="_blank" rel="noopener noreferrer">顔文字と関連処理を初期化する PlayerApplyKaomoji.cs を見る</a></p>
-					<p class="tech-next-step"><strong>次に検討できること:</strong> タグの最大スタック数と補正データの対応を自動テストで確認する。</p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>

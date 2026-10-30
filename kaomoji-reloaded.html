@@ -31,16 +31,14 @@
 							<p class="project-genre">ウェーブ制</p>
 						</div>
 						<h1>Kaomoji Clash / Reloaded</h1>
-						<p>顔文字をドラッグして発射し、敵との衝突でWaveを進める2D物理アクションゲームです。
-							<br><strong>README記載では制作途中です。以下は公開リポジトリの調査時点のコードと資料から整理しています。</strong>
-						</p>
+						<p>制作中の2Dアクションゲームです。顔文字をドラッグして発射し、敵との物理衝突やWave進行を組み合わせています。</p>
 					</div>
 				</header>
 
 				<nav class="project-toc" aria-label="Reloaded紹介ページの目次">
 					<a href="#reloaded-overview">ゲーム概要</a>
 					<a href="#reloaded-comparison">初版との比較</a>
-					<a href="#reloaded-code">コードの構成</a>
+					<a href="#reloaded-code">実装の流れ</a>
 					<a href="#reloaded-status">開発状況</a>
 					<a href="#reloaded-links">関連リンク</a>
 				</nav>
@@ -49,77 +47,74 @@
 					<h2>Reloaded の概要</h2>
 					<div class="project-highlight-grid">
 						<article>
-							<h3>操作と戦闘</h3>
-							<p>マウスで引っ張った方向と反対へ顔文字を発射。敵との衝突速度をもとにダメージを判定します。</p>
+							<h3>ドラッグ射出</h3>
+							<p>ドラッグ方向と距離を使って発射力を計算し、顔文字を飛ばします。</p>
 						</article>
 						<article>
-							<h3>ウェーブと成長</h3>
-							<p>敵を倒して経験値を獲得。レベルアップ時にアリーナオブジェクトを選択・強化します。</p>
+							<h3>衝突とWave</h3>
+							<p>衝突時の速度を使ったダメージ判定と、BattleStateによるWave進行を扱います。</p>
 						</article>
 						<article>
-							<h3>開発状況</h3>
-							<p>制作途中（README記載）。Unity Editorでのプレイ・ビルド状況は確認できていません。</p>
+							<h3>Waveと成長</h3>
+							<p>敵の撃破経験値によるレベルアップと、ArenaObjectの選択・強化を扱います。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/tree/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e" class="button small" target="_blank" rel="noopener noreferrer">調査時点のソースコード</a></li>
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/tree/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e" class="button small" target="_blank" rel="noopener noreferrer">Reloadedのソースコード</a></li>
 					</ul>
 				</section>
 
 				<section>
-					<h2>ゲームの流れ</h2>
+					<h2>ゲームの進行</h2>
 					<ol>
 						<li>顔文字をドラッグして発射し、敵にぶつけて攻撃する。</li>
 						<li>敵を倒して経験値を獲得し、ウェーブを進める。</li>
 						<li>レベルアップ時にアリーナオブジェクトを選択して強化する。</li>
 						<li>敵を全滅させるか制限時間を迎えるとウェーブが切り替わる。プレイヤーの体力が尽きると失敗となる。</li>
 					</ol>
-					<p>アリーナオブジェクトとして現在データを確認できるのは、衝突時に反発力を与える Bumper です。</p>
+					<p>アリーナオブジェクトの例として、衝突時に反発力を与える Bumper のデータがあります。</p>
 				</section>
 
 				<section>
-					<h2>テストプレイ映像</h2>
+					<h2>関連動画</h2>
 					<div class="image featured">
-						<iframe src="https://www.youtube.com/embed/D5MxKl4xR1o" title="Kaomoji Clash のブラッシュアップ紹介動画"
+						<iframe src="https://www.youtube.com/embed/D5MxKl4xR1o" title="Kaomoji Clash / Reloadedの関連動画"
 							style="width: 100%; aspect-ratio: 16 / 9;" frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 							allowfullscreen></iframe>
 					</div>
-					<p>YouTube上の動画タイトルは「BrushUp / TestPlay」です。ここではコード上の仕様や開発状況を示す証拠としては扱いません。</p>
 				</section>
 
 				<section id="reloaded-comparison">
-					<h2>初版とのコード上の違い</h2>
-					<p>以下は各公開リポジトリの調査時点のコードと資料から整理した違いです。実行環境や画面で同一条件の比較は行っていません。</p>
+					<h2>初版との違い</h2>
+					<p>どちらも顔文字を使ったアクションゲームですが、初版はパーツのタグを使ったビルド、Reloadedはドラッグ射出・物理衝突・Wave進行を中心にしています。初版の完成版としてではなく、別プロジェクトとして紹介しています。</p>
 					<div class="compare-visual">
 						<div class="compare-head"><span></span><span class="v1">Kaomoji Clash</span><span></span><span class="v2">Kaomoji Clash / Reloaded</span></div>
-						<div class="compare-row"><div class="compare-axis">戦闘操作</div><div class="compare-card v1"><span class="compare-label">初版</span>ビルド構成とアリーナでの衝突アクション。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>ドラッグ距離から発射力を計算し、衝突速度をダメージ判定に使用。</div></div>
-						<div class="compare-row"><div class="compare-axis">成長データ</div><div class="compare-card v1"><span class="compare-label">初版</span>顔文字パーツとタグ集計に基づくステータス補正。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>撃破経験値によるレベルアップと、ArenaObjectの選択・強化。</div></div>
-						<div class="compare-row"><div class="compare-axis">進行管理</div><div class="compare-card v1"><span class="compare-label">初版</span>敵のWave進行と、戦闘後のビルド変更。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>敵の全滅・制限時間・プレイヤーHPをBattleStateとWaveControllerで扱う。</div></div>
-						<div class="compare-row"><div class="compare-axis">関連コード</div><div class="compare-card v1"><span class="compare-label">初版</span>ScriptableObjectの顔文字・記号データとビルドのステータス計算。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>StatsCalculator、IAttackable / IWave、WaveControllerなどのコードがある。</div></div>
+						<div class="compare-row"><div class="compare-axis">ビルド</div><div class="compare-card v1"><span class="compare-label">初版</span>顔文字パーツのタグを集計し、スタック数に応じてステータスを補正。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>基礎ステータスと顔文字データを使う計算クラスを配置。</div></div>
+						<div class="compare-row"><div class="compare-axis">戦闘</div><div class="compare-card v1"><span class="compare-label">初版</span>顔文字を引っ張って発射し、敵との衝突で攻撃。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>ドラッグ距離に応じて発射力を計算し、衝突速度からダメージを判定。</div></div>
+						<div class="compare-row"><div class="compare-axis">進行と成長</div><div class="compare-card v1"><span class="compare-label">初版</span>Wave戦闘と、集めた記号パーツによるビルドの組み替え。</div><div class="compare-arrow" aria-hidden="true">➜</div><div class="compare-card v2"><span class="compare-label">Reloaded</span>BattleStateによるWave進行、撃破経験値、アリーナオブジェクトの選択・強化。</div></div>
 					</div>
 				</section>
 
 				<section id="reloaded-code">
-					<h2>コードから確認できる処理</h2>
+					<h2>実装の流れ</h2>
 					<ul>
-						<li><strong>ドラッグ操作:</strong> 入力位置をワールド座標へ変換し、距離から発射力を計算してRigidbody2DへImpulseを加えます。</li>
-						<li><strong>Wave進行:</strong> WaveControllerがBattleStateに応じて戦闘処理を切り替えます。</li>
-						<li><strong>ステータス計算:</strong> PlayerStatsCalculatorが基礎値などからステータスや発射力を計算します。</li>
+						<li><strong>ドラッグして発射:</strong> Movementが画面座標をワールド座標に変換し、ドラッグ距離をPlayerStatsCalculatorへ渡してRigidbody2DにImpulseを加えます。</li>
+						<li><strong>発射力を計算:</strong> PlayerStatsCalculatorがドラッグ距離に上限を設け、プレイヤーのSpeedを使って発射力を求めます。</li>
+						<li><strong>Waveを進行:</strong> WaveControllerがBattleStateを切り替え、敵との遭遇、戦闘、Wave終了などの処理を進めます。</li>
 					</ul>
-					<p>コード（調査時点のコミット）: <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Player/Movement.cs" target="_blank" rel="noopener noreferrer">ドラッグ操作と発射（Movement.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Wave/WaveController.cs" target="_blank" rel="noopener noreferrer">Wave進行（WaveController.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Kaomoji/StatCalculator/PlayerStatsCalculator.cs" target="_blank" rel="noopener noreferrer">ステータス計算（PlayerStatsCalculator.cs）</a></p>
+					<p><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Player/Movement.cs" target="_blank" rel="noopener noreferrer">ドラッグ入力と発射（Movement.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Wave/WaveController.cs" target="_blank" rel="noopener noreferrer">Waveの状態管理（WaveController.cs）</a> · <a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/blob/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e/Assets/Scripts/Kaomoji/StatCalculator/PlayerStatsCalculator.cs" target="_blank" rel="noopener noreferrer">ステータスと発射力（PlayerStatsCalculator.cs）</a></p>
 				</section>
 
 				<section id="reloaded-status">
-					<h2>開発状況・今後の課題</h2>
-					<p>READMEでは制作途中とされ、Unity Editorでのプレイ・ビルド確認は記載されていません。このページの説明も、調査時コミットの静的なコード読解に基づきます。</p>
-					<p>初版との仕様差、Scene/Inspectorの接続、掲載動画とコードの版の一致は未確認です。</p>
+					<h2>開発状況</h2>
+					<p>制作中です。Unity Editorでの通しプレイやビルド確認はまだ行っていません。スキル装備の仕組みも開発途中のため、完成した機能としては紹介していません。</p>
 				</section>
 
 				<section id="reloaded-links">
 					<h2>関連リンク</h2>
 					<ul class="actions">
-						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/tree/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e" class="button small" target="_blank" rel="noopener noreferrer">調査時点のReloadedソース</a></li>
+						<li><a href="https://github.com/HinataPiyo/KaomojiClash_Reloaded/tree/dd7e1a031498f70d5ad124e7b05e7c0925de8c2e" class="button small" target="_blank" rel="noopener noreferrer">Reloadedのソースコード</a></li>
 						<li><a href="kaomoji.html" class="button small">初版 Kaomoji Clash の紹介</a></li>
 					</ul>
 				</section>
@@ -127,7 +122,6 @@
 				<footer>
 					<ul class="stats">
 						<li>Unity</li>
-						<li>In Development</li>
 					</ul>
 				</footer>
 			</article>

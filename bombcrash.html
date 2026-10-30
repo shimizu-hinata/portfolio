@@ -48,10 +48,10 @@
 					<div class="project-highlight-grid">
 						<article>
 							<h3>制作体制</h3>
-							<p>チーム制作です。本人の担当範囲は確認中のため、機能の実装者を断定していません。</p>
+							<p>チーム制作。企画・プログラミング・UI実装を担当。</p>
 						</article>
 						<article>
-							<h3>コードで確認できる仕組み</h3>
+							<h3>Wave生成の仕組み</h3>
 							<p>ScriptableObjectのWave設定をWaveGeneratorが実行時データに変換し、WaveManagerとEnemySpawnControllerが進行・出現を担います。</p>
 						</article>
 					</div>
@@ -149,7 +149,7 @@
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
 					<h3>実装のポイント：ウェーブ生成とスキル発動</h3>
-					<p class="tech-lead">公開リポジトリのコードでは、Waveルールから出現候補を作り、進行と敵の配置を別の処理へ渡す構成を確認できます。チーム内での本人担当範囲は確認中です。</p>
+					<p class="tech-lead">EndlessWaveRuleの設定からWaveGeneratorが敵の出現候補と比重を組み立て、WaveManagerとEnemySpawnControllerが進行と配置を分担します。</p>
 					<div class="implementation-grid">
 						<article id="wave-generation">
 							<h4>Waveごとの出現条件を組み立てる</h4>
@@ -174,8 +174,7 @@ if (weight &gt; 0f)
         weight = weight
     });</code></pre>
 					</figure>
-					<p class="tech-next-step"><strong>今後の改善候補:</strong> 敵の出現候補が空の場合を設定時に検出すること、自動スキルの待機処理が重複して起動しないよう状態を管理すること。</p>
-					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" target="_blank" rel="noopener noreferrer">調査時点のソースとREADMEを見る</a></p>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" target="_blank" rel="noopener noreferrer">ソースコードとREADMEを見る</a></p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>

@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>AlgomateColony（アルゴメイトコロニー） | Game Portfolio</title>
+	<title>Algomate Colony（アルゴメイトコロニー） | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
@@ -31,7 +31,7 @@
 							<p class="project-genre">コマンド入力</p>
 							<p class="project-genre">拠点運営シミュレーション</p>
 						</div>
-						<h1>AlgomateColony</h1>
+						<h1>Algomate Colony</h1>
 						<p>プレイヤーがロボット「アルゴメイト」にコマンドを与え、資源を集めて拠点を発展させるシミュレーションゲームです。Move・Gather・Depositを組み合わせ、直接操作ではなく作業手順を組み立てます。</p>
 					</div>
 				</header>
@@ -53,7 +53,7 @@
 						</article>
 						<article>
 							<h3>制作体制</h3>
-							<p>チーム制作です。本人の担当範囲は確認中のため、機能の実装者を断定していません。</p>
+							<p>チーム制作。企画・プログラミング・UI実装を担当。</p>
 						</article>
 						<article>
 							<h3>技術上の見どころ</h3>
@@ -99,7 +99,7 @@
 						<div class="algomate-screenshot-intro">
 							<span class="algomate-eyebrow">PLAN → EXECUTE → GROW</span>
 							<h4>命令を組み立て、作業の流れをつくる</h4>
-							<p>基本コマンドを順番に記述し、資源の移動から拠点の成長までをつなぎます。現行仕様資料では、コマンド行を検証してから順番に実行する構成が確認されています。</p>
+							<p>基本コマンドを順番に記述し、資源の移動から拠点の成長までをつなぎます。入力したコマンド行は検査後に順番に実行されます。</p>
 							<code>Move(rock);<br>Gather(rock);<br>Move(warehouse);<br>Deposit(rock, 30);</code>
 						</div>
 					</div>
@@ -215,7 +215,7 @@
 				<section id="implementation">
 					<h3>開発状況・関連資料</h3>
 					<h4>プロトタイプの範囲</h4>
-					<p>利用できる基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエストや交易、新しいコマンドの研究は今後の要素として資料に記載されています。</p>
+					<p>現在扱える基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエスト、交易、コマンド研究は、現時点の実装範囲に含まれていません。</p>
 					<h4>GitHubの技術資料</h4>
 					<ul class="algomate-doc-links">
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>
@@ -226,7 +226,7 @@
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
 					<h3>実装のポイント：コマンド実行とロボット移動</h3>
-					<p class="tech-lead">公開リポジトリのコードでは、ロボットへの命令入力を検証し、順番に実行して移動・採集・格納へつなぐ処理を確認できます。チーム内での本人担当範囲は確認中です。</p>
+					<p class="tech-lead">入力したMove・Gather・Depositの命令を検査し、RobotCommandExecuteが順番に処理して、ロボットの移動・採集・格納へつなぎます。</p>
 					<div class="implementation-grid">
 						<article id="command-execution">
 							<h4>入力した命令を検証して実行する</h4>
@@ -247,8 +247,7 @@
     waypoints.Enqueue(point);
 }</code></pre>
 					</figure>
-					<p class="tech-next-step"><strong>今後の改善候補:</strong> 命令文字列を検証・実行間で共通の形式にし、入力エラーを扱いやすくすること。現在の経路は直線補間と局所回避の組み合わせのため、複雑な障害物配置に対応する経路探索も検討できます。</p>
-					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" target="_blank" rel="noopener noreferrer">調査時点のソースとREADMEを見る</a></p>
+					<p class="tech-source-link"><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" target="_blank" rel="noopener noreferrer">ソースコードとREADMEを見る</a></p>
 				</section>
 				<section id="project-links">
 					<h3>関連リンク</h3>
