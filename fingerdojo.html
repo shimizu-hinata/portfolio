@@ -28,7 +28,7 @@
 							<p class="project-genre">1対1バトル</p>
 						</div>
 						<h1>指道場（FingerDojo）</h1>
-						<p>Unity製の1対1タイミングバトル。敵の攻撃に合わせるカウンター、タイミングQTEによる指撃、HPを回復する休息を使い分けます。現在は試作段階です。</p>
+						<p>敵の攻撃に合わせるカウンター、タイミングQTEによる指撃、HPを回復する休息を使い分ける1対1バトルです。現在は試作段階です。</p>
 					</div>
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
@@ -44,15 +44,15 @@
 					<div class="project-highlight-grid fingerdojo-highlights">
 						<article>
 							<h3>制作体制</h3>
-							<p>チーム制作。企画・プログラミング・UI実装を担当。</p>
+							<p>チーム制作。担当範囲は企画・プログラミング・UI実装です。</p>
 						</article>
 						<article>
 							<h3>ゲームの特徴</h3>
-							<p>指撃QTE、カウンター、休息を個別の戦闘状態として扱い、敵の行動やダメージ処理と連携させること。</p>
+							<p>指撃QTEの判定、敵の攻撃へのカウンター、HPを回復する休息を切り替えて戦います。</p>
 						</article>
 						<article>
 							<h3>戦闘処理の構成</h3>
-							<p>プレイヤーと敵の状態・HPを分け、Command、StateController、CombatCalculatorを通じて入力から戦闘結果を処理します。</p>
+							<p>プレイヤーと敵の状態・HPを別々に管理し、入力や敵の行動に応じてダメージと勝敗を更新します。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
@@ -174,19 +174,19 @@
 						<div class="design-flow-card" id="fingerdojo-combat-flow">
 							<h4>戦闘の処理経路</h4>
 							<ol class="design-flow-steps">
-								<li><strong>難易度を選ぶ</strong><span>DifficultyButtonが選択Profileを確認し、BattleSceneへ進む</span></li>
-								<li><strong>コマンドを入力</strong><span>Unity UI ButtonからCommandを実行し、StateControllerが状態を管理</span></li>
-								<li><strong>判定・ダメージ</strong><span>指撃QTEや敵攻撃のAnimationEventからCombatCalculatorへ倍率を渡す</span></li>
-								<li><strong>結果を反映</strong><span>HealthがHPを更新し、GameManagerとGameUIManagerが勝敗を表示</span></li>
+								<li><strong>対戦相手を選ぶ</strong><span>DifficultyButtonが選んだ難易度のEnemyProfileをBattleSceneへ渡します。</span></li>
+								<li><strong>行動を選ぶ</strong><span>ボタン入力で指撃・カウンター・休息などのCommandを開始し、StateControllerがプレイヤーや敵の状態を管理します。</span></li>
+								<li><strong>攻撃を判定する</strong><span>指撃ではCommandTimingQTEが入力タイミングから倍率を求め、CombatCalculatorへ渡します。敵の攻撃はAnimationEventからCombatCalculatorを呼び出します。</span></li>
+								<li><strong>HPと勝敗を更新する</strong><span>CombatCalculatorが対象のHealthへダメージを渡し、HPが尽きるとGameManagerが勝敗画面へ進めます。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card" id="fingerdojo-combat-architecture">
-							<h4>主なクラスとデータ</h4>
+							<h4>処理を分担するクラスとデータ</h4>
 							<ul class="fingerdojo-tech-list">
-								<li><strong>プレイヤーと敵の戦闘状態を個別に管理</strong><span><code>PlayerStateController</code> / <code>EnemyStateController</code></span></li>
-								<li><strong>敵AIの行動と戦闘中の履歴を管理</strong><span><code>EnemyDecisionController</code></span></li>
-								<li><strong>プレイヤー値と難易度別の敵パラメータを保持</strong><span><code>PlayerDataSO</code> / <code>EnemyProfileSO</code>（ScriptableObject）</span></li>
-								<li><strong>QTEバー、ポインター入力、倍率・判定表示を処理</strong><span><code>TimingBarController</code> / <code>CommandTimingQTE</code></span></li>
+								<li><strong>状態の切り替え:</strong> <code>PlayerStateController</code>と<code>EnemyStateController</code>が、それぞれの戦闘状態を管理します。</li>
+								<li><strong>敵の行動選択:</strong> <code>EnemyDecisionController</code>が難易度や戦闘状況に応じて敵の行動を選びます。</li>
+								<li><strong>対戦データ:</strong> <code>PlayerDataSO</code>がプレイヤーの基礎値を、<code>EnemyProfileSO</code>が難易度ごとの敵パラメータを保持します。</li>
+								<li><strong>QTE判定:</strong> <code>TimingBarController</code>がタイミングと倍率を計算し、<code>CommandTimingQTE</code>が入力を受けて戦闘処理へ渡します。</li>
 							</ul>
 						</div>
 					</div>

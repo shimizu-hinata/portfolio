@@ -36,47 +36,21 @@
 					</div>
 				</header>
 				<nav class="project-toc" aria-label="作品ページの目次">
-					<a href="#project-summary">作品の要点</a>
 					<a href="#game-overview">ゲーム概要</a>
+					<a href="#project-summary">制作体制・技術の見どころ</a>
 					<a href="#design-flow">ゲーム進行</a>
-					<a href="#implementation">実装内容</a>
-					<a href="#tech-deep-dive">技術解説</a>
-					<a href="#project-links">ソース・実行ファイル</a>
+					<a href="#implementation">設定画面・実装範囲</a>
+					<a href="#tech-deep-dive">Wave生成の実装</a>
+					<a href="#project-links">ソースコード・関連資料</a>
 				</nav>
-				<section class="project-at-a-glance" id="project-summary">
-					<h2>作品の要点</h2>
-					<div class="project-highlight-grid">
-						<article>
-							<h3>制作体制</h3>
-							<p>チーム制作。企画・プログラミング・UI実装を担当。</p>
-						</article>
-						<article>
-							<h3>Wave生成の仕組み</h3>
-							<p>ScriptableObjectのWave設定をWaveGeneratorが実行時データに変換し、WaveManagerとEnemySpawnControllerが進行・出現を担います。</p>
-						</article>
-					</div>
-					<ul class="actions project-quick-links">
-						<li><a href="https://github.com/HinataPiyo/BombCrash/tree/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5" class="button small" target="_blank"
-								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
-					</ul>
-				</section>
-				<div class="image featured">
-					<h3>紹介動画</h3>
-					<div class="js-video-player"data-video-url="https://www.youtube.com/embed/pQ53e4TLCJE"></div>
-				</div>
 				<section id="game-overview">
-					<h3>ゲーム概要</h3>
-					<p>「BombCrash」は、次々と湧いてくるカウントダウン爆弾（敵）を、強力な凍結爆弾で破壊する爽快アクションゲームです。
-						<br>プレイヤーはキャラクターを操作し、敵を倒してスクラップを入手します。
-						<br>スクラップは装備の購入・強化に使用します。知見ポイント（IP）はウェーブ到達状況などに応じてリザルトで獲得します。
-						<br>このゲームでは、Wave(波)の概念を採用しており、Wave数が上がるにつれ敵が強くなっていくようになっています。</p>
+					<h2>ゲーム概要</h2>
+					<p>Bomb Crashは、着弾位置を調整して凍結爆弾を投げ、爆発までのカウントダウンがある敵を迎撃する2Dアクションゲームです。敵を倒してWaveを進め、スクラップで装備を購入・強化します。</p>
 					<ul>
-						<li>敵はHPと爆発までのカウントダウンを持ち、時間切れになる前に撃破する必要があります。</li>
-						<li>プレイヤーは爆弾の着弾位置を調整して投げ、敵を倒すとスクラップを獲得します。爆弾は所持数に上限があり、時間経過で補充されます。</li>
-						<li>スクラップは装備の購入・強化に使用します。知見ポイント（IP）はウェーブ到達状況などに応じてリザルトで獲得します。</li>
-						<li>オトモに装備したスキルはZ / X / Cで使用でき、スキルの設定によっては自動発動します。必殺技は使用可能な状態でVキーから発動します。</li>
-						<li>ウェーブの敵出現が終了し、フィールド上の敵もいなくなると次のウェーブへ進みます。一定間隔のスタンピードやボス出現も設定されています。</li>
-						<li>敵のカウントダウンが尽きると爆発してゲームオーバーとなり、リザルトで到達ウェーブや獲得資源を確認できます。</li>
+						<li>敵はHPと爆発までのカウントダウンを持ち、時間内に倒せないと爆発してゲームオーバーになります。</li>
+						<li>爆弾には所持数の上限があり、時間経過で補充されます。敵を倒すとスクラップを獲得し、到達Waveなどに応じた知見ポイント（IP）がリザルトに反映されます。</li>
+						<li>敵の出現が終わり、フィールド上の敵を全て倒すと次のWaveへ進みます。Wave数に応じて敵が強くなり、一定間隔でスタンピードやボスが登場します。</li>
+						<li>オトモスキルはZ / X / Cで発動し、自動発動する設定もあります。必殺技は使用可能なときにVキーで発動します。</li>
 					</ul>
 					<h4>操作</h4>
 					<ul>
@@ -84,86 +58,106 @@
 						<li>装備スキル: Z / X / C、必殺技（使用可能時）: V</li>
 						<li>ホーム画面などのUI操作: マウスクリック、ゲームオーバー演出後にホームへ戻る: Space</li>
 					</ul>
+					<div class="image featured">
+						<h3>紹介動画</h3>
+						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/pQ53e4TLCJE"></div>
+					</div>
+				</section>
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>制作体制・技術の見どころ</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>制作体制と担当</h3>
+							<p>チーム制作。担当範囲は企画・プログラミング・UI実装です。</p>
+						</article>
+						<article>
+							<h3>Wave生成</h3>
+							<p>WaveManagerがWaveGeneratorを呼び出して各Waveの出現データを作り、EnemySpawnControllerの敵選択・配置につなげます。</p>
+						</article>
+					</div>
 				</section>
 				<section class="design-flow-section" id="design-flow">
-					<h3>ゲーム進行・処理フロー</h3>
-					<p>出撃からウェーブ戦闘、リザルトまでのゲーム進行と、ウェーブ設定から敵を出現させる処理の流れです。</p>
+					<h2>ゲームの基本ループ</h2>
+					<p>出撃して敵を迎撃し、Waveを進めながら装備を整えます。敵の爆発を防げなかった場合はゲームオーバーとなり、リザルトへ進みます。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
-							<h4>プレイの基本ループと終了条件</h4>
+							<h3>出撃から次のWaveへ</h3>
 							<ol class="design-flow-steps">
-								<li><strong>出撃</strong><span>ホームからゲームを開始し、ローディングを経て戦闘へ</span></li>
-								<li><strong>敵が出現</strong><span>ウェーブ設定に従って敵がフィールドに登場</span></li>
-								<li><strong>爆弾で迎撃</strong><span>着弾位置を調整して凍結爆弾を投げ、敵を撃破</span></li>
-								<li><strong>次のWave / ゲームオーバー</strong><span>出現終了かつ敵がいなければ次のWaveへ。敵のカウントダウンが尽きた場合はゲームオーバーとなり、リザルトへ</span></li>
+								<li><strong>出撃する</strong><span>ホーム画面から戦闘を開始します。</span></li>
+								<li><strong>敵を迎撃する</strong><span>Wave設定に沿って出現する敵へ、着弾位置を調整した凍結爆弾を投げます。</span></li>
+								<li><strong>Waveを進める</strong><span>敵の出現が終わり、フィールド上の敵を倒すと次のWaveへ進みます。</span></li>
+								<li><strong>装備を整える</strong><span>獲得したスクラップで装備を購入・強化し、次の出撃に備えます。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card" id="wave-result-flow">
-							<h4>ウェーブ・リザルト処理</h4>
+							<h3>Wave設定から敵の出現へ</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>ルールから生成</strong><span>EndlessWaveRuleと敵データから時間・出現間隔・候補を構成</span></li>
-								<li><strong>敵を出現・進行</strong><span>WaveManagerが進行とUIを管理し、EnemySpawnControllerが敵を配置</span></li>
-								<li><strong>結果を反映</strong><span>討伐数・スクラップを更新し、到達ウェーブと獲得資源を表示</span></li>
+								<li><strong>Waveデータを生成する</strong><span>WaveManagerが現在のWaveに応じてWaveGeneratorを呼び出し、EndlessWaveRuleの設定から出現データを作ります。</span></li>
+								<li><strong>敵を選んで配置する</strong><span>WaveGeneratorが敵の出現時間・間隔・候補の比重を計算し、EnemySpawnControllerがその比重を使って敵を選び、フィールドへ配置します。</span></li>
+								<li><strong>敵を倒して次のWaveへ進む</strong><span>WaveManagerがWaveの進行を管理し、出現終了後にフィールド上の敵がいなくなると次のWaveへ移ります。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
-							<h4>オトモスキルの装備・発動</h4>
+							<h3>オトモスキルの装備・発動</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>装備を反映</strong><span>出撃時にOtomoSkillManagerが装備スロットのスキルを読み込む</span></li>
-								<li><strong>発動方式を判定</strong><span>OtomoSkillRunnerがZ / X / C入力を確認。自動設定スキルは敵がいる場合に発動を試みる</span></li>
-								<li><strong>発動・再使用待ち</strong><span>SkillSO.Execute()を実行し、設定されたクールタイム中は再発動しない</span></li>
+								<li><strong>装備を読み込む</strong><span>出撃時にOtomoSkillManagerが、装備スロットに設定されたスキルを読み込みます。</span></li>
+								<li><strong>発動条件を確認する</strong><span>OtomoSkillRunnerがZ / X / Cの入力や自動発動の設定を確認します。</span></li>
+								<li><strong>スキルを実行する</strong><span>SkillSOの共通処理を呼び出し、クールタイム中の再発動を防ぎます。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
-							<h4>装備処理フロー</h4>
+							<h3>装備を強化する</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>スクラップを獲得</strong><span>敵を撃破してゲーム内資源を入手</span></li>
-								<li><strong>装備を購入・強化</strong><span>スクラップを使って装備を整え、プレイヤー能力を補助</span></li>
-								<li><strong>次の出撃に備える</strong><span>装備内容を確認して、より先のウェーブに挑戦</span></li>
+								<li><strong>スクラップを集める</strong><span>敵を倒して装備購入・強化に使う資源を獲得します。</span></li>
+								<li><strong>装備を購入・強化する</strong><span>スクラップを使って装備を整えます。</span></li>
+								<li><strong>次のWaveに備える</strong><span>強化した装備で、さらに先のWaveへ挑戦します。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
-							<h4>オトモ処理フロー</h4>
+							<h3>オトモを戦闘に加える</h3>
 							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>オトモを解放</strong><span>一定の到達ウェーブを条件に解放される</span></li>
-								<li><strong>スキルを装備</strong><span>オトモにスキルを設定し、手動または設定に応じて自動で使用</span></li>
-								<li><strong>戦闘を支援</strong><span>クールタイムや使用可能状態に従ってスキルを発動</span></li>
+								<li><strong>オトモを解放する</strong><span>到達Waveの条件を満たしてオトモを解放します。</span></li>
+								<li><strong>スキルを設定する</strong><span>オトモにスキルを装備し、手動または設定に応じた自動発動を選びます。</span></li>
+								<li><strong>スキルで支援する</strong><span>使用可能状態とクールタイムに応じて戦闘中に発動します。</span></li>
 							</ol>
 						</div>
 					</div>
 				</section>
 				<section id="implementation">
-					<h3>ゲーム設定画面</h3>
-					<h4>現在の実装範囲</h4>
+					<h2>設定画面と実装範囲</h2>
+					<h3>現在の実装範囲</h3>
 					<p>スキルガチャは未実装のため、ホーム画面のガチャボタンは無効です。</p>
 					<div class="image featured custom-editor-demos">
 						<div class="custom-editor-demo">
-							<h4>Endless Waveの生成</h4>
-							<img src="images/BombCrash_EndlessWaveGeneration.png" alt="Endless Waveの生成例" loading="lazy" decoding="async" />
+							<h3>Endless Waveの設定</h3>
+							<p>敵の出現開始Wave、出現比重が高くなるWave、比重の最大値などを設定します。</p>
+							<img src="images/BombCrash_EndlessWaveGeneration.png" alt="Endless Waveの敵出現パターン設定画面" loading="lazy" decoding="async" />
 						</div>
 						<div class="custom-editor-demo">
-							<h4>スキルのデータ</h4>
-							<img src="images/BombCrash_Skill_Data.png" alt="スキルのデータ例" loading="lazy" decoding="async" />
+							<h3>スキルデータ</h3>
+							<p>スキルの共通設定をScriptableObjectで管理します。</p>
+							<img src="images/BombCrash_Skill_Data.png" alt="Bomb Crashのスキルデータ設定画面" loading="lazy" decoding="async" />
 						</div>
 					</div>
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
-					<h3>実装のポイント：ウェーブ生成とスキル発動</h3>
-					<p class="tech-lead">EndlessWaveRuleの設定からWaveGeneratorが敵の出現候補と比重を組み立て、WaveManagerとEnemySpawnControllerが進行と配置を分担します。</p>
+					<h2>実装の詳細：Wave生成とスキル発動</h2>
+					<p class="tech-lead">ここでは、Wave設定から敵の候補を作る処理と、オトモスキルの発動処理を詳しく紹介します。</p>
 					<div class="implementation-grid">
 						<article id="wave-generation">
-							<h4>Waveごとの出現条件を組み立てる</h4>
-							<p><strong>Waveごとの出現条件を設定</strong>するEndlessWaveRuleをもとに、WaveGeneratorが回ごとの出現設定を作成。EnemySpawnControllerが敵の比重から出現対象を選び、WaveManagerがボスやスタンピードを含む進行を扱います。</p>
+							<h3>Waveごとの出現データを作る</h3>
+							<p><code>EndlessWaveRule</code>には通常Waveとスタンピードの時間・出現間隔、敵ごとの出現開始Wave・比重の最大値を設定します。<code>WaveGenerator</code>は現在のWave番号から出現時間と間隔を決め、敵パターンごとの比重を計算して<code>IntervalWaveData</code>を作ります。</p>
+							<p>敵パターンの開始Waveに達していない場合は候補に加えず、比重が0より大きい敵だけを出現候補にします。<code>EnemySpawnController</code>は候補の比重を使って敵を選び、<code>WaveManager</code>がWave進行やボス・スタンピードを含む進行を管理します。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
 						</article>
 						<article id="skill-activation">
-							<h4>スキルの発動方法をそろえる</h4>
-							<p><strong>手動・自動の発動とクールタイムを管理</strong>するOtomoSkillRunnerが、装備スロットとZ / X / C入力を扱います。スキル共通の情報と実行口はSkillSOに定義しています。Wave設定とスキル設定の画面は上のスクリーンショットで紹介しています。</p>
+							<h3>オトモスキルを発動する</h3>
+							<p><code>OtomoSkillManager</code>が出撃時に装備スロットを読み込み、<code>OtomoSkillRunner</code>がZ / X / Cの入力や自動発動の条件を処理します。スキル名やクールタイム、共通の実行口は<code>SkillSO</code>で扱います。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">スキル定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動処理</a></p>
 						</article>
 					</div>
 					<figure class="tech-code">
-						<figcaption>敵ごとの出現比重をWaveの進行に合わせて計算する処理（WaveGenerator）</figcaption>
+						<figcaption>出現開始Waveと最大比重から、現在Waveの出現比重を求める処理（WaveGenerator）</figcaption>
 						<pre><code>float t = Mathf.InverseLerp(pattern.startWave, pattern.peakWave, waveNumber);
 float weight = Mathf.Lerp(0f, pattern.peakWeight, Mathf.Clamp01(t));
 

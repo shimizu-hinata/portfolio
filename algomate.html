@@ -53,7 +53,7 @@
 						</article>
 						<article>
 							<h3>制作体制</h3>
-							<p>チーム制作。企画・プログラミング・UI実装を担当。</p>
+							<p>チーム制作。担当範囲は企画・プログラミング・UI実装です。</p>
 						</article>
 						<article>
 							<h3>技術上の見どころ</h3>
@@ -178,10 +178,10 @@
 						<div class="design-flow-card">
 							<h4>命令入力からロボットの行動へ</h4>
 							<ol class="design-flow-steps">
-								<li><strong>定義を読み込む</strong><span>CommandLoaderがResourcesのJSONから候補を取得</span></li>
-								<li><strong>入力を検証する</strong><span>CommandHandlerが各行と引数を確認</span></li>
-								<li><strong>行ごとに実行する</strong><span>RobotCommandExecuteが入力行を順番に処理</span></li>
-								<li><strong>行動へつなぐ</strong><span>RobotControllerが探索・移動・採集・格納の処理を呼び分ける</span></li>
+								<li><strong>コマンドを読み込む</strong><span>CommandLoaderがJSONからMove・Gather・Depositの候補を読み込みます。</span></li>
+								<li><strong>入力を検査する</strong><span>CommandHandlerがコマンド名と対象、Depositの素材名・数量を調べます。</span></li>
+								<li><strong>順番に実行する</strong><span>RobotCommandExecuteが入力された命令を1行ずつ処理し、各行動の終了を待ちます。</span></li>
+								<li><strong>ロボットを動かす</strong><span>RobotControllerが命令に応じて移動・採集・格納の状態へ切り替えます。</span></li>
 							</ol>
 						</div>
 						<div class="design-flow-card">
@@ -196,10 +196,10 @@
 						<div class="design-flow-card">
 							<h4>経路生成と局所的な障害物回避（部分実装）</h4>
 							<ol class="design-flow-steps">
-								<li><strong>目的地を設定</strong><span>Moveコマンドに応じて移動先を決める</span></li>
-								<li><strong>経由点を生成</strong><span>直線を10分割したWaypointを作る</span></li>
-								<li><strong>周囲を検知</strong><span>移動方向へRaycastを行う</span></li>
-								<li><strong>局所的に回避</strong><span>ObstacleAvoidanceHelperで候補方向を選ぶ</span></li>
+								<li><strong>目的地を決める</strong><span>Moveコマンドの対象からロボットの移動先を指定します。</span></li>
+								<li><strong>移動点を作る</strong><span>PathfindingSystemが始点と目的地の間を分割し、Waypointを並べます。</span></li>
+								<li><strong>障害物を検知する</strong><span>RobotMovementが進行方向へRaycastを行います。</span></li>
+								<li><strong>近くの障害物を避ける</strong><span>ObstacleAvoidanceHelperが候補方向を選び、移動を補助します。</span></li>
 							</ol>
 							<div class="image featured custom-editor-demos">
 								<div class="custom-editor-demo">
@@ -226,21 +226,21 @@
 				</section>
 				<section class="tech-deep-dive" id="tech-deep-dive">
 					<h3>実装のポイント：コマンド実行とロボット移動</h3>
-					<p class="tech-lead">入力したMove・Gather・Depositの命令を検査し、RobotCommandExecuteが順番に処理して、ロボットの移動・採集・格納へつなぎます。</p>
+					<p class="tech-lead">ここでは、コマンドの検査結果を逐次実行へ渡す流れと、ロボットが移動点をたどる処理を紹介します。</p>
 					<div class="implementation-grid">
 						<article id="command-execution">
 							<h4>入力した命令を検証して実行する</h4>
-							<p><strong>Move・Gather・Depositの入力と対象を検証</strong>するCommandHandlerは、Resources内のJSONから指定できる対象一覧を読み込みます。RobotCommandExecuteは各命令の終了を待ってから次の行へ進め、移動・採集・格納をロボットの状態遷移につなぎます。</p>
+							<p>CommandLoaderがResources内のJSONから指定できる対象を読み込み、CommandHandlerがMove・Gather・Depositの名前と引数を検査します。検査後、RobotCommandExecuteが命令を1行ずつ実行し、ロボットの状態処理が終わってから次の命令へ進みます。</p>
 							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Command/CommandHandler.cs" target="_blank" rel="noopener noreferrer">命令の検証</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/RobotCommandExecute.cs" target="_blank" rel="noopener noreferrer">命令の実行</a></p>
 						</article>
 						<article id="robot-navigation">
 							<h4>WaypointとRaycastで移動する</h4>
-							<p><strong>始点と目的地を直線補間したWaypointを生成</strong>し、RobotMovementが経由点へ移動します。障害物はRaycastで検知し、局所的な回避方向を選びます。A*などの経路探索としては説明していません。</p>
+							<p>PathfindingSystemは始点から目的地までの直線をWaypointに分割し、RobotMovementが順番にたどります。進行方向に障害物がある場合はRaycastで検知し、ObstacleAvoidanceHelperが近くを通る方向を選びます。障害物を考慮した経路全体の探索（A*など）とは異なる仕組みです。</p>
 							<p><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/PathfindingSystem.cs" target="_blank" rel="noopener noreferrer">Waypoint生成</a> · <a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Assets/Scripts/Robot/RobotMovement.cs" target="_blank" rel="noopener noreferrer">ロボット移動</a></p>
 						</article>
 					</div>
 					<figure class="tech-code">
-						<figcaption>始点から終点までを分割してWaypointを作成（PathfindingSystem）</figcaption>
+						<figcaption>始点と目的地の間を等間隔に分割してWaypointを作成（PathfindingSystem）</figcaption>
 						<pre><code>for (int i = 1; i &lt;= stepCount; i++)
 {
     Vector2 point = Vector2.Lerp(start, end, i / (float)stepCount);
