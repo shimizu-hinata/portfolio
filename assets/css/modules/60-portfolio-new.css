@@ -667,7 +667,9 @@
 }
 
 .design-flow-steps strong,
-.design-flow-steps span {
+.design-flow-steps span,
+.design-flow-steps h4,
+.design-flow-steps p {
     display: block;
 }
 
@@ -677,7 +679,18 @@
     margin-bottom: 0.45em;
 }
 
-.design-flow-steps span {
+.design-flow-steps h4 {
+    font-size: 0.78em;
+    line-height: 1.5;
+    margin: 0 0 0.45em;
+}
+
+.design-flow-steps p {
+    margin: 0;
+}
+
+.design-flow-steps span,
+.design-flow-steps p {
     color: var(--portfolio-muted);
     font-size: 0.68em;
     line-height: 1.6;
