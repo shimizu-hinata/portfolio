@@ -131,7 +131,7 @@ sequenceDiagram
 
 | ファイル / クラス | 主なデータ・メソッド | 呼出元・受渡し先 | 実装上の責務 |
 |---|---|---|---|
-| `Assets/Scripts/SO/SkillSO.cs` — `SkillSO` | 基本表示データ、`IsAuto`、`IsEndCoolTime`、stock、awakening、`GetDecCoolTime`、`GetEffectDiscription`、抽象`Execute` | Inventory / equipment / runnerが同じ派生SO参照を受け渡す | ScriptableObjectの共通基底。表示・発動設定・進行値に加え、実行状態も保持している |
+| `Assets/Scripts/SO/SkillSO.cs` — `SkillSO` | 基本表示データ、`IsAuto`、`IsEndCoolTime`、stock、awakening、`GetDecCoolTime`、`GetEffectDiscription`、抽象`Execute` | Inventory / equipment / runnerが同じ派生SO参照を受け渡す | ScriptableObjectの共通基底。表示・発動設定・進行値に加え、実行状態も保持している。`IsEndCoolTime`の裏フィールドは`[SerializeField]`なしの実行時bool |
 | `Assets/Scripts/SO/SkillDatabase.cs` — `SkillDatabase` | `SkillSO[] SkillDB` | `SkillInventoryManager`、`SkillGacha` | スキルSOアセットの一覧を保持 |
 | `Assets/Scripts/System/Otomo_Skill/SkillInventoryManager.cs` — `SkillInventoryManager` | `CreateSkillInventory`, `SetSkillStock`, `InventorySlotUpdateUI` | `SkillDatabase`からUIスロットを生成。ガチャコードからStock追加 | 一覧UI生成とstock更新 / 表示更新を担当。取得・所持データの変更処理も部分的に担う |
 | `Assets/Scripts/UI/Otomo/OtomoSkillInventorySlot.cs` — `OtomoSkillInventorySlot` | SO参照、stock表示、クリック処理 | 選択中なら`OtomoSkillStatusSlotController.SkillChange_SetSkill`へ。通常は詳細パネルへ | インベントリスロットUI。スキル選択とUI表示をつなぐ |
@@ -149,7 +149,7 @@ sequenceDiagram
 2. ガチャコードの経路では`SkillGacha`がレアリティを抽選し、対応する`SkillSO`を選び、`SkillInventoryManager.SetSkillStock`が`CountUpStock`を呼ぶ。ただしREADMEはガチャボタン無効を説明する。実UIでの利用は確認できず、公開ページでは取得できる機能として案内しない。
 3. `OtomoSkillInventorySlot`からスキルを選択すると`OtomoSkillStatusSlotController.SkillChange_SetSkill`に渡される。Controllerはロック状態・重複を確認して装備枠へ設定し、`OtomoSkillStatusSlot`が名前・効果・覚醒・CTを表示する。自動 / 手動切替は`SkillSO.IsAuto`を書き換える。
 4. `HomeSceneController.GoGameScene`はシーン遷移前に`OtomoSkillManager.ReplaceEquippedSkills()`を呼ぶ。Managerは装備枠の配列を走査し、その`SkillSO`参照を`equippedSkill`へ格納する。
-5. 戦闘側`OtomoSkillRunner.Start`は装備一覧を読み、`EquipmentNowSkillSlot`へアイコンを反映し、装備SOの`IsEndCoolTime`をtrueにする。
+5. 戦闘側`OtomoSkillRunner.Start`は`OtomoSkillManager.EquippedSkill`のリスト参照をそのまま受け取り、`EquipmentNowSkillSlot`へアイコンを反映し、装備SOの`IsEndCoolTime`をtrueにする。
 6. `Update`は装備ごとに`IsAuto`かつ`IsEndCoolTime`を確認し、`EnemyList.Count > 0`の場合に自動発動コルーチンを開始する。手動発動はZ / X / Cからslot index 0 / 1 / 2の`SkillExecute`を呼ぶ。
 7. `SkillExecute`は空リスト・空SO・クールタイム中かを確認し、`SkillSO.Execute()`を呼ぶ。発動後、`UpdateCoolTime`が`IsEndCoolTime=false`にしてSOの`CoolTime`に応じてUIを更新、終了時にtrueへ戻す。
 8. 派生SOが効果を適用する。例: `ColdShot.Execute`はコルーチンを開始し、`WaveManager.GetCrossTo0Enemy()`でカウントダウンが最小の敵位置を取り、Prefabをオトモ位置に生成して目標位置を設定する。`CoolCharge`は`ThrowBomb.CreateBombTimeUp`、`DelayPulse`は敵の`EnemyBombController.DelayTime`等を直接更新する。
@@ -236,7 +236,7 @@ classDiagram
 
 #### B. 現在の制約・確認が必要な点
 
-- `SkillSO`は表示・スキル設定・stock / awakeningに加えて`IsAuto`、`IsEndCoolTime`という変更可能な状態を持つ。Inventory / Equipment / Runnerは同一SOアセット参照を共有するため、設定値とプレイ中状態が混在する。
+- `SkillSO`は表示・スキル設定・stock / awakeningに加えて`IsAuto`、`IsEndCoolTime`という変更可能な状態を持つ。`IsEndCoolTime`の裏フィールドはシリアライズされない実行時boolだが、Inventory / Equipment / Runnerは同一SOアセット参照を共有するため、同じインスタンスを使う場所ではプレイ中状態も共有される。
 - `OtomoSkillStatusSlot`の自動 / 手動切替はSOアセットの`IsAuto`を直接変更する。Runnerも`IsEndCoolTime`をSO上で更新するため、装備データとランタイム状態がアセット参照を介して一体化している。
 - `OtomoSkillRunner`は発動条件・入力割当・効果呼出し・クールタイム・画面表示更新を担う。条件が増えると責務が集中する。
 - 手動入力の`SkillExecute(index)`は`equippedSkill.Count == 0`は見るが、`index < Count`は確認しない。空き枠やスロット数とリスト数の組み合わせによって範囲外参照になる可能性がある。

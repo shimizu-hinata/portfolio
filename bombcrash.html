@@ -143,47 +143,46 @@
 					<div class="implementation-grid">
 						<article id="wave-generation">
 							<h3>Wave設定から敵の出現まで</h3>
-							<h4>実装している仕組み</h4>
-							<p><code>EndlessWaveRule</code>に通常Wave・スタンピードの条件と、敵ごとの登場開始Wave・ピークWave・最大比重を設定します。Wave番号を受け取った<code>WaveGenerator.GenerateWave</code>は、出現時間や間隔、敵候補の比重を計算し、1回分の<code>IntervalWaveData</code>を作ります。敵の出現数を先に固定するのではなく、Wave時間と出現間隔に沿って敵を生成します。</p>
-							<h4>クラスとデータの受け渡し</h4>
+							<h4>1. 実装した機能</h4>
+							<p>Waveごとの出現時間・間隔・敵候補をルールから作り、時間内に敵を出現させます。敵の数を先に決めるのではなく、Wave時間と出現間隔に沿って生成します。</p>
+							<h4>2. クラス構成</h4>
 							<ul>
-								<li><code>EndlessWaveRule</code> / <code>EnemyScalingPattern</code>: Wave条件と敵パターンを保持します。</li>
-								<li><code>WaveGenerator</code>: 条件から時間・間隔・スタンピード状態・重み付き敵候補を計算します。</li>
-								<li><code>IntervalWaveData</code>: 生成したWave条件と<code>EnemySO</code>・重みの候補配列を運びます。</li>
-								<li><code>WaveManager</code>: Wave番号、ボス判定、タイマー、UI、Wave終了を管理します。</li>
-								<li><code>EnemySpawnController</code>: 候補を重みで選び、位置を決めて敵を生成し、HPを設定します。</li>
+								<li><code>EndlessWaveRule</code>は通常Wave・スタンピードの設定を持つScriptableObjectアセットです。<code>EnemyScalingPattern</code>には敵ごとの出現開始Wave、ピークWave、最大比重を設定します。</li>
+								<li><code>WaveGenerator.GenerateWave()</code>は設定とWave番号から実行用データを生成します。<code>IntervalWaveData</code>もScriptableObjectで、メソッド内で実行時インスタンスが作られ、1回分のWave条件と<code>EnemySO</code>・重みの候補配列を持ちます。</li>
+								<li><code>WaveManager</code>は生成データを受け取り、Wave番号・タイマー・UI・終了判定を管理します。通常Waveでは<code>EnemySpawnController</code>にデータを渡し、敵の選択・配置・HP設定を任せます。</li>
 							</ul>
-							<h4>設定から次のWaveまで</h4>
+							<h4>3. 処理の流れ</h4>
 							<ol>
-								<li><p><code>WaveManager</code>がWaveを開始し、<code>WaveGenerator.GenerateWave</code>にWave番号と<code>EndlessWaveRule</code>を渡します。</p></li>
-								<li><p><code>WaveGenerator</code>が敵の開始Waveを確認し、ピークWaveまでの比重を線形補間して<code>IntervalWaveData</code>を返します。</p></li>
-								<li><p>通常Waveでは<code>WaveManager</code>から<code>EnemySpawnController</code>へデータを渡します。敵の出現終了後、フィールド上の敵がいなくなると次のWaveへ進みます。</p></li>
+								<li><p><code>WaveManager</code>が<code>WaveGenerator.GenerateWave()</code>にWave番号と<code>EndlessWaveRule</code>を渡します。</p></li>
+								<li><p><code>WaveGenerator</code>は各敵の開始Waveより前なら候補から除き、それ以外は<code>Mathf.InverseLerp</code>で開始からピークまでの進み具合を求め、<code>Mathf.Lerp</code>で0から最大比重までを計算します。結果を含む<code>IntervalWaveData</code>を返します。</p></li>
+								<li><p><code>WaveManager</code>はそのデータを保持し、通常Waveでは<code>EnemySpawnController.StartSpawnEnemy()</code>へ渡します。敵の出現時間が終わり、フィールド上の敵がいなくなると次のWaveに進みます。</p></li>
 							</ol>
-							<h4>変更できる範囲と改善候補</h4>
-							<p>既存の敵パターンなら、敵データとルールアセットの組み合わせで登場時期や比重を調整できます。別のWave種別を増やす場合は、生成データや<code>WaveManager</code>の分岐も変更対象になります。現在のコードでは表示Wave番号より1大きい番号を生成器へ渡し、<code>IntervalWaveData.readyTime</code>は進行側で使わず固定1秒待っています。番号と待機時間の扱い、敵候補が空の場合の検査は見直し候補です。</p>
+							<h4>4. 設計上の工夫と利点</h4>
+							<p>設定値を持つ<code>EndlessWaveRule</code>と、1回分の生成結果を持つ<code>IntervalWaveData</code>を分けています。敵ごとの登場時期や比重はルール側で調整でき、生成器はその設定から実行用データを組み立てます。また、<code>WaveManager</code>が進行を、<code>EnemySpawnController</code>が通常敵の出現を担うため、進行条件と敵配置の処理を別々に追えます。これは現在の実装を振り返ったときの利点であり、当時の設計意図を示すものではありません。</p>
+							<h4>5. 課題と今後の改善案</h4>
+							<p>表示Wave番号より1大きい番号を生成器へ渡しているため、番号と敵比重・ボス周期の対応を確認する必要があります。また、<code>IntervalWaveData.readyTime</code>は生成されますが、進行側では使わずWave後に固定1秒待ちます。設定との対応を整理し、敵候補が空の場合などの境界条件も検査するのが改善候補です。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/EndlessWaveRule.cs" target="_blank" rel="noopener noreferrer">Waveルール</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/IntervalWaveData.cs" target="_blank" rel="noopener noreferrer">Waveデータ</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/WaveGenerator.cs" target="_blank" rel="noopener noreferrer">Wave生成</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/WaveManager.cs" target="_blank" rel="noopener noreferrer">Wave進行</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Wave/EnemySpawnController.cs" target="_blank" rel="noopener noreferrer">敵の出現</a></p>
 						</article>
 						<article id="skill-activation">
 							<h3>オトモスキルの装備から効果適用まで</h3>
-							<h4>実装している仕組み</h4>
-							<p>装備したスキルを出撃時に戦闘側へ渡し、キー入力または個別設定に応じた自動発動で実行します。スキルごとの効果は<code>SkillSO</code>を継承するクラスに実装されています。</p>
-							<h4>クラス構成</h4>
+							<h4>1. 実装した機能</h4>
+							<p>装備したスキルを出撃時に戦闘側へ渡し、手動入力またはスキルごとの自動設定に応じて発動します。共通のスキル情報と実行時の入口を<code>SkillSO</code>にまとめ、個別の効果を派生クラスに実装しています。</p>
+							<h4>2. クラス構成</h4>
 							<ul>
-								<li><code>SkillDatabase</code>と<code>SkillInventoryManager</code>: スキルSOの一覧からインベントリ表示を作り、stockを更新します。</li>
-								<li><code>OtomoSkillStatusSlotController</code> / <code>OtomoSkillStatusSlot</code>: 装備枠への設定と、手動・自動の選択を扱います。</li>
-								<li><code>OtomoSkillManager</code>: 出撃時に装備枠からスキル参照を集め、装備中リストを更新します。</li>
-								<li><code>OtomoSkillRunner</code>: 戦闘時スロットへの反映、発動条件、スキル実行、クールタイムを処理します。</li>
-								<li><code>SkillSO</code>と派生クラス: 共通のスキル情報・実行口と、個別の効果処理を定義します。</li>
+								<li><code>SkillSO</code>はScriptableObjectの抽象クラスです。名前・カテゴリ・レアリティ・画像などの共通情報を持ち、<code>GetDecCoolTime(int awakening)</code>、<code>GetEffectDiscription(int awakening)</code>、<code>Execute()</code>を派生クラスに実装させます。表示用クールタイムは覚醒数を使って求めます。</li>
+								<li><code>OtomoSkillManager</code>は装備中の<code>SkillSO</code>参照をリストで管理します。出撃時に<code>ReplaceEquippedSkills()</code>が装備枠からリストを作り直します。</li>
+								<li><code>OtomoSkillRunner</code>は戦闘開始時にそのリストを取得し、戦闘スロット表示、手動・自動発動、クールタイムを処理します。</li>
 							</ul>
-							<h4>装備から効果実行まで</h4>
+							<h4>3. 処理の流れ</h4>
 							<ol>
-								<li><p>装備画面で選んだスキルを、<code>OtomoSkillStatusSlotController</code>が装備枠へ設定します。</p></li>
-								<li><p>出撃時に<code>HomeSceneController</code>が<code>OtomoSkillManager.ReplaceEquippedSkills</code>を呼び、装備枠の<code>SkillSO</code>参照を一覧に移します。</p></li>
-								<li><p><code>OtomoSkillRunner</code>が一覧を戦闘UIへ反映します。Z / X / Cの入力、または敵がいるときの自動発動設定を確認します。</p></li>
-								<li><p>発動可能なら<code>SkillSO.Execute</code>を呼び、クールタイムと戦闘中UIを更新します。派生クラスがゲーム側の処理へ効果を適用します。</p></li>
+								<li><p>装備画面で選んだスキルを装備枠に設定します。出撃時に<code>HomeSceneController.GoGameScene()</code>が<code>OtomoSkillManager.ReplaceEquippedSkills()</code>を呼び、装備枠の参照を管理リストへ入れます。</p></li>
+								<li><p><code>OtomoSkillRunner.Start()</code>がそのリストを受け取り、対応する戦闘スロットへ表示します。RunnerとManagerは同じリスト、各画面は同じ<code>SkillSO</code>アセット参照を使います。</p></li>
+								<li><p>Z / X / C入力と自動発動のどちらも<code>SkillExecute()</code>へ進み、クールタイム終了状態を確認してから<code>SkillSO.Execute()</code>を呼びます。続いて<code>UpdateCoolTime()</code>が終了状態と残り時間の表示を更新します。</p></li>
 							</ol>
-							<h4>拡張範囲と改善候補</h4>
-							<p>新しい効果は<code>SkillSO</code>の派生クラスとスキルデータを追加する形で作れます。一方、現在の<code>SkillSO</code>は設定情報だけでなく自動・CT状態も持ち、Runnerは発動・クールタイム・UI更新をまとめて扱います。装備単位の状態管理、キーと枠数の境界確認、自動発動コルーチンの重複防止は、今後整理できる点です。</p>
+							<h4>4. 設計上の工夫と利点</h4>
+							<p>共通情報と抽象メソッドを<code>SkillSO</code>に置くことで、Runnerは個々のスキル型ごとに分岐せず共通の<code>Execute()</code>を呼べます。新しい効果は派生クラスで実装でき、装備リストの管理は<code>OtomoSkillManager</code>、発動とクールタイムは<code>OtomoSkillRunner</code>が担います。これは現在の構造を振り返った評価であり、当時の意図を断定するものではありません。</p>
+							<h4>5. 課題と今後の改善案</h4>
+							<p><code>IsEndCoolTime</code>は<code>SkillSO</code>インスタンス上の実行時状態で、アセットにシリアライズされる設定値ではありません。Runnerが同じアセット参照の値を更新するため、その参照を使う箇所では状態も共有されます。さらに、自動発動条件が続く間は<code>Update()</code>から毎フレーム待機コルーチンを開始するため、発動待ちが重なる可能性があります。手動入力は固定の3キーで、<code>SkillExecute(index)</code>にリスト範囲の確認もありません。スキル数・枠数を変更する前に、状態を装備ごとに持たせる方法、待機処理の重複防止、入力と枠数の境界チェックを整理するのが改善候補です。</p>
 							<p><a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/UI/Otomo/OtomoSkillStatusSlotController.cs" target="_blank" rel="noopener noreferrer">装備枠の選択</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Otomo_Skill/OtomoSkillManager.cs" target="_blank" rel="noopener noreferrer">装備スキル一覧</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/Otomo_Skill/OtomoSkillRunner.cs" target="_blank" rel="noopener noreferrer">スキル発動</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/SO/SkillSO.cs" target="_blank" rel="noopener noreferrer">共通定義</a> · <a href="https://github.com/HinataPiyo/BombCrash/blob/e4fc3fe45371a4f4b6e214522991a8e64b4e50a5/Assets/Scripts/System/SkillLogic/Attack/ColdShot.cs" target="_blank" rel="noopener noreferrer">効果実装例: ColdShot</a></p>
 						</article>
 					</div>
