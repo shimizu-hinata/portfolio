@@ -59,6 +59,8 @@
 
 ### Bomb Crash
 
+Wave / オトモスキルシステムの呼出し経路、資料との差異、設計上の利点・制約、拡張範囲とMermaid図は[bomb-crash-system-analysis.md](bomb-crash-system-analysis.md)に追記した。以下は既存調査記録で、上記の詳細記録を優先する。
+
 **コードから読める構成（A）**
 
 - `EndlessWaveRule` ScriptableObjectが通常Wave、スタンピード、敵HP上昇、敵種ごとの開始Wave・ピークWave・重みを保持する。

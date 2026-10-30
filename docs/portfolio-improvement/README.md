@@ -8,9 +8,9 @@
 
 ## 現在地
 
-- **現在の工程:** 工程10（採用向け最終調整）。詳細ページに記載された担当範囲をトップにも反映し、Bomb Crashのページを概要→担当・技術の見どころ→基本ループ→実装詳細→関連リンクの順に整理。Wave生成・コマンド処理・QTE戦闘の説明を処理の順番とクラスの役割が分かる文章に修正した。Reloaded専用の画面素材はローカルに見つからず、外部動画内容も未確認。今回の変更は未コミットで、公開版への反映は未確認。
+- **現在の工程:** 工程11（Bomb Crash技術調査と掲載改善）。固定コミットのREADME・設計資料・Wave / Skill関連コードを照合し、データと処理の流れ、資料との差、改善候補を[bomb-crash-system-analysis.md](bomb-crash-system-analysis.md)に記録。Bomb Crashページへ2つの技術解説を反映した。Unity実行・本人の設計意図・担当詳細・紹介動画と対象ビルドの対応は未確認。変更は未コミット・未公開。
 - **最終更新:** 2026-10-30
-- **Git:** ブランチ `main`、工程10開始時のHEAD `b65916a`（`ポートフォリオのドキュメントおよびHTMLファイルを、明確かつ正確な内容となるようリファクタリングしました。`）。工程10の変更は未コミット。
+- **Git:** ブランチ `main`、工程10開始時のHEAD `b65916a`（`ポートフォリオのドキュメントおよびHTMLファイルを、明確かつ正確な内容となるようリファクタリングしました。`）。工程10・11の変更は未コミット。
 - **作業開始時に確認した既存変更:** `assets/css/modules/60-portfolio-new.css` と `assets/js/site.js` が変更済み。アンカー先の強調表示およびハッシュ遷移時のスクロール処理に関する差分。元の差分を保持し、CSSにはKaomoji詳細ページだけに作用する導入部の縮小ルールを追加した。`assets/js/site.js` は変更していない。管理資料は既存ファイルを確認後に追加。
 - **作業管理ディレクトリ:** `docs/portfolio-improvement/`
 - **現状調査レポート:** [current-state.md](current-state.md)
@@ -21,6 +21,8 @@
 - **未確認事項一覧:** [open-questions.md](open-questions.md)
 - **最新の文章・掲載構成監査:** [stage-09-review.md](stage-09-review.md)
 - **採用向け最終調整:** [stage-10-review.md](stage-10-review.md)
+- **Bomb Crash技術調査・掲載改善:** [stage-11-review.md](stage-11-review.md)
+- **Bomb Crash Wave / Skill設計分析:** [bomb-crash-system-analysis.md](bomb-crash-system-analysis.md)
 - **公開リポジトリ:** `shimizu-hinata/portfolio.github.io`（ローカルの `origin` URLで確認）
 
 ### 初期調査で把握したこと
