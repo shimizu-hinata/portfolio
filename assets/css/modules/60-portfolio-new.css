@@ -2045,3 +2045,322 @@ body {
         font-size: 1.25rem;
     }
 }
+
+body.kaomoji-detail .post > section {
+    margin-top: 3rem;
+}
+
+body.kaomoji-detail .kaomoji-overview > p,
+body.kaomoji-detail .kaomoji-loop > p,
+body.kaomoji-detail .kaomoji-build > p,
+body.kaomoji-detail .kaomoji-combat > p {
+    max-width: 68ch;
+}
+
+body.kaomoji-detail .kaomoji-video {
+    margin-top: 2rem;
+}
+
+body.kaomoji-detail .kaomoji-video h3 {
+    margin-bottom: 0.75rem;
+}
+
+body.kaomoji-detail .kaomoji-video .js-video-player {
+    aspect-ratio: 16 / 9;
+    background: #e9edf0;
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    overflow: hidden;
+}
+
+body.kaomoji-detail .kaomoji-video .js-video-player iframe {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+body.kaomoji-detail .kaomoji-loop,
+body.kaomoji-detail .kaomoji-build,
+body.kaomoji-detail .kaomoji-combat {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+body.kaomoji-detail .kaomoji-flow {
+    counter-reset: kaomoji-step;
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+}
+
+body.kaomoji-detail .kaomoji-flow li {
+    background: #f5f7f8;
+    border-left: 3px solid var(--portfolio-accent-strong);
+    border-radius: 0 var(--portfolio-radius) var(--portfolio-radius) 0;
+    counter-increment: kaomoji-step;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    list-style: none;
+    min-width: 0;
+    padding: 1rem;
+}
+
+body.kaomoji-detail .kaomoji-flow li::before {
+    color: var(--portfolio-accent-strong);
+    content: counter(kaomoji-step, decimal-leading-zero);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+body.kaomoji-detail .kaomoji-flow strong {
+    color: var(--portfolio-text);
+    font-size: 0.98rem;
+    line-height: 1.45;
+}
+
+body.kaomoji-detail .kaomoji-flow span {
+    color: var(--portfolio-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+body.kaomoji-detail .section-heading {
+    margin-bottom: 1.25rem;
+}
+
+body.kaomoji-detail .section-heading .portfolio-eyebrow {
+    color: var(--portfolio-accent-strong);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.35rem;
+}
+
+body.kaomoji-detail .kaomoji-highlight-grid,
+body.kaomoji-detail .kaomoji-build-details,
+body.kaomoji-detail .kaomoji-architecture-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.kaomoji-detail .kaomoji-highlight-grid article,
+body.kaomoji-detail .kaomoji-build-details article,
+body.kaomoji-detail .kaomoji-architecture-grid article {
+    border-top: 1px solid var(--portfolio-border);
+    margin: 0;
+    min-width: 0;
+    padding: 1rem 0 0;
+}
+
+body.kaomoji-detail .kaomoji-number {
+    color: var(--portfolio-accent-strong);
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+}
+
+body.kaomoji-detail .kaomoji-highlight-grid h3,
+body.kaomoji-detail .kaomoji-build-details h3,
+body.kaomoji-detail .kaomoji-architecture-grid h3 {
+    margin-bottom: 0.5rem;
+}
+
+body.kaomoji-detail .kaomoji-highlight-grid p,
+body.kaomoji-detail .kaomoji-build-details p,
+body.kaomoji-detail .kaomoji-architecture-grid p {
+    color: var(--portfolio-muted);
+    margin-bottom: 0;
+}
+
+body.kaomoji-detail .kaomoji-slot-wrap {
+    margin: 1.5rem 0 2rem;
+    max-width: 100%;
+}
+
+body.kaomoji-detail .kaomoji-slot-table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+body.kaomoji-detail .kaomoji-slot-table th,
+body.kaomoji-detail .kaomoji-slot-table td {
+    border-bottom: 1px solid var(--portfolio-border);
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+
+body.kaomoji-detail .kaomoji-slot-table thead th {
+    color: var(--portfolio-text);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+body.kaomoji-detail .kaomoji-slot-table tbody th {
+    color: var(--portfolio-text);
+    font-size: 0.92rem;
+    width: 20%;
+}
+
+body.kaomoji-detail .kaomoji-slot-table td {
+    color: var(--portfolio-muted);
+    font-size: 0.92rem;
+}
+
+body.kaomoji-detail .kaomoji-note {
+    color: var(--portfolio-muted);
+    font-size: 0.9rem;
+    margin: 0.75rem 0 0;
+}
+
+body.kaomoji-detail .kaomoji-build-flow {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+}
+
+body.kaomoji-detail .kaomoji-build-details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 2rem;
+}
+
+body.kaomoji-detail .kaomoji-combat-note {
+    border-left: 3px solid var(--portfolio-accent-strong);
+    margin-top: 1.75rem;
+    padding: 0.15rem 0 0.15rem 1rem;
+}
+
+body.kaomoji-detail .kaomoji-combat-note h3 {
+    margin-bottom: 0.5rem;
+}
+
+body.kaomoji-detail .kaomoji-combat-note p {
+    color: var(--portfolio-muted);
+    margin-bottom: 0;
+    max-width: 68ch;
+}
+
+body.kaomoji-detail .kaomoji-source-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+    margin: 1.25rem 0 0;
+}
+
+body.kaomoji-detail .kaomoji-source-links a {
+    display: inline-block;
+    min-height: 2.5rem;
+    padding: 0.45rem 0;
+}
+
+body.kaomoji-detail .kaomoji-architecture-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.kaomoji-detail .kaomoji-meta {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.25rem 0 1.75rem;
+}
+
+body.kaomoji-detail .kaomoji-meta > div {
+    border-left: 2px solid var(--portfolio-accent-strong);
+    min-width: 0;
+    padding-left: 0.8rem;
+}
+
+body.kaomoji-detail .kaomoji-meta dt {
+    color: var(--portfolio-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+body.kaomoji-detail .kaomoji-meta dd {
+    color: var(--portfolio-text);
+    font-size: 0.95rem;
+    margin: 0.25rem 0 0;
+    overflow-wrap: anywhere;
+}
+
+body.kaomoji-detail .post a:focus-visible {
+    outline: 3px solid var(--portfolio-accent-strong);
+    outline-offset: 3px;
+}
+
+@media screen and (max-width: 980px) {
+    body.kaomoji-detail .kaomoji-architecture-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.kaomoji-detail .kaomoji-build-details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 736px) {
+    body.kaomoji-detail .post > section {
+        margin-top: 2.25rem;
+    }
+
+    body.kaomoji-detail .kaomoji-highlight-grid,
+    body.kaomoji-detail .kaomoji-build-details,
+    body.kaomoji-detail .kaomoji-architecture-grid,
+    body.kaomoji-detail .kaomoji-meta {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table,
+    body.kaomoji-detail .kaomoji-slot-table tbody,
+    body.kaomoji-detail .kaomoji-slot-table tr,
+    body.kaomoji-detail .kaomoji-slot-table th,
+    body.kaomoji-detail .kaomoji-slot-table td {
+        display: block;
+        width: 100%;
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table thead {
+        clip: rect(0, 0, 0, 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table tbody tr {
+        border-bottom: 1px solid var(--portfolio-border);
+        padding: 0.75rem 0;
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table tbody th {
+        border: 0;
+        padding: 0.25rem 0;
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table td {
+        border: 0;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: minmax(6.5rem, 0.45fr) minmax(0, 1fr);
+        padding: 0.35rem 0;
+    }
+
+    body.kaomoji-detail .kaomoji-slot-table td::before {
+        color: var(--portfolio-muted);
+        content: attr(data-label);
+        font-size: 0.8rem;
+        font-weight: 800;
+    }
+}

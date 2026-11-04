@@ -9,6 +9,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Kaomoji Clash初版のゲームループ、顔文字パーツによるビルド、ドラッグ発射と衝突戦闘の実装を紹介します。" />
 	<title>Kaomoji Clash | Game Portfolio</title>
 	<link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -33,95 +34,182 @@
 							<p class="project-genre">衝突アクション</p>
 						</div>
 						<h1>Kaomoji Clash</h1>
-						<p>顔文字の記号パーツを組み合わせてビルドを作り、アリーナで敵と戦うトップダウン型アクションゲームです。</p>
+						<p>顔文字を引っ張って射出し、敵にぶつけて戦うトップダウン型アクションです。戦闘で得た記号パーツを組み合わせ、タグとステータス補正でビルドを作ります。</p>
 					</div>
 					<figure class="project-hero-visual">
 						<img src="images/KaomojiClash_Thumbnail.png" alt="Kaomoji Clashの作品サムネイル" fetchpriority="high" />
 					</figure>
 				</header>
-				<nav class="project-toc" aria-label="作品ページの目次">
-					<a href="#gameplay">紹介動画</a>
-					<a href="#game-overview">ゲーム概要</a>
-					<a href="#build-flow">ビルドの処理</a>
-					<a href="#implementation">コード解説</a>
-					<a href="#project-links">ソースコード</a>
-				</nav>
-				<section class="project-at-a-glance" id="project-summary">
-					<h2>作品と担当</h2>
+				<section class="project-at-a-glance kaomoji-summary" id="project-summary">
+					<h2>作品の要点</h2>
 					<div class="project-highlight-grid">
 						<article>
-							<h3>担当</h3>
+							<h3>制作・担当</h3>
 							<p>個人制作。企画・プログラミングを担当。</p>
 						</article>
 						<article>
-							<h3>ゲームの特徴</h3>
-							<p>顔文字の記号パーツを組み替えてビルドを作り、アリーナで敵と戦うアクションゲーム。</p>
+							<h3>ゲームの軸</h3>
+							<p>顔文字パーツの構成を変え、性能の異なるビルドで敵に挑むトップダウンアクション。</p>
 						</article>
 						<article>
-							<h3>技術紹介</h3>
-							<p>パーツのタグを集計し、スタック数に応じたステータス補正を適用する処理。</p>
+							<h3>技術の見どころ</h3>
+							<p>タグの重複集計、ステータス補正、ドラッグ発射と速度差を使う衝突ダメージ。</p>
 						</article>
 					</div>
 					<ul class="actions project-quick-links">
+						<li><a href="#gameplay" class="button small">紹介動画を見る</a></li>
 						<li><a href="https://github.com/HinataPiyo/KaomojiClash/tree/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコードを見る</a></li>
 					</ul>
 				</section>
-				<section id="gameplay">
-					<h2>ゲーム紹介</h2>
-					<div class="image featured">
+				<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#core-loop">ゲームループ</a>
+					<a href="#highlights">主な特徴</a>
+					<a href="#build-system">ビルド計算</a>
+					<a href="#combat-system">戦闘処理</a>
+					<a href="#architecture">クラス構成</a>
+					<a href="#project-links">関連リンク</a>
+				</nav>
+				<section id="game-overview" class="kaomoji-overview">
+					<h2>顔文字の構成が、そのまま戦い方になる</h2>
+					<p><strong>Kaomoji Clash</strong>は、顔文字を引っ張って射出し、敵との衝突で戦うビルド主導型アクションです。戦闘で得た記号パーツを組み替え、パーツの成長値とタグ効果から次のビルドを作ります。</p>
+					<p>装備中パーツの構成・レベル別補正・タグ効果からSpeed・Power・Guard・Staminaを算出します。操作はドラッグとリリース。狙う方向と引く距離を決め、壁の反射も利用して敵への再接触を狙います。</p>
+					<div class="kaomoji-video" id="gameplay">
+						<h3>ゲーム紹介</h3>
 						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/3Ye79Ocqmjk"></div>
-					</div>
-					<p><a href="https://www.youtube.com/watch?v=3Ye79Ocqmjk" target="_blank"
-							rel="noopener noreferrer">動画が表示されない場合はYouTubeで見る</a></p>
-				</section>
-				<section id="game-overview">
-					<h2>ゲーム概要</h2>
-					<p><strong>Kaomoji Clash</strong> は、顔文字の記号パーツを組み合わせてビルドを作り、アリーナで敵と戦うトップダウン型アクションゲームです。</p>
-					<ul>
-						<li>記号パーツの構成がキャラクターのステータスに反映されます。</li>
-						<li>顔文字を引っ張って発射し、敵にぶつけて攻撃します。</li>
-						<li>戦闘で集めた記号パーツを組み替え、次の挑戦に向けてビルドを再構成します。</li>
-					</ul>
-				</section>
-				<section class="design-flow-section" id="build-flow">
-					<h2>パーツからステータスまで</h2>
-					<p>顔文字パーツのタグを集計し、タグごとの補正を適用した後、パーツ固有の補正を加えます。</p>
-					<div class="design-flow-grid">
-						<div class="design-flow-card">
-							<h3>顔文字ビルドの処理</h3>
-							<ol class="design-flow-steps design-flow-steps-three">
-								<li><strong>顔文字を初期化</strong><span>PlayerApplyKaomojiが表示と関連処理を初期化</span></li>
-								<li><strong>タグを集計</strong><span>PlayerUpgradeServiceがタグを集計し、条件タグを分けて最大5スタックで記録</span></li>
-								<li><strong>補正を適用</strong><span>タグの補正後にパーツ由来の補正を加え、PlayerUpgradeService.UpgradedStatusに計算結果を保存</span></li>
-							</ol>
-						</div>
+						<p><a href="https://www.youtube.com/watch?v=3Ye79Ocqmjk" target="_blank" rel="noopener noreferrer">動画が表示されない場合はYouTubeで見る</a></p>
 					</div>
 				</section>
-				<section class="tech-deep-dive" id="implementation">
-					<h2>タグ補正を適用するコード</h2>
-					<p class="tech-lead">タグごとの補正は、基礎ステータスに乗算補正を適用してから加算補正を加えます。その後、PlayerUpgradeServiceが顔文字パーツ由来の補正を反映します。</p>
-					<figure class="tech-code">
-						<figcaption>SkillTag.StatusModifier.ApplyModifier（Kaomoji Clashのソースコードより）</figcaption>
-						<pre><code>public float ApplyModifier(float baseValue)
-{
-    float modifiedValue = ApplyMultiplication(baseValue);
-    modifiedValue = ApplyAddition(modifiedValue);
-    return modifiedValue;
-}</code></pre>
-					</figure>
-					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerUpgradeService.cs#L47-L197"
-							target="_blank" rel="noopener noreferrer">タグの集計と補正を行う PlayerUpgradeService.cs を見る</a></p>
-					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/ScriptableObject/KaomojiSkill/UpgradeDefinition.cs#L37-L79"
-							target="_blank" rel="noopener noreferrer">補正値を定義する UpgradeDefinition.cs を見る</a></p>
-					<p><a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerApplyKaomoji.cs#L15-L33"
-							target="_blank" rel="noopener noreferrer">顔文字と関連処理を初期化する PlayerApplyKaomoji.cs を見る</a></p>
+				<section class="design-flow-section kaomoji-loop" id="core-loop">
+					<h2>戦闘とビルドのループ</h2>
+					<p>Waveを攻略して得た報酬を、パーツの入手・成長と次の構成に結び付けます。</p>
+					<ol class="kaomoji-flow" aria-label="エリア選択からビルド再構成までのゲームループ">
+						<li><strong>エリアを選ぶ</strong><span>難易度を選択して戦闘へ。</span></li>
+						<li><strong>引いて射出する</strong><span>ドラッグ方向と距離を決め、敵にぶつける。</span></li>
+						<li><strong>Waveを攻略する</strong><span>敵を倒し、パーツ・経験値・報酬を得る。</span></li>
+						<li><strong>顔文字を組み替える</strong><span>所持パーツを選び直し、異なる構成で次の挑戦へ。</span></li>
+					</ol>
 				</section>
-				<section id="project-links">
-					<h3>関連リンク</h3>
+				<section class="kaomoji-highlights" id="highlights">
+					<header class="section-heading">
+						<p class="portfolio-eyebrow">CORE SYSTEMS</p>
+						<h2>この作品の4つの見どころ</h2>
+					</header>
+					<div class="kaomoji-highlight-grid">
+						<article>
+							<span class="kaomoji-number">01</span>
+							<h3>顔文字パーツで性能を組み立てる</h3>
+							<p>5つのスロットに設定したパーツのうち、目と口は顔文字表示に使い、全パーツからステータス補正とスキルタグを集計します。</p>
+						</article>
+						<article>
+							<span class="kaomoji-number">02</span>
+							<h3>タグの重なりを効果へ変換する</h3>
+							<p>同じタグを最大5スタックまで集計し、スタック数ごとに用意した補正値を適用。条件付きタグは衝突時の効果に使います。</p>
+						</article>
+						<article>
+							<span class="kaomoji-number">03</span>
+							<h3>引く距離を発射速度に結び付ける</h3>
+							<p>ドラッグの方向と距離から速度を計算し、物理衝突後は反射と速度差をもとにダメージを判定します。</p>
+						</article>
+						<article>
+							<span class="kaomoji-number">04</span>
+							<h3>連続命中とWave報酬をつなぐ</h3>
+							<p>連続して敵にダメージを与えるとコンボが伸びます。3つのWaveからなる戦闘の終了時にパーツを所持品へ加え、装備中パーツに経験値を反映します。</p>
+						</article>
+					</div>
+				</section>
+				<section class="design-flow-section kaomoji-build" id="build-system">
+					<h2>ビルド計算：スロットから戦闘ステータスまで</h2>
+					<p>パーツは見た目の記号だけではなく、レベルに応じた4種の補正値とスキルタグを持ちます。ビルド画面ではパーツの種類を選び、選択したパーツのステータスとタグを確認できます。</p>
+					<div class="kaomoji-slot-wrap">
+						<table class="kaomoji-slot-table">
+							<thead><tr><th scope="col">スロット</th><th scope="col">ビルド内の役割</th><th scope="col">現在の処理</th></tr></thead>
+							<tbody>
+								<tr><th scope="row">目・口</th><td data-label="ビルド内の役割">顔文字の見た目と性能を構成</td><td data-label="現在の処理">目は左右に分割し、口と顔の輪郭をつないで文字列化</td></tr>
+								<tr><th scope="row">手・装飾1・装飾2</th><td data-label="ビルド内の役割">顔文字表示とは別に性能を構成</td><td data-label="現在の処理">表示用文字列には含めず、タグとレベル別ステータスを集計</td></tr>
+							</tbody>
+						</table>
+						<p class="kaomoji-note">ステータス集計は、装備中の各スロットからパーツの補正値を合算します。スロット別倍率による重み付けは行わず、未装備スロットはスキップします。</p>
+					</div>
+					<ol class="kaomoji-flow kaomoji-build-flow" aria-label="顔文字パーツからプレイヤーステータスが計算されるまで">
+						<li><strong>パーツデータを選ぶ</strong><span><code>KaomojiPartData</code>が部位、記号、レベル別の補正、スキルタグを保持。</span></li>
+						<li><strong>顔文字とタグを集める</strong><span><code>KAOMOJI</code>が5枠をまとめ、表示用の顔文字とタグ一覧を作る。</span></li>
+						<li><strong>タグを分類・集計する</strong><span><code>PlayerUpgradeService</code>が通常タグと条件付きタグを分け、重複数をそれぞれ最大5まで数える。</span></li>
+						<li><strong>補正を順に適用する</strong><span>通常タグの効果を適用した後、各パーツのレベル別補正値を合算してステータスへ反映。</span></li>
+						<li><strong>プレイヤーへ反映する</strong><span><code>PlayerApplyKaomoji</code>が全パーツのタグを<code>PlayerUpgradeService</code>へ渡し、顔文字表示と文字数に応じた当たり判定幅を初期化。移動・戦闘処理は計算済みステータスを参照。</span></li>
+					</ol>
+					<div class="kaomoji-build-details">
+						<article>
+							<h3>タグ補正はスタック数ごとに設定</h3>
+							<p><code>UpgradeDefinition.cs</code>の<code>SkillTag</code>（ScriptableObject）は表示名、条件付きかどうか、最大スタック数と各段階の補正を保持します。<code>PlayerUpgradeService</code>は集計したスタック数に対応する補正を取得します。</p>
+						</article>
+						<article>
+							<h3>乗算してから加算</h3>
+							<p>各タグの<code>StatusModifier.ApplyModifier</code>は「現在値 × mul → addを加算」の順に処理します。タグ補正を適用した後、パーツ補正は「現在値 ×（1 + パーツ補正合計）」として反映します。</p>
+						</article>
+						<article>
+							<h3>条件付きタグは別経路</h3>
+							<p>条件付きタグは常時ステータス補正から除外されます。たとえば<code>ReboundBoost</code>は壁との接触時にレベル別の速度倍率・時間を取得し、一時的な速度上昇と残像表示につなぎます。</p>
+						</article>
+					</div>
+					<p class="kaomoji-source-links">
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Constants/CharacterStatus.cs" target="_blank" rel="noopener noreferrer">KAOMOJI・パーツ値</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerUpgradeService.cs" target="_blank" rel="noopener noreferrer">タグ集計・ステータス計算</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerApplyKaomoji.cs" target="_blank" rel="noopener noreferrer">顔文字とプレイヤー初期化</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/ScriptableObject/KaomojiSkill/UpgradeDefinition.cs" target="_blank" rel="noopener noreferrer">タグ補正データ</a>
+					</p>
+				</section>
+				<section class="design-flow-section kaomoji-combat" id="combat-system">
+					<h2>戦闘処理：ドラッグから命中まで</h2>
+					<p>プレイヤーの操作はタッチドラッグです。引いた距離が短すぎる場合は発射せず、距離に応じた速度で<code>Rigidbody2D</code>を動かします。</p>
+					<ol class="kaomoji-flow kaomoji-combat-flow" aria-label="プレイヤーの入力から敵へのダメージ反映まで">
+						<li><strong>方向と距離を決める</strong><span><code>PlayerMovement</code>がタッチ位置をワールド座標へ変換し、ドラッグ距離を上限内に収める。</span></li>
+						<li><strong>リリースして発射</strong><span>最小距離を満たすと、方向・距離の割合・プレイヤーSpeedから初速を計算。</span></li>
+						<li><strong>物理衝突で反射</strong><span><code>Reflect</code>が衝突面の法線で速度ベクトルを反射し、<code>reflectPower</code>を適用。</span></li>
+						<li><strong>速度差でダメージ判定</strong><span><code>PlayerReflect</code>はプレイヤー側の速度が敵側を基準とした閾値を超えた場合にダメージを与える。</span></li>
+						<li><strong>命中結果を反映</strong><span><code>Combo</code>は3秒の継続時間と最大10コンボを使って攻撃倍率を補間し、敵の体力、ヒットストップ、効果音へつなぐ。</span></li>
+					</ol>
+					<div class="kaomoji-combat-note">
+						<h3>攻撃の強さを「当て方」に結び付ける</h3>
+						<p>プレイヤーと敵の双方が同じ<code>Reflect</code>基底処理で衝突方向を反射し、ダメージ条件はそれぞれの派生クラスで判定します。プレイヤーは反射後の速度の二乗が敵側の0.92倍を上回るとダメージを与え、その命中時だけコンボを加算します。</p>
+					</div>
+					<p class="kaomoji-source-links">
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerMovement.cs" target="_blank" rel="noopener noreferrer">タッチ入力・発射</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Character/Reflect.cs" target="_blank" rel="noopener noreferrer">共通反射処理</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Player/PlayerReflect.cs" target="_blank" rel="noopener noreferrer">プレイヤー衝突・攻撃</a> ·
+						<a href="https://github.com/HinataPiyo/KaomojiClash/blob/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868/Assets/Scripts/Character/Combo.cs" target="_blank" rel="noopener noreferrer">コンボ計算</a>
+					</p>
+				</section>
+				<section class="kaomoji-architecture" id="architecture">
+					<h2>主なクラスとデータのつながり</h2>
+					<div class="kaomoji-architecture-grid">
+						<article>
+							<h3>ビルドとステータス</h3>
+							<p><code>KaomojiPartData</code>がパーツ単位の記号・補正・タグを保持。<code>KAOMOJI</code>が装備枠をまとめ、<code>PlayerApplyKaomoji</code>がタグを渡して表示と当たり判定を初期化し、<code>PlayerUpgradeService</code>がステータスを計算します。</p>
+						</article>
+						<article>
+							<h3>入力と戦闘</h3>
+							<p><code>PlayerMovement</code>がタッチ入力と発射、<code>Reflect</code>が共通の物理反射、<code>PlayerReflect</code>がプレイヤー側のダメージ条件・コンボ連携を担当。</p>
+						</article>
+						<article>
+							<h3>進行と報酬</h3>
+							<p><code>BattleFlowManager</code>が接敵・戦闘開始と終了を進行。<code>WaveController</code>がWaveを順に処理し、<code>DropController</code>と<code>ResultController</code>がパーツ報酬・所持品・装備パーツの経験値を扱います。</p>
+						</article>
+					</div>
+					<p class="kaomoji-note">実行時のパーツ一覧は<code>KaomojiPartsManager</code>がResourcesから読み込み、部位ごとにキャッシュします。顔文字ビルド画面は部位別に一覧を表示し、選択したパーツの数値とタグをプレビューします。</p>
+				</section>
+				<section id="project-links" class="kaomoji-links">
+					<h2>制作情報・関連リンク</h2>
+					<dl class="kaomoji-meta">
+						<div><dt>制作形態</dt><dd>個人制作</dd></div>
+						<div><dt>担当</dt><dd>企画・プログラミング</dd></div>
+						<div><dt>技術</dt><dd>Unity / C# / ScriptableObject</dd></div>
+					</dl>
 					<ul class="actions">
+						<li><a href="https://www.youtube.com/watch?v=3Ye79Ocqmjk" class="button small" target="_blank" rel="noopener noreferrer">紹介動画を見る</a></li>
 						<li><a href="https://github.com/HinataPiyo/KaomojiClash/tree/c59192dfa0f5d0b7751e2c7e0dab796ae32ad868" class="button small" target="_blank"
-								rel="noopener noreferrer">GitHub</a></li>
+								rel="noopener noreferrer">GitHub（ソースコード）</a></li>
 					</ul>
 				</section>
 				<footer>
