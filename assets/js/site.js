@@ -187,8 +187,61 @@
 		if (!hasMatch) posts[0].hidden = false;
 	}
 
+	function initializeReadingExperience() {
+		if (!('IntersectionObserver' in window)) return;
+
+		var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (!prefersReducedMotion) {
+			var revealTargets = document.querySelectorAll(
+				'#main .portfolio-hero, #main .portfolio-section, #main .strengths-section, #main .post > header.project-header, #main .post > section'
+			);
+			var revealObserver = new IntersectionObserver(function (entries, observer) {
+				entries.forEach(function (entry) {
+					if (!entry.isIntersecting) return;
+					entry.target.classList.add('is-visible');
+					observer.unobserve(entry.target);
+				});
+			}, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+			revealTargets.forEach(function (target) {
+				if (target.hidden || target.getBoundingClientRect().top < window.innerHeight * 0.88) return;
+				target.classList.add('portfolio-reveal-pending');
+				revealObserver.observe(target);
+			});
+		}
+
+		var toc = document.querySelector('.project-toc');
+		if (!toc) return;
+
+		var links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+		var sections = links.map(function (link) {
+			return document.getElementById(decodeURIComponent(link.hash.slice(1)));
+		}).filter(Boolean);
+		if (!sections.length) return;
+
+		function updateCurrentSection() {
+			var current = null;
+			var marker = window.innerHeight * 0.3;
+			sections.forEach(function (section) {
+				if (section.getBoundingClientRect().top <= marker) current = section;
+			});
+			links.forEach(function (link) {
+				if (current && decodeURIComponent(link.hash.slice(1)) === current.id) {
+					link.setAttribute('aria-current', 'location');
+				} else {
+					link.removeAttribute('aria-current');
+				}
+			});
+		}
+
+		window.addEventListener('scroll', updateCurrentSection, { passive: true });
+		window.addEventListener('resize', updateCurrentSection, { passive: true });
+		updateCurrentSection();
+	}
+
 	initializeScrollPosition();
 	hydrateVideoPlayers();
 	initializeStoryToggles();
 	showSelectedPost();
+	initializeReadingExperience();
 })();
