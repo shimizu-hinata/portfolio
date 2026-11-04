@@ -115,7 +115,7 @@
 						</div>
 						<div class="design-flow-card">
 							<h3>Unityroomランキング連携</h3>
-							<p>最終結果からUnityroomクライアントを呼び出すコードがあります。外部サービス側の設定や、実際の通信・ランキング送信の成功は資料上で検証されていません。</p>
+							<p>最終結果からUnityroomクライアントを呼び出す処理を入れています。Unityroom上でのランキング送信の動作確認は、まだ十分に行えていません。</p>
 						</div>
 					</div>
 					<h3>色差と得点の考え方</h3>
@@ -128,35 +128,34 @@
 					</figure>
 				</section>
 				<section class="design-flow-section" id="design-decisions">
-					<h2>設計上の判断と改善視点</h2>
-					<p>公開資料は、実装確認済みの仕様と設計意図の推定、未確認事項を区別しています。以下も確認できる強みと課題をあわせて示します。</p>
+					<h2>現在の課題と今後の改善案</h2>
+					<p>現在の実装の構成上の特徴と、今後直したい点をまとめます。</p>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
 							<h3>小さな逐次ゲームに合わせた進行</h3>
-							<p>全5ラウンドの直列フローをコルーチンで記述し、結果を読む間は次ラウンドを待機させます。一方、途中キャンセルや並行進行が増える場合は状態管理の見直しが必要です。</p>
+							<p>全5ラウンドの直列フローをコルーチンで記述し、結果を見ている間は次ラウンドを待機させています。途中キャンセルや並行して進む処理を追加する場合は、状態管理を見直したいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
 							<h3>編集可能なデータの範囲</h3>
-							<p>色モード情報や音声クリップはScriptableObjectに分離されています。ただし、新しい採点方式・モード固有の動作までデータのみで追加できるわけではなく、コード変更が必要です。</p>
+							<p>色モード情報や音声クリップはScriptableObjectに分けています。新しい採点方式やモード固有の動作はデータだけでは追加できず、コードの変更が必要です。</p>
 						</div>
 						<div class="design-flow-card">
-							<h3>採点仕様を検証する視点</h3>
-							<p>資料では、Bランクの条件がCランクより先に判定されるためCランクに到達できない問題を確認しています。また<code>MaxScore</code>の基準値としての意味も明確化が必要です。境界値テストと仕様の整理が改善候補です。</p>
+							<h3>採点まわりの課題</h3>
+							<p>Bランクの条件がCランクより先に判定されるため、Cランクに到達できません。<code>MaxScore</code>を基準値として使う意味も整理できていません。判定順を直し、境界値のテストを追加したいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
 							<h3>イベントと依存関係の改善</h3>
-							<p>履歴ボタン等のイベント登録・解除に問題候補があり、シングルトンやシーン参照への依存もあります。画面再初期化を含むイベントライフサイクル検証、必須参照の診断が改善点として挙げられています。</p>
+							<p>履歴ボタンなどのイベントの登録・解除に不具合の可能性があり、シングルトンやシーン上の参照にも依存しています。画面を再初期化したときのイベント処理を見直し、必須の参照が欠けたときに気づけるようにしたいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
-							<h3>性能・対応環境は未計測</h3>
-							<p>Mobile向け描画設定はありますが、実機別のフレーム時間・メモリ・画質や画面サイズ別の操作品質は未検証です。Profiler計測やユーザーテストの結果を示すものではありません。</p>
+							<h3>性能・対応環境の確認</h3>
+							<p>Mobile向けの描画設定は用意していますが、実機ごとのフレーム時間・メモリや、画面サイズごとの操作感は確認していません。Profilerでの計測も行っていません。</p>
 						</div>
 						<div class="design-flow-card">
 							<h3>自動テスト・永続化の範囲</h3>
-							<p>リポジトリの分析資料では、プロジェクト用テストコードやCI設定、履歴・設定をアプリ再起動後も保持する仕組みは確認されていません。色差・得点・ランクの境界値テストなどが改善案です。</p>
+							<p>プロジェクト用のテストコードやCI設定はなく、履歴や設定をアプリ再起動後も保持する仕組みも入れていません。色差・得点・ランクの境界値テストの追加と、履歴の保存を今後の改善案としています。</p>
 						</div>
 					</div>
-					<p>これらは公開リポジトリのREADME、コード・設定をもとにした技術資料の記述です。実装済みの機能、確認された課題、未検証の項目を分けて掲載しています。</p>
 				</section>
 				<section id="project-links">
 					<h2>プレイ・ソースコード・設計資料</h2>
@@ -166,17 +165,17 @@
 					</ul>
 					<h3>技術・設計ドキュメント</h3>
 					<ul>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a> — 作品紹介、開発資料一覧、分析上の注意</li>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">ゲーム概要</a> — 基本ループ、特徴、実装確認範囲</li>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/GameDesignDocument.md" target="_blank" rel="noopener noreferrer">ゲームデザイン・体験設計</a> — 色合わせ体験、進行、設計意図と評価上の留意点</li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a> — 作品紹介、開発資料一覧</li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">ゲーム概要</a> — 基本ループ、特徴</li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/GameDesignDocument.md" target="_blank" rel="noopener noreferrer">ゲームデザイン・体験設計</a> — 色合わせ体験、ゲームの進行</li>
 						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">ゲーム仕様</a> — 操作、ラウンド、採点、UI・シーン遷移</li>
 						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/SystemArchitecture.md" target="_blank" rel="noopener noreferrer">システム構成・アーキテクチャ</a> — クラス構成、ラウンド処理、データフロー</li>
 						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/TechnicalDesign.md" target="_blank" rel="noopener noreferrer">技術設計</a> — Unity環境、データ設計、技術選定と制約</li>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/TechnicalHighlights.md" target="_blank" rel="noopener noreferrer">技術的アピールポイント</a> — 実装根拠、技術的メリットと評価範囲</li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/TechnicalHighlights.md" target="_blank" rel="noopener noreferrer">技術的な見どころ</a> — 使用している技術と実装内容</li>
 						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/ClassReference.md" target="_blank" rel="noopener noreferrer">主要クラスリファレンス</a> — クラスの役割、依存関係、改善余地</li>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/CodeReview.md" target="_blank" rel="noopener noreferrer">実装品質・コードレビュー</a> — 良い点、確認された問題、未確認事項</li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/CodeReview.md" target="_blank" rel="noopener noreferrer">実装の振り返り</a> — 現在の課題</li>
 						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/ImprovementPlan.md" target="_blank" rel="noopener noreferrer">技術課題と改善計画</a> — 優先度別の改善案と検証方針</li>
-						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/PortfolioTechnicalSummary.md" target="_blank" rel="noopener noreferrer">ポートフォリオ・面接向け技術説明</a></li>
+						<li><a href="https://github.com/HinataPiyo/AbsoluteColor/blob/main/Documentation/PortfolioTechnicalSummary.md" target="_blank" rel="noopener noreferrer">ポートフォリオ向け技術説明</a></li>
 					</ul>
 				</section>
 				<footer>

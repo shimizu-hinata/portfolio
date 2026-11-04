@@ -124,26 +124,25 @@
 					</div>
 				</section>
 				<section class="design-flow-section" id="design-decisions">
-					<h2>設計の判断と改善視点</h2>
+					<h2>現在の課題と今後の改善案</h2>
 					<div class="design-flow-grid">
 						<div class="design-flow-card">
 							<h3>共通化と拡張性</h3>
-							<p>敵の共通初期化・移動・体力処理を基底クラスに置き、型別データと派生挙動で敵を追加する構成です。共通処理の重複を抑えられる一方、敵の能力の組み合わせが増える場合は継承の拡大を避け、コンポジションを検討する余地があります。</p>
+							<p>敵の共通の初期化・移動・体力処理を基底クラスに置き、型別のデータと派生クラスの挙動で敵を追加する構成にしています。共通処理の重複は抑えられますが、敵の能力の組み合わせが増える場合は、継承ではなくコンポジションにすることも検討したいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
 							<h3>データ設定とコード設定</h3>
-							<p>ScriptableObjectでPrefabや主要パラメータをInspectorから参照できますが、強化価格・LevelProperty定義などはコード側に残ります。すべての調整値がデータ駆動というわけではなく、アセットとコードの設定源を明確にするのが課題です。</p>
+							<p>ScriptableObjectでPrefabや主要パラメータをInspectorから設定できますが、強化価格やLevelPropertyの定義はコード側に残っています。調整値の置き場所をデータ側に揃えたいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
-							<h3>確認済みの改善課題</h3>
-							<p>敵の出現抽選は0〜1の乱数と重みの累積値を比較しますが、現行データの重み合計が1を超えるため、先頭以降の一部敵が抽選されない問題が資料で指摘されています。重みの正規化と確率分布テストが改善候補です。</p>
+							<h3>現在の課題</h3>
+							<p>敵の出現抽選は0〜1の乱数と重みの累積値を比較していますが、現在のデータでは重みの合計が1を超えており、先頭以降の一部の敵が抽選されない問題があります。重みを正規化し、確率分布のテストを追加したいと考えています。</p>
 						</div>
 						<div class="design-flow-card">
-							<h3>実測・自動検証の範囲</h3>
-							<p>公開資料ではProfilerによる性能測定、端末別動作確認、自動テスト／CIを確認できません。プール化も通常ダメージ表示など一部に限られるため、測定なしに「最適化済み」とはしていません。</p>
+							<h3>実測・自動検証</h3>
+							<p>Profilerでの性能測定、端末ごとの動作確認、自動テストやCIは行っていません。プール化も通常のダメージ表示など一部だけなので、最適化済みとは考えていません。</p>
 						</div>
 					</div>
-					<p>以上は公開リポジトリのREADMEとコード・設定を分析した技術資料に基づく説明です。確認できた実装事実と、設計の評価・改善提案を分けています。</p>
 				</section>
 				<section id="project-links">
 					<h2>プレイ・ソースコード・設計資料</h2>
@@ -154,15 +153,15 @@
 					<h3>技術・設計ドキュメント</h3>
 					<ul>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a> — 作品紹介、開発資料一覧、実行方法</li>
-						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">ゲーム概要</a> — 作品コンセプト、基本ループ、確認範囲</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">ゲーム概要</a> — 作品コンセプト、基本ループ</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameDesignDocument.md" target="_blank" rel="noopener noreferrer">ゲームデザイン・体験設計</a> — コア操作、敵による判断、成長要素</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">ゲーム仕様</a> — 操作、戦闘、敵、強化、結果・保存</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/SystemArchitecture.md" target="_blank" rel="noopener noreferrer">システム構成・アーキテクチャ</a> — Scene構成、クラス連携、データフロー</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/TechnicalDesign.md" target="_blank" rel="noopener noreferrer">技術設計</a> — 技術選定、データ設計、保存・UI・性能上の考慮</li>
-						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/TechnicalHighlights.md" target="_blank" rel="noopener noreferrer">技術的アピールポイント</a> — 実装根拠、メリット、制約と改善余地</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/TechnicalHighlights.md" target="_blank" rel="noopener noreferrer">技術的な見どころ</a> — 使用している技術と実装内容、課題</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/ClassReference.md" target="_blank" rel="noopener noreferrer">主要クラスリファレンス</a> — クラスの責務、依存、改善ポイント</li>
 						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/ImprovementPlan.md" target="_blank" rel="noopener noreferrer">技術課題と改善計画</a> — 優先度別の課題と改善案</li>
-						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/PortfolioTechnicalSummary.md" target="_blank" rel="noopener noreferrer">ポートフォリオ・面接向け技術説明</a></li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/PortfolioTechnicalSummary.md" target="_blank" rel="noopener noreferrer">ポートフォリオ向け技術説明</a></li>
 					</ul>
 				</section>
 				<footer>
