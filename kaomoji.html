@@ -72,6 +72,7 @@
 					<a href="#build-system">ビルド計算</a>
 					<a href="#combat-system">戦闘処理</a>
 					<a href="#architecture">クラス構成</a>
+					<a href="#technical-details">設計判断・改善点</a>
 					<a href="#project-links">関連リンク</a>
 					</nav>
 				</details>
@@ -202,6 +203,84 @@
 						</article>
 					</div>
 					<p class="kaomoji-note">実行時のパーツ一覧は<code>KaomojiPartsManager</code>がResourcesから読み込み、部位ごとにキャッシュします。顔文字ビルド画面は部位別に一覧を表示し、選択したパーツの数値とタグをプレビューします。</p>
+				</section>
+				<section class="tech-deep-dive" id="technical-details">
+					<h2>実装の詳細と設計判断</h2>
+					<p class="tech-lead">コードから確認できる事実と、現在の視点での考察を分けて記載しています。<span class="tech-label tech-label--fact">確認済み</span>はコードやコミットで確認できる内容、<span class="tech-label">考察</span>は現在のコードを読み返した説明です。</p>
+					<div class="tech-accordion-list">
+						<details class="tech-accordion">
+							<summary>ステータス計算を「タグ補正→パーツ補正」の2段階にした理由</summary>
+							<div class="tech-accordion-body">
+								<p><span class="tech-label tech-label--fact">確認済み</span><code>PlayerUpgradeService</code>は、先に<code>ApplyTagEffects</code>でタグ補正（現在値×mul＋add）を適用し、次に<code>ApplyPartsEffects</code>でパーツ補正を「現在値×（1＋補正合計）」として重ねます。</p>
+								<pre class="tech-code"><code>// StatusModifier
+float v = ApplyMultiplication(baseValue);  // × mul
+return ApplyAddition(v);                   // + add
+
+// PlayerUpgradeService
+UpgradedStatus.speed += UpgradedStatus.speed * GetTotalParamByType(StatusType.Speed);</code></pre>
+								<p><span class="tech-label">考察</span>パーツ補正は足し合わせる値なので、枠が増えても伸び方が線形です。タグ補正はスタック数ごとに段階が決まっているため、ビルドの特化度を表す役割を分けられます。パーツ補正は−0.2〜0.2の範囲で設定でき、負の値を持つデメリット付きパーツも作れます。</p>
+								<h4>別の方法との比較</h4>
+								<p>すべての補正を「加算・乗算・最終」の種類付きリストにまとめ、優先度順に一括適用する方式もあります。調整やデバッグはしやすい反面、実装量が増えます。対象が4種類のステータスと少数のタグだったため、現在の2段構成のほうが読みやすいと考えられます。タグを先に適用する順序をなぜ選んだかは、コードに記録がなく不明です。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>SkillTagをScriptableObjectで段階別データにした設計</summary>
+							<div class="tech-accordion-body">
+								<p><span class="tech-label tech-label--fact">確認済み</span><code>SkillTag</code>は抽象クラスの<code>ScriptableObject</code>で、条件付きかどうかを示す<code>isCondition</code>、最大スタック数<code>maxStacks</code>、スタック段階ごとの<code>StatusModifier</code>リストを持ちます。説明文を返す<code>GetDescription(stack)</code>も同じ型に定義しています。</p>
+								<p><span class="tech-label">考察</span>数値と説明文が同じ場所にあるため、補正値を変えても表示とのずれが起きにくくなります。コードを変更せず、Inspectorで段階別の数値を調整できます。表計算ソフトのデータを読み込む方式はバージョン管理で差分を追いやすい一方、Unity上で参照を検証しにくくなります。</p>
+								<h4>現在のコードの制約</h4>
+								<p>タグの集計上限は<code>PlayerUpgradeService</code>側で5と決め打ちされ、<code>SkillTag.maxStacks</code>とは別に管理されています。<code>maxStacks</code>が5未満のタグを作ると、範囲外参照になる可能性があります。次に直すなら、上限を<code>SkillTag</code>側の値に統一します。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>Waveの敵・ドロップ・報酬を戦闘前に確定する設計</summary>
+							<div class="tech-accordion-body">
+								<p><span class="tech-label tech-label--fact">確認済み</span><code>WaveController.CreateWaveData</code>が、戦闘を始める前に3Wave分の敵、ドロップ、獲得金、経験値を決めます。敵数は難易度別の基準数から<code>ceil(基準×(1＋0.6×Wave番号))</code>で増えます。<code>EnemyData</code>は生成時にコピーし、元のScriptableObjectを書き換えません。</p>
+								<p><span class="tech-label">考察</span>戦闘中に乱数が変わらないため、結果の計算が単純です。撃破のたびに抽選する方式はデータ構造が軽くなりますが、事前の予告表示やテストが難しくなります。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>衝突ダメージの閾値と、調整履歴（コミットb0b123e）</summary>
+							<div class="tech-accordion-body">
+								<p><span class="tech-label tech-label--fact">確認済み</span>プレイヤーの攻撃条件は「反射後の速度の二乗が、敵側の二乗×0.92を上回る」ことです。速度の二乗を使うため、平方根の計算が不要です。</p>
+								<p>コミット<code>b0b123e</code>「衝突判定をもっと緩やかにした」で、プレイヤー側の係数を1.0から0.92へ、敵側を1.2から1.0へ変更しています。変更後は、プレイヤーがやや遅くてもダメージを与えられ、敵はプレイヤーと同じ速度でも攻撃できます。</p>
+								<p><span class="tech-label">考察</span>「速い側が勝つ」を1つのルールで表せ、引く距離がダメージに直結します。質量と速度を使う運動量ベースの判定は、現実の挙動に近づく一方、「引いた距離＝強さ」という分かりやすさが弱まります。0.92という数値を選んだ根拠はコードに残っていません。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>PCのマウス操作からモバイル専用タッチ操作への移行</summary>
+							<div class="tech-accordion-body">
+								<p><span class="tech-label tech-label--fact">確認済み</span>コミット<code>1db96a4</code>で入力をタッチ専用にしました（以後PCのマウスでは操作できません）。<code>PlayerMovement</code>は、ドラッグ距離を上限内に収めた後、<code>freeDragMaxDistanceRate</code>で補正して発射の強さを決めます。引く距離が最小値に満たない場合は発射しません。</p>
+								<p><span class="tech-label">考察</span>小さい画面では、指で長く引ける距離に限りがあります。そのため、画面上の最大距離まで引かなくても最大の強さに届くよう、補正率を調整できる形にしたと考えられます。実機での操作感を計測した記録はありません。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>不具合修正の例：UI Toolkitの名前解決失敗と、見えない失敗の除去（ff81edf）</summary>
+							<div class="tech-accordion-body">
+								<h4>問題</h4>
+								<p>ホーム画面のパーツプレビューで、ステータスのProgressBarが更新されませんでした。</p>
+								<h4>原因</h4>
+								<p>UXMLのテンプレートインスタンスに名前が付いておらず、<code>StatusParamater.Initialize</code>の検索結果が<code>null</code>になっていました。さらに、<code>null</code>のときは何もせず戻る処理があり、失敗が表に出ませんでした。</p>
+								<h4>対応</h4>
+								<p>UXMLにインスタンス名を付け、失敗を黙って吸収する<code>null</code>ガードを削除し、確認用のログを追加しました。</p>
+								<h4>得られた考え方</h4>
+								<p>例外を避けるための<code>null</code>ガードは、不具合を見つけにくくします。初期化に失敗したら、気づける形で通知するほうが原因を追いやすいと整理しています。コミットには、修正後の動作確認の記録はありません。</p>
+							</div>
+						</details>
+						<details class="tech-accordion">
+							<summary>現在のコードを読み返して見つけた改善点</summary>
+							<div class="tech-accordion-body">
+								<p>実際に経験した不具合ではなく、現在のコードを読み返して見つけた課題です。</p>
+								<ul>
+									<li><strong>タグ集計の重複：</strong><code>SetTags</code>と<code>SetConditionTags</code>がほぼ同じ処理で、上限5も別管理です。共通化して上限を<code>maxStacks</code>に揃えます。</li>
+									<li><strong>効果の重複起動：</strong>壁に当たるたびに速度上昇のコルーチンを起動するため、連続衝突では先に終わった効果が後続の効果を早く打ち切る可能性があります。実際の発生は未計測です。</li>
+									<li><strong>ヒットストップの重なり：</strong>連続して発生すると、<code>timeScale</code>が早く元に戻る可能性があります。</li>
+									<li><strong>毎フレームのUI更新：</strong><code>Combo.Update</code>が毎フレームUIへ値を渡しています。変化したときだけ通知するほうが無駄がありません。</li>
+									<li><strong>疎結合の不足：</strong>連携の中心がシングルトンと参照で、イベントやオブジェクトプールは使っていません。続編のReloadedでは、サービスロケータとインターフェースによる整理に取り組んでいます。</li>
+								</ul>
+							</div>
+						</details>
+					</div>
 				</section>
 				<section id="project-links" class="kaomoji-links">
 					<h2>制作情報・関連リンク</h2>

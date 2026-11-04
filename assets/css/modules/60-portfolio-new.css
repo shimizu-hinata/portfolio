@@ -3707,6 +3707,149 @@ body.is-site-menu-open {
     min-height: 2.5rem;
 }
 
+.tech-deep-dive {
+    min-width: 0;
+}
+
+.tech-deep-dive > .tech-lead {
+    color: var(--portfolio-muted);
+    font-size: 0.92rem;
+    margin-bottom: 1.25rem;
+    max-width: 68ch;
+}
+
+.tech-accordion-list {
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.tech-accordion {
+    background: var(--portfolio-surface);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    min-width: 0;
+}
+
+.tech-accordion > summary {
+    align-items: center;
+    color: var(--portfolio-text);
+    cursor: pointer;
+    display: flex;
+    font-size: 0.92rem;
+    font-weight: 700;
+    gap: 1rem;
+    justify-content: space-between;
+    line-height: 1.5;
+    list-style: none;
+    min-height: 3rem;
+    padding: 0.7rem 1rem;
+}
+
+.tech-accordion > summary::-webkit-details-marker {
+    display: none;
+}
+
+.tech-accordion > summary::after {
+    color: var(--portfolio-accent-strong);
+    content: "+";
+    flex: 0 0 auto;
+    font-size: 1.25rem;
+    transition: transform var(--portfolio-motion) ease;
+}
+
+.tech-accordion[open] > summary::after {
+    content: "\2212";
+}
+
+.tech-accordion > summary:hover {
+    background: var(--portfolio-surface-tint);
+}
+
+.tech-accordion-body {
+    animation: tech-accordion-open 260ms ease;
+    border-top: 1px solid var(--portfolio-border);
+    overflow-wrap: anywhere;
+    padding: 0.9rem 1rem 1.1rem;
+}
+
+.tech-accordion-body > :first-child {
+    margin-top: 0;
+}
+
+.tech-accordion-body > :last-child {
+    margin-bottom: 0;
+}
+
+.tech-accordion-body p,
+.tech-accordion-body li {
+    color: var(--portfolio-muted);
+    max-width: 72ch;
+}
+
+.tech-accordion-body code {
+    font-size: 0.82em;
+    padding: 0.05em 0.35em;
+}
+
+.tech-accordion-body h4 {
+    color: var(--portfolio-text);
+    font-size: 0.82rem;
+    margin: 1.1rem 0 0.35rem;
+}
+
+.tech-code {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    font-size: 0.8rem;
+    margin: 0.75rem 0;
+    max-width: 100%;
+    overflow-x: auto;
+    padding: 0.75rem 0.9rem;
+}
+
+.tech-code code {
+    background: none;
+    font-size: 1em;
+    padding: 0;
+    white-space: pre;
+}
+
+.tech-label {
+    border: 1px solid var(--portfolio-border);
+    border-radius: 999px;
+    color: var(--portfolio-text);
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-right: 0.4rem;
+    padding: 0 0.55rem;
+}
+
+.tech-label--fact {
+    background: var(--portfolio-surface-tint);
+}
+
+@keyframes tech-accordion-open {
+    from {
+        opacity: 0;
+        transform: translateY(-0.35rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tech-accordion-body {
+        animation: none;
+    }
+}
+
 .implementation-infographic {
     counter-reset: infographic-step;
     display: grid;
