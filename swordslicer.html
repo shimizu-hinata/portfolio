@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<!--
+	Future Imperfect by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license
+-->
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="超回転！ぶーめらんブレードのゲーム概要と、剣の投擲・敵の共通処理などの技術的な見どころを紹介します。" />
+	<title>超回転！ぶーめらんブレード | Game Portfolio</title>
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body class="is-preload">
+	<div id="wrapper">
+		<div id="main">
+			<article class="post">
+				<ul class="actions">
+					<li><a href="index.html" class="button small">ホームに戻る</a></li>
+				</ul>
+				<header>
+					<div class="title">
+						<div class="project-genres">
+							<p class="project-genre">2D防衛アクション</p>
+							<p class="project-genre">サバイバル</p>
+						</div>
+						<h1>超回転！ぶーめらんブレード</h1>
+						<p>剣をドラッグして回転させ、投げた剣で敵を迎撃する防衛アクションゲームです。ドラッグ中の回転量が剣の軌道や攻撃間隔に影響します。</p>
+					</div>
+				</header>
+				<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#core-loop">ゲーム進行と操作</a>
+					<a href="#technical-highlights">技術的な見どころ</a>
+					<a href="#design-decisions">設計と改善視点</a>
+					<a href="#project-links">関連資料・プレイ</a>
+				</nav>
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>作品の要点</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>ゲームの特徴</h3>
+							<p>剣を回転させて投擲し、敵が防衛ラインに到達するまで生き残ります。</p>
+						</article>
+						<article>
+							<h3>操作と攻撃</h3>
+							<p>ドラッグの方向と回転量を、投擲後の移動軌道や攻撃周期に反映します。</p>
+						</article>
+						<article>
+							<h3>技術構成</h3>
+							<p>Unity 6 / C#、URP 2D、Input System、UI Toolkitを使用。敵の共通処理と型別データを分けています。</p>
+						</article>
+					</div>
+				</section>
+				<section id="game-overview">
+					<h2>ゲーム概要</h2>
+					<div class="image featured">
+						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/XoulBDcGWyg"></div>
+					</div>
+					<p>SwordSlicerは、剣をドラッグして回転させてから投げ、迫る敵から防衛ラインを守る2Dサバイバルアクションです。操作の方向と回転量を剣の飛行軌道・攻撃テンポに結びつけ、敵の行動や位置に合わせた投げ方を考えます。</p>
+					<ul>
+						<li>ホームでは5段階の難易度、強化、音量などを設定。戦闘では時間経過とともに敵の出現間隔や能力が上がります。</li>
+						<li>敵を倒して通貨を獲得し、強化項目を解放・調整します。剣のストックや攻撃力など、戦い方に関わる複数の項目があります。</li>
+						<li>防衛ラインへの到達またはプレイヤーの撤退で結果画面へ進み、ホームへ戻るか同じ難易度でリトライします。</li>
+					</ul>
+				</section>
+				<section class="design-flow-section" id="core-loop">
+					<h2>ゲーム進行と操作</h2>
+					<p>剣の操作を、敵への攻撃と戦闘中の選択につなぐ基本ループです。</p>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h3>01 — 強化・難易度を選ぶ</h3>
+							<p>ホームで難易度を選択し、所持通貨で強化を解放・調整して戦闘を開始します。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>02 — ドラッグで回転を作る</h3>
+							<p>剣の近くを押してドラッグ。操作エリア内で剣を動かし、回転量を蓄積します。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>03 — 投げて敵を迎撃する</h3>
+							<p>指やボタンを離すと剣を投擲。狙う方向と回転量が飛行軌道に反映され、攻撃周期ごとに敵を判定します。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>04 — 報酬を次の挑戦へ</h3>
+							<p>敵の撃破で通貨を獲得。防衛ライン到達または撤退後、戦績を確認してホームまたはリトライへ進みます。</p>
+						</div>
+					</div>
+				</section>
+				<section class="design-flow-section" id="technical-highlights">
+					<h2>技術的な見どころ</h2>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h3>入力サンプルから軌道を作る</h3>
+							<p><code>SwordControl</code>は最大0.3秒のドラッグ位置履歴を保持し、直近約0.1秒の差分を投擲方向の推定に利用します。飛行中は反応時間を使った指数補間で回転入力を反映し、方向変化を積分してカーブ移動を作ります。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>入力と攻撃の責務を分ける</h3>
+							<p><code>SwordControl</code>が入力・ドラッグ・投擲・移動を扱い、<code>SwordAttack</code>が回転量に応じた攻撃間隔、範囲判定、ダメージ、命中演出を担当します。操作値が戦闘結果へ届く経路を、異なる責務として追える構成です。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>敵の共通処理と型別データ</h3>
+							<p>敵のController・Movement・Healthで初期化や基本フローを共通化し、ジェネリック制約付きの派生クラスと敵別ScriptableObjectで差分を表現。敵データ型の不一致も検出しやすくしています。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>敵ごとの対処条件を表現</h3>
+							<p>共通の進行処理に、敵固有の条件を組み合わせます。例：ジャンプ中は攻撃できないカエル、正面を防御するトロール、被弾後に無敵・停止するゾンビ、胞子を生成するキノコ。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>調整データをコードから分離</h3>
+							<p>敵種別・出現スケジュール・剣データ・戦闘設定などをScriptableObjectで参照します。強化レベルは保存データから種類別に復元し、設定範囲に補正します。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>Sceneを越えるゲームフロー</h3>
+							<p>HomeSceneとGameSceneをBootstrapで初期化し、ServiceLocatorにインターフェースを登録。敵撃破は死亡アニメーションのイベントを経て、敵の削除・通貨・戦績更新へつながります。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>結果・保存・UIの構成</h3>
+							<p>結果画面は防衛時間・撃破数・最大ヒット数・通貨などを表示し、Unityroomのスコア送信にも連携。ホームからの手動セーブはJsonUtilityとPlayerPrefsを使用します。UIはUI Toolkitを中心に、一部ワールド表示にTextMesh Proを使います。</p>
+						</div>
+					</div>
+				</section>
+				<section class="design-flow-section" id="design-decisions">
+					<h2>設計の判断と改善視点</h2>
+					<div class="design-flow-grid">
+						<div class="design-flow-card">
+							<h3>共通化と拡張性</h3>
+							<p>敵の共通初期化・移動・体力処理を基底クラスに置き、型別データと派生挙動で敵を追加する構成です。共通処理の重複を抑えられる一方、敵の能力の組み合わせが増える場合は継承の拡大を避け、コンポジションを検討する余地があります。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>データ設定とコード設定</h3>
+							<p>ScriptableObjectでPrefabや主要パラメータをInspectorから参照できますが、強化価格・LevelProperty定義などはコード側に残ります。すべての調整値がデータ駆動というわけではなく、アセットとコードの設定源を明確にするのが課題です。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>確認済みの改善課題</h3>
+							<p>敵の出現抽選は0〜1の乱数と重みの累積値を比較しますが、現行データの重み合計が1を超えるため、先頭以降の一部敵が抽選されない問題が資料で指摘されています。重みの正規化と確率分布テストが改善候補です。</p>
+						</div>
+						<div class="design-flow-card">
+							<h3>実測・自動検証の範囲</h3>
+							<p>公開資料ではProfilerによる性能測定、端末別動作確認、自動テスト／CIを確認できません。プール化も通常ダメージ表示など一部に限られるため、測定なしに「最適化済み」とはしていません。</p>
+						</div>
+					</div>
+					<p>以上は公開リポジトリのREADMEとコード・設定を分析した技術資料に基づく説明です。確認できた実装事実と、設計の評価・改善提案を分けています。</p>
+				</section>
+				<section id="project-links">
+					<h2>プレイ・ソースコード・設計資料</h2>
+					<ul class="actions">
+						<li><a href="https://unityroom.com/games/sword-slicer" class="button small" target="_blank" rel="noopener noreferrer">Unityroomでプレイ</a></li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer" class="button small" target="_blank" rel="noopener noreferrer">GitHubソースコード・資料</a></li>
+					</ul>
+					<h3>技術・設計ドキュメント</h3>
+					<ul>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/README.md" target="_blank" rel="noopener noreferrer">README</a> — 作品紹介、開発資料一覧、実行方法</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">ゲーム概要</a> — 作品コンセプト、基本ループ、確認範囲</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameDesignDocument.md" target="_blank" rel="noopener noreferrer">ゲームデザイン・体験設計</a> — コア操作、敵による判断、成長要素</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/GameSpecification.md" target="_blank" rel="noopener noreferrer">ゲーム仕様</a> — 操作、戦闘、敵、強化、結果・保存</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/SystemArchitecture.md" target="_blank" rel="noopener noreferrer">システム構成・アーキテクチャ</a> — Scene構成、クラス連携、データフロー</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/TechnicalDesign.md" target="_blank" rel="noopener noreferrer">技術設計</a> — 技術選定、データ設計、保存・UI・性能上の考慮</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/TechnicalHighlights.md" target="_blank" rel="noopener noreferrer">技術的アピールポイント</a> — 実装根拠、メリット、制約と改善余地</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/ClassReference.md" target="_blank" rel="noopener noreferrer">主要クラスリファレンス</a> — クラスの責務、依存、改善ポイント</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/ImprovementPlan.md" target="_blank" rel="noopener noreferrer">技術課題と改善計画</a> — 優先度別の課題と改善案</li>
+						<li><a href="https://github.com/HinataPiyo/SwordSlicer/blob/main/Documentation/PortfolioTechnicalSummary.md" target="_blank" rel="noopener noreferrer">ポートフォリオ・面接向け技術説明</a></li>
+					</ul>
+				</section>
+				<footer>
+					<ul class="stats">
+						<li>Unity 6</li>
+						<li>C#</li>
+						<li>URP 2D</li>
+						<li>UI Toolkit</li>
+					</ul>
+				</footer>
+			</article>
+		</div>
+		<section id="sidebar">
+			<section id="intro">
+				<a href="index.html" class="logo"><img src="images/Hiyoko_icon.png" alt="ポートフォリオのトップページ" /></a>
+				<header>
+					<h2>Game Portfolio</h2>
+					<p>Unity / C#の制作作品と実装例を紹介しています。</p>
+				</header>
+			</section>
+			<section>
+				<div class="mini-posts">
+					<article class="mini-post">
+						<header><h3><a href="swordslicer.html">ぶーめらんブレード</a></h3></header>
+						<a href="swordslicer.html" class="image"><img src="images/SwordSlicer_Thumbnail.png" alt="超回転！ぶーめらんブレード" loading="lazy" decoding="async" /></a>
+					</article>
+					<article class="mini-post">
+						<header><h3><a href="absolutecolor.html">AbsoluteColor</a></h3></header>
+						<a href="absolutecolor.html" class="image"><img src="images/AbsoluteColor_Thumbnail.png" alt="AbsoluteColor" loading="lazy" decoding="async" /></a>
+					</article>
+				</div>
+			</section>
+		</section>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/site.js"></script>
+</body>
+
+</html>
