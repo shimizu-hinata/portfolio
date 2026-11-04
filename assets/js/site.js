@@ -172,6 +172,45 @@
 		});
 	}
 
+	function initializeThemeSwitcher() {
+		var group = document.createElement('div');
+		group.className = 'theme-switch';
+		group.setAttribute('role', 'group');
+		group.setAttribute('aria-label', '表示テーマ');
+
+		[
+			{ theme: 'light', label: '☀ ライト' },
+			{ theme: 'dark', label: '☾ ダーク' }
+		].forEach(function (option) {
+			var button = document.createElement('button');
+			button.type = 'button';
+			button.className = 'theme-switch-button';
+			button.setAttribute('data-theme-choice', option.theme);
+			button.textContent = option.label;
+			button.addEventListener('click', function () {
+				document.documentElement.setAttribute('data-theme', option.theme);
+				try {
+					window.localStorage.setItem('portfolio-theme', option.theme);
+				} catch (error) {
+					// Keep the current-page choice even when storage is unavailable.
+				}
+				updateThemeSwitcher(group, option.theme);
+			});
+			group.appendChild(button);
+		});
+
+		document.body.appendChild(group);
+		updateThemeSwitcher(group, document.documentElement.getAttribute('data-theme'));
+	}
+
+	function updateThemeSwitcher(group, theme) {
+		group.querySelectorAll('[data-theme-choice]').forEach(function (button) {
+			var isSelected = button.getAttribute('data-theme-choice') === theme;
+			button.setAttribute('aria-pressed', String(isSelected));
+			button.classList.toggle('is-selected', isSelected);
+		});
+	}
+
 	function showSelectedPost() {
 		var selectedPost = new URLSearchParams(window.location.search).get('post');
 		var posts = document.querySelectorAll('#main .post[data-post]');
@@ -240,6 +279,7 @@
 	}
 
 	initializeScrollPosition();
+	initializeThemeSwitcher();
 	hydrateVideoPlayers();
 	initializeStoryToggles();
 	showSelectedPost();

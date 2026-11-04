@@ -1,131 +1,179 @@
-/* 
- * Color System for Portfolio Redesign
- * Based on Analysis and Design Proposal
- * Final Choice: Hybrid of Case A (Dark Technical) + Case C (Editorial)
- */
-
 :root {
-    /* ===== BACKGROUND COLORS ===== */
-    /* Main page background - Dark technical base */
-    --color-bg-primary: #0f1419;
-    
-    /* Section backgrounds - Subtle variation for visual rhythm */
-    --color-bg-secondary: #1a2332;
-    --color-bg-tertiary: #141b23;
-    
-    /* Card and surface backgrounds */
-    --color-surface: #1e2d3a;
-    --color-surface-raised: #252f3d;
-    --color-surface-alt: #232f3d;
-    
-    /* Special section backgrounds */
-    --color-bg-hero: #0d1117;
-    --color-bg-dark-section: #0a0e14;
-    
-    /* ===== TEXT COLORS ===== */
-    /* Primary text - High contrast on dark backgrounds */
-    --color-text-primary: #e8ecf1;
-    
-    /* Secondary text - Slightly muted for hierarchy */
-    --color-text-secondary: #b0b8c1;
-    
-    /* Muted/meta text - Lower priority information */
-    --color-text-muted: #8a9299;
-    
-    /* Text on light backgrounds (if needed) */
-    --color-text-inverse: #0f1419;
-    
-    /* ===== ACCENT COLORS ===== */
-    /* Main accent - Cyan, high contrast and modern */
+    color-scheme: dark;
+
+    --color-bg-primary: #101820;
+    --color-bg-secondary: #17232d;
+    --color-bg-tertiary: #1b2934;
+    --color-bg-hero: #101820;
+    --color-surface: #202e39;
+    --color-surface-raised: #2a3a46;
+    --color-surface-alt: #192630;
+
+    --color-text-primary: #edf3f7;
+    --color-text-secondary: #c1ccd5;
+    --color-text-muted: #a9b6c1;
+    --color-text-inverse: #f4f7fa;
+    --color-text-on-strong: #f4f7fa;
+    --color-text-on-strong-secondary: #c7d2dc;
+    --color-text-on-image: #ffffff;
+
     --color-accent-primary: #4dd0e1;
-    
-    /* Strong accent - Darker cyan for emphasis and hover states */
-    --color-accent-strong: #00bcd4;
-    
-    /* Accent bright - For critical/important elements */
-    --color-accent-bright: #5dd0e1;
-    
-    /* Secondary accents for status/categories */
-    --color-status-new: #ff6b6b;
-    --color-status-success: #23ad5f;
-    --color-status-info: #4d99f7;
-    --color-status-warning: #ffa94d;
-    
-    /* ===== BORDER & DIVIDER COLORS ===== */
-    /* Standard borders - Subtle but visible */
-    --color-border-default: rgba(77, 208, 225, 0.15);
-    
-    /* Stronger borders - For UI component boundaries */
-    --color-border-strong: rgba(77, 208, 225, 0.3);
-    
-    /* Divider lines - Section separation */
-    --color-divider: rgba(77, 208, 225, 0.1);
-    
-    /* ===== UI COMPONENT COLORS ===== */
-    /* Button backgrounds */
-    --color-button-primary: #4dd0e1;
-    --color-button-primary-dark: #00bcd4;
-    --color-button-secondary: #1e2d3a;
-    --color-button-text: #0f1419;
-    --color-button-text-secondary: #e8ecf1;
-    
-    /* Link colors */
-    --color-link: #4dd0e1;
-    --color-link-hover: #5dd0e1;
-    --color-link-visited: #00bcd4;
-    --color-link-active: #00acc1;
-    
-    /* Form/Input elements */
-    --color-input-bg: #1e2d3a;
-    --color-input-border: rgba(77, 208, 225, 0.2);
-    --color-input-border-focus: rgba(77, 208, 225, 0.5);
-    --color-input-text: #e8ecf1;
-    
-    /* ===== STATE COLORS ===== */
-    /* Hover state */
-    --color-hover-bg: rgba(77, 208, 225, 0.1);
-    
-    /* Active/Focus state */
-    --color-focus-ring: rgba(77, 208, 225, 0.4);
-    
-    /* Disabled state */
-    --color-disabled-bg: rgba(77, 208, 225, 0.05);
-    --color-disabled-text: rgba(176, 184, 193, 0.5);
-    
-    /* ===== LEGACY SUPPORT (for transitional compatibility) ===== */
-    /* Portfolio-specific variables (maintain existing usage) */
-    --portfolio-accent: #4dd0e1;
-    --portfolio-accent-strong: #1a2332;
-    --portfolio-accent-hover: #00acc1;
-    --portfolio-text: #e8ecf1;
-    --portfolio-muted: #b0b8c1;
-    --portfolio-border: rgba(77, 208, 225, 0.15);
-    --portfolio-surface: #1e2d3a;
-    --portfolio-surface-tint: rgba(77, 208, 225, 0.08);
+    --color-accent-strong: #62dcea;
+    --color-accent-secondary: #8abed4;
+    --color-accent-on-strong: #68d8e6;
+    --color-accent-soft: #253d46;
+    --color-hero-decoration: rgba(104, 216, 230, 0.1);
+
+    --color-border-default: #7b8fa0;
+    --color-border-strong: #91a5b5;
+    --color-border-on-strong: rgba(244, 247, 250, 0.4);
+    --color-divider: #7b8fa0;
+
+    --color-button-background: #4dd0e1;
+    --color-button-text: #0c171c;
+    --color-button-hover: #62dcea;
+    --color-button-shadow: 0 2px 8px rgba(77, 208, 225, 0.2);
+    --color-button-shadow-hover: 0 4px 12px rgba(77, 208, 225, 0.35);
+    --color-button-on-strong: #4dd0e1;
+    --color-button-on-strong-hover: #62dcea;
+    --color-button-text-on-strong: #0c171c;
+    --color-link: #55d6e6;
+    --color-link-hover: #8be5ef;
+    --color-link-visited: #8abed4;
+    --color-focus-ring: #62dcea;
+    --color-focus-shadow: rgba(98, 220, 234, 0.22);
+    --color-focus-glow: rgba(98, 220, 234, 0.45);
+    --color-disabled-background: #27343e;
+    --color-disabled-text: #a9b6c1;
+    --color-control-selected: #4dd0e1;
+    --color-control-selected-text: #0c171c;
+
+    --color-code-background: #0b1218;
+    --color-code-text: #d7e6ee;
+    --color-input-background: #192630;
+    --color-input-text: #edf3f7;
+    --color-input-border: #7b8fa0;
+    --color-input-border-focus: #62dcea;
+    --color-image-overlay: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.68) 100%);
+    --color-media-background: #090c10;
+    --color-media-control-overlay: rgba(0, 0, 0, 0.72);
+    --color-media-control-icon: #ffffff;
+    --color-surface-on-strong: rgba(244, 247, 250, 0.1);
+    --color-shadow: 0 14px 36px rgba(0, 0, 0, 0.38);
+
+    --color-status-success: #42c982;
+    --color-status-warning: #ffc06a;
+    --color-status-error: #ff8585;
+    --color-status-info: #78b9ff;
+
+    --portfolio-accent: var(--color-accent-primary);
+    --portfolio-accent-strong: var(--color-accent-strong);
+    --portfolio-accent-hover: var(--color-accent-strong);
+    --portfolio-text: var(--color-text-primary);
+    --portfolio-muted: var(--color-text-secondary);
+    --portfolio-border: var(--color-border-default);
+    --portfolio-surface: var(--color-surface);
+    --portfolio-surface-tint: var(--color-accent-soft);
     --portfolio-radius: 0.35rem;
-    --portfolio-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
-    --portfolio-ink: #0f1419;
-    --portfolio-paper: #1a2332;
-    --portfolio-motion: 220ms;
-    
-    /* ===== SEMANTIC/UTILITY COLORS ===== */
-    --color-success: #23ad5f;
-    --color-warning: #ffa94d;
-    --color-error: #ff6b6b;
-    --color-info: #4d99f7;
+    --portfolio-shadow: var(--color-shadow);
+    --portfolio-ink: var(--color-bg-hero);
+    --portfolio-paper: var(--color-bg-primary);
+    --portfolio-motion: 180ms;
 }
 
-/* Optional: High contrast mode variant */
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    --color-bg-primary: #f3f6f8;
+    --color-bg-secondary: #e7eef3;
+    --color-bg-tertiary: #edf2f6;
+    --color-bg-hero: #10232e;
+    --color-surface: #ffffff;
+    --color-surface-raised: #f8fafc;
+    --color-surface-alt: #e9f0f4;
+
+    --color-text-primary: #17212b;
+    --color-text-secondary: #405262;
+    --color-text-muted: #4d5e6d;
+    --color-text-inverse: #f4f7fa;
+    --color-text-on-strong: #f4f7fa;
+    --color-text-on-strong-secondary: #d0dbe3;
+    --color-text-on-image: #ffffff;
+
+    --color-accent-primary: #075e68;
+    --color-accent-strong: #064b54;
+    --color-accent-secondary: #0b7285;
+    --color-accent-on-strong: #70dce8;
+    --color-accent-soft: #e5f1f2;
+    --color-hero-decoration: rgba(112, 220, 232, 0.1);
+
+    --color-border-default: #6e8496;
+    --color-border-strong: #657b8d;
+    --color-border-on-strong: rgba(244, 247, 250, 0.42);
+    --color-divider: #6e8496;
+
+    --color-button-background: #075e68;
+    --color-button-text: #ffffff;
+    --color-button-hover: #064b54;
+    --color-button-shadow: 0 2px 8px rgba(7, 94, 104, 0.16);
+    --color-button-shadow-hover: 0 4px 12px rgba(7, 94, 104, 0.24);
+    --color-button-on-strong: #70dce8;
+    --color-button-on-strong-hover: #a0edf2;
+    --color-button-text-on-strong: #10232e;
+    --color-link: #075e68;
+    --color-link-hover: #064b54;
+    --color-link-visited: #0b7285;
+    --color-focus-ring: #0b7285;
+    --color-focus-shadow: rgba(11, 114, 133, 0.2);
+    --color-focus-glow: rgba(11, 114, 133, 0.36);
+    --color-disabled-background: #e4e9ed;
+    --color-disabled-text: #596579;
+    --color-control-selected: #075e68;
+    --color-control-selected-text: #ffffff;
+
+    --color-code-background: #e8eef2;
+    --color-code-text: #17212b;
+    --color-input-background: #ffffff;
+    --color-input-text: #17212b;
+    --color-input-border: #6e8496;
+    --color-input-border-focus: #0b7285;
+    --color-image-overlay: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.68) 100%);
+    --color-media-background: #090c10;
+    --color-media-control-overlay: rgba(0, 0, 0, 0.72);
+    --color-media-control-icon: #ffffff;
+    --color-surface-on-strong: rgba(244, 247, 250, 0.1);
+    --color-shadow: 0 14px 36px rgba(27, 45, 59, 0.14);
+
+    --color-status-success: #147a45;
+    --color-status-warning: #855000;
+    --color-status-error: #a52c2c;
+    --color-status-info: #155da8;
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+}
+
 @media (prefers-contrast: more) {
     :root {
-        --color-text-primary: #f0f4f8;
-        --color-text-secondary: #c0c8d1;
-        --color-accent-primary: #5dd0e1;
-        --color-border-default: rgba(93, 208, 225, 0.25);
+        --color-text-primary: #ffffff;
+        --color-text-secondary: #e2e8ee;
+        --color-text-muted: #d3dce4;
+        --color-border-default: #a8b7c4;
+        --color-border-strong: #d1dce5;
+        --color-divider: #a8b7c4;
+    }
+
+    :root[data-theme="light"] {
+        --color-text-primary: #101820;
+        --color-text-secondary: #263746;
+        --color-text-muted: #34495a;
+        --color-border-default: #526779;
+        --color-border-strong: #33495b;
+        --color-divider: #526779;
     }
 }
 
-/* Optional: Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
     :root {
         --portfolio-motion: 0ms;
