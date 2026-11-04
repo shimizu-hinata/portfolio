@@ -3414,9 +3414,17 @@ body,
     padding: 0;
     position: fixed;
     width: auto;
-    transition: opacity 260ms ease, visibility 260ms ease;
+    box-shadow: none;
+    transition: opacity 260ms ease, visibility 260ms ease, background-color 400ms ease;
     visibility: hidden;
     z-index: 11000;
+}
+
+.site-menu-backdrop:hover,
+.site-menu-backdrop:active,
+.site-menu-backdrop:focus {
+    background-color: rgb(12 17 24 / 66%);
+    box-shadow: none;
 }
 
 .site-menu-backdrop.is-open {
