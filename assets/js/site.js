@@ -179,8 +179,8 @@
 		group.setAttribute('aria-label', '表示テーマ');
 
 		[
-			{ theme: 'light', label: '☀ ライト' },
-			{ theme: 'dark', label: '☾ ダーク' }
+			{ theme: 'light', label: '☀テラコッタ' },
+			{ theme: 'dark', label: '☾ナイト' }
 		].forEach(function (option) {
 			var button = document.createElement('button');
 			button.type = 'button';
