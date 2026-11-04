@@ -206,52 +206,52 @@
 				</section>
 				<section class="tech-deep-dive" id="technical-details">
 					<h2>実装の詳細と設計判断</h2>
-					<p class="tech-lead">コードから確認できる事実と、現在の視点での考察を分けて記載しています。<span class="tech-label tech-label--fact">確認済み</span>はコードやコミットで確認できる内容、<span class="tech-label">考察</span>は現在のコードを読み返した説明です。</p>
+					<p class="tech-lead">実装の仕組みと、その構成にした理由をまとめています。<span class="tech-label tech-label--fact">実装</span>は実際のコードやコミットの内容、<span class="tech-label">振り返り</span>は今コードを読み返して考えていることです。</p>
 					<div class="tech-accordion-list">
 						<details class="tech-accordion">
 							<summary>ステータス計算を「タグ補正→パーツ補正」の2段階にした理由</summary>
 							<div class="tech-accordion-body">
-								<p><span class="tech-label tech-label--fact">確認済み</span><code>PlayerUpgradeService</code>は、先に<code>ApplyTagEffects</code>でタグ補正（現在値×mul＋add）を適用し、次に<code>ApplyPartsEffects</code>でパーツ補正を「現在値×（1＋補正合計）」として重ねます。</p>
+								<p><span class="tech-label tech-label--fact">実装</span><code>PlayerUpgradeService</code>では、まず<code>ApplyTagEffects</code>でタグ補正（現在値×mul＋add）をかけ、そのあと<code>ApplyPartsEffects</code>でパーツ補正を「現在値×（1＋補正合計）」として重ねています。</p>
 								<pre class="tech-code"><code>// StatusModifier
 float v = ApplyMultiplication(baseValue);  // × mul
 return ApplyAddition(v);                   // + add
 
 // PlayerUpgradeService
 UpgradedStatus.speed += UpgradedStatus.speed * GetTotalParamByType(StatusType.Speed);</code></pre>
-								<p><span class="tech-label">考察</span>パーツ補正は足し合わせる値なので、枠が増えても伸び方が線形です。タグ補正はスタック数ごとに段階が決まっているため、ビルドの特化度を表す役割を分けられます。パーツ補正は−0.2〜0.2の範囲で設定でき、負の値を持つデメリット付きパーツも作れます。</p>
-								<h4>別の方法との比較</h4>
-								<p>すべての補正を「加算・乗算・最終」の種類付きリストにまとめ、優先度順に一括適用する方式もあります。調整やデバッグはしやすい反面、実装量が増えます。対象が4種類のステータスと少数のタグだったため、現在の2段構成のほうが読みやすいと考えられます。タグを先に適用する順序をなぜ選んだかは、コードに記録がなく不明です。</p>
+								<p><span class="tech-label">振り返り</span>パーツ補正は足し合わせた値を掛けるので、枠が増えても伸び方が緩やかです。一方のタグ補正は、スタック数ごとに決めた段階で効きます。この2つを分けることで、「ビルドの方向性はタグ、細かい強さはパーツ」と役割を分けて調整できます。パーツ補正は−0.2〜0.2の範囲で設定でき、デメリット付きのパーツも作れます。</p>
+								<h4>別の方法を選んだ場合</h4>
+								<p>補正をすべて「加算・乗算・最終」の種類を付けたリストにまとめ、優先度順に一括で適用する方法もあります。調整やデバッグはしやすくなりますが、実装は大きくなります。ステータスが4種類、タグも少数だったため、今の2段構成で十分だと考えています。タグを先に適用する順序にした理由は、当時のコードやコミットに記録が残っておらず、はっきりしません。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
 							<summary>SkillTagをScriptableObjectで段階別データにした設計</summary>
 							<div class="tech-accordion-body">
-								<p><span class="tech-label tech-label--fact">確認済み</span><code>SkillTag</code>は抽象クラスの<code>ScriptableObject</code>で、条件付きかどうかを示す<code>isCondition</code>、最大スタック数<code>maxStacks</code>、スタック段階ごとの<code>StatusModifier</code>リストを持ちます。説明文を返す<code>GetDescription(stack)</code>も同じ型に定義しています。</p>
-								<p><span class="tech-label">考察</span>数値と説明文が同じ場所にあるため、補正値を変えても表示とのずれが起きにくくなります。コードを変更せず、Inspectorで段階別の数値を調整できます。表計算ソフトのデータを読み込む方式はバージョン管理で差分を追いやすい一方、Unity上で参照を検証しにくくなります。</p>
-								<h4>現在のコードの制約</h4>
-								<p>タグの集計上限は<code>PlayerUpgradeService</code>側で5と決め打ちされ、<code>SkillTag.maxStacks</code>とは別に管理されています。<code>maxStacks</code>が5未満のタグを作ると、範囲外参照になる可能性があります。次に直すなら、上限を<code>SkillTag</code>側の値に統一します。</p>
+								<p><span class="tech-label tech-label--fact">実装</span><code>SkillTag</code>は抽象クラスのScriptableObjectです。条件付きかどうかを示す<code>isCondition</code>、最大スタック数<code>maxStacks</code>、スタック段階ごとの<code>StatusModifier</code>のリストを持たせています。説明文を返す<code>GetDescription(stack)</code>も同じクラスに置いています。</p>
+								<p><span class="tech-label">振り返り</span>数値と説明文を同じ場所に置いたので、補正値を変えても表示とずれにくくなります。段階ごとの数値はコードを触らずにInspectorで調整できます。CSVなどの表データにする方法は差分を追いやすい反面、Unity上で参照を確認しにくくなるため、ScriptableObjectにしています。</p>
+								<h4>今の実装の弱点</h4>
+								<p>集計の上限は<code>PlayerUpgradeService</code>側で5と決め打ちしていて、<code>SkillTag.maxStacks</code>とは別に管理しています。<code>maxStacks</code>が5未満のタグを作ると範囲外を参照する可能性があるので、上限は<code>SkillTag</code>側の値に揃えたいと考えています。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
 							<summary>Waveの敵・ドロップ・報酬を戦闘前に確定する設計</summary>
 							<div class="tech-accordion-body">
-								<p><span class="tech-label tech-label--fact">確認済み</span><code>WaveController.CreateWaveData</code>が、戦闘を始める前に3Wave分の敵、ドロップ、獲得金、経験値を決めます。敵数は難易度別の基準数から<code>ceil(基準×(1＋0.6×Wave番号))</code>で増えます。<code>EnemyData</code>は生成時にコピーし、元のScriptableObjectを書き換えません。</p>
-								<p><span class="tech-label">考察</span>戦闘中に乱数が変わらないため、結果の計算が単純です。撃破のたびに抽選する方式はデータ構造が軽くなりますが、事前の予告表示やテストが難しくなります。</p>
+								<p><span class="tech-label tech-label--fact">実装</span><code>WaveController.CreateWaveData</code>で、戦闘に入る前に3Wave分の敵、ドロップ、獲得金、経験値を決めています。敵の数は、難易度ごとの基準数から<code>ceil(基準×(1＋0.6×Wave番号))</code>で増やしています。<code>EnemyData</code>は生成時にコピーして使い、元のScriptableObjectは書き換えません。</p>
+								<p><span class="tech-label">振り返り</span>先に決めておけば、戦闘中に乱数が変わらず、結果の集計も単純になります。撃破のたびに抽選する方法はデータが軽くなりますが、戦闘前の予告表示やテストがしにくくなります。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
 							<summary>衝突ダメージの閾値と、調整履歴（コミットb0b123e）</summary>
 							<div class="tech-accordion-body">
-								<p><span class="tech-label tech-label--fact">確認済み</span>プレイヤーの攻撃条件は「反射後の速度の二乗が、敵側の二乗×0.92を上回る」ことです。速度の二乗を使うため、平方根の計算が不要です。</p>
-								<p>コミット<code>b0b123e</code>「衝突判定をもっと緩やかにした」で、プレイヤー側の係数を1.0から0.92へ、敵側を1.2から1.0へ変更しています。変更後は、プレイヤーがやや遅くてもダメージを与えられ、敵はプレイヤーと同じ速度でも攻撃できます。</p>
-								<p><span class="tech-label">考察</span>「速い側が勝つ」を1つのルールで表せ、引く距離がダメージに直結します。質量と速度を使う運動量ベースの判定は、現実の挙動に近づく一方、「引いた距離＝強さ」という分かりやすさが弱まります。0.92という数値を選んだ根拠はコードに残っていません。</p>
+								<p><span class="tech-label tech-label--fact">実装</span>プレイヤーがダメージを与える条件は、反射後の速度の二乗が、敵側の速度の二乗×0.92を上回ることです。二乗のまま比べているので、平方根の計算は要りません。</p>
+								<p>コミット<code>b0b123e</code>（衝突判定をもっと緩やかにした）で、プレイヤー側の係数を1.0から0.92に、敵側を1.2から1.0に変えました。これでプレイヤーが少し遅くてもダメージを与えられ、敵はプレイヤーと同じ速度でも攻撃できます。</p>
+								<p><span class="tech-label">振り返り</span>「速いほうが当たり勝つ」を1つのルールで表せるので、引いた距離がそのままダメージに結び付きます。質量も含めた運動量で判定する方法もありますが、「引いた距離＝強さ」という分かりやすさが薄れるので採っていません。0.92という値を選んだ根拠は、コードには残っていません。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
 							<summary>PCのマウス操作からモバイル専用タッチ操作への移行</summary>
 							<div class="tech-accordion-body">
-								<p><span class="tech-label tech-label--fact">確認済み</span>コミット<code>1db96a4</code>で入力をタッチ専用にしました（以後PCのマウスでは操作できません）。<code>PlayerMovement</code>は、ドラッグ距離を上限内に収めた後、<code>freeDragMaxDistanceRate</code>で補正して発射の強さを決めます。引く距離が最小値に満たない場合は発射しません。</p>
-								<p><span class="tech-label">考察</span>小さい画面では、指で長く引ける距離に限りがあります。そのため、画面上の最大距離まで引かなくても最大の強さに届くよう、補正率を調整できる形にしたと考えられます。実機での操作感を計測した記録はありません。</p>
+								<p><span class="tech-label tech-label--fact">実装</span>コミット<code>1db96a4</code>で、入力をタッチ専用にしました（PCのマウスでは操作できなくなります）。<code>PlayerMovement</code>では、ドラッグ距離を上限に収めたあと<code>freeDragMaxDistanceRate</code>で補正して、発射の強さを決めています。引く距離が最小値に満たないときは発射しません。</p>
+								<p><span class="tech-label">振り返り</span>スマートフォンでは、指で長く引ける距離に限りがあります。画面の端まで引かなくても最大の強さに届くよう、補正率を調整できる形にしたと考えています。実機での操作感を数値で測った記録はありません。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
@@ -260,23 +260,23 @@ UpgradedStatus.speed += UpgradedStatus.speed * GetTotalParamByType(StatusType.Sp
 								<h4>問題</h4>
 								<p>ホーム画面のパーツプレビューで、ステータスのProgressBarが更新されませんでした。</p>
 								<h4>原因</h4>
-								<p>UXMLのテンプレートインスタンスに名前が付いておらず、<code>StatusParamater.Initialize</code>の検索結果が<code>null</code>になっていました。さらに、<code>null</code>のときは何もせず戻る処理があり、失敗が表に出ませんでした。</p>
+								<p>UXMLのテンプレートインスタンスに名前を付けていなかったため、<code>StatusParamater.Initialize</code>での検索結果が<code>null</code>になっていました。しかも<code>null</code>のときは何もせず戻る処理を入れていたので、失敗に気づけませんでした。</p>
 								<h4>対応</h4>
-								<p>UXMLにインスタンス名を付け、失敗を黙って吸収する<code>null</code>ガードを削除し、確認用のログを追加しました。</p>
-								<h4>得られた考え方</h4>
-								<p>例外を避けるための<code>null</code>ガードは、不具合を見つけにくくします。初期化に失敗したら、気づける形で通知するほうが原因を追いやすいと整理しています。コミットには、修正後の動作確認の記録はありません。</p>
+								<p>UXMLにインスタンス名を付け、失敗を黙って見逃す<code>null</code>ガードを外し、確認用のログを足しました。</p>
+								<h4>学んだこと</h4>
+								<p>例外を避けるための<code>null</code>ガードは、不具合を見つけにくくします。初期化に失敗したときは、気づける形で知らせるほうが原因を追いやすいと考えるようになりました。修正後の動作確認の記録はコミットには残していません。</p>
 							</div>
 						</details>
 						<details class="tech-accordion">
 							<summary>現在のコードを読み返して見つけた改善点</summary>
 							<div class="tech-accordion-body">
-								<p>実際に経験した不具合ではなく、現在のコードを読み返して見つけた課題です。</p>
+								<p>実際に起きた不具合ではなく、今コードを読み返して気になっている点です。</p>
 								<ul>
-									<li><strong>タグ集計の重複：</strong><code>SetTags</code>と<code>SetConditionTags</code>がほぼ同じ処理で、上限5も別管理です。共通化して上限を<code>maxStacks</code>に揃えます。</li>
-									<li><strong>効果の重複起動：</strong>壁に当たるたびに速度上昇のコルーチンを起動するため、連続衝突では先に終わった効果が後続の効果を早く打ち切る可能性があります。実際の発生は未計測です。</li>
+									<li><strong>タグ集計の重複：</strong><code>SetTags</code>と<code>SetConditionTags</code>がほぼ同じ処理で、上限の5も別に持っています。1つにまとめて、上限は<code>maxStacks</code>に揃えたいです。</li>
+									<li><strong>速度上昇の重複起動：</strong>壁に当たるたびに速度上昇のコルーチンを起動しているので、連続で当たると、先に終わった効果が後の効果を早く打ち切る可能性があります。実際に起きるかは測っていません。</li>
 									<li><strong>ヒットストップの重なり：</strong>連続して発生すると、<code>timeScale</code>が早く元に戻る可能性があります。</li>
-									<li><strong>毎フレームのUI更新：</strong><code>Combo.Update</code>が毎フレームUIへ値を渡しています。変化したときだけ通知するほうが無駄がありません。</li>
-									<li><strong>疎結合の不足：</strong>連携の中心がシングルトンと参照で、イベントやオブジェクトプールは使っていません。続編のReloadedでは、サービスロケータとインターフェースによる整理に取り組んでいます。</li>
+									<li><strong>毎フレームのUI更新：</strong><code>Combo.Update</code>が毎フレームUIに値を渡しています。値が変わったときだけ通知するほうが無駄がありません。</li>
+									<li><strong>連携の仕組み：</strong>クラス間の連携はシングルトンと参照が中心で、イベントやオブジェクトプールは使っていません。続編のReloadedでは、サービスロケータとインターフェースで整理し直しています。</li>
 								</ul>
 							</div>
 						</details>
