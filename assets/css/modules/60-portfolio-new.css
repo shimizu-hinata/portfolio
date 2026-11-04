@@ -1870,3 +1870,178 @@ button:focus-visible {
 .tech-code pre {
     font-size: 0.8rem;
 }
+
+body {
+    background-color: #f3f5f7;
+    background-image: none;
+}
+
+.post > header.project-header {
+    align-items: center;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: minmax(0, 1.15fr) minmax(16rem, 0.85fr);
+    padding: 2.5rem 3rem;
+}
+
+.post > header.project-header .title {
+    min-width: 0;
+    padding: 0;
+}
+
+.post > header.project-header .title h1 {
+    font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    overflow-wrap: anywhere;
+    text-transform: none;
+}
+
+.post > header.project-header .title .project-genres {
+    margin-bottom: 1rem;
+}
+
+.post > header.project-header .title .project-genre {
+    letter-spacing: 0.02em;
+    text-transform: none;
+}
+
+.post > header.project-header .title > p {
+    color: var(--portfolio-text);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 42rem;
+}
+
+.project-hero-visual {
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    margin: 0;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.project-hero-visual img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.project-hero-visual--contain {
+    background: #ffffff;
+}
+
+.project-hero-visual--contain img {
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.minimal-card[data-category="representative"] h3 {
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+}
+
+.minimal-card h3 {
+    overflow-wrap: anywhere;
+}
+
+.project-highlight-grid h3 {
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    line-height: 1.45;
+    text-transform: none;
+}
+
+.project-highlight-grid p {
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.post > section > p {
+    max-width: 72ch;
+}
+
+.post section p,
+.post section li {
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.post section h2 {
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: none;
+}
+
+.post section h3,
+.post section h4 {
+    letter-spacing: 0.02em;
+    line-height: 1.45;
+    text-transform: none;
+}
+
+.post section h3 {
+    font-size: 1.15rem;
+}
+
+.post section h4 {
+    font-size: 1rem;
+}
+
+.tech-deep-dive h4 {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 980px) {
+    .post > header.project-header {
+        gap: 1rem;
+        grid-template-columns: minmax(0, 1fr);
+        padding: 2rem 3rem;
+    }
+
+    .post > header.project-header .title {
+        margin: 0;
+        text-align: left;
+    }
+
+    .post > header.project-header .title .project-genres {
+        justify-content: flex-start;
+    }
+
+    .project-hero-visual {
+        width: 100%;
+    }
+
+    .project-highlight-grid,
+    .fingerdojo-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 736px) {
+    .post > header.project-header {
+        padding: 1.5rem;
+    }
+
+    .post > header.project-header .title h1 {
+        font-size: clamp(1.65rem, 7vw, 2.1rem);
+    }
+
+    .project-hero-visual {
+        aspect-ratio: 16 / 10;
+    }
+
+    .project-highlight-grid,
+    .fingerdojo-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .post section h2 {
+        font-size: 1.25rem;
+    }
+}
