@@ -1031,8 +1031,38 @@
 }
 
 .project-quick-links {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    flex-flow: row wrap;
+    gap: 0.65em;
+    margin: 1em 0;
+    padding-left: 0;
+}
+
+.post ul.actions.project-quick-links li {
+    flex: 0 1 auto;
+    max-width: 100%;
+    padding: 0;
+    width: auto;
+}
+
+.post ul.actions.project-quick-links li > .button {
+    height: auto;
+    line-height: 1.4;
+    max-width: 100%;
+    min-height: 2.75em;
+    padding: 0.65em 1.1em;
+    white-space: normal;
+}
+
+@media screen and (max-width: 480px) {
+    .post ul.actions.project-quick-links {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .post ul.actions.project-quick-links li,
+    .post ul.actions.project-quick-links li > .button {
+        width: 100%;
+    }
 }
 
 .fingerdojo-video .js-video-player {
