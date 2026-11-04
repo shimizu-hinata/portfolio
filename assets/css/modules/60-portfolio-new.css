@@ -1,16 +1,17 @@
-:root {
-    --portfolio-accent: #c3df72;
-    --portfolio-accent-strong: #23685f;
-    --portfolio-accent-hover: #174f49;
-    --portfolio-text: #1d2b32;
-    --portfolio-muted: #59676c;
-    --portfolio-border: rgba(29, 43, 50, 0.16);
-    --portfolio-surface: #fffefa;
-    --portfolio-surface-tint: rgba(195, 223, 114, 0.16);
+﻿:root {
+    /* Color System - New Dark Technical Design */
+    --portfolio-accent: var(--color-accent-primary);
+    --portfolio-accent-strong: var(--color-accent-strong);
+    --portfolio-accent-hover: var(--color-accent-strong);
+    --portfolio-text: var(--color-text-primary);
+    --portfolio-muted: var(--color-text-secondary);
+    --portfolio-border: var(--color-border-default);
+    --portfolio-surface: var(--color-surface);
+    --portfolio-surface-tint: rgba(77, 208, 225, 0.08);
     --portfolio-radius: 0.35rem;
-    --portfolio-shadow: 0 14px 36px rgba(25, 41, 47, 0.08);
-    --portfolio-ink: #172b33;
-    --portfolio-paper: #f3f1e9;
+    --portfolio-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+    --portfolio-ink: var(--color-bg-primary);
+    --portfolio-paper: var(--color-bg-secondary);
     --portfolio-motion: 220ms;
 }
 
@@ -102,7 +103,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #ffffff;
+    color: var(--color-surface);
     text-align: center;
     padding: 2em 2em 2em 2em;
     padding-top: 5.5rem;
@@ -142,7 +143,7 @@
     width: 3rem;
     height: 3rem;
     padding: 0.2em;
-    background-color: #ffffff2c;
+    background-color: var(--color-surface)2c;
     border-radius: 30%;
 }
 
@@ -179,7 +180,7 @@
 }
 
 .hero-banner .overlay h1 {
-    color: #ffffff;
+    color: var(--color-surface);
     font-size: 3em;
     margin: 0;
     letter-spacing: 0.5em;
@@ -216,7 +217,7 @@
     border: 1px solid rgba(160, 160, 160, 0.3);
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.95);
-    color: #3c3b3b;
+    color: var(--color-text-primary);
     font-size: 1.15em;
     cursor: pointer;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
@@ -237,8 +238,8 @@
 }
 
 .carousel-nav:hover {
-    border-color: #2ebaae;
-    color: #2ebaae;
+    border-color: var(--color-accent-primary);
+    color: var(--color-accent-primary);
     transform: translateY(-50%) translateY(-2px);
 }
 
@@ -298,8 +299,8 @@
 
 .carousel-item:hover {
     transform: translateY(-10px);
-    border-color: #2ebaae;
-    box-shadow: 0 20px 45px rgba(46, 186, 174, 0.15);
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 20px 45px rgba(77, 208, 225, 0.15);
 }
 
 .carousel-item .image-wrapper {
@@ -310,7 +311,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f5f5f5;
+    background: var(--color-surface-alt);
 }
 
 .carousel-item .image-wrapper img {
@@ -783,7 +784,7 @@
     background: var(--portfolio-accent-strong);
     border-radius: var(--portfolio-radius);
     box-shadow: none;
-    color: #ffffff !important;
+    color: var(--color-surface) !important;
     height: auto;
     line-height: 1.2;
     padding: 1em 1.4em;
@@ -1610,16 +1611,16 @@
 /* Highlight the section reached via an in-page link */
 @keyframes target-spotlight {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(46, 186, 174, 0);
-        outline-color: rgba(46, 186, 174, 0);
+        box-shadow: 0 0 0 0 rgba(77, 208, 225, 0);
+        outline-color: rgba(77, 208, 225, 0);
     }
     25%, 75% {
-        box-shadow: 0 0 0 0.5em rgba(46, 186, 174, 0.22), 0 0 1.5em rgba(46, 186, 174, 0.45);
+        box-shadow: 0 0 0 0.5em rgba(77, 208, 225, 0.22), 0 0 1.5em rgba(77, 208, 225, 0.45);
         outline-color: var(--portfolio-accent);
     }
     50% {
-        box-shadow: 0 0 0 0 rgba(46, 186, 174, 0);
-        outline-color: rgba(46, 186, 174, 0.2);
+        box-shadow: 0 0 0 0 rgba(77, 208, 225, 0);
+        outline-color: rgba(77, 208, 225, 0.2);
     }
 }
 
@@ -1934,7 +1935,7 @@ body {
 }
 
 .project-hero-visual--contain {
-    background: #ffffff;
+    background: var(--color-surface);
 }
 
 .project-hero-visual--contain img {
@@ -3178,3 +3179,4 @@ body {
         transform: none;
     }
 }
+

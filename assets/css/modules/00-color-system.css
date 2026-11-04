@@ -1,0 +1,133 @@
+/* 
+ * Color System for Portfolio Redesign
+ * Based on Analysis and Design Proposal
+ * Final Choice: Hybrid of Case A (Dark Technical) + Case C (Editorial)
+ */
+
+:root {
+    /* ===== BACKGROUND COLORS ===== */
+    /* Main page background - Dark technical base */
+    --color-bg-primary: #0f1419;
+    
+    /* Section backgrounds - Subtle variation for visual rhythm */
+    --color-bg-secondary: #1a2332;
+    --color-bg-tertiary: #141b23;
+    
+    /* Card and surface backgrounds */
+    --color-surface: #1e2d3a;
+    --color-surface-raised: #252f3d;
+    --color-surface-alt: #232f3d;
+    
+    /* Special section backgrounds */
+    --color-bg-hero: #0d1117;
+    --color-bg-dark-section: #0a0e14;
+    
+    /* ===== TEXT COLORS ===== */
+    /* Primary text - High contrast on dark backgrounds */
+    --color-text-primary: #e8ecf1;
+    
+    /* Secondary text - Slightly muted for hierarchy */
+    --color-text-secondary: #b0b8c1;
+    
+    /* Muted/meta text - Lower priority information */
+    --color-text-muted: #8a9299;
+    
+    /* Text on light backgrounds (if needed) */
+    --color-text-inverse: #0f1419;
+    
+    /* ===== ACCENT COLORS ===== */
+    /* Main accent - Cyan, high contrast and modern */
+    --color-accent-primary: #4dd0e1;
+    
+    /* Strong accent - Darker cyan for emphasis and hover states */
+    --color-accent-strong: #00bcd4;
+    
+    /* Accent bright - For critical/important elements */
+    --color-accent-bright: #5dd0e1;
+    
+    /* Secondary accents for status/categories */
+    --color-status-new: #ff6b6b;
+    --color-status-success: #23ad5f;
+    --color-status-info: #4d99f7;
+    --color-status-warning: #ffa94d;
+    
+    /* ===== BORDER & DIVIDER COLORS ===== */
+    /* Standard borders - Subtle but visible */
+    --color-border-default: rgba(77, 208, 225, 0.15);
+    
+    /* Stronger borders - For UI component boundaries */
+    --color-border-strong: rgba(77, 208, 225, 0.3);
+    
+    /* Divider lines - Section separation */
+    --color-divider: rgba(77, 208, 225, 0.1);
+    
+    /* ===== UI COMPONENT COLORS ===== */
+    /* Button backgrounds */
+    --color-button-primary: #4dd0e1;
+    --color-button-primary-dark: #00bcd4;
+    --color-button-secondary: #1e2d3a;
+    --color-button-text: #0f1419;
+    --color-button-text-secondary: #e8ecf1;
+    
+    /* Link colors */
+    --color-link: #4dd0e1;
+    --color-link-hover: #5dd0e1;
+    --color-link-visited: #00bcd4;
+    --color-link-active: #00acc1;
+    
+    /* Form/Input elements */
+    --color-input-bg: #1e2d3a;
+    --color-input-border: rgba(77, 208, 225, 0.2);
+    --color-input-border-focus: rgba(77, 208, 225, 0.5);
+    --color-input-text: #e8ecf1;
+    
+    /* ===== STATE COLORS ===== */
+    /* Hover state */
+    --color-hover-bg: rgba(77, 208, 225, 0.1);
+    
+    /* Active/Focus state */
+    --color-focus-ring: rgba(77, 208, 225, 0.4);
+    
+    /* Disabled state */
+    --color-disabled-bg: rgba(77, 208, 225, 0.05);
+    --color-disabled-text: rgba(176, 184, 193, 0.5);
+    
+    /* ===== LEGACY SUPPORT (for transitional compatibility) ===== */
+    /* Portfolio-specific variables (maintain existing usage) */
+    --portfolio-accent: #4dd0e1;
+    --portfolio-accent-strong: #1a2332;
+    --portfolio-accent-hover: #00acc1;
+    --portfolio-text: #e8ecf1;
+    --portfolio-muted: #b0b8c1;
+    --portfolio-border: rgba(77, 208, 225, 0.15);
+    --portfolio-surface: #1e2d3a;
+    --portfolio-surface-tint: rgba(77, 208, 225, 0.08);
+    --portfolio-radius: 0.35rem;
+    --portfolio-shadow: 0 14px 36px rgba(0, 0, 0, 0.4);
+    --portfolio-ink: #0f1419;
+    --portfolio-paper: #1a2332;
+    --portfolio-motion: 220ms;
+    
+    /* ===== SEMANTIC/UTILITY COLORS ===== */
+    --color-success: #23ad5f;
+    --color-warning: #ffa94d;
+    --color-error: #ff6b6b;
+    --color-info: #4d99f7;
+}
+
+/* Optional: High contrast mode variant */
+@media (prefers-contrast: more) {
+    :root {
+        --color-text-primary: #f0f4f8;
+        --color-text-secondary: #c0c8d1;
+        --color-accent-primary: #5dd0e1;
+        --color-border-default: rgba(93, 208, 225, 0.25);
+    }
+}
+
+/* Optional: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --portfolio-motion: 0ms;
+    }
+}
