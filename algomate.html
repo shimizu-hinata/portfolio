@@ -39,28 +39,6 @@
 						<img src="images/AlgomateColony_Thumbnail.png" alt="Algomate Colonyの作品サムネイル" fetchpriority="high" />
 					</figure>
 				</header>
-				<section class="download-panel" id="download" aria-labelledby="download-title">
-					<h2 id="download-title">ダウンロード</h2>
-					<ul class="actions download-actions">
-						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link" class="button primary" target="_blank" rel="noopener noreferrer">実行ファイルをダウンロード</a></li>
-						<li><a href="manual.html#algomate" class="button">簡易マニュアル</a></li>
-					</ul>
-					<p class="download-note">Google Driveから入手できます。</p>
-				</section>
-
-				<details class="project-navigation">
-					<summary>このページ内を移動</summary>
-					<nav class="project-toc" aria-label="作品ページの目次">
-					<a href="#download">ダウンロード</a>
-					<a href="#project-summary">作品の要点</a>
-					<a href="#game-overview">ゲーム概要</a>
-					<a href="#screenshots">ゲーム画面</a>
-					<a href="#design-flow">設計・処理フロー</a>
-					<a href="#implementation">技術・開発状況</a>
-					<a href="#tech-deep-dive">技術解説</a>
-					<a href="#project-links">関連資料</a>
-					</nav>
-				</details>
 				<section class="project-at-a-glance" id="project-summary">
 					<h2>作品の要点</h2>
 					<div class="project-highlight-grid">
@@ -81,6 +59,28 @@
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/tree/defcfa9106017b945ea5edced54b6ad56786ce4b" class="button small" target="_blank"
 								rel="noopener noreferrer">ソースコード・READMEを見る</a></li>
 					</ul>
+				</section>
+				<details class="project-navigation">
+					<summary>このページ内を移動</summary>
+					<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#download">ダウンロード</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#screenshots">ゲーム画面</a>
+					<a href="#design-flow">設計・処理フロー</a>
+					<a href="#implementation">技術・開発状況</a>
+					<a href="#tech-deep-dive">技術解説</a>
+					<a href="#project-links">関連資料</a>
+					</nav>
+				</details>
+				<section class="download-panel" id="download" aria-labelledby="download-title">
+					<h2 id="download-title">ダウンロード</h2>
+					<ul class="actions download-actions">
+						<li><a href="https://drive.google.com/file/d/1rnjmrkqYXmTL-8J5vs-NfJi5iNY57M8A/view?usp=drive_link" class="button primary" target="_blank" rel="noopener noreferrer">実行ファイルをダウンロード</a></li>
+						<li><a href="manual.html#algomate" class="button">簡易マニュアル</a></li>
+					</ul>
+					<p class="download-note"><strong>開発状況：</strong>実装されているのはチュートリアルまでです。チュートリアル後のゲーム本編は未実装です。</p>
+					<p class="download-note">実行ファイルはGoogle Driveから入手できます。</p>
 				</section>
 				<section id="game-overview">
 					<h3>ゲーム概要</h3>
@@ -232,8 +232,8 @@
 				</section>
 				<section id="implementation">
 					<h3>開発状況・関連資料</h3>
-					<h4>プロトタイプの範囲</h4>
-					<p>現在扱える基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエスト、交易、コマンド研究は、現時点の実装範囲に含まれていません。</p>
+					<h4>実装済みの範囲</h4>
+					<p>プレイ可能な範囲はチュートリアルまでです。ページ内のゲーム概要や設計フローには企画・設計段階の内容も含まれており、チュートリアル後のゲーム進行は未実装です。チュートリアルで扱う基本コマンドはMove・Gather・Depositです。if・forなどの構文、加工施設での生産、エネルギー管理、クエスト、交易、コマンド研究も未実装です。</p>
 					<h4>GitHubの技術資料</h4>
 					<ul class="algomate-doc-links">
 						<li><a href="https://github.com/HinataPiyo/AlgomateColony/blob/defcfa9106017b945ea5edced54b6ad56786ce4b/Documentation/GameOverview.md" target="_blank" rel="noopener noreferrer">作品概要と企画意図</a></li>

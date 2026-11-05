@@ -39,6 +39,35 @@
 						<img src="images/BombCrash_Thumbnail.png" alt="Bomb Crashの作品サムネイル" fetchpriority="high" />
 					</figure>
 				</header>
+				<section class="project-at-a-glance" id="project-summary">
+					<h2>作品の要点</h2>
+					<div class="project-highlight-grid">
+						<article>
+							<h3>制作体制と担当</h3>
+							<p>チーム制作。担当範囲は企画・プログラミング・UI実装です。</p>
+						</article>
+						<article>
+							<h3>Wave生成</h3>
+							<p>ルール設定から出現候補の計算、敵の生成までを複数のクラスで処理します。</p>
+						</article>
+						<article>
+							<h3>オトモスキル</h3>
+							<p>装備中のスキルを出撃時に引き継ぎ、手動または設定に応じた自動発動につなげます。</p>
+						</article>
+					</div>
+				</section>
+				<details class="project-navigation">
+					<summary>このページ内を移動</summary>
+					<nav class="project-toc" aria-label="作品ページの目次">
+					<a href="#project-summary">作品の要点</a>
+					<a href="#download">ダウンロード</a>
+					<a href="#game-overview">ゲーム概要</a>
+					<a href="#design-flow">ゲーム進行</a>
+					<a href="#implementation">設定画面・実装範囲</a>
+					<a href="#tech-deep-dive">Wave生成・オトモスキルの実装</a>
+					<a href="#project-links">ソースコード・関連資料</a>
+					</nav>
+				</details>
 				<section class="download-panel" id="download" aria-labelledby="download-title">
 					<h2 id="download-title">ダウンロード</h2>
 					<ul class="actions download-actions">
@@ -47,19 +76,6 @@
 					</ul>
 					<p class="download-note">Google Driveから入手できます。</p>
 				</section>
-
-				<details class="project-navigation">
-					<summary>このページ内を移動</summary>
-					<nav class="project-toc" aria-label="作品ページの目次">
-					<a href="#download">ダウンロード</a>
-					<a href="#game-overview">ゲーム概要</a>
-					<a href="#project-summary">制作体制・技術の見どころ</a>
-					<a href="#design-flow">ゲーム進行</a>
-					<a href="#implementation">設定画面・実装範囲</a>
-					<a href="#tech-deep-dive">Wave生成・オトモスキルの実装</a>
-					<a href="#project-links">ソースコード・関連資料</a>
-					</nav>
-				</details>
 				<section id="game-overview">
 					<h2>ゲーム概要</h2>
 					<p>Bomb Crashは、凍結爆弾の着弾位置を調整しながら、爆発までのカウントダウンがある敵を迎撃してWaveを攻略する2Dアクションゲームです。</p>
@@ -80,23 +96,6 @@
 						<h3>ゲーム紹介</h3>
 						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/pQ53e4TLCJE"></div>
 						<p><a href="https://www.youtube.com/watch?v=pQ53e4TLCJE" target="_blank" rel="noopener noreferrer">動画が表示されない場合はYouTubeで見る</a></p>
-					</div>
-				</section>
-				<section class="project-at-a-glance" id="project-summary">
-					<h2>制作体制・技術の見どころ</h2>
-					<div class="project-highlight-grid">
-						<article>
-							<h3>制作体制と担当</h3>
-							<p>チーム制作。担当範囲は企画・プログラミング・UI実装です。</p>
-						</article>
-						<article>
-							<h3>Wave生成</h3>
-							<p>ルール設定から出現候補の計算、敵の生成までを複数のクラスで処理します。</p>
-						</article>
-						<article>
-							<h3>オトモスキル</h3>
-							<p>装備中のスキルを出撃時に引き継ぎ、手動または設定に応じた自動発動につなげます。</p>
-						</article>
 					</div>
 				</section>
 				<section class="design-flow-section bombcrash-flow" id="design-flow">
