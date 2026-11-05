@@ -70,7 +70,7 @@
 						<li><a href="https://drive.google.com/file/d/1BHumg28tov_kHwYOUsf6FRPFnXxUhrHB/view?usp=drive_link" class="button" target="_blank" rel="noopener noreferrer">実行ファイル（.exe）</a></li>
 						<li><a href="manual.html#kaomoji" class="button">簡易マニュアル</a></li>
 					</ul>
-					<p class="download-note">Google Driveから入手できます。操作はタッチ専用のため、PCのマウスでは遊べません。</p>
+					<p class="download-note">Google Driveから入手できます。Android版はタッチドラッグ、PC版はクリックした地点へ移動します。ドラッグ操作への切り替えはUnity Editorのみで可能です。</p>
 				</section>
 
 				<details class="project-navigation">
@@ -78,6 +78,7 @@
 					<nav class="project-toc" aria-label="作品ページの目次">
 					<a href="#download">ダウンロード</a>
 					<a href="#game-overview">ゲーム概要</a>
+					<a href="#game-screens">プレイ画面</a>
 					<a href="#core-loop">ゲームループ</a>
 					<a href="#highlights">主な特徴</a>
 					<a href="#build-system">ビルド計算</a>
@@ -90,11 +91,82 @@
 				<section id="game-overview" class="kaomoji-overview">
 					<h2>顔文字の構成が、そのまま戦い方になる</h2>
 					<p><strong>Kaomoji Clash</strong>は、顔文字を引っ張って射出し、敵との衝突で戦うビルド主導型アクションです。戦闘で得た記号パーツを組み替え、パーツの成長値とタグ効果から次のビルドを作ります。</p>
-					<p>装備中パーツの構成・レベル別補正・タグ効果からSpeed・Power・Guard・Staminaを算出します。操作はドラッグとリリース。狙う方向と引く距離を決め、壁の反射も利用して敵への再接触を狙います。</p>
+					<p>装備中パーツの構成・レベル別補正・タグ効果からSpeed・Power・Guard・Staminaを算出します。Android版ではドラッグして引いた方向へ射出し、壁の反射も利用して敵への再接触を狙います。PC版ではクリックした地点へ移動します。</p>
 					<div class="kaomoji-video" id="gameplay">
 						<h3>ゲーム紹介</h3>
 						<div class="js-video-player" data-video-url="https://www.youtube.com/embed/3Ye79Ocqmjk"></div>
 						<p><a href="https://www.youtube.com/watch?v=3Ye79Ocqmjk" target="_blank" rel="noopener noreferrer">動画が表示されない場合はYouTubeで見る</a></p>
+					</div>
+				</section>
+				<section class="kaomoji-screens" id="game-screens" aria-labelledby="game-screens-title">
+					<header class="section-heading">
+						<p class="portfolio-eyebrow">IN-GAME SCREENS</p>
+						<h2 id="game-screens-title">プレイ画面で見るゲームの流れ</h2>
+					</header>
+					<p class="kaomoji-screens-lead">出撃前の準備から戦闘、ビルド調整、ステージクリアまで、初版の画面を順に紹介します。</p>
+
+					<div class="kaomoji-screen-group">
+						<h3>出撃準備：文化圏と顔文字を選ぶ</h3>
+						<div class="kaomoji-screen-grid">
+							<figure class="kaomoji-screen-card kaomoji-screen-card--featured">
+								<img src="images/KaomojiClash 初版/ホーム画面（下端のボタンは未実装）.png" alt="文化圏レベルや平均レベル、顔文字密度を確認して出撃し、顔文字ビルドやアリーナビルドへ進むホーム画面" loading="lazy" decoding="async" />
+								<figcaption><strong>ホーム：出撃内容を決める</strong>文化圏レベルを選び、出現する顔文字や平均レベルを確認して出撃します。顔文字ビルドとアリーナビルドにもここから移動できます。画面下部の「練習・図鑑・ショップ・実績・設定」は、このスクリーンショット撮影時点では未実装です。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/顔文字ビルドの画面.png" alt="目、口、手、装飾パーツを選び、顔文字の見た目とスキル、ステータスを確認するビルド画面" loading="lazy" decoding="async" />
+								<figcaption><strong>顔文字ビルド：パーツで性能を構成</strong>部位ごとに記号パーツを選択し、完成する顔文字とスキル、スピード・パワー・ガード・スタミナを確認します。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/文化圏レベルの違い（レベル1）.png" alt="文化圏レベル1の選択画面。平均レベル2で、出現顔文字に（3）と（ω）が表示されている" loading="lazy" decoding="async" />
+								<figcaption><strong>文化圏レベル1</strong>平均レベル2のエリア。出現する顔文字を見て、挑戦する文化圏を選びます。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/文化圏レベルの違い（レベル5）.png" alt="文化圏レベル5の選択画面。平均レベル13で、出現顔文字に（^^）、（$$）、（TT）、（>>）が表示されている" loading="lazy" decoding="async" />
+								<figcaption><strong>文化圏レベル5</strong>平均レベル13のエリア。レベル1とは異なる顔文字が出現し、挑戦するエリアごとに戦闘相手が変わります。</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<div class="kaomoji-screen-group">
+						<h3>戦闘：移動して敵顔文字とぶつかる</h3>
+						<div class="kaomoji-screen-grid">
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/戦闘ポイントの移動画面.png" alt="戦闘画面。プレイヤーと敵の状態、Waveや残り敵数を確認し、次の戦闘ポイントへ移動する" loading="lazy" decoding="async" />
+								<figcaption><strong>戦闘ポイントへ移動</strong>敵の位置やプレイヤーの状態を見ながら戦闘を進めます。画面にはWaveと残り敵数も表示されます。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/敵顔文字を倒したときの演出.png" alt="敵顔文字との衝突時にCLASHとダメージ数が表示される戦闘演出" loading="lazy" decoding="async" />
+								<figcaption><strong>衝突で攻撃</strong>顔文字を倒すと「CLASH!」とダメージが表示され、敵を全て倒すと次の戦闘へ進みます。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card kaomoji-screen-card--featured">
+								<img src="images/KaomojiClash 初版/PC版だとクリックした箇所に飛んでいく ドラックとの切り替えは現在UnityEdiorのみで可能.png" alt="PC版の戦闘画面。クリックした場所へプレイヤーが移動する操作を示す" loading="lazy" decoding="async" />
+								<figcaption><strong>PC版の操作</strong>PC版ではクリックした地点へ移動します。ドラッグ操作への切り替えはUnity Editor上でのみ可能です。</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<div class="kaomoji-screen-group">
+						<h3>アリーナビルド：オブジェクトを配置する</h3>
+						<div class="kaomoji-screen-grid">
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/アリーナオブジェクトの選択と設置.png" alt="3×3のアリーナにオブジェクトを選び、所持金や設置数、使用料を見ながら配置する画面" loading="lazy" decoding="async" />
+								<figcaption><strong>オブジェクトを選んで配置</strong>反発パッドや回復キットなどから選び、所持金と設置コストを確認しながらアリーナを組み立てます。</figcaption>
+							</figure>
+							<figure class="kaomoji-screen-card">
+								<img src="images/KaomojiClash 初版/アリーナオブジェクトの最大数設置後の変化.png" alt="設置上限2個までアリーナオブジェクトを置いた状態。設置数2/2と表示される" loading="lazy" decoding="async" />
+								<figcaption><strong>設置上限まで配置</strong>オブジェクト数には上限があり、画面例では2個を配置すると設置数が2/2になります。</figcaption>
+							</figure>
+						</div>
+					</div>
+
+					<div class="kaomoji-screen-group">
+						<h3>ステージクリア：報酬を確認する</h3>
+						<div class="kaomoji-screen-grid">
+							<figure class="kaomoji-screen-card kaomoji-screen-card--featured">
+								<img src="images/KaomojiClash 初版/ステージクリア画面.png" alt="ステージクリア画面。獲得した記号や顔文字構成、アリーナオブジェクト、消費金額と獲得金額を表示する" loading="lazy" decoding="async" />
+								<figcaption><strong>クリア結果</strong>獲得した記号や顔文字・アリーナの状態、消費額と獲得額を確認できます。再挑戦するかホームへ戻るかを選び、次のビルドにつなげます。</figcaption>
+							</figure>
+						</div>
 					</div>
 				</section>
 				<section class="design-flow-section kaomoji-loop" id="core-loop">
@@ -178,7 +250,7 @@
 				</section>
 				<section class="design-flow-section kaomoji-combat" id="combat-system">
 					<h2>戦闘処理：ドラッグから命中まで</h2>
-					<p>プレイヤーの操作はタッチドラッグです。引いた距離が短すぎる場合は発射せず、距離に応じた速度で<code>Rigidbody2D</code>を動かします。</p>
+					<p>Android版はタッチドラッグで顔文字を発射します。引いた距離が短すぎる場合は発射せず、距離に応じた速度で<code>Rigidbody2D</code>を動かします。PC版はクリックした地点へ移動する操作です。</p>
 					<ol class="kaomoji-flow kaomoji-combat-flow" aria-label="プレイヤーの入力から敵へのダメージ反映まで">
 						<li><strong>方向と距離を決める</strong><span><code>PlayerMovement</code>がタッチ位置をワールド座標へ変換し、ドラッグ距離を上限内に収める。</span></li>
 						<li><strong>リリースして発射</strong><span>最小距離を満たすと、方向・距離の割合・プレイヤーSpeedから初速を計算。</span></li>
