@@ -265,6 +265,7 @@
 		createLink('トップページ', 'index.html', primaryLinks);
 		createLink('主要作品', 'index.html#projects', primaryLinks);
 		createLink('作品の実装例', 'index.html#implementation-examples', primaryLinks);
+		createLink('簡易マニュアル', 'manual.html', primaryLinks);
 		[
 			['Kaomoji Clash', 'kaomoji.html'],
 			['Bomb Crash', 'bombcrash.html'],
