@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     /* Color System - New Dark Technical Design */
     --portfolio-accent: var(--color-accent-primary);
     --portfolio-accent-strong: var(--color-accent-strong);
@@ -2133,15 +2133,15 @@ body.kaomoji-detail .kaomoji-combat > p {
     max-width: 68ch;
 }
 
-body.kaomoji-detail .kaomoji-video {
+.kaomoji-video {
     margin-top: 2rem;
 }
 
-body.kaomoji-detail .kaomoji-video h3 {
+.kaomoji-video h3 {
     margin-bottom: 0.75rem;
 }
 
-body.kaomoji-detail .kaomoji-video .js-video-player {
+.kaomoji-video .js-video-player {
     aspect-ratio: 16 / 9;
     background: var(--color-media-background);
     border: 1px solid var(--portfolio-border);
@@ -2149,7 +2149,7 @@ body.kaomoji-detail .kaomoji-video .js-video-player {
     overflow: hidden;
 }
 
-body.kaomoji-detail .kaomoji-video .js-video-player iframe {
+.kaomoji-video .js-video-player iframe {
     display: block;
     height: 100%;
     width: 100%;
@@ -3041,6 +3041,59 @@ body {
 
 .post .image.featured .js-video-player {
     aspect-ratio: 16 / 9;
+}
+
+/* 紹介動画フレームの共通デザイン */
+.post .js-video-player,
+.post .image.featured .js-video-player,
+.fingerdojo-video .js-video-player,
+.minimal-card iframe {
+    background: var(--color-media-background);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+}
+
+.post .js-video-player {
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+
+.post .js-video-player iframe,
+.post .js-video-player.is-custom-video video {
+    border: 0;
+    border-radius: 0;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.post .image.featured .js-video-player iframe {
+    border: 0;
+    border-radius: 0;
+}
+
+.post .js-video-player.is-custom-video.is-portrait-video {
+    aspect-ratio: 9 / 16;
+    margin-inline: auto;
+    max-height: 80vh;
+    max-width: min(100%, 22rem);
+}
+
+.minimal-card iframe {
+    aspect-ratio: 16 / 9;
+    height: auto;
+}
+
+@media screen and (orientation: portrait) {
+    .post .js-video-player iframe,
+    .post .js-video-player video {
+        aspect-ratio: auto;
+        height: 100%;
+    }
 }
 
 .post section img {
